@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+    "group": "armor_leggings",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:ingot_bronze"
+    }
+  },
+  "result": {
+    "item": "acecraft:armor_leggings_bronze"
+  }
+}

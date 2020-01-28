@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+    "group": "armor_boots",
+  "pattern": [
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:ingot_silver"
+    }
+  },
+  "result": {
+    "item": "acecraft:armor_boots_silver"
+  }
+}

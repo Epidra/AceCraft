@@ -1,0 +1,17 @@
+tile.machina_workbench.name=Werkbank
+tile.machina_sewingbench.name=Schneiderbank
+tile.machina_anvil.name=Amboss
+tile.machina_stove.name=Herd
+tile.machina_blastfurnace.name=Hochofen
+tile.machina_campfire.name=Lagerfeuer
+tile.machina_distillery.name=Destille
+tile.machina_globe.name=Globus
+tile.machina_anchor.name=Anker
+tile.machina_rope.name=Seil
+tile.machina_keg.name=Fass
+tile.machina_gearbox.name=Getriebebox
+tile.machina_axle.name=Achse
+tile.machina_windmill.name=Windmühle
+tile.machina_waterwheel.name=Wasserrad
+tile.machina_fruitpress.name=Fruchtpresse
+tile.machina_millstone.name=Mühlstein

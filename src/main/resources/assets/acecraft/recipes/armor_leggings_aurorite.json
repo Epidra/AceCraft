@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+    "group": "armor_leggings",
+  "pattern": [
+    "XXX",
+    "X X",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:gem_aurorite"
+    }
+  },
+  "result": {
+    "item": "acecraft:armor_leggings_aurorite"
+  }
+}

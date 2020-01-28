@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:powder_sulfur"
+    }
+  },
+  "result": {
+    "item": "acecraft:block_sulfur"
+  }
+}

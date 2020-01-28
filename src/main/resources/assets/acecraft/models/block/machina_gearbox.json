@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "blocks/piston_top_normal",
+        "front": "blocks/piston_top_sticky",
+        "side": "blocks/piston_top_normal"
+    }
+}

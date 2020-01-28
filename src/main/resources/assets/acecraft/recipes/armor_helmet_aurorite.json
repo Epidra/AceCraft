@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+    "group": "armor_helmet",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:gem_aurorite"
+    }
+  },
+  "result": {
+    "item": "acecraft:armor_helmet_aurorite"
+  }
+}

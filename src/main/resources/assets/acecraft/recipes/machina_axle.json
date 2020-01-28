@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:machina_axle"
+    }
+  },
+  "result": {
+    "item": "acecraft:machina_axle"
+  }
+}
