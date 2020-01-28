@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+        "acecraft:tool_sword_brass",
+        "acecraft:tool_spear_brass",
+        "acecraft:armor_helmet_brass",
+        "acecraft:armor_plate_brass",
+        "acecraft:armor_leggings_brass",
+        "acecraft:armor_boots_brass"
+    ]
+  },
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_brass"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_block"
+    ]
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+        "acecraft:tool_shovel_orichalcum",
+        "acecraft:tool_hoe_orichalcum",
+        "acecraft:tool_axe_orichalcum",
+        "acecraft:tool_pickaxe_orichalcum"
+    ]
+  },
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_orichalcum"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_block"
+    ]
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PIP",
+    "PGP",
+    "PGP"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:string"
+    },
+    "G": {
+      "item": "minecraft:gunpowder"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "acecraft:stuff_dynamite"
+  }
+}

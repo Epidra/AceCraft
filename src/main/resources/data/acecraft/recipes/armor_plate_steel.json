@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "acecraft:ingot_steel"
+    }
+  },
+  "result": {
+    "item": "acecraft:armor_plate_steel"
+  }
+}

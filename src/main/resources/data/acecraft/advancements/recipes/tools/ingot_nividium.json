@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+        "acecraft:tool_shovel_nividium",
+        "acecraft:tool_hoe_nividium",
+        "acecraft:tool_axe_nividium",
+        "acecraft:tool_pickaxe_nividium"
+    ]
+  },
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_nividium"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_block"
+    ]
+  ]
+}

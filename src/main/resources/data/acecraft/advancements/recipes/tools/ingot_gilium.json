@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+        "acecraft:tool_shovel_gilium",
+        "acecraft:tool_hoe_gilium",
+        "acecraft:tool_axe_gilium",
+        "acecraft:tool_pickaxe_gilium"
+    ]
+  },
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_gilium"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_block"
+    ]
+  ]
+}
