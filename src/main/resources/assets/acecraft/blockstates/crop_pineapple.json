@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:crop_pineapple_0" },
+        "age=1": { "model": "acecraft:crop_pineapple_1" },
+        "age=2": { "model": "acecraft:crop_pineapple_2" },
+        "age=3": { "model": "acecraft:crop_pineapple_3" },
+        "age=4": { "model": "acecraft:crop_pineapple_3" },
+        "age=5": { "model": "acecraft:crop_pineapple_3" },
+        "age=6": { "model": "acecraft:crop_pineapple_3" },
+        "age=7": { "model": "acecraft:crop_pineapple_3" }
+    }
+}

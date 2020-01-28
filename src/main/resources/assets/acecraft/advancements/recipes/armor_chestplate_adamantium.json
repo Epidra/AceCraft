@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:armor_chestplate_adamantium"
+    ]
+  },
+  "criteria": {
+    "has_ingot_adamantium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_adamantium",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:armor_chestplate_adamantium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_adamantium",
+      "has_the_recipe"
+    ]
+  ]
+}

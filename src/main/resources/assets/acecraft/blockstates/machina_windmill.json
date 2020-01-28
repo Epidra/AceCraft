@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:machina_windmill", "y": 180 },
+        "facing=south": { "model": "acecraft:machina_windmill", "y":   0 },
+        "facing=west":  { "model": "acecraft:machina_windmill", "y":  90 },
+        "facing=east":  { "model": "acecraft:machina_windmill", "y": 270 },
+        "facing=up":    { "model": "acecraft:machina_windmill", "y": 180 },
+        "facing=down":  { "model": "acecraft:machina_windmill", "y": 180 }
+    }
+}

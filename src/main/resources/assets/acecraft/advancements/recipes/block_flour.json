@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_flour"
+    ]
+  },
+  "criteria": {
+    "has_powder_flour": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:powder_flour",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_flour"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_flour",
+      "has_the_recipe"
+    ]
+  ]
+}

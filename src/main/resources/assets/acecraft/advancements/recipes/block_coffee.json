@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_coffee"
+    ]
+  },
+  "criteria": {
+    "has_powder_coffee": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:powder_coffee",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_coffee"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_coffee",
+      "has_the_recipe"
+    ]
+  ]
+}

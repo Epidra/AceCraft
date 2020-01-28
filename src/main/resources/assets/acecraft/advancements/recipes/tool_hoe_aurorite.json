@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:tool_hoe_aurorite"
+    ]
+  },
+  "criteria": {
+    "has_stuff_aurorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:gem_aurorite",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:tool_hoe_aurorite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stuff_aurorite",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:armor_helmet_steel"
+    ]
+  },
+  "criteria": {
+    "has_ingot_silver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_steel",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:armor_helmet_steel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_silver",
+      "has_the_recipe"
+    ]
+  ]
+}

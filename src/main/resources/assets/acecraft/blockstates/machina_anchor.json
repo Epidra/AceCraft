@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":    { "model": "acecraft:machina_anchor_top",  "x":   0 },
+        "facing=down":  { "model": "acecraft:machina_anchor_top",  "x": 180 },
+        "facing=north": { "model": "acecraft:machina_anchor_side", "y":   0 },
+        "facing=south": { "model": "acecraft:machina_anchor_side", "y": 180 },
+        "facing=west":  { "model": "acecraft:machina_anchor_side", "y": 270 },
+        "facing=east":  { "model": "acecraft:machina_anchor_side", "y":  90 }
+    }
+}

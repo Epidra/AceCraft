@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_clavium"
+    ]
+  },
+  "criteria": {
+    "has_ingot_clavium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_clavium",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_clavium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_clavium",
+      "has_the_recipe"
+    ]
+  ]
+}

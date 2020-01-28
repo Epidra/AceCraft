@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_salt"
+    ]
+  },
+  "criteria": {
+    "has_powder_salt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:powder_salt",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_salt"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_salt",
+      "has_the_recipe"
+    ]
+  ]
+}

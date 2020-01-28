@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_zinc"
+    ]
+  },
+  "criteria": {
+    "has_ingot_zinc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_zinc",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_zinc"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_zinc",
+      "has_the_recipe"
+    ]
+  ]
+}

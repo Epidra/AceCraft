@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_nividium"
+    ]
+  },
+  "criteria": {
+    "has_ingot_nividium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_nividium",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_nividium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_nividium",
+      "has_the_recipe"
+    ]
+  ]
+}

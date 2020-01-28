@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_sulfur"
+    ]
+  },
+  "criteria": {
+    "has_powder_sulfur": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:powder_sulfur",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_sulfur"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_sulfur",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,83 @@
+{
+    "sound.llamaidle": {
+        "sounds": [
+            {
+                "name": "acecraft:llama_idle_1",
+                "name": "acecraft:llama_idle_2",
+                "stream": false
+            }
+        ]
+    },
+    "sound.llamahurt": {
+        "sounds": [
+            {
+                "name": "acecraft:llama_hurt_1",
+                "stream": false
+            }
+        ]
+    },
+    "sound.llamadeath": {
+        "sounds": [
+            {
+                "name": "acecraft:llama_die_1",
+                "stream": false
+            }
+        ]
+    },
+    "sound.deeridle": {
+        "sounds": [
+            {
+                "name": "acecraft:deer_idle_1",
+                "name": "acecraft:deer_idle_2",
+                "name": "acecraft:deer_idle_3",
+                "name": "acecraft:deer_idle_4",
+                "stream": false
+            }
+        ]
+    },
+    "sound.deerhurt": {
+        "sounds": [
+            {
+                "name": "acecraft:deer_hurt_1",
+                "name": "acecraft:deer_hurt_2",
+                "stream": false
+            }
+        ]
+    },
+    "sound.deerdeath": {
+        "sounds": [
+            {
+                "name": "acecraft:deer_die_1",
+                "stream": false
+            }
+        ]
+    },
+    "sound.goatidle": {
+        "sounds": [
+            {
+                "name": "acecraft:goat_idle_1",
+                "name": "acecraft:goat_idle_2",
+                "name": "acecraft:goat_idle_3",
+                "name": "acecraft:goat_idle_4",
+                "stream": false
+            }
+        ]
+    },
+    "sound.goathurt": {
+        "sounds": [
+            {
+                "name": "acecraft:goat_hurt_1",
+                "name": "acecraft:goat_hurt_2",
+                "stream": false
+            }
+        ]
+    },
+    "sound.goatdeath": {
+        "sounds": [
+            {
+                "name": "acecraft:goat_die_1",
+                "stream": false
+            }
+        ]
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:block_tin"
+    ]
+  },
+  "criteria": {
+    "has_ingot_tin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_tin",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:block_tin"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_tin",
+      "has_the_recipe"
+    ]
+  ]
+}

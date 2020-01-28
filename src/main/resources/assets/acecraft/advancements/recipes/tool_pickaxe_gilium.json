@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:tool_pickaxe_gilium"
+    ]
+  },
+  "criteria": {
+    "has_ingot_gilium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_gilium",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:tool_pickaxe_gilium"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_gilium",
+      "has_the_recipe"
+    ]
+  ]
+}

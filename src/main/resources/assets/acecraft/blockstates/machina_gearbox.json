@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up":    { "model": "acecraft:machina_gearbox", "x":  90 },
+        "facing=down":  { "model": "acecraft:machina_gearbox", "x": 270 },
+        "facing=north": { "model": "acecraft:machina_gearbox", "y": 180 },
+        "facing=south": { "model": "acecraft:machina_gearbox", "y":   0 },
+        "facing=west":  { "model": "acecraft:machina_gearbox", "y":  90 },
+        "facing=east":  { "model": "acecraft:machina_gearbox", "y": 270 }
+    }
+}

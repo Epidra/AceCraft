@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:armor_leggings_steel"
+    ]
+  },
+  "criteria": {
+    "has_ingot_steel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_steel",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:armor_leggings_steel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_steel",
+      "has_the_recipe"
+    ]
+  ]
+}

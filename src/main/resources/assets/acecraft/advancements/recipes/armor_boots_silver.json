@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "acecraft:armor_boots_silver"
+    ]
+  },
+  "criteria": {
+    "has_ingot_silver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_silver",
+            "data": 0
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "acecraft:armor_boots_silver"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_silver",
+      "has_the_recipe"
+    ]
+  ]
+}
