@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:block/crop_cotton_0" },
+        "age=1": { "model": "acecraft:block/crop_cotton_1" },
+        "age=2": { "model": "acecraft:block/crop_cotton_2" },
+        "age=3": { "model": "acecraft:block/crop_cotton_3" },
+        "age=4": { "model": "acecraft:block/crop_cotton_4" },
+        "age=5": { "model": "acecraft:block/crop_cotton_5" },
+        "age=6": { "model": "acecraft:block/crop_cotton_6" },
+        "age=7": { "model": "acecraft:block/crop_cotton_7" }
+    }
+}

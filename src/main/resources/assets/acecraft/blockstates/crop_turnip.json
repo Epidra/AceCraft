@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:block/crop_turnip_0" },
+        "age=1": { "model": "acecraft:block/crop_turnip_1" },
+        "age=2": { "model": "acecraft:block/crop_turnip_2" },
+        "age=3": { "model": "acecraft:block/crop_turnip_3" },
+        "age=4": { "model": "acecraft:block/crop_turnip_4" },
+        "age=5": { "model": "acecraft:block/crop_turnip_5" },
+        "age=6": { "model": "acecraft:block/crop_turnip_6" },
+        "age=7": { "model": "acecraft:block/crop_turnip_7" }
+    }
+}
