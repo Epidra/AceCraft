@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "acecraft:ingot_copper"
+    },
+    {
+      "item": "acecraft:ingot_tin"
+    }
+  ],
+  "result": {
+    "item": "acecraft:ingot_bronze"
+  }
+}

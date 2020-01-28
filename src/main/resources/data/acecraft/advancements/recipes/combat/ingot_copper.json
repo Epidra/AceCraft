@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+        "acecraft:tool_sword_copper",
+        "acecraft:tool_spear_copper",
+        "acecraft:armor_helmet_copper",
+        "acecraft:armor_plate_copper",
+        "acecraft:armor_leggings_copper",
+        "acecraft:armor_boots_copper"
+    ]
+  },
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_copper"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_block"
+    ]
+  ]
+}

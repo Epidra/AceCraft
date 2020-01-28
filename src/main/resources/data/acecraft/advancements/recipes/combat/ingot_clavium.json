@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+        "acecraft:tool_sword_clavium",
+        "acecraft:tool_spear_clavium",
+        "acecraft:armor_helmet_clavium",
+        "acecraft:armor_plate_clavium",
+        "acecraft:armor_leggings_clavium",
+        "acecraft:armor_boots_clavium"
+    ]
+  },
+  "criteria": {
+    "has_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "acecraft:ingot_clavium"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_block"
+    ]
+  ]
+}

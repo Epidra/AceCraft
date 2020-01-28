@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "acecraft:ingot_mythril"
+    },
+    {
+      "item": "acecraft:ingot_nividium"
+    }
+  ],
+  "result": {
+    "item": "acecraft:ingot_aurelium"
+  }
+}

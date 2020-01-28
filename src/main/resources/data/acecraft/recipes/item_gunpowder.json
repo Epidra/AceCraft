@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "acecraft:stuff_salt"
+    },
+    {
+      "item": "acecraft:stuff_sulfur"
+    },
+    {
+      "item": "minecraft:sand"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gunpowder"
+  }
+}

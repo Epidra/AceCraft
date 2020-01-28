@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "acecraft:items/tool_axe_gilium"
+    }
+}
