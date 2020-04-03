@@ -30,7 +30,7 @@ public class WorldGen {
             //biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_SILVER.getDefaultState(), 5), Placement.COUNT_RANGE, new CountRangeConfig(10, 0, 0, 64)));
 
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_AURORITE.getDefaultState(), 3), Placement.COUNT_RANGE, new CountRangeConfig(4, 0, 0, 64)));
-            biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_CITRINE.getDefaultState(), 4), Placement.COUNT_RANGE, new CountRangeConfig(4, 0, 0, 64)));
+            //biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_CITRINE.getDefaultState(), 4), Placement.COUNT_RANGE, new CountRangeConfig(4, 0, 0, 64)));
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_RUBY.getDefaultState(), 4), Placement.COUNT_RANGE, new CountRangeConfig(4, 0, 0, 64)));
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_SAPPHIRE.getDefaultState(), 4), Placement.COUNT_RANGE, new CountRangeConfig(4, 0, 0, 64)));
             biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, ShopKeeper.ORE_TOPAZ.getDefaultState(), 4), Placement.COUNT_RANGE, new CountRangeConfig(4, 0, 0, 64)));
@@ -55,8 +55,8 @@ public class WorldGen {
     public static void GenerateNetherOre()
     {
         Biomes.NETHER.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ShopKeeper.ORE_GILIUM.getDefaultState(), 9), Placement.COUNT_RANGE, new CountRangeConfig(10, 0, 0, 128)));
-        Biomes.NETHER.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ShopKeeper.ORE_NIVIDIUM.getDefaultState(), 7), Placement.COUNT_RANGE, new CountRangeConfig(10, 0, 0, 64)));
-        Biomes.NETHER.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ShopKeeper.ORE_CLAVIUM.getDefaultState(), 7), Placement.COUNT_RANGE, new CountRangeConfig(10, 0, 0, 64)));
+        //Biomes.NETHER.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ShopKeeper.ORE_NIVIDIUM.getDefaultState(), 7), Placement.COUNT_RANGE, new CountRangeConfig(10, 0, 0, 64)));
+        //Biomes.NETHER.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NETHERRACK, ShopKeeper.ORE_CLAVIUM.getDefaultState(), 7), Placement.COUNT_RANGE, new CountRangeConfig(10, 0, 0, 64)));
     }
 
 }

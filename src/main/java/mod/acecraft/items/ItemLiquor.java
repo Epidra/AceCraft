@@ -1,9 +1,6 @@
 package mod.acecraft.items;
 
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
@@ -12,8 +9,13 @@ public class ItemLiquor extends Item {
 
     /** Default Constructor */
     public ItemLiquor(String modid, String name, int hunger, float saturation){
-        super(new Properties().group(ItemGroup.FOOD).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
+        super(new Properties().group(ItemGroup.FOOD).maxStackSize(16).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
         this.setRegistryName(modid, name);
+    }
+
+    public UseAction getUseAction(ItemStack stack) {
+        //return stack.getItem().isFood() ? UseAction.EAT : UseAction.NONE;
+        return UseAction.DRINK;
     }
 
 }

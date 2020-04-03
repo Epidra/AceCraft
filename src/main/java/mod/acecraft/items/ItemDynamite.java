@@ -1,9 +1,10 @@
 package mod.acecraft.items;
 
+import mod.acecraft.ShopKeeper;
+import mod.acecraft.entity.EntityDynamite;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 public class ItemDynamite extends Item {
@@ -12,6 +13,34 @@ public class ItemDynamite extends Item {
     public ItemDynamite(String modid, String name, ItemGroup group){
         super(new Properties().group(group));
         this.setRegistryName(modid, name);
+    }
+
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        //if (this.isFood()) {
+        //    ItemStack itemstack = playerIn.getHeldItem(handIn);
+        //    if (playerIn.canEat(this.getFood().canEatWhenFull())) {
+        //        playerIn.setActiveHand(handIn);
+        //        return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
+        //    } else {
+        //        return new ActionResult<>(ActionResultType.FAIL, itemstack);
+        //    }
+        //} else {
+        //    return new ActionResult<>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
+        //}
+        if (!playerIn.abilities.isCreativeMode){
+            playerIn.getHeldItem(handIn).shrink(1);
+        }
+        worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        if (!worldIn.isRemote){
+            EntityDynamite nugget = new EntityDynamite(worldIn, playerIn);
+            //EntityDynamite nugget = new EntityDynamite(ShopKeeper.ENTITY_DYNAMITE, worldIn);
+            nugget.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+            //worldIn.spawnEntity(nugget);
+            worldIn.addEntity(nugget);
+        }
+        //playerIn.addStat(StatList.getObjectUseStats(this));
+        //return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
     }
 
 }

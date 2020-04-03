@@ -65,9 +65,7 @@ public class FoundryContent extends ContainerContent {
         float value1 = amount1/size;
         float value2 = amount2/size;
         if(value1 > scale1 -0.05f && value1 < scale1 + 0.05f){
-            if(value2 > scale2 -0.05f && value2 < scale2 + 0.05f){
-                return true;
-            }
+            return value2 > scale2 - 0.05f && value2 < scale2 + 0.05f;
         }
         return false;
     }

@@ -13,8 +13,13 @@ public class ItemFood extends Item {
 
     /** Default Constructor */
     public ItemFood(String modid, String name, int hunger, float saturation){
-        super(new Properties().group(ItemGroup.FOOD).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
+        super(new Properties().group(ItemGroup.FOOD).maxStackSize(16).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
         this.setRegistryName(modid, name);
+    }
+
+    public UseAction getUseAction(ItemStack stack) {
+        //return stack.getItem().isFood() ? UseAction.EAT : UseAction.NONE;
+        return UseAction.EAT;
     }
 
 }

@@ -29,8 +29,8 @@ import java.util.List;
 
 public class ContainerBlastFurnace extends ContainerFlamer {
 
-    public ContainerBlastFurnace(int id, PlayerInventory player, TileBlastFurnace container, IIntArray furnaceData, ContainerContent materials) {
-        super(ShopKeeper.TYPE_BLASTFURNACE, id, player, (IInventory)container, furnaceData, materials);
+    public ContainerBlastFurnace(int id, PlayerInventory player, TileBlastFurnace container, IIntArray furnaceData) {
+        super(ShopKeeper.TYPE_BLASTFURNACE, id, player, (IInventory)container, furnaceData);
     }
 
     // For Forge Registry

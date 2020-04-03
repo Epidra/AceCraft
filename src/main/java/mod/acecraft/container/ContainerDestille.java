@@ -26,49 +26,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ContainerDestille extends ContainerFlamer {
 
     // Main Constructor
-    public ContainerDestille(int id, PlayerInventory player, TileEntityDestille container, IIntArray furnaceData, ContainerContent materials) {
-        super(ShopKeeper.TYPE_DESTILLE, id, player, (IInventory)container, furnaceData, materials);
-        //super(ShopKeeper.TYPE_DESTILLE, id);
+    public ContainerDestille(int id, PlayerInventory player, TileEntityDestille container, IIntArray furnaceData) {
+        super(ShopKeeper.TYPE_DESTILLE, id, player, (IInventory)container, furnaceData);
+        addPlayerSlots(player);
+        addOwnSlots(player);
     }
 
     // For Forge Registry
     public ContainerDestille(int id, PlayerInventory playerInventory, PacketBuffer packetBuffer) {
         super(ShopKeeper.TYPE_DESTILLE, id, playerInventory);
+        addPlayerSlots(playerInventory);
+        addOwnSlots(playerInventory);
     }
-
-    //public ContainerDestille(int windowId, PlayerInventory playerInventory, PacketBuffer extraData) {
-    //    this(windowId, playerInventory, (BaseCreatureEntity)playerInventory.player.getEntityWorld().getEntityByID(extraData.readInt()));
-    //}
-
-  //  /**
-  //   * Main Constructor
-  //   * @param windowId The window id for the gui screen to use.
-  //   * @param playerInventory The accessing player's inventory.
-  //   * @param creature The creature to access.
-  //   */
-  //  public ContainerDestille(int windowId, PlayerInventory playerInventory, BaseCreatureEntity creature) {
-  //      super(ShopKeeper.TYPE_DESTILLE, windowId);
-  //      this.creature = creature;
-//
-  //      // Player Inventory:
-  //      this.addPlayerSlots(playerInventory, 0, 0);
-//
-  //      // Creature Equipment:
-  //      this.specialStart = this.inventorySlots.size();
-  //      this.drawCreatureEquipment(creature, 8, 18);
-  //      this.specialFinish = this.inventorySlots.size() - 1;
-//
-  //      // Creature Inventory
-  //      this.inventoryStart = this.inventorySlots.size();
-  //      if(creature.inventory.getItemSlotsSize() > 0)
-  //          this.addSlotsByColumn(creature.inventory, 8 + (18 * 4), 18, 5, 0, creature.inventory.getActiveItemSlotsSize() - 1);
-  //      this.inventoryFinish = this.inventorySlots.size() - 1;
-  //  }
-
-    //public ContainerDestille(int i, PlayerInventory playerInventory, PacketBuffer packetBuffer) {
-   //     super();
-   // }
-
 
     /** Adds Container Speific Blocks **/
     private void addOwnSlots(PlayerInventory playerInventory) { // for container specifig slots
@@ -78,8 +47,4 @@ public class ContainerDestille extends ContainerFlamer {
         this.addSlot(new Slot(furnaceInventory, 3, 37, 17));
     }
 
-    @Override
-    public boolean canInteractWith(PlayerEntity playerIn) {
-        return false;
-    }
 }

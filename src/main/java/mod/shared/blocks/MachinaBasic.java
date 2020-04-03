@@ -47,10 +47,6 @@ public abstract class MachinaBasic extends Block {
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
-    public boolean isFullCube(BlockState state){
-        return false;
-    }
-
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
     }

@@ -26,24 +26,22 @@ public abstract class ContainerFlamer extends Container {
 
     protected final IInventory furnaceInventory;
     protected final IIntArray trackingData;
-    protected final ContainerContent trackingExtraData;
     protected final World world;
 
    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn){
-       this(containerTypeIn, id, playerInventoryIn, new Inventory(3), null, new FoundryContent());
+       this(containerTypeIn, id, playerInventoryIn, new Inventory(3), null);
    }
 
-    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IIntArray data, ContainerContent extraData) {
-        this(containerTypeIn, id, playerInventoryIn, new Inventory(3), data, extraData);
+    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IIntArray data) {
+        this(containerTypeIn, id, playerInventoryIn, new Inventory(3), data);
     }
 
-    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IInventory furnaceInventoryIn, IIntArray data, ContainerContent extraData) {
+    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IInventory furnaceInventoryIn, IIntArray data) {
         super(containerTypeIn, id);
         assertInventorySize(furnaceInventoryIn, 3);
         assertIntArraySize(data, 4);
         this.furnaceInventory = furnaceInventoryIn;
         this.trackingData = data;
-        this.trackingExtraData = extraData;
         this.world = playerInventoryIn.player.world;
         this.addSlot(new Slot(furnaceInventoryIn, 0, 56, 17));
         this.addSlot(new SlotFuel(this, furnaceInventoryIn, 1, 56, 53));

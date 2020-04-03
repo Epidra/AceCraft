@@ -27,9 +27,12 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MachinaDestille extends MachinaFlamer {
 
@@ -57,6 +60,13 @@ public class MachinaDestille extends MachinaFlamer {
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return ShopKeeper.TYPE_DESTILLE_TILE.create();
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        List<ItemStack> drops = new ArrayList<>();
+        drops.add(new ItemStack(this));
+        return drops;
     }
 
 }
