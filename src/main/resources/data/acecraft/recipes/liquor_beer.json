@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "acecraft:destille",
   "ingredients": [
     {
       "item": "minecraft:glass_bottle"
@@ -9,6 +9,8 @@
     }
   ],
   "result": {
-    "item": "acecraft:liquor_beer"
+    "item": "acecraft:liquor_beer",
+    "experience": 1.0,
+    "cookingtime": 200
   }
 }

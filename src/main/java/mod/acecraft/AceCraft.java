@@ -1,31 +1,29 @@
 package mod.acecraft;
 
-import mod.acecraft.tileentities.TileBlastFurnace;
+import mod.acecraft.system.AceCraftPacketHandler;
+import mod.acecraft.system.ClientProxy;
+import mod.acecraft.system.CommonProxy;
 import mod.acecraft.worldgen.WorldGen;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.MerchantOffer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.nio.file.Paths;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("acecraft")
@@ -36,98 +34,63 @@ public class AceCraft {
     // The Mod ID
     public static final String MODID = "acecraft";
     // Client/Server Proxy
-    //public static ServerProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+    public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
     public AceCraft() {
-       // Register the setup method for modloading
-       FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-       // Register the enqueueIMC method for modloading
-       FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-       // Register the processIMC method for modloading
-       FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-       // Register the doClientStuff method for modloading
-       FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-       // Register ourselves for server and other game events we are interested in
-       MinecraftForge.EVENT_BUS.register(this);
-
+        final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.addListener(this::setupCommon);
+        eventBus.addListener(this::enqueueIMC);
+        eventBus.addListener(this::processIMC);
+        eventBus.addListener(this::setupClient);
+        eventBus.addListener(this::villagerTrades);
+        eventBus.addListener(this::wandererTrades);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
+    private void setupCommon(final FMLCommonSetupEvent event) {
+        AceCraftPacketHandler.register();
         WorldGen.GenerateOre();
         WorldGen.GenerateNetherOre();
-
-        //ShopKeeper.loadConfig(Paths.get("config", MODID + ".toml"));
-
-        //DistExecutor.runWhenOn(Dist.CLIENT, () -> ChestContainerType::registerScreenFactories);
+        //DeferredWorkQueue.runLater(ShopKeeper::addSpawn);
+        //ShopKeeper.addTrades();
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+    private void setupClient(final FMLClientSetupEvent event) {
         ShopKeeper.registerGUI();
+        ShopKeeper.registerRenderer();
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-        // some example code to dispatch IMC to another mod
-        InterModComms.sendTo(MODID, "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+
     }
 
     private void processIMC(final InterModProcessEvent event) {
-        // some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.getMessageSupplier().get()).
-                collect(Collectors.toList()));
+        // PostInit
+        //registerBlockColor here
     }
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
+
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-        // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+    public void villagerTrades(VillagerTradesEvent event){
+        if(event.getType() == VillagerProfession.FARMER){
+            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.FOOD_RICEBALL, 16), 8, 10, 0F));
+            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.STUFF_CURRY,   16), 8, 10, 0F));
+            //RandomTradeBuilder.forEachLevel((level, tradeBuild) -> event.getTrades().get(level.intValue()).add(tradeBuild.build()));
+        }
     }
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            ShopKeeper.registerBlocks();
-        }
-        @SubscribeEvent
-        public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
-            ShopKeeper.registerItems();
-        }
-
-       // @SubscribeEvent
-//
-       // public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
-//
-       //     IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
-//
-       //     ShopKeeper.registerContainer(registry);
-//
-       // }
-
-        //@SubscribeEvent
-
-       // public static void registerTiles(RegistryEvent.Register<TileEntityType<?>> event) {
-//
-       //     IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
-//
-       //     ShopKeeper.TYPE_BLASTFURNACE_TILE = TileEntityType.Builder.create((Supplier<TileEntity>) TileBlastFurnace::new,
-       //             ShopKeeper.MACHINA_BLASTFURNACE
-       //     ).build(null);
-       //     ShopKeeper.TYPE_BLASTFURNACE_TILE.setRegistryName(MODID, "summoningpedestal");
-       //     event.getRegistry().register(ShopKeeper.TYPE_BLASTFURNACE_TILE);
-//
-//
-       //     //registry.register(TileEntityType.Builder.create(TileBlastFurnace::new, ShopKeeper.MACHINA_BLASTFURNACE).build(null).setRegistryName(MODID, "blastfurnace"));
-//
-       // }
+    //@SubscribeEvent
+    public void wandererTrades(WandererTradesEvent event){
+        //List<ITrade> genericList = event.getGenericTrades();
+        //RandomTradeBuilder.forEachWanderer((tradeBuild) -> genericList.add(tradeBuild.build()));
+        //List<ITrade> rareList = event.getRareTrades();
+        //RandomTradeBuilder.forEachWandererRare((tradeBuild) -> rareList.add(tradeBuild.build()));
     }
+
+
+    /**
+     * Check out how vanilla does it in GrassColors, FoliageColors, and BiomeColors. Then use BlockColors#register in the client setup event ColorHandlerEvent﻿﻿.Block* to replace the vanilla block colors.
+     */
+
+
 }

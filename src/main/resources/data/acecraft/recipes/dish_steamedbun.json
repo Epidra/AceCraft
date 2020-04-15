@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_steamedbun",
+    "count": 1
+  }
+}

@@ -1,19 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "GGG",
-    "QGQ",
-    "WWW"
+    " I ",
+    "III",
+    "III"
   ],
   "key": {
-    "Q": {
-      "item": "minecraft:quartz"
-    },
-    "G": {
-      "item": "minecraft:glass"
-    },
-    "W": {
-      "tag": "minecraft:wooden_slabs"
+    "I": {
+      "item": "minecraft:iron_ingot"
     }
   },
   "result": {

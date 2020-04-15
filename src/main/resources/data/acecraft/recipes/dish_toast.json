@@ -1,0 +1,12 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_toast",
+    "count": 1
+  }
+}

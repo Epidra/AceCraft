@@ -1,0 +1,18 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_tempura",
+    "count": 1
+  }
+}

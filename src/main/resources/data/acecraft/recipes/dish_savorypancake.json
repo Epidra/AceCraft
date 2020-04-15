@@ -1,0 +1,21 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:food_cabbage"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_savorypancake",
+    "count": 1
+  }
+}

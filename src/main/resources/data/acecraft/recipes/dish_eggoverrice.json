@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "acecraft:food_riceball"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_eggoverrice",
+    "count": 1
+  }
+}

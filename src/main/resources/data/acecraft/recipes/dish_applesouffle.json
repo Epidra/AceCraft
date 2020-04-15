@@ -1,0 +1,12 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_applesouffle",
+    "count": 1
+  }
+}

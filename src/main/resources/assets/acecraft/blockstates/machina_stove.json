@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=south": { "model": "acecraft:block/machina_stove", "x": 180 },
+        "facing=west":  { "model": "acecraft:block/machina_stove", "x": 180 },
+        "facing=north": { "model": "acecraft:block/machina_stove", "x": 180 },
+        "facing=east":  { "model": "acecraft:block/machina_stove", "x": 180 }
+    }
+}

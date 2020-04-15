@@ -1,45 +1,30 @@
 package mod.acecraft.util;
 
-import java.util.function.Supplier;
-
 import mod.acecraft.ShopKeeper;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.util.LazyLoadBase;
+import net.minecraft.util.LazyValue;
+
+import java.util.function.Supplier;
 
 public enum MaterialTool implements IItemTier {
 
-    BRASS     (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);      }),
-    QUESTORIUM(4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_QUESTORIUM); }),
-    GILIUM    (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_GILIUM);     }),
-    ADAMANTIUM(4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ADAMANTIUM); }),
-    VIRIDIUM  (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_VIRIDIUM);   }),
-    ZINC      (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ZINC);       }),
-    KOBALIUM  (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_KOBALIUM);   }),
-    DENARIUM  (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_DENARIUM);   }),
-    MYTHRIL   (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_MYTHRIL);    }),
-    CLAVIUM   (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_CLAVIUM);    }),
-    AURELIUM  (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_AURELIUM);   }),
-    NIVIDIUM  (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_NIVIDIUM);   }),
-    TIN       (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_TIN);        }),
-    ORICHALCUM(4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ORICHALCUM); }),
-    SCARLETITE(4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_SCARLETITE); }),
-    COPPER    (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_COPPER);     }),
-    BRONZE    (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRONZE);     }),
-    STEEL     (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_STEEL);      }),
-    DARKSTEEL (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_DARKSTEEL);  }),
-    UNOBTANIUM(4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_UNOBTANIUM); }),
-    AURORITE  (4, 2000, 10.0F, 4.0F, 15, () -> { return Ingredient.fromItems(ShopKeeper.GEM_AURORITE);     });
+    BRASS     (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);      }),
+    GILIUM    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_GILIUM);     }),
+    ADAMANTIUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ADAMANTIUM); }),
+    MYTHRIL   (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_MYTHRIL);    }),
+    ORICHALCUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ORICHALCUM); }),
+    COPPER    (1, 131, 4.0F, 1.0F, 5, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_COPPER);     }),
+    BRONZE    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRONZE);     }),
+    STEEL     (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_STEEL);      }),
+    AURORITE  (3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.STUFF_AURORITE);   });
 
     private final int harvestLevel;
     private final int maxUses;
     private final float efficiency;
     private final float attackDamage;
     private final int enchantability;
-    private final LazyLoadBase<Ingredient> repairMaterial;
+    private final LazyValue<Ingredient> repairMaterial;
 
     private MaterialTool(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn) {
         this.harvestLevel = harvestLevelIn;
@@ -47,7 +32,7 @@ public enum MaterialTool implements IItemTier {
         this.efficiency = efficiencyIn;
         this.attackDamage = attackDamageIn;
         this.enchantability = enchantabilityIn;
-        this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
+        this.repairMaterial = new LazyValue<>(repairMaterialIn);
     }
 
     public int getMaxUses() {

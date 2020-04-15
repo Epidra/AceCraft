@@ -2,7 +2,6 @@ package mod.acecraft.items;
 
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
 public class ToolAxe extends AxeItem {

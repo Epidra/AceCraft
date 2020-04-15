@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:blocks/dish_pudding"
+        "layer0": "acecraft:items/dish_pudding"
     }
 }

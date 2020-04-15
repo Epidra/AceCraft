@@ -1,4 +1,4 @@
 package mod.acecraft.system;
 
-public class ClientProxy {
+public class ClientProxy extends CommonProxy {
 }

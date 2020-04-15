@@ -1,52 +1,46 @@
 package mod.shared.container;
 
-import mod.acecraft.util.FoundryContent;
-import mod.shared.tileentity.TileEntityFlamer;
 import mod.shared.util.BurnTimes;
-import mod.shared.util.ContainerContent;
-import mod.shared.util.SlotFuel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.*;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.container.FurnaceResultSlot;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import javax.annotation.Nullable;
 
 public abstract class ContainerFlamer extends Container {
 
     protected final IInventory furnaceInventory;
     protected final IIntArray trackingData;
-    protected final ContainerContent trackingExtraData;
     protected final World world;
 
    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn){
-       this(containerTypeIn, id, playerInventoryIn, new Inventory(3), null, new FoundryContent());
+       this(containerTypeIn, id, playerInventoryIn, new Inventory(3), null);
    }
 
-    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IIntArray data, ContainerContent extraData) {
-        this(containerTypeIn, id, playerInventoryIn, new Inventory(3), data, extraData);
+    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IIntArray data) {
+        this(containerTypeIn, id, playerInventoryIn, new Inventory(3), data);
     }
 
-    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IInventory furnaceInventoryIn, IIntArray data, ContainerContent extraData) {
+    protected ContainerFlamer(ContainerType<?> containerTypeIn, int id, PlayerInventory playerInventoryIn, IInventory furnaceInventoryIn, IIntArray data) {
         super(containerTypeIn, id);
         assertInventorySize(furnaceInventoryIn, 3);
         assertIntArraySize(data, 4);
         this.furnaceInventory = furnaceInventoryIn;
         this.trackingData = data;
-        this.trackingExtraData = extraData;
         this.world = playerInventoryIn.player.world;
         this.addSlot(new Slot(furnaceInventoryIn, 0, 56, 17));
-        this.addSlot(new SlotFuel(this, furnaceInventoryIn, 1, 56, 53));
+        //this.addSlot(new SlotFuel(this, furnaceInventoryIn, 1, 56, 53));
         this.addSlot(new FurnaceResultSlot(playerInventoryIn.player, furnaceInventoryIn, 2, 116, 35));
 
         for(int i = 0; i < 3; ++i) {

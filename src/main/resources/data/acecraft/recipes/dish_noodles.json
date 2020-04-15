@@ -1,0 +1,12 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_noodles",
+    "count": 1
+  }
+}

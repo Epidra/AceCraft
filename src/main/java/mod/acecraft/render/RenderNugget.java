@@ -1,25 +1,16 @@
 package mod.acecraft.render;
 
-public class RenderNugget {
+import mod.acecraft.entity.EntityNugget;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.SpriteRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
+public class RenderNugget extends SpriteRenderer<EntityNugget> {
+
+    public RenderNugget(EntityRendererManager renderManager) {
+        super(renderManager, Minecraft.getInstance().getItemRenderer());
+    }
 }
-
-//public class RenderNugget extends RenderSnowball<EntityNugget> {
-//
-//    public static final Factory FACTORY = new Factory();
-//
-//    public RenderNugget(RenderManager renderManagerIn, RenderItem itemRendererIn){
-//        super(renderManagerIn, Items.POTIONITEM, itemRendererIn);
-//    }
-//
-//    public ItemStack getStackToRender(EntityNugget entityIn){
-//        return entityIn.getNugget();
-//    }
-//
-//    public static class Factory implements IRenderFactory<EntityNugget>{
-//        public Render<? super EntityNugget> createRenderFor(RenderManager manager){
-//            return new RenderNugget(manager, Minecraft.getMinecraft().getRenderItem());
-//        }
-//    }
-//
-//}

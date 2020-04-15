@@ -1,7 +1,6 @@
 package mod.acecraft.slots;
 
-import mod.acecraft.container.ContainerBlastFurnace;
-import mod.acecraft.container.ContainerDestille;
+import mod.acecraft.container.ContainerDestilleAbstract;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -9,9 +8,9 @@ import net.minecraft.item.Items;
 
 public class SlotFurnaceFuelDestille extends Slot {
 
-    private ContainerDestille container;
+    private ContainerDestilleAbstract container;
 
-    public SlotFurnaceFuelDestille(ContainerDestille container, IInventory inventory, int a, int b, int c) {
+    public SlotFurnaceFuelDestille(ContainerDestilleAbstract container, IInventory inventory, int a, int b, int c) {
         super(inventory, a, b, c);
         this.container = container;
     }

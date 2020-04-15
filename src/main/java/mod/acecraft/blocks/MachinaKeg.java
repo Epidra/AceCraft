@@ -1,6 +1,5 @@
 package mod.acecraft.blocks;
 
-import mod.acecraft.ShopKeeper;
 import mod.acecraft.tileentities.TileEntityKeg;
 import mod.shared.blocks.MachinaBasic;
 import net.minecraft.block.Block;
@@ -10,7 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -30,24 +29,20 @@ public class MachinaKeg extends MachinaBasic {
         return false;
     }
 
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
-
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
         // Only execute on the server
         if (worldIn.isRemote)
-            return true;
+            return ActionResultType.SUCCESS;
         TileEntity te = worldIn.getTileEntity(pos);
         if (! (te instanceof TileEntityKeg))
-            return false;
+            return ActionResultType.PASS;
         NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) te, pos);
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Override

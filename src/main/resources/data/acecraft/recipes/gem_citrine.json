@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "acecraft:ore_citrine"
-  },
-  "result": "acecraft:gem_citrine",
-  "experience": 1.0,
-  "cookingtime": 200
-}

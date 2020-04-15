@@ -1,89 +1,167 @@
 package mod.acecraft.entity;
 
-public class EntityNugget {
+import mod.acecraft.ShopKeeper;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.BlazeEntity;
+import net.minecraft.entity.projectile.ProjectileItemEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ItemParticleData;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.Explosion;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
+public class EntityNugget extends ProjectileItemEntity implements IEntityAdditionalSpawnData {
+
+    private ItemStack stack;
+
+    public EntityNugget(EntityType<? extends EntityNugget> p_i50159_1_, World p_i50159_2_) {
+        super(p_i50159_1_, p_i50159_2_);
+    }
+
+    public EntityNugget(FMLPlayMessages.SpawnEntity packet, World worldIn)
+    {
+        super(ShopKeeper.ENTITY_NUGGET, worldIn);
+        PacketBuffer buf = packet.getAdditionalData();
+        stack = buf.readItemStack();
+    }
+
+    public EntityNugget(World worldIn, LivingEntity throwerIn, ItemStack itemIn) {
+        super(ShopKeeper.ENTITY_NUGGET, throwerIn, worldIn);
+        this.stack = itemIn.copy();
+
+    }
+
+    public EntityNugget(World worldIn, double x, double y, double z) {
+        super(ShopKeeper.ENTITY_NUGGET, x, y, z, worldIn);
+    }
+
+    protected Item getDefaultItem() {
+        return ShopKeeper.NUGGET_COPPER;
+    }
+
+    @Override
+
+    public void writeSpawnData(PacketBuffer buffer) {
+
+        buffer.writeItemStack(this.stack);
+
+    }
+
+
+
+    @Override
+
+    public void readSpawnData(PacketBuffer additionalData) {
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private IParticleData makeParticle() {
+        ItemStack itemstack = this.func_213882_k();
+        return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public ItemStack getItem() {
+        return stack;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void handleStatusUpdate(byte id) {
+        if (id == 3) {
+            IParticleData iparticledata = this.makeParticle();
+
+            for(int i = 0; i < 8; ++i) {
+                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+            }
+        }
+
+    }
+
+    protected void onImpact(RayTraceResult result) {
+        if (result.getType() == RayTraceResult.Type.ENTITY) {
+            Entity entity = ((EntityRayTraceResult)result).getEntity();
+            int i = entity instanceof BlazeEntity ? 3 : 0;
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
+        }
+
+        if (!this.world.isRemote) {
+            this.world.setEntityState(this, (byte)3);
+            //explode();
+            this.remove();
+        }
+
+    }
+
+    private void explode(){
+        float f = 3.0F;
+        this.world.createExplosion(this, this.getPosX(), this.getPosY() + (double)(this.getHeight() / 16.0F), this.getPosZ(), f, Explosion.Mode.DESTROY);
+    }
+
+    //public void shoot(float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy) {
+    //    float f = -MathHelper.sin(rotationYawIn * ((float)Math.PI / 180F)) * MathHelper.cos(rotationPitchIn * ((float)Math.PI / 180F));
+    //    float f1 = -MathHelper.sin((rotationPitchIn + pitchOffset) * ((float)Math.PI / 180F));
+    //    float f2 = MathHelper.cos(rotationYawIn * ((float)Math.PI / 180F)) * MathHelper.cos(rotationPitchIn * ((float)Math.PI / 180F));
+    //    this.shoot((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+    //    //Vec3d vec3d = entityThrower.getMotion();
+    //    //this.setMotion(this.getMotion().add(vec3d.x, vec3d.y, vec3d.z));
+    //}
+
+    @Override
+    public IPacket<?> createSpawnPacket()
+    {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
 }
 
-//public class EntityNugget extends EntityThrowable {
+//public class EntityDynamite extends EntityThrowable {
 //
-//    private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityPotion.class, DataSerializers.ITEM_STACK);
-//    private static final Logger LOGGER = LogManager.getLogger();
-//
-//    public EntityNugget(World worldIn){
+//    public EntityDynamite(World worldIn){
 //        super(worldIn);
 //    }
 //
-//    public EntityNugget(World worldIn, EntityLivingBase throwerIn, ItemStack nugget){
+//    public EntityDynamite(World worldIn, EntityLivingBase throwerIn){
 //        super(worldIn, throwerIn);
-//        this.setItem(nugget);
 //    }
 //
-//    public EntityNugget(World worldIn, double x, double y, double z, ItemStack nugget){
+//    public EntityDynamite(World worldIn, EntityLivingBase throwerIn, String name){
+//        super(worldIn, throwerIn);
+//    }
+//
+//    public EntityDynamite(World worldIn, double x, double y, double z){
 //        super(worldIn, x, y, z);
-//        if (!nugget.isEmpty()){
-//            this.setItem(nugget);
-//        }
 //    }
 //
-//    protected void entityInit(){
-//        this.getDataManager().register(ITEM, ItemStack.EMPTY);
-//    }
-//
-//    public ItemStack getNugget(){
-//        ItemStack itemstack = this.getDataManager().get(ITEM);
-//        if (itemstack.isEmpty()){
-//            if (this.world != null){
-//                LOGGER.error("ThrownPotion entity {} has no item?!", this.getEntityId());
-//            }
-//            return new ItemStack(Items.FLINT);
-//        } else {
-//            return itemstack;
-//        }
-//    }
-//
-//    public void setItem(ItemStack stack){
-//        this.getDataManager().set(ITEM, stack);
-//        this.getDataManager().setDirty(ITEM);
-//    }
-//
-//    /** Gets the amount of gravity to apply to the thrown entity with each tick. */
-//    protected float getGravityVelocity(){
-//        return 0.05F;
-//    }
-//
-//    /** Called when this EntityThrowable hits a block or entity. */
 //    protected void onImpact(RayTraceResult result){
-//        if (!this.world.isRemote){
-//            if (result.entityHit != null){
-//                int i = 2;
-//                result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
-//            }
-//            for (int j = 0; j < 8; ++j){
-//                this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-//            }
-//            if(!this.world.isRemote)
-//                this.dropItem(getNugget().getItem(), 1);
-//            this.setDead();
+//        if (result.entityHit != null){
+//            int i = 2;
+//            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
 //        }
+//        for (int j = 0; j < 8; ++j){
+//            this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+//        }
+//        if(!this.world.isRemote)
+//            this.explode();
+//        this.setDead();
 //    }
 //
-//    /** (abstract) Protected helper method to read subclass entity data from NBT. */
-//    public void readEntityFromNBT(NBTTagCompound compound){
-//        super.readEntityFromNBT(compound);
-//        ItemStack itemstack = new ItemStack(compound.getCompoundTag("Nugget"));
-//        if (itemstack.isEmpty()){
-//            this.setDead();
-//        } else {
-//            this.setItem(itemstack);
-//        }
+//    private void explode(){
+//        float f = 3.0F;
+//        this.world.createExplosion(this, this.posX, this.posY + (double)(this.height / 16.0F), this.posZ, f, true);
 //    }
 //
-//    /** (abstract) Protected helper method to write subclass entity data to NBT. */
-//    public void writeEntityToNBT(NBTTagCompound compound){
-//        super.writeEntityToNBT(compound);
-//        ItemStack itemstack = this.getNugget();
-//        if (!itemstack.isEmpty()){
-//            compound.setTag("Potion", itemstack.writeToNBT(new NBTTagCompound()));
-//        }
-//    }
 //}
