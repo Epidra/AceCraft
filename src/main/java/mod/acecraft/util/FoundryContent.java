@@ -76,17 +76,10 @@ public class FoundryContent extends ContainerContent {
 
     public Item getResultItem(){
         if(result.matches("brass")) return ShopKeeper.INGOT_BRASS;
-        if(result.matches("questorium")) return ShopKeeper.INGOT_QUESTORIUM;
         if(result.matches("adamantium")) return ShopKeeper.INGOT_ADAMANTIUM;
-        if(result.matches("viridium")) return ShopKeeper.INGOT_VIRIDIUM;
-        if(result.matches("kobalium")) return ShopKeeper.INGOT_KOBALIUM;
-        if(result.matches("denarium")) return ShopKeeper.INGOT_DENARIUM;
-        if(result.matches("clavium")) return ShopKeeper.INGOT_CLAVIUM;
-        if(result.matches("aurelium")) return ShopKeeper.INGOT_AURELIUM;
         if(result.matches("orichalcum")) return ShopKeeper.INGOT_ORICHALCUM;
         if(result.matches("bronze")) return ShopKeeper.INGOT_BRONZE;
         if(result.matches("steel")) return ShopKeeper.INGOT_STEEL;
-        if(result.matches("darksteel")) return ShopKeeper.INGOT_DARKSTEEL;
 
         return Items.STICK;
     }

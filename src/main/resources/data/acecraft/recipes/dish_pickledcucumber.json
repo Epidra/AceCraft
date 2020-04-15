@@ -1,0 +1,12 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:food_cucumber"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_pickledcucumber",
+    "count": 1
+  }
+}

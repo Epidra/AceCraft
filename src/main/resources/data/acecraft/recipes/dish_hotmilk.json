@@ -1,0 +1,12 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_hotmilk",
+    "count": 1
+  }
+}

@@ -9,52 +9,55 @@ import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.IPacket;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityDynamite extends ProjectileItemEntity {
 
-    public EntityDynamite(EntityType<? extends EntityDynamite> type, World worldIn) {
-        super(type, worldIn);
+    public EntityDynamite(EntityType<? extends EntityDynamite> p_i50159_1_, World p_i50159_2_) {
+        super(p_i50159_1_, p_i50159_2_);
+    }
+
+    public EntityDynamite(FMLPlayMessages.SpawnEntity packet, World worldIn)
+    {
+        super(ShopKeeper.ENTITY_DYNAMITE, worldIn);
     }
 
     public EntityDynamite(World worldIn, LivingEntity throwerIn) {
         super(ShopKeeper.ENTITY_DYNAMITE, throwerIn, worldIn);
     }
 
-    public EntityDynamite(EntityType<? extends EntityDynamite> type, double x, double y, double z, World worldIn) {
-        super(type, x, y, z, worldIn);
+    public EntityDynamite(World worldIn, double x, double y, double z) {
+        super(ShopKeeper.ENTITY_DYNAMITE, x, y, z, worldIn);
     }
 
-    public EntityDynamite(EntityType<? extends EntityDynamite> type, LivingEntity livingEntityIn, World worldIn) {
-        super(type, livingEntityIn, worldIn);
-    }
-
-    protected Item func_213885_i() {
+    protected Item getDefaultItem() {
         return ShopKeeper.STUFF_DYNAMITE;
     }
 
     @OnlyIn(Dist.CLIENT)
-    private IParticleData func_213887_n() {
+    private IParticleData makeParticle() {
         ItemStack itemstack = this.func_213882_k();
         return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
     }
 
-    /**
-     * Handler for {@link World#setEntityState}
-     */
     @OnlyIn(Dist.CLIENT)
     public void handleStatusUpdate(byte id) {
         if (id == 3) {
-            IParticleData iparticledata = this.func_213887_n();
+            IParticleData iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
                 this.world.addParticle(iparticledata, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
@@ -63,20 +66,16 @@ public class EntityDynamite extends ProjectileItemEntity {
 
     }
 
-    /**
-     * Called when this EntityThrowable hits a block or entity.
-     */
     protected void onImpact(RayTraceResult result) {
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
-            //int i = entity instanceof BlazeEntity ? 3 : 0;
-            int i = 1;
+            int i = entity instanceof BlazeEntity ? 3 : 0;
             entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
         }
 
         if (!this.world.isRemote) {
             this.world.setEntityState(this, (byte)3);
-            this.explode();
+            explode();
             this.remove();
         }
 
@@ -87,6 +86,20 @@ public class EntityDynamite extends ProjectileItemEntity {
         this.world.createExplosion(this, this.posX, this.posY + (double)(this.getHeight() / 16.0F), this.posZ, f, Explosion.Mode.DESTROY);
     }
 
+    //public void shoot(float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy) {
+    //    float f = -MathHelper.sin(rotationYawIn * ((float)Math.PI / 180F)) * MathHelper.cos(rotationPitchIn * ((float)Math.PI / 180F));
+    //    float f1 = -MathHelper.sin((rotationPitchIn + pitchOffset) * ((float)Math.PI / 180F));
+    //    float f2 = MathHelper.cos(rotationYawIn * ((float)Math.PI / 180F)) * MathHelper.cos(rotationPitchIn * ((float)Math.PI / 180F));
+    //    this.shoot((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+    //    //Vec3d vec3d = entityThrower.getMotion();
+    //    //this.setMotion(this.getMotion().add(vec3d.x, vec3d.y, vec3d.z));
+    //}
+
+    @Override
+    public IPacket<?> createSpawnPacket()
+    {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
 }
 
 //public class EntityDynamite extends EntityThrowable {

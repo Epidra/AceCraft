@@ -13,7 +13,7 @@ public class ItemFood extends Item {
 
     /** Default Constructor */
     public ItemFood(String modid, String name, int hunger, float saturation){
-        super(new Properties().group(ItemGroup.FOOD).maxStackSize(16).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
+        super(new Properties().group(ItemGroup.FOOD).maxStackSize(64).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
         this.setRegistryName(modid, name);
     }
 

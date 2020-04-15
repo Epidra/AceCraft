@@ -1,6 +1,7 @@
 package mod.acecraft;
 
 import mod.acecraft.render.RenderCrab;
+import mod.acecraft.system.AceCraftPacketHandler;
 import mod.acecraft.system.ClientProxy;
 import mod.acecraft.system.CommonProxy;
 import mod.acecraft.tileentities.TileBlastFurnace;
@@ -8,8 +9,12 @@ import mod.acecraft.worldgen.WorldGen;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.MerchantOffer;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -17,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -59,14 +66,18 @@ public class AceCraft {
         eventBus.addListener(this::enqueueIMC);
         eventBus.addListener(this::processIMC);
         eventBus.addListener(this::setupClient);
+        eventBus.addListener(this::villagerTrades);
+        eventBus.addListener(this::wandererTrades);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setupCommon(final FMLCommonSetupEvent event) {
+        AceCraftPacketHandler.register();
         WorldGen.GenerateOre();
         WorldGen.GenerateNetherOre();
-        DeferredWorkQueue.runLater(ShopKeeper::addSpawn);
+        //DeferredWorkQueue.runLater(ShopKeeper::addSpawn);
+        //ShopKeeper.addTrades();
     }
 
     private void setupClient(final FMLClientSetupEvent event) {
@@ -79,7 +90,25 @@ public class AceCraft {
     }
 
     private void processIMC(final InterModProcessEvent event) {
+        // PostInit
+        //registerBlockColor here
+    }
 
+    @SubscribeEvent
+    public void villagerTrades(VillagerTradesEvent event){
+        if(event.getType() == VillagerProfession.FARMER){
+            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.FOOD_RICEBALL, 16), 8, 10, 0F));
+            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.STUFF_CURRY,   16), 8, 10, 0F));
+            //RandomTradeBuilder.forEachLevel((level, tradeBuild) -> event.getTrades().get(level.intValue()).add(tradeBuild.build()));
+        }
+    }
+
+    //@SubscribeEvent
+    public void wandererTrades(WandererTradesEvent event){
+        //List<ITrade> genericList = event.getGenericTrades();
+        //RandomTradeBuilder.forEachWanderer((tradeBuild) -> genericList.add(tradeBuild.build()));
+        //List<ITrade> rareList = event.getRareTrades();
+        //RandomTradeBuilder.forEachWandererRare((tradeBuild) -> rareList.add(tradeBuild.build()));
     }
 
 

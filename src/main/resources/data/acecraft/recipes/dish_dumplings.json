@@ -1,0 +1,21 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:food_cabbage"
+    },
+    {
+      "item": "acecraft:food_onion"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    },
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_dumplings",
+    "count": 1
+  }
+}

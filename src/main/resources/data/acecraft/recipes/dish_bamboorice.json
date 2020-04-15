@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:flower_bamboo"
+    },
+    {
+      "item": "acecraft:food_riceball"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_bamboorice",
+    "count": 1
+  }
+}

@@ -44,7 +44,7 @@ public abstract class ContainerFlamer extends Container {
         this.trackingData = data;
         this.world = playerInventoryIn.player.world;
         this.addSlot(new Slot(furnaceInventoryIn, 0, 56, 17));
-        this.addSlot(new SlotFuel(this, furnaceInventoryIn, 1, 56, 53));
+        //this.addSlot(new SlotFuel(this, furnaceInventoryIn, 1, 56, 53));
         this.addSlot(new FurnaceResultSlot(playerInventoryIn.player, furnaceInventoryIn, 2, 116, 35));
 
         for(int i = 0; i < 3; ++i) {

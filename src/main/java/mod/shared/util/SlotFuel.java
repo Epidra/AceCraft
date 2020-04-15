@@ -1,5 +1,6 @@
 package mod.shared.util;
 
+import mod.acecraft.container.ContainerBase;
 import mod.acecraft.container.ContainerBlastFurnace;
 import mod.shared.container.ContainerFlamer;
 import net.minecraft.inventory.IInventory;
@@ -9,9 +10,9 @@ import net.minecraft.item.Items;
 
 public class SlotFuel extends Slot {
 
-    private ContainerFlamer container;
+    private ContainerBase container;
 
-    public SlotFuel(ContainerFlamer container, IInventory inventory, int a, int b, int c) {
+    public SlotFuel(ContainerBase container, IInventory inventory, int a, int b, int c) {
         super(inventory, a, b, c);
         this.container = container;
     }

@@ -1,21 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "GGG",
-    "QGG",
-    "WWW"
-  ],
-  "key": {
-    "Q": {
-      "item": "minecraft:quartz"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:furnace"
     },
-    "G": {
-      "item": "minecraft:glass"
-    },
-    "W": {
-      "tag": "minecraft:wooden_slabs"
+    {
+      "item": "minecraft:furnace"
     }
-  },
+  ],
   "result": {
     "item": "acecraft:machina_destillery"
   }

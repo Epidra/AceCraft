@@ -1,0 +1,16 @@
+{
+  "type": "acecraft:destille",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:sunflower"
+    }
+  ],
+  "result": {
+    "item": "acecraft:liquor_oil",
+    "experience": 1.0,
+    "cookingtime": 200
+  }
+}

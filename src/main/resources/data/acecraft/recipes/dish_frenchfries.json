@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_frenchfries",
+    "count": 1
+  }
+}

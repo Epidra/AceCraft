@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:dish_noodles"
+    },
+    {
+      "item": "acecraft:dish_tempura"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_tempuranoodles",
+    "count": 1
+  }
+}

@@ -1,7 +1,10 @@
 package mod.acecraft.blocks;
 
 import mod.acecraft.ShopKeeper;
+import mod.acecraft.container.ContainerProvider;
+import mod.acecraft.tileentities.TileBlastFurnace;
 import mod.acecraft.tileentities.TileEntityDestille;
+import mod.shared.blocks.BlockBlock;
 import mod.shared.blocks.MachinaBasic;
 import mod.shared.blocks.MachinaFlamer;
 import net.minecraft.block.Block;
@@ -34,21 +37,28 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MachinaDestille extends MachinaFlamer {
+public class MachinaDestille extends BlockBlock {
+
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final IProperty<Boolean> LIT = BlockStateProperties.LIT;
+
+
 
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
     public MachinaDestille(String modid, String name, Block block) {
         super(modid, name, block);
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.valueOf(false)));
     }
 
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isRemote) {
+            TileEntity tileentity = worldIn.getTileEntity(pos);
+            NetworkHooks.openGui((ServerPlayerEntity) player, new ContainerProvider((TileEntityDestille) tileentity), buf -> buf.writeBlockPos(pos));
+        }
 
-    //----------------------------------------FUNCTION----------------------------------------//
-
-    @Override
-    protected void interactWith(World worldIn, BlockPos pos, PlayerEntity player) {
-
+        return true;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class MachinaDestille extends MachinaFlamer {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return ShopKeeper.TYPE_DESTILLE_TILE.create();
+        return new TileEntityDestille();
     }
 
     @Override
@@ -67,6 +77,22 @@ public class MachinaDestille extends MachinaFlamer {
         List<ItemStack> drops = new ArrayList<>();
         drops.add(new ItemStack(this));
         return drops;
+    }
+
+    public BlockState rotate(BlockState state, Rotation rot) {
+        return state.with(FACING, rot.rotate(state.get(FACING)));
+    }
+
+    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+    }
+
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(FACING, LIT);
+    }
+
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
     }
 
 }

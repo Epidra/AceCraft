@@ -1,13 +1,30 @@
 package mod.acecraft;
 
 import com.google.common.base.Preconditions;
+import mod.acecraft.container.ContainerBlastFurnace;
+import mod.acecraft.container.ContainerDestille;
+import mod.acecraft.container.ContainerStove;
+import mod.acecraft.crafting.RecipeDestille;
+import mod.acecraft.crafting.RecipeDestilleSerializer;
+import mod.acecraft.crafting.RecipeStove;
+import mod.acecraft.crafting.RecipeStoveSerializer;
 import mod.acecraft.entity.EntityCrab;
+import mod.acecraft.tileentities.TileBlastFurnace;
+import mod.acecraft.tileentities.TileEntityDestille;
+import mod.acecraft.tileentities.TileEntityStove;
 import mod.acecraft.util.CustomBiomeColors;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.MerchantOffer;
 import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.SingleItemRecipe;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.GrassColors;
@@ -16,18 +33,43 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
+import static mod.acecraft.AceCraft.MODID;
 import static net.minecraftforge.versions.forge.ForgeVersion.MOD_ID;
 
 public class Subscriber {
 
+    public static final RecipeDestilleSerializer serializerDestille = null;
+    public static final RecipeStoveSerializer    serializerStove    = null;
+
+    public static final TileEntityType<TileEntityDestille> tileDestille = null;
+    public static final TileEntityType<TileEntityStove>    tileStove = null;
+
+    public static final ContainerType<ContainerDestille> containerDestille = IForgeContainerType.create(ContainerDestille::new);
+    public static final ContainerType<ContainerStove>    containerStove    = IForgeContainerType.create(ContainerStove::new);
+
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
+    @ObjectHolder(MODID)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
+
+        @SubscribeEvent
+
+        public static void registerSerializer(RegistryEvent.Register<IRecipeSerializer<?>> event) {
+            IForgeRegistry<IRecipeSerializer<?>> registry = event.getRegistry();
+            registry.register(new RecipeDestilleSerializer(RecipeDestille::new).setRegistryName(MODID, "destille"));
+            registry.register(new RecipeStoveSerializer(RecipeStove::new).setRegistryName(MODID, "stove"));
+        }
+
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             ShopKeeper.registerBlocks();
@@ -37,44 +79,48 @@ public class Subscriber {
             ShopKeeper.registerItems();
         }
 
-        @SubscribeEvent
-        public static void onRegisterSerializers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
-            //event.getRegistry().register(ShopKeeper.WOODCUTTING.setRegistryName(new ResourceLocation(MOD_ID, "woodcutting")));
-        }
-
         @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
         public static void registerBlockColorHandlers(final ColorHandlerEvent.Block event) {
             event.getBlockColors().register((x, reader, pos, u) -> reader != null
                     && pos != null ? CustomBiomeColors.getGrassColor(reader, pos)
                     : GrassColors.get(0.5D, 1.0D), ShopKeeper.FLOWER_TOYFLOWER);
+            //BlockColors blockColors = event.getBlockColors();
+            //blockColors.register((state, world, pos, tint_index) -> {
+            //    return world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D);
+            //}, block1, block2, blokc3, blokc4);
         }
 
+        @SubscribeEvent
+        public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event) {
+            IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
+            //registry.register(containerDestille.setRegistryName(MODID, "destille"));
+            //registry.register(containerStove.setRegistryName(MODID, "stove"));
+            registry.register(ContainerBlastFurnace.TYPE);
+            registry.register(ContainerDestille.TYPE);
+            registry.register(ContainerStove.TYPE);
 
-
-        // @SubscribeEvent
-        // public static void registerContainers(RegistryEvent.Register<ContainerType<?>> event) {
-        //     IForgeRegistry<ContainerType<?>> registry = event.getRegistry();
-        //     ShopKeeper.registerContainer(registry);
-        // }
-
-        //@SubscribeEvent
-        // public static void registerTiles(RegistryEvent.Register<TileEntityType<?>> event) {
-        //     IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
-        //     ShopKeeper.TYPE_BLASTFURNACE_TILE = TileEntityType.Builder.create((Supplier<TileEntity>) TileBlastFurnace::new,
-        //             ShopKeeper.MACHINA_BLASTFURNACE
-        //     ).build(null);
-        //     ShopKeeper.TYPE_BLASTFURNACE_TILE.setRegistryName(MODID, "summoningpedestal");
-        //     event.getRegistry().register(ShopKeeper.TYPE_BLASTFURNACE_TILE);
-        //     //registry.register(TileEntityType.Builder.create(TileBlastFurnace::new, ShopKeeper.MACHINA_BLASTFURNACE).build(null).setRegistryName(MODID, "blastfurnace"));
-        // }
+        }
 
         @SubscribeEvent
-        public static void registerPenguins(RegistryEvent.Register<EntityType<?>> event) {
+        public static void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event){
+            ShopKeeper.registerTileEntities(event);
+        }
+
+        //@SubscribeEvent
+        //public static void registerTileEntity(RegistryEvent.Register<TileEntityType<?>> event) {
+        //    IForgeRegistry<TileEntityType<?>> registry = event.getRegistry();
+        //    registry.register(TileEntityType.Builder.create(TileBlastFurnace::new,   ShopKeeper.MACHINA_BLASTFURNACE).build(null).setRegistryName("blast_furnace"));
+        //    registry.register(TileEntityType.Builder.create(TileEntityDestille::new, ShopKeeper.MACHINA_DESTILLERY).build(null).setRegistryName("destille"));
+        //    registry.register(TileEntityType.Builder.create(TileEntityStove::new,    ShopKeeper.MACHINA_STOVE).build(null).setRegistryName("stove"));
+        //}
+
+        @SubscribeEvent
+        public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
             for (EntityType entity : ShopKeeper.entities) {
                 Preconditions.checkNotNull(entity.getRegistryName(), "registryName");
                 event.getRegistry().register(entity);
-                EntitySpawnPlacementRegistry.register(entity, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityCrab::func_223316_b);
+                //EntitySpawnPlacementRegistry.register(entity, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, EntityCrab::func_223316_b);
             }
         }
 
@@ -88,10 +134,9 @@ public class Subscriber {
 
         @SubscribeEvent
         public static void registerSound(RegistryEvent.Register<SoundEvent> event) {
-            for (SoundEvent sound : ShopKeeper.sounds) {
-                event.getRegistry().register(sound);
-            }
+            //for (SoundEvent sound : ShopKeeper.sounds) {
+            //    event.getRegistry().register(sound);
+            //}
         }
-
     }
 }

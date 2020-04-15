@@ -1,21 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "GGG",
-    "GGQ",
-    "WWW"
-  ],
-  "key": {
-    "Q": {
-      "item": "minecraft:quartz"
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "acecraft:block_copper"
     },
-    "G": {
-      "item": "minecraft:glass"
-    },
-    "W": {
-      "tag": "minecraft:wooden_slabs"
+    {
+      "item": "minecraft:furnace"
     }
-  },
+  ],
   "result": {
     "item": "acecraft:machina_blastfurnace"
   }

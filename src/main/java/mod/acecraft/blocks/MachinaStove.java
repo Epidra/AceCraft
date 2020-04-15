@@ -1,6 +1,7 @@
 package mod.acecraft.blocks;
 
 import mod.acecraft.ShopKeeper;
+import mod.acecraft.container.ContainerProvider;
 import mod.acecraft.tileentities.TileEntityStove;
 import mod.shared.blocks.MachinaBasic;
 import net.minecraft.block.Block;
@@ -48,22 +49,20 @@ public class MachinaStove extends MachinaBasic {
         if (worldIn.isRemote)
             return true;
         TileEntity te = worldIn.getTileEntity(pos);
-        //if (! (te instanceof TileEntityStove))
-        //    return false;
-        //NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) te, pos);
+        NetworkHooks.openGui((ServerPlayerEntity) player, new ContainerProvider((TileEntityStove) te), buf -> buf.writeBlockPos(pos));
         return true;
     }
 
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return false;
+        return true;
     }
 
-    //@Nullable
-    //@Override
-    //public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-    //    return new TileEntityStove();
-    //}
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new TileEntityStove();
+    }
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {

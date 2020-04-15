@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_scrambledeggs",
+    "count": 1
+  }
+}

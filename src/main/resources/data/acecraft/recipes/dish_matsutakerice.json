@@ -1,0 +1,15 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:flower_matsutake"
+    },
+    {
+      "item": "acecraft:food_riceball"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_matsutakerice",
+    "count": 1
+  }
+}

@@ -9,9 +9,12 @@ import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -25,29 +28,55 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class EntitySpear extends AbstractArrowEntity {
+public class EntitySpear extends AbstractArrowEntity implements IEntityAdditionalSpawnData {
 
     private static final DataParameter<Byte> LOYALTY_LEVEL = EntityDataManager.createKey(EntitySpear.class, DataSerializers.BYTE);
     private ItemStack thrownStack = new ItemStack(Items.TRIDENT);
     private boolean dealtDamage;
     public int returningTicks;
 
-    public EntitySpear(EntityType<? extends EntitySpear> p_i50148_1_, World p_i50148_2_) {
-        super(p_i50148_1_, p_i50148_2_);
+    public EntitySpear(EntityType<? extends EntitySpear> type, World worldIn) {
+        super(type, worldIn);
     }
 
-    public EntitySpear(World p_i48790_1_, LivingEntity p_i48790_2_, ItemStack p_i48790_3_) {
-        super(ShopKeeper.ENTITY_SPEAR, p_i48790_2_, p_i48790_1_);
-        this.thrownStack = p_i48790_3_.copy();
-        this.dataManager.set(LOYALTY_LEVEL, (byte) EnchantmentHelper.getLoyaltyModifier(p_i48790_3_));
+    public EntitySpear(FMLPlayMessages.SpawnEntity packet, World worldIn)
+    {
+        super(ShopKeeper.ENTITY_SPEAR, worldIn);
+        PacketBuffer buf = packet.getAdditionalData();
+        thrownStack = buf.readItemStack();
+    }
+
+    public EntitySpear(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
+        super(ShopKeeper.ENTITY_SPEAR, thrower, worldIn);
+        this.thrownStack = thrownStackIn.copy();
+        this.dataManager.set(LOYALTY_LEVEL, (byte)EnchantmentHelper.getLoyaltyModifier(thrownStackIn));
     }
 
     @OnlyIn(Dist.CLIENT)
-    public EntitySpear(World p_i48791_1_, double p_i48791_2_, double p_i48791_4_, double p_i48791_6_) {
-        super(ShopKeeper.ENTITY_SPEAR, p_i48791_2_, p_i48791_4_, p_i48791_6_, p_i48791_1_);
+    public EntitySpear(World worldIn, double x, double y, double z) {
+        super(ShopKeeper.ENTITY_SPEAR, x, y, z, worldIn);
+    }
+
+    @Override
+
+    public void writeSpawnData(PacketBuffer buffer) {
+
+        buffer.writeItemStack(this.thrownStack);
+
+    }
+
+
+
+    @Override
+
+    public void readSpawnData(PacketBuffer additionalData) {
+
     }
 
     protected void registerData() {
@@ -55,16 +84,23 @@ public class EntitySpear extends AbstractArrowEntity {
         this.dataManager.register(LOYALTY_LEVEL, (byte)0);
     }
 
-    /**
-     * Called to update the entity's position/logic.
-     */
+    public Item getStack(){
+        return thrownStack.getItem();
+    }
+
+    @Override
+    public IPacket<?> createSpawnPacket()
+    {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
     public void tick() {
         if (this.timeInGround > 4) {
             this.dealtDamage = true;
         }
 
         Entity entity = this.getShooter();
-        if ((this.dealtDamage || this.func_203047_q()) && entity != null) {
+        if ((this.dealtDamage || this.getNoClip()) && entity != null) {
             int i = this.dataManager.get(LOYALTY_LEVEL);
             if (i > 0 && !this.shouldReturnToThrower()) {
                 if (!this.world.isRemote && this.pickupStatus == AbstractArrowEntity.PickupStatus.ALLOWED) {
@@ -73,7 +109,7 @@ public class EntitySpear extends AbstractArrowEntity {
 
                 this.remove();
             } else if (i > 0) {
-                this.func_203045_n(true);
+                this.setNoClip(true);
                 Vec3d vec3d = new Vec3d(entity.posX - this.posX, entity.posY + (double)entity.getEyeHeight() - this.posY, entity.posZ - this.posZ);
                 this.posY += vec3d.y * 0.015D * (double)i;
                 if (this.world.isRemote) {
@@ -107,11 +143,11 @@ public class EntitySpear extends AbstractArrowEntity {
     }
 
     @Nullable
-    protected EntityRayTraceResult func_213866_a(Vec3d p_213866_1_, Vec3d p_213866_2_) {
-        return this.dealtDamage ? null : super.func_213866_a(p_213866_1_, p_213866_2_);
+    protected EntityRayTraceResult rayTraceEntities(Vec3d startVec, Vec3d endVec) {
+        return this.dealtDamage ? null : super.rayTraceEntities(startVec, endVec);
     }
 
-    protected void func_213868_a(EntityRayTraceResult p_213868_1_) {
+    protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
         Entity entity = p_213868_1_.getEntity();
         float f = 8.0F;
         if (entity instanceof LivingEntity) {
@@ -149,13 +185,10 @@ public class EntitySpear extends AbstractArrowEntity {
         this.playSound(soundevent, f1, 1.0F);
     }
 
-    protected SoundEvent func_213867_k() {
+    protected SoundEvent getHitEntitySound() {
         return SoundEvents.ITEM_TRIDENT_HIT_GROUND;
     }
 
-    /**
-     * Called by a player entity when they collide with an entity
-     */
     public void onCollideWithPlayer(PlayerEntity entityIn) {
         Entity entity = this.getShooter();
         if (entity == null || entity.getUniqueID() == entityIn.getUniqueID()) {
@@ -163,9 +196,6 @@ public class EntitySpear extends AbstractArrowEntity {
         }
     }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
         if (compound.contains("Trident", 10)) {

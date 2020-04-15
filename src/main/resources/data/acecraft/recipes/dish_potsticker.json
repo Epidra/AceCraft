@@ -1,0 +1,21 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "acecraft:food_cabbage"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    },
+    {
+      "item": "acecraft:food_onion"
+    },
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_potsticker",
+    "count": 1
+  }
+}

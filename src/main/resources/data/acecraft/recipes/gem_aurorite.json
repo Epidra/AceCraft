@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "acecraft:ore_aurorite"
-  },
-  "result": "acecraft:gem_aurorite",
-  "experience": 1.0,
-  "cookingtime": 200
-}

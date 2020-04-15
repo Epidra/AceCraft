@@ -1,0 +1,18 @@
+{
+  "type": "acecraft:stove",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "acecraft:liquor_oil"
+    }
+  ],
+  "result": {
+    "item": "acecraft:dish_steamedcake",
+    "count": 1
+  }
+}
