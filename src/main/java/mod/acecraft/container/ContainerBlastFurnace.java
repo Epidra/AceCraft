@@ -1,28 +1,18 @@
 package mod.acecraft.container;
 
-import com.google.common.collect.Lists;
 import mod.acecraft.AceCraft;
-import mod.acecraft.ShopKeeper;
-import mod.acecraft.slots.SlotFurnaceFuel;
 import mod.acecraft.tileentities.TileBlastFurnace;
 import mod.acecraft.tileentities.TileEntityBase;
-import mod.acecraft.util.FoundryContent;
-import mod.shared.container.ContainerFlamer;
-import mod.shared.util.ContainerContent;
-import mod.shared.util.SlotFuel;
+import mod.acecraft.util.SlotFuel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.FurnaceResultSlot;
-import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +20,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 import static mod.acecraft.tileentities.TileEntityDestille.ITEMS;
 

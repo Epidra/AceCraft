@@ -1,6 +1,5 @@
 package mod.acecraft.blocks;
 
-import mod.shared.blocks.MachinaBasic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

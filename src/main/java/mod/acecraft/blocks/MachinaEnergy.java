@@ -1,12 +1,12 @@
-package mod.shared.blocks;
+package mod.acecraft.blocks;
 
-public class MachinaCubic {
+public class MachinaEnergy {
 
 }
 
-//public class IMachinaCubic extends Block {
+//public class IMachinaEnergy extends BlockContainer {
 //
-//    /** ??? */
+//    /** Enum Value for horizontal placement */
 //    public static final PropertyDirection FACING = PropertyDirection.create("facing");
 //
 //
@@ -14,8 +14,8 @@ public class MachinaCubic {
 //
 //    //----------------------------------------CONSTRUCTOR----------------------------------------//
 //
-//    /** ??? */
-//    public IMachinaCubic(String name, Material material) {
+//    /** Default Constructor */
+//    public IMachinaEnergy(String name, Material material) {
 //        super(material);
 //        this.setUnlocalizedName(name);
 //        this.setRegistryName(name);
@@ -52,6 +52,11 @@ public class MachinaCubic {
 //        return EnumBlockRenderType.MODEL;
 //    }
 //
+//    /** Returns the Light Value */
+//    public int getLightValue(IBlockState state){
+//        return 0;
+//    }
+//
 //
 //
 //
@@ -73,6 +78,12 @@ public class MachinaCubic {
 //    /** Called by ItemBlocks after a block is set in the world, to allow post-place logic */
 //    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack){
 //        worldIn.setBlockState(pos, state.withProperty(FACING, getFacingFromEntity(pos, placer)), 2);
+//    }
+//
+//    /** Called serverside after this block is replaced with another in Chunk, but before the Tile Entity is updated */
+//    public void breakBlock(World worldIn, BlockPos pos, IBlockState state){
+//        super.breakBlock(worldIn, pos, state);
+//        worldIn.removeTileEntity(pos);
 //    }
 //
 //
@@ -101,12 +112,7 @@ public class MachinaCubic {
 //        return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 //    }
 //
-//    /** Creates the Block State Container */
-//    protected BlockStateContainer createBlockState(){
-//        return new BlockStateContainer(this, FACING);
-//    }
-//
-//    /** Returns cubic facing from given Entity */
+//    /** Return cubic facing from given Entity */
 //    public static EnumFacing getFacingFromEntity(BlockPos pos, EntityLivingBase placer){
 //        if (MathHelper.abs((float)placer.posX - (float)pos.getX()) < 2.0F && MathHelper.abs((float)placer.posZ - (float)pos.getZ()) < 2.0F){
 //            double d0 = placer.posY + (double)placer.getEyeHeight();
@@ -118,6 +124,16 @@ public class MachinaCubic {
 //            }
 //        }
 //        return placer.getHorizontalFacing();
+//    }
+//
+//    /** Creates the Block State Container */
+//    protected BlockStateContainer createBlockState(){
+//        return new BlockStateContainer(this, FACING);
+//    }
+//
+//    /** Creates the Tile Entity */
+//    public TileEntity createNewTileEntity(World worldIn, int meta){
+//        return new ITileEntityEnergy();
 //    }
 //
 //}

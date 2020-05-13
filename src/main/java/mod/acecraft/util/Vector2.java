@@ -1,4 +1,4 @@
-package mod.shared.util;
+package mod.acecraft.util;
 
 public class Vector2 {
 

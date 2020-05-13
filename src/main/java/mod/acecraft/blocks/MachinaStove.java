@@ -1,15 +1,12 @@
 package mod.acecraft.blocks;
 
-import mod.acecraft.ShopKeeper;
 import mod.acecraft.container.ContainerProvider;
 import mod.acecraft.tileentities.TileEntityStove;
-import mod.shared.blocks.MachinaBasic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;

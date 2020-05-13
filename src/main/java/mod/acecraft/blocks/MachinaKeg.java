@@ -1,8 +1,6 @@
 package mod.acecraft.blocks;
 
-import mod.acecraft.ShopKeeper;
 import mod.acecraft.tileentities.TileEntityKeg;
-import mod.shared.blocks.MachinaBasic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

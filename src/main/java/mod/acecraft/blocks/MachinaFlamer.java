@@ -1,44 +1,49 @@
-package mod.shared.blocks;
+package mod.acecraft.blocks;
 
-import jdk.nashorn.internal.ir.BlockStatement;
+import mod.acecraft.ShopKeeper;
+import mod.acecraft.tileentities.TileBlastFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public abstract class MachinaDoubleWide extends Block {
+public abstract class MachinaFlamer extends Block {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty OFFSET = BlockStateProperties.ATTACHED;
+    public static final IProperty<Boolean> LIT = BlockStateProperties.LIT;
 
 
 
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
-    public MachinaDoubleWide(String modid, String name, Block block) {
+    public MachinaFlamer(String modid, String name, Block block) {
         super(Properties.from(block));
         this.setRegistryName(modid, name);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OFFSET, Boolean.valueOf(true)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(OFFSET, Boolean.valueOf(true)).with(LIT, Boolean.valueOf(false)));
     }
 
 
@@ -66,7 +71,7 @@ public abstract class MachinaDoubleWide extends Block {
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(FACING, OFFSET);
+        builder.add(FACING, OFFSET, LIT);
     }
 
     public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -141,5 +146,27 @@ public abstract class MachinaDoubleWide extends Block {
         if(enumfacing == Direction.WEST ) if(worldIn.getBlockState(pos.south()).getBlock() != Blocks.AIR) return false;
         return true;
     }
+
+    /**
+     * Amount of light emitted
+     * @deprecated prefer calling {@link //IBlockState#getLightValue()}
+     */
+    public int getLightValue(BlockState state) {
+        return state.get(LIT) ? super.getLightValue(state) : 0;
+    }
+
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isRemote) {
+            this.interactWith(worldIn, pos, player);
+        }
+
+        return true;
+    }
+
+    /**
+     * Interface for handling interaction with blocks that impliment AbstractFurnaceBlock. Called in onBlockActivated
+     * inside AbstractFurnaceBlock.
+     */
+    protected abstract void interactWith(World worldIn, BlockPos pos, PlayerEntity player);
 
 }

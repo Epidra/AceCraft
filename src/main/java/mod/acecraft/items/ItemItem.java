@@ -1,4 +1,4 @@
-package mod.shared.items;
+package mod.acecraft.items;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -15,5 +15,9 @@ public class ItemItem extends Item {
     public ItemItem(String modid, String name, ItemGroup group){
         super(new Properties().group(group));
         this.setRegistryName(modid, name);
+    }
+
+    public ItemItem(ItemGroup group){
+        super(new Properties().group(group));
     }
 }

@@ -1,6 +1,5 @@
 package mod.acecraft;
 
-import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -11,7 +10,6 @@ import mod.acecraft.container.ContainerBlastFurnace;
 import mod.acecraft.container.ContainerDestille;
 import mod.acecraft.container.ContainerStove;
 import mod.acecraft.crafting.RecipeDestille;
-import mod.acecraft.crafting.RecipeStove;
 import mod.acecraft.entity.EntityCrab;
 import mod.acecraft.entity.EntityDynamite;
 import mod.acecraft.entity.EntityNugget;
@@ -31,12 +29,10 @@ import mod.acecraft.util.BiomeDictionaryHelper;
 import mod.acecraft.util.MaterialArmor;
 import mod.acecraft.util.MaterialTool;
 import mod.acecraft.util.VillagerUtil;
-import mod.shared.Register;
-import mod.shared.blocks.BlockBlock;
-import mod.shared.items.ItemItem;
+import mod.acecraft.blocks.BlockBlock;
+import mod.acecraft.items.ItemItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -56,23 +52,16 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.ObjectHolder;
 
-import javax.annotation.Nullable;
-import java.nio.file.Path;
 import java.util.*;
-import java.util.function.BiFunction;
 
 import static mod.acecraft.AceCraft.MODID;
 

@@ -1,4 +1,4 @@
-package mod.shared.util;
+package mod.acecraft.util;
 
 import net.minecraft.nbt.CompoundNBT;
 

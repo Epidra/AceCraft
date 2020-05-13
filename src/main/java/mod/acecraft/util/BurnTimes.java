@@ -1,4 +1,4 @@
-package mod.shared.util;
+package mod.acecraft.util;
 
 import com.google.common.collect.Maps;
 import net.minecraft.block.Blocks;

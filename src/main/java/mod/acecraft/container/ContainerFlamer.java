@@ -1,13 +1,8 @@
-package mod.shared.container;
+package mod.acecraft.container;
 
-import mod.acecraft.util.FoundryContent;
-import mod.shared.tileentity.TileEntityFlamer;
-import mod.shared.util.BurnTimes;
-import mod.shared.util.ContainerContent;
-import mod.shared.util.SlotFuel;
+import mod.acecraft.util.BurnTimes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.Inventory;
@@ -15,12 +10,9 @@ import net.minecraft.inventory.container.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
-import javax.annotation.Nullable;
 
 public abstract class ContainerFlamer extends Container {
 

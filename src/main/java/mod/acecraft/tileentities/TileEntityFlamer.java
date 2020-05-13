@@ -1,18 +1,16 @@
-package mod.shared.tileentity;
+package mod.acecraft.tileentities;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import mod.shared.blocks.MachinaFlamer;
-import mod.shared.util.BurnTimes;
+import mod.acecraft.blocks.MachinaFlamer;
+import mod.acecraft.util.BurnTimes;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IRecipeHelperPopulator;
 import net.minecraft.inventory.IRecipeHolder;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,7 +28,6 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
 
 import javax.annotation.Nullable;
 import java.util.List;

@@ -2,16 +2,11 @@ package mod.acecraft.container;
 
 import mod.acecraft.AceCraft;
 import mod.acecraft.ShopKeeper;
-import mod.acecraft.Subscriber;
-import mod.acecraft.tileentities.TileBlastFurnace;
 import mod.acecraft.tileentities.TileEntityBase;
-import mod.acecraft.tileentities.TileEntityDestille;
-import mod.shared.util.SlotFuel;
-import net.minecraft.client.Minecraft;
+import mod.acecraft.util.SlotFuel;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.FurnaceResultSlot;
 import net.minecraft.inventory.container.Slot;
@@ -19,16 +14,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.IntArray;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 
 import javax.annotation.Nonnull;
 

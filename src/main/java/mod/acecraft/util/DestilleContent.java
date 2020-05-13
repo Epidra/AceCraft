@@ -1,12 +1,6 @@
 package mod.acecraft.util;
 
-import mod.acecraft.ShopKeeper;
-import mod.shared.util.ContainerContent;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-
-import java.util.List;
 
 public class DestilleContent extends ContainerContent {
 

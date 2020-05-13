@@ -1,4 +1,4 @@
-package mod.shared;
+package mod.acecraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

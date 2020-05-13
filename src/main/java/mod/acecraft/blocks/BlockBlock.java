@@ -1,4 +1,4 @@
-package mod.shared.blocks;
+package mod.acecraft.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

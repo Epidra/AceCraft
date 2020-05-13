@@ -1,4 +1,4 @@
-package mod.shared.tileentity;
+package mod.acecraft.tileentities;
 
 public class TileEntityEnergy {
 
