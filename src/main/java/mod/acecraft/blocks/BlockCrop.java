@@ -10,21 +10,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class BlockCrop extends CropsBlock {
 
     Item seeds;
-    int maxAge;
 
     /** Contructor with predefined BlockProperty */
-    public BlockCrop(String modid, String name, int age, Block block) {
+    public BlockCrop(Block block) {
         super(Properties.from(block));
-        this.setRegistryName(modid, name);
-        maxAge = age;
     }
 
     public void setSeeds(Item seed){
         seeds = seed;
-    }
-
-    public int getMaxAge() {
-        return maxAge;
     }
 
     @OnlyIn(Dist.CLIENT)

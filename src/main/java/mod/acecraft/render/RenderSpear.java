@@ -22,10 +22,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import static mod.acecraft.AceCraft.MODID;
+
 @OnlyIn(Dist.CLIENT)
 public class RenderSpear extends EntityRenderer<EntitySpear> {
 
-    public static final ResourceLocation TRIDENT = new ResourceLocation(AceCraft.MODID, "textures/entity/spear_gold.png");
+    public static final ResourceLocation TRIDENT = new ResourceLocation(MODID, "textures/entity/spear_gold.png");
     private final ModelSpear tridentModel = new ModelSpear();
 
     public RenderSpear(EntityRendererManager renderManagerIn) {
@@ -37,22 +39,22 @@ public class RenderSpear extends EntityRenderer<EntitySpear> {
         matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) - 90.0F));
         matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch) + 90.0F));
         IVertexBuilder ivertexbuilder = net.minecraft.client.renderer.ItemRenderer.getBuffer(bufferIn, this.tridentModel.getRenderType(this.getEntityTexture(entityIn)), false, entityIn.func_226572_w_());
-        this.tridentModel.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.DEFAULT_LIGHT, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.tridentModel.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStackIn.pop();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
 
     public ResourceLocation getEntityTexture(EntitySpear entity) {
 
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_BRASS     ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_brass.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_GILIUM    ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_gilium.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_ADAMANTIUM) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_adamantium.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_MYTHRIL   ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_mythril.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_ORICHALCUM) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_orichalcum.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_COPPER    ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_copper.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_BRONZE    ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_bronze.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_STEEL     ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_steel.png");
-        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_AURORITE  ) return new ResourceLocation(AceCraft.MODID, "textures/entity/spear_aurorite/" + Math.round((float)((System.currentTimeMillis() >> 6) % 24L)) + ".png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_BRASS.get()     ) return new ResourceLocation(MODID, "textures/entity/spear_brass.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_GILIUM.get()    ) return new ResourceLocation(MODID, "textures/entity/spear_gilium.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_ADAMANTIUM.get()) return new ResourceLocation(MODID, "textures/entity/spear_adamantium.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_MYTHRIL.get()   ) return new ResourceLocation(MODID, "textures/entity/spear_mythril.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_ORICHALCUM.get()) return new ResourceLocation(MODID, "textures/entity/spear_orichalcum.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_COPPER.get()    ) return new ResourceLocation(MODID, "textures/entity/spear_copper.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_BRONZE.get()    ) return new ResourceLocation(MODID, "textures/entity/spear_bronze.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_STEEL.get()     ) return new ResourceLocation(MODID, "textures/entity/spear_steel.png");
+        if(entity.getStack() == ShopKeeper.TOOL_SPEAR_AURORITE.get()  ) return new ResourceLocation(MODID, "textures/entity/spear_aurorite/" + Math.round((float)((System.currentTimeMillis() >> 6) % 24L)) + ".png");
             return TRIDENT;
     }
 

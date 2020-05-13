@@ -34,23 +34,23 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
 
     public EntityNugget(FMLPlayMessages.SpawnEntity packet, World worldIn)
     {
-        super(ShopKeeper.ENTITY_NUGGET, worldIn);
+        super(ShopKeeper.ENTITY_NUGGET.get(), worldIn);
         PacketBuffer buf = packet.getAdditionalData();
         stack = buf.readItemStack();
     }
 
     public EntityNugget(World worldIn, LivingEntity throwerIn, ItemStack itemIn) {
-        super(ShopKeeper.ENTITY_NUGGET, throwerIn, worldIn);
+        super(ShopKeeper.ENTITY_NUGGET.get(), throwerIn, worldIn);
         this.stack = itemIn.copy();
 
     }
 
     public EntityNugget(World worldIn, double x, double y, double z) {
-        super(ShopKeeper.ENTITY_NUGGET, x, y, z, worldIn);
+        super(ShopKeeper.ENTITY_NUGGET.get(), x, y, z, worldIn);
     }
 
     protected Item getDefaultItem() {
-        return ShopKeeper.NUGGET_COPPER;
+        return ShopKeeper.NUGGET_COPPER.get();
     }
 
     @Override

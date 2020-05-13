@@ -162,62 +162,13 @@ public class ModelCrab <T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(T t, float v, float v1, float v2, float v3, float v4) {
+    public void setRotationAngles(T t, float v, float v1, float v2, float v3, float v4) {
 
     }
 
-    //public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5)
-    //{
-    //    super.render(entity, f, f1, f2, f3, f4, f5);
-    //    setRotationAngles(entity, f, f1, f2, f3, f4, f5);
-    //    if(this.isChild){
-    //        GlStateManager.pushMatrix();
-    //        GlStateManager.translatef(0, 0.75f, 0);
-    //        GlStateManager.scalef(0.5f, 0.5f, 0.5f);
-    //        BodyLower.render(f5);
-    //        BodyUpper.render(f5);
-    //        LegLeft1.render(f5);
-    //        LegLeft2.render(f5);
-    //        LegLeft3.render(f5);
-    //        LegLeft4.render(f5);
-    //        LegRight1.render(f5);
-    //        LegRight2.render(f5);
-    //        LegRight3.render(f5);
-    //        LegRight4.render(f5);
-    //        StalkLeft.render(f5);
-    //        StalkRight.render(f5);
-    //        EyeLeft.render(f5);
-    //        EyeRight.render(f5);
-    //        ArmLeft.render(f5);
-    //        ClawLeftUpper.render(f5);
-    //        ClawLeftLower.render(f5);
-    //        ArmRight.render(f5);
-    //        ClawRightUpper.render(f5);
-    //        ClawRightLower.render(f5);
-    //        GlStateManager.popMatrix();
-    //    } else {
-    //        BodyLower.render(f5);
-    //        BodyUpper.render(f5);
-    //        LegLeft1.render(f5);
-    //        LegLeft2.render(f5);
-    //        LegLeft3.render(f5);
-    //        LegLeft4.render(f5);
-    //        LegRight1.render(f5);
-    //        LegRight2.render(f5);
-    //        LegRight3.render(f5);
-    //        LegRight4.render(f5);
-    //        StalkLeft.render(f5);
-    //        StalkRight.render(f5);
-    //        EyeLeft.render(f5);
-    //        EyeRight.render(f5);
-    //        ArmLeft.render(f5);
-    //        ClawLeftUpper.render(f5);
-    //        ClawLeftLower.render(f5);
-    //        ArmRight.render(f5);
-    //        ClawRightUpper.render(f5);
-    //        ClawRightLower.render(f5);
-    //    }
-    //}
+    public void render(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+
+    }
 
     private void setRotation(ModelRenderer model, float x, float y, float z)
     {
@@ -253,7 +204,7 @@ public class ModelCrab <T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder iVertexBuilder, int i, int i1, float v, float v1, float v2, float v3) {
+    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 
     }
 }

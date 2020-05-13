@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:items/seeds_onion"
+        "layer0": "acecraft:item/seeds_onion"
     }
 }

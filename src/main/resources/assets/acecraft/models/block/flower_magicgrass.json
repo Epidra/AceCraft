@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "cross": "acecraft:blocks/flower_magicgrass"
+        "cross": "acecraft:block/flower_magicgrass"
     }
 }

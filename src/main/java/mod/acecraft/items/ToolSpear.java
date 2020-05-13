@@ -23,9 +23,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ToolSpear extends SwordItem {
 
-    public ToolSpear(String modid, String name, IItemTier tier, int attackDamageIn, float attackSpeedIn) {
+    public ToolSpear(IItemTier tier, int attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().group(ItemGroup.COMBAT));
-        this.setRegistryName(modid, name);
         this.addPropertyOverride(new ResourceLocation("throwing"), (p_210315_0_, p_210315_1_, p_210315_2_) -> {
             return p_210315_2_ != null && p_210315_2_.isHandActive() && p_210315_2_.getActiveItemStack() == p_210315_0_ ? 1.0F : 0.0F;
         });

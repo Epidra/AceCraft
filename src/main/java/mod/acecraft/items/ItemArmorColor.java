@@ -12,9 +12,8 @@ import javax.annotation.Nullable;
 
 public class ItemArmorColor extends ArmorItem {
 
-    public ItemArmorColor(String modid, String name, IArmorMaterial materialIn, EquipmentSlotType slot) {
+    public ItemArmorColor(IArmorMaterial materialIn, EquipmentSlotType slot) {
         super(materialIn, slot, new Properties().group(ItemGroup.COMBAT));
-        this.setRegistryName(modid, name);
     }
 
     @Nullable

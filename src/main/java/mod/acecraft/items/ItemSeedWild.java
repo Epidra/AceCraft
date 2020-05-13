@@ -2,12 +2,13 @@ package mod.acecraft.items;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 
 public class ItemSeedWild extends BlockItem {
 
-    public ItemSeedWild(String modid, String name, Properties builder) {
-        super(Blocks.GRASS, builder);
-        this.setRegistryName(modid, name);
+    public ItemSeedWild() {
+        super(Blocks.GRASS, new Properties().group(ItemGroup.MATERIALS));
     }
 
 }

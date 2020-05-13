@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "acecraft:blocks/block_mythril"
+        "all": "acecraft:block/block_mythril"
     }
 }

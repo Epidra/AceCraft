@@ -1,7 +1,6 @@
 package mod.acecraft.entity;
 
 import mod.acecraft.ShopKeeper;
-import mod.acecraft.Subscriber;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -50,17 +49,17 @@ public class EntitySpear extends AbstractArrowEntity implements IEntityAdditiona
 
     public EntitySpear(FMLPlayMessages.SpawnEntity packet, World worldIn)
     {
-        super(ShopKeeper.ENTITY_SPEAR, worldIn);
+        super(ShopKeeper.ENTITY_SPEAR.get(), worldIn);
         PacketBuffer buf = packet.getAdditionalData();
         thrownStack = buf.readItemStack();
     }
 
     @Nonnull
-    public EntityType<?> getType() { return ShopKeeper.ENTITY_SPEAR; }
+    public EntityType<?> getType() { return ShopKeeper.ENTITY_SPEAR.get(); }
 
 
     public EntitySpear(World worldIn, LivingEntity thrower, ItemStack thrownStackIn) {
-        super(ShopKeeper.ENTITY_SPEAR, thrower, worldIn);
+        super(ShopKeeper.ENTITY_SPEAR.get(), thrower, worldIn);
         this.thrownStack = thrownStackIn.copy();
         this.dataManager.set(LOYALTY_LEVEL, (byte) EnchantmentHelper.getLoyaltyModifier(thrownStackIn));
         this.dataManager.set(field_226571_aq_, thrownStackIn.hasEffect());
@@ -68,7 +67,7 @@ public class EntitySpear extends AbstractArrowEntity implements IEntityAdditiona
 
     @OnlyIn(Dist.CLIENT)
     public EntitySpear(World worldIn, double x, double y, double z) {
-        super(ShopKeeper.ENTITY_SPEAR, x, y, z, worldIn);
+        super(ShopKeeper.ENTITY_SPEAR.get(), x, y, z, worldIn);
     }
 
     @Override

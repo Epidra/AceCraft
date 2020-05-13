@@ -1,6 +1,5 @@
 package mod.acecraft.blocks;
 
-import mod.shared.blocks.BlockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
@@ -11,8 +10,8 @@ import net.minecraft.world.World;
 public class BlockOre extends BlockBlock {
 
     /** Contructor with predefined BlockProperty */
-    public BlockOre(String modid, String name, Block block) {
-        super(modid, name, block);
+    public BlockOre(Block block) {
+        super(block);
     }
 
     /**

@@ -6,9 +6,8 @@ import net.minecraft.item.PickaxeItem;
 
 public class ToolPickaxe extends PickaxeItem {
 
-    public ToolPickaxe(String modid, String name, IItemTier tier, int attackDamageIn, float attackSpeedIn) {
+    public ToolPickaxe(IItemTier tier, int attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().group(ItemGroup.TOOLS));
-        this.setRegistryName(modid, name);
     }
 
 }

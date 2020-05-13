@@ -14,15 +14,15 @@ import java.util.function.Supplier;
 
 public enum MaterialArmor implements IArmorMaterial {
 
-    BRASS     ("acecraft:brass",      7, new int[]{1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);      }),
-    GILIUM    ("acecraft:gilium",     15, new int[]{1, 4, 5, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_GILIUM);     }),
-    ADAMANTIUM("acecraft:adamantium", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ADAMANTIUM); }),
-    MYTHRIL   ("acecraft:mythril",    15, new int[]{1, 4, 5, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_MYTHRIL);    }),
-    ORICHALCUM("acecraft:orichalcum", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ORICHALCUM); }),
-    COPPER    ("acecraft:copper",     15, new int[]{1, 4, 5, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_COPPER);     }),
-    BRONZE    ("acecraft:bronze",     25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRONZE);     }),
-    STEEL     ("acecraft:steel",      25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_STEEL);      }),
-    AURORITE  ("acecraft:aurorite",   33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.fromItems(ShopKeeper.STUFF_AURORITE);   });
+    BRASS     ("acecraft:brass",      7, new int[]{1, 3, 5, 2}, 25, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_BRASS.get());      }),
+    GILIUM    ("acecraft:gilium",     15, new int[]{1, 4, 5, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_GILIUM.get());     }),
+    ADAMANTIUM("acecraft:adamantium", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_ADAMANTIUM.get()); }),
+    MYTHRIL   ("acecraft:mythril",    15, new int[]{1, 4, 5, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_MYTHRIL.get());    }),
+    ORICHALCUM("acecraft:orichalcum", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_ORICHALCUM.get()); }),
+    COPPER    ("acecraft:copper",     15, new int[]{1, 4, 5, 2}, 9, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_COPPER.get());     }),
+    BRONZE    ("acecraft:bronze",     25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_BRONZE.get());     }),
+    STEEL     ("acecraft:steel",      25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_STEEL.get());      }),
+    AURORITE  ("acecraft:aurorite",   33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_AURORITE.get());   });
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
     private final String name;

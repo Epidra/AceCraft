@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:items/armor_plate_brass"
+        "layer0": "acecraft:item/armor_plate_brass"
     }
 }

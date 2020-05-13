@@ -30,19 +30,19 @@ public class EntityDynamite extends ProjectileItemEntity {
 
     public EntityDynamite(FMLPlayMessages.SpawnEntity packet, World worldIn)
     {
-        super(ShopKeeper.ENTITY_DYNAMITE, worldIn);
+        super(ShopKeeper.ENTITY_DYNAMITE.get(), worldIn);
     }
 
     public EntityDynamite(World worldIn, LivingEntity throwerIn) {
-        super(ShopKeeper.ENTITY_DYNAMITE, throwerIn, worldIn);
+        super(ShopKeeper.ENTITY_DYNAMITE.get(), throwerIn, worldIn);
     }
 
     public EntityDynamite(World worldIn, double x, double y, double z) {
-        super(ShopKeeper.ENTITY_DYNAMITE, x, y, z, worldIn);
+        super(ShopKeeper.ENTITY_DYNAMITE.get(), x, y, z, worldIn);
     }
 
     protected Item getDefaultItem() {
-        return ShopKeeper.STUFF_DYNAMITE;
+        return ShopKeeper.TOOL_DYNAMITE.get();
     }
 
     @OnlyIn(Dist.CLIENT)

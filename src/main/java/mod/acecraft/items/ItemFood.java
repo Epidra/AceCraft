@@ -5,9 +5,8 @@ import net.minecraft.item.*;
 public class ItemFood extends Item {
 
     /** Default Constructor */
-    public ItemFood(String modid, String name, int hunger, float saturation){
+    public ItemFood(int hunger, float saturation){
         super(new Properties().group(ItemGroup.FOOD).maxStackSize(64).food(new Food.Builder().hunger(hunger).saturation(saturation).build()));
-        this.setRegistryName(modid, name);
     }
 
     public UseAction getUseAction(ItemStack stack) {

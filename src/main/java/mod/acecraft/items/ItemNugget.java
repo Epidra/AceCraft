@@ -2,19 +2,17 @@ package mod.acecraft.items;
 
 import mod.acecraft.entity.EntityNugget;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 
-public class ItemNugget extends Item {
+public class ItemNugget extends ItemItem {
 
     /** Default Constructor */
-    public ItemNugget(String modid, String name, ItemGroup group){
-        super(new Properties().group(group));
-        this.setRegistryName(modid, name);
+    public ItemNugget(){
+        super(ItemGroup.MATERIALS);
     }
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {

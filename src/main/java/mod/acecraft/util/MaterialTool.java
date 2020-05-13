@@ -9,15 +9,15 @@ import java.util.function.Supplier;
 
 public enum MaterialTool implements IItemTier {
 
-    BRASS     (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);      }),
-    GILIUM    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_GILIUM);     }),
-    ADAMANTIUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ADAMANTIUM); }),
-    MYTHRIL   (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_MYTHRIL);    }),
-    ORICHALCUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ORICHALCUM); }),
-    COPPER    (1, 131, 4.0F, 1.0F, 5, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_COPPER);     }),
-    BRONZE    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRONZE);     }),
-    STEEL     (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_STEEL);      }),
-    AURORITE  (3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.STUFF_AURORITE);   });
+    BRASS     (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_BRASS.get());      }),
+    GILIUM    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_GILIUM.get());     }),
+    ADAMANTIUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_ADAMANTIUM.get()); }),
+    MYTHRIL   (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_MYTHRIL.get());    }),
+    ORICHALCUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_ORICHALCUM.get()); }),
+    COPPER    (1, 131, 4.0F, 1.0F, 5, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_COPPER.get());     }),
+    BRONZE    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_BRONZE.get());     }),
+    STEEL     (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_STEEL.get());      }),
+    AURORITE  (3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.ITEM_AURORITE.get());   });
 
     private final int harvestLevel;
     private final int maxUses;

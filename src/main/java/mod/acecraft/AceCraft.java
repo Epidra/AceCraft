@@ -1,9 +1,8 @@
 package mod.acecraft;
 
-import mod.acecraft.system.AceCraftPacketHandler;
+import mod.acecraft.system.PacketHandler;
 import mod.acecraft.system.ClientProxy;
 import mod.acecraft.system.CommonProxy;
-import mod.acecraft.worldgen.WorldGen;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -29,10 +28,9 @@ import org.apache.logging.log4j.Logger;
 @Mod("acecraft")
 public class AceCraft {
 
+    public static final String MODID = "acecraft";
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
-    // The Mod ID
-    public static final String MODID = "acecraft";
     // Client/Server Proxy
     public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
@@ -46,19 +44,18 @@ public class AceCraft {
         eventBus.addListener(this::wandererTrades);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
         MinecraftForge.EVENT_BUS.register(this);
+        ShopKeeper.register();
     }
 
     private void setupCommon(final FMLCommonSetupEvent event) {
-        AceCraftPacketHandler.register();
-        WorldGen.GenerateOre();
-        WorldGen.GenerateNetherOre();
+        PacketHandler.register();
+        ShopKeeper.setup(event);
         //DeferredWorkQueue.runLater(ShopKeeper::addSpawn);
         //ShopKeeper.addTrades();
     }
 
     private void setupClient(final FMLClientSetupEvent event) {
-        ShopKeeper.registerGUI();
-        ShopKeeper.registerRenderer();
+        ShopKeeper.setup(event);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
@@ -73,8 +70,8 @@ public class AceCraft {
     @SubscribeEvent
     public void villagerTrades(VillagerTradesEvent event){
         if(event.getType() == VillagerProfession.FARMER){
-            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.FOOD_RICEBALL, 16), 8, 10, 0F));
-            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.STUFF_CURRY,   16), 8, 10, 0F));
+            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.FOOD_RICEBALL.get(), 16), 8, 10, 0F));
+            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.ITEM_CURRY.get(),    16), 8, 10, 0F));
             //RandomTradeBuilder.forEachLevel((level, tradeBuild) -> event.getTrades().get(level.intValue()).add(tradeBuild.build()));
         }
     }

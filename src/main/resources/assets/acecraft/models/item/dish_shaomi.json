@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:items/dish_shaomi"
+        "layer0": "acecraft:item/dish_shaomi"
     }
 }

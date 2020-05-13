@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:items/dish_pizza"
+        "layer0": "acecraft:item/dish_pizza"
     }
 }

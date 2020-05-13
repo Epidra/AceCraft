@@ -7,9 +7,8 @@ import net.minecraft.item.ItemGroup;
 
 public class ItemArmor extends ArmorItem {
 
-    public ItemArmor(String modid, String name, IArmorMaterial materialIn, EquipmentSlotType slot) {
+    public ItemArmor(IArmorMaterial materialIn, EquipmentSlotType slot) {
         super(materialIn, slot, new Properties().group(ItemGroup.COMBAT));
-        this.setRegistryName(modid, name);
     }
 
 }

@@ -1,7 +1,7 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "acecraft:items/tool_spear_aurorite"
+        "layer0": "acecraft:item/tool_spear_aurorite"
     },
     "display": {
         "thirdperson_righthand": {

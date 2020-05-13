@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import mod.acecraft.AceCraft;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.model.TridentModel;
 import net.minecraft.client.renderer.model.Model;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -11,12 +12,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelSpear extends Model {
+public class ModelSpear extends TridentModel {
     public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/entity/trident.png");
     private final ModelRenderer modelRenderer = new ModelRenderer(32, 32, 0, 6);
 
     public ModelSpear() {
-        super(RenderType::entitySolid);
+        super();
         this.modelRenderer.addBox(-0.5F, 2.0F, -0.5F, 1.0F, 25.0F, 1.0F, 0.0F);
         ModelRenderer modelrenderer = new ModelRenderer(32, 32, 4, 0);
         modelrenderer.addBox(-1.5F, 0.0F, -0.5F, 3.0F, 2.0F, 1.0F);

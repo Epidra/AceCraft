@@ -5,9 +5,8 @@ import net.minecraft.item.*;
 public class ItemLiquor extends Item {
 
     /** Default Constructor */
-    public ItemLiquor(String modid, String name, int hunger, float saturation){
+    public ItemLiquor(int hunger, float saturation){
         super(new Properties().group(ItemGroup.FOOD).maxStackSize(64).food(new Food.Builder().hunger(hunger).setAlwaysEdible().saturation(saturation).build()));
-        this.setRegistryName(modid, name);
     }
 
     public UseAction getUseAction(ItemStack stack) {

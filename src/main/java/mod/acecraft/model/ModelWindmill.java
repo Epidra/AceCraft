@@ -196,6 +196,10 @@ public class ModelWindmill <T extends Entity> extends EntityModel<T> {
     }
 
     @Override
+    public void setRotationAngles(T t, float v, float v1, float v2, float v3, float v4) {
+
+    }
+
     public void render(T t, float v, float v1, float v2, float v3, float v4) {
 
     }
