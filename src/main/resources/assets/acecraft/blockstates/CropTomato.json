@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropTomatoStage0" },
+        "age=1": { "model": "acecraft:CropTomatoStage1" },
+        "age=2": { "model": "acecraft:CropTomatoStage1" },
+        "age=3": { "model": "acecraft:CropTomatoStage2" },
+        "age=4": { "model": "acecraft:CropTomatoStage2" },
+        "age=5": { "model": "acecraft:CropTomatoStage3" },
+        "age=6": { "model": "acecraft:CropTomatoStage3" },
+        "age=7": { "model": "acecraft:CropTomatoStage4" }
+    }
+}

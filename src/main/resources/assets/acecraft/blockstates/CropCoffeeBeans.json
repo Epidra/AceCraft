@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropCoffeeBeansStage0" },
+        "age=1": { "model": "acecraft:CropCoffeeBeansStage1" },
+        "age=2": { "model": "acecraft:CropCoffeeBeansStage1" },
+        "age=3": { "model": "acecraft:CropCoffeeBeansStage2" },
+        "age=4": { "model": "acecraft:CropCoffeeBeansStage2" },
+        "age=5": { "model": "acecraft:CropCoffeeBeansStage3" },
+        "age=6": { "model": "acecraft:CropCoffeeBeansStage3" },
+        "age=7": { "model": "acecraft:CropCoffeeBeansStage4" }
+    }
+}

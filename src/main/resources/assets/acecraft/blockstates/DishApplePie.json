@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "bites=0": { "model": "acecraft:DishApplePieUneaten" },
+        "bites=1": { "model": "acecraft:DishApplePieSlice1" },
+        "bites=2": { "model": "acecraft:DishApplePieSlice2" },
+        "bites=3": { "model": "acecraft:DishApplePieSlice3" },
+        "bites=4": { "model": "acecraft:DishApplePieSlice4" },
+        "bites=5": { "model": "acecraft:DishApplePieSlice5" },
+        "bites=6": { "model": "acecraft:DishApplePieSlice6" }
+    }
+}

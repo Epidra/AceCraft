@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "bites=0": { "model": "acecraft:DishChocolateCakeUneaten" },
+        "bites=1": { "model": "acecraft:DishChocolateCakeSlice1" },
+        "bites=2": { "model": "acecraft:DishChocolateCakeSlice2" },
+        "bites=3": { "model": "acecraft:DishChocolateCakeSlice3" },
+        "bites=4": { "model": "acecraft:DishChocolateCakeSlice4" },
+        "bites=5": { "model": "acecraft:DishChocolateCakeSlice5" },
+        "bites=6": { "model": "acecraft:DishChocolateCakeSlice6" }
+    }
+}

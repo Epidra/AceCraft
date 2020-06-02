@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top":   "acecraft:blocks/MinoIceTop",
+        "front": "acecraft:blocks/MinoIceSide",
+        "side":  "acecraft:blocks/MinoIceSide"
+    }
+}

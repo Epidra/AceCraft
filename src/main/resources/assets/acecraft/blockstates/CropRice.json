@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropRiceStage0" },
+        "age=1": { "model": "acecraft:CropRiceStage1" },
+        "age=2": { "model": "acecraft:CropRiceStage1" },
+        "age=3": { "model": "acecraft:CropRiceStage2" },
+        "age=4": { "model": "acecraft:CropRiceStage2" },
+        "age=5": { "model": "acecraft:CropRiceStage3" },
+        "age=6": { "model": "acecraft:CropRiceStage3" },
+        "age=7": { "model": "acecraft:CropRiceStage4" }
+    }
+}

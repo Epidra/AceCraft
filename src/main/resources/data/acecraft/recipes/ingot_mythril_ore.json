@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "acecraft:ore_mythril"
-  },
-  "result": "acecraft:ingot_mythril",
-  "experience": 1.0,
-  "cookingtime": 200
-}

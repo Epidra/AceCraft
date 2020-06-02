@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:MinoDark" },
+        "facing=south": { "model": "acecraft:MinoDark", "y": 180 },
+        "facing=west":  { "model": "acecraft:MinoDark", "y": 270 },
+        "facing=east":  { "model": "acecraft:MinoDark", "y": 90 }
+    }
+}

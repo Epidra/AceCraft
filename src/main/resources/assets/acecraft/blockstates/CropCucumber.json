@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropCucumberStage0" },
+        "age=1": { "model": "acecraft:CropCucumberStage1" },
+        "age=2": { "model": "acecraft:CropCucumberStage1" },
+        "age=3": { "model": "acecraft:CropCucumberStage2" },
+        "age=4": { "model": "acecraft:CropCucumberStage2" },
+        "age=5": { "model": "acecraft:CropCucumberStage3" },
+        "age=6": { "model": "acecraft:CropCucumberStage3" },
+        "age=7": { "model": "acecraft:CropCucumberStage4" }
+    }
+}

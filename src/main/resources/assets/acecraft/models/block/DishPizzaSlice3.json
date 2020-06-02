@@ -1,0 +1,22 @@
+{
+    "textures": {
+        "particle": "acecraft:blocks/DishPizzaSide",
+        "bottom":   "acecraft:blocks/DishPizzaBottom",
+        "top":      "acecraft:blocks/DishPizzaTop",
+        "side":     "acecraft:blocks/DishPizzaSide",
+		"inside":   "acecraft:blocks/DishPizzaInside"
+    },
+    "elements": [
+        {   "from": [ 7, 0, 1 ],
+            "to": [ 15, 4, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#inside" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}

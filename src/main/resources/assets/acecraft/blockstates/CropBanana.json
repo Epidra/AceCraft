@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropBananaStage0" },
+        "age=1": { "model": "acecraft:CropBananaStage1" },
+        "age=2": { "model": "acecraft:CropBananaStage1" },
+        "age=3": { "model": "acecraft:CropBananaStage1" },
+        "age=4": { "model": "acecraft:CropBananaStage2" },
+        "age=5": { "model": "acecraft:CropBananaStage2" },
+        "age=6": { "model": "acecraft:CropBananaStage2" },
+        "age=7": { "model": "acecraft:CropBananaStage3" }
+    }
+}

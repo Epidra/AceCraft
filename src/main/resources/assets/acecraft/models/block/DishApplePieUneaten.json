@@ -1,0 +1,21 @@
+{
+    "textures": {
+        "particle": "acecraft:blocks/DishApplePieSide",
+        "bottom":   "acecraft:blocks/DishApplePieBottom",
+        "top":      "acecraft:blocks/DishApplePieTop",
+        "side":     "acecraft:blocks/DishApplePieSide"
+    },
+    "elements": [
+        {   "from": [ 1, 0, 1 ],
+            "to": [ 15, 8, 15 ],
+            "faces": {
+                "down":  { "texture": "#bottom", "cullface": "down" },
+                "up":    { "texture": "#top" },
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "west":  { "texture": "#side" },
+                "east":  { "texture": "#side" }
+            }
+        }
+    ]
+}
