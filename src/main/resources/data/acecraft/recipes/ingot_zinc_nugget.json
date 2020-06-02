@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "acecraft:nugget_zinc"
-  },
-  "result": "acecraft:ingot_zinc",
-  "experience": 1.0,
-  "cookingtime": 200
-}

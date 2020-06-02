@@ -1,0 +1,34 @@
+{
+    "sound.llamaidle": {
+        "sounds": [
+            {
+                "name": "acecraft:dog_barking_mono",
+                "stream": false
+            }
+        ]
+    },
+    "sound.llamahurt": {
+        "sounds": [
+            {
+                "name": "acecraft:dog_barking_mono",
+                "stream": false
+            }
+        ]
+    },
+    "sound.llamadeath": {
+        "sounds": [
+            {
+                "name": "acecraft:dog_barking_mono",
+                "stream": false
+            }
+        ]
+    },
+    "sound.chocobokweh": {
+        "sounds": [
+            {
+                "name": "acecraft:chocobokweh",
+                "stream": false
+            }
+        ]
+    }
+}

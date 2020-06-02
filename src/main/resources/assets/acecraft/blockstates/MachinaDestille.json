@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=north,powered=false": { "model": "acecraft:MachinaDestilleOff", "y": 180 },
+        "facing=south,powered=false": { "model": "acecraft:MachinaDestilleOff", "y":   0 },
+        "facing=west,powered=false":  { "model": "acecraft:MachinaDestilleOff", "y":  90 },
+        "facing=east,powered=false":  { "model": "acecraft:MachinaDestilleOff", "y": 270 },
+        "facing=north,powered=true":  { "model": "acecraft:MachinaDestilleOn",  "y": 180 },
+        "facing=south,powered=true":  { "model": "acecraft:MachinaDestilleOn",  "y":   0 },
+        "facing=west,powered=true":   { "model": "acecraft:MachinaDestilleOn",  "y":  90 },
+        "facing=east,powered=true":   { "model": "acecraft:MachinaDestilleOn",  "y": 270 }
+    }
+}

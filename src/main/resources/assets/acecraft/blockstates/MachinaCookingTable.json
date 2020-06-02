@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:MachinaCookingTable", "y": 180 },
+        "facing=south": { "model": "acecraft:MachinaCookingTable", "y":   0 },
+        "facing=west":  { "model": "acecraft:MachinaCookingTable", "y":  90 },
+        "facing=east":  { "model": "acecraft:MachinaCookingTable", "y": 270 }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:MachinaWaterwheel", "y": 180 },
+        "facing=south": { "model": "acecraft:MachinaWaterwheel", "y":   0 },
+        "facing=west":  { "model": "acecraft:MachinaWaterwheel", "y":  90 },
+        "facing=east":  { "model": "acecraft:MachinaWaterwheel", "y": 270 },
+        "facing=up":    { "model": "acecraft:MachinaWaterwheel", "y": 180 },
+        "facing=down":  { "model": "acecraft:MachinaWaterwheel", "y": 180 }
+    }
+}

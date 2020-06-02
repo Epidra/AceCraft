@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:MachinaGlobe", "y": 180 },
+        "facing=south": { "model": "acecraft:MachinaGlobe", "y":   0 },
+        "facing=west":  { "model": "acecraft:MachinaGlobe", "y":  90 },
+        "facing=east":  { "model": "acecraft:MachinaGlobe", "y": 270 }
+    }
+}

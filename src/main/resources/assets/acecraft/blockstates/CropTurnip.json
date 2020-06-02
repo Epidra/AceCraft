@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropTurnipStage0" },
+        "age=1": { "model": "acecraft:CropTurnipStage1" },
+        "age=2": { "model": "acecraft:CropTurnipStage2" },
+        "age=3": { "model": "acecraft:CropTurnipStage2" },
+        "age=4": { "model": "acecraft:CropTurnipStage2" },
+        "age=5": { "model": "acecraft:CropTurnipStage2" },
+        "age=6": { "model": "acecraft:CropTurnipStage2" },
+        "age=7": { "model": "acecraft:CropTurnipStage2" }
+    }
+}

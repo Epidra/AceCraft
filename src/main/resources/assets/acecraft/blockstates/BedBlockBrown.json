@@ -1,0 +1,21 @@
+{
+    "variants": {
+        "facing=north,occupied=false,part=foot": { "model": "acecraft:BedBrownFoot", "y": 180 },
+        "facing=east,occupied=false,part=foot":  { "model": "acecraft:BedBrownFoot", "y": 270 },
+        "facing=south,occupied=false,part=foot": { "model": "acecraft:BedBrownFoot" },
+        "facing=west,occupied=false,part=foot":  { "model": "acecraft:BedBrownFoot", "y": 90 },
+        "facing=north,occupied=false,part=head": { "model": "acecraft:BedBrownHead", "y": 180 },
+        "facing=east,occupied=false,part=head":  { "model": "acecraft:BedBrownHead", "y": 270 },
+        "facing=south,occupied=false,part=head": { "model": "acecraft:BedBrownHead" },
+        "facing=west,occupied=false,part=head":  { "model": "acecraft:BedBrownHead", "y": 90 },
+        
+        "facing=north,occupied=true,part=foot": { "model": "acecraft:BedBrownFoot", "y": 180 },
+        "facing=east,occupied=true,part=foot":  { "model": "acecraft:BedBrownFoot", "y": 270 },
+        "facing=south,occupied=true,part=foot": { "model": "acecraft:BedBrownFoot" },
+        "facing=west,occupied=true,part=foot":  { "model": "acecraft:BedBrownFoot", "y": 90 },
+        "facing=north,occupied=true,part=head": { "model": "acecraft:BedBrownHead", "y": 180 },
+        "facing=east,occupied=true,part=head":  { "model": "acecraft:BedBrownHead", "y": 270 },
+        "facing=south,occupied=true,part=head": { "model": "acecraft:BedBrownHead" },
+        "facing=west,occupied=true,part=head":  { "model": "acecraft:BedBrownHead", "y": 90 }
+    }
+}

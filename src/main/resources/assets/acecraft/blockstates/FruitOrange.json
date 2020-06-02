@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:FruitOrangeStage0" },
+        "age=1": { "model": "acecraft:FruitOrangeStage1" },
+        "age=2": { "model": "acecraft:FruitOrangeStage2" },
+        "age=3": { "model": "acecraft:FruitOrangeStage3" },
+        "age=4": { "model": "acecraft:FruitOrangeStage3" },
+        "age=5": { "model": "acecraft:FruitOrangeStage3" },
+        "age=6": { "model": "acecraft:FruitOrangeStage3" },
+        "age=7": { "model": "acecraft:FruitOrangeStage3" }
+    }
+}

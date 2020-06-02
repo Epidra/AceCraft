@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:MachinaPedestal", "y": 180 },
+        "facing=south": { "model": "acecraft:MachinaPedestal", "y":   0 },
+        "facing=west":  { "model": "acecraft:MachinaPedestal", "y":  90 },
+        "facing=east":  { "model": "acecraft:MachinaPedestal", "y": 270 }
+    }
+}

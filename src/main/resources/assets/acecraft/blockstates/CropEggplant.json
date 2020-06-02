@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropEggplantStage0" },
+        "age=1": { "model": "acecraft:CropEggplantStage1" },
+        "age=2": { "model": "acecraft:CropEggplantStage2" },
+        "age=3": { "model": "acecraft:CropEggplantStage3" },
+        "age=4": { "model": "acecraft:CropEggplantStage3" },
+        "age=5": { "model": "acecraft:CropEggplantStage3" },
+        "age=6": { "model": "acecraft:CropEggplantStage3" },
+        "age=7": { "model": "acecraft:CropEggplantStage3" }
+    }
+}

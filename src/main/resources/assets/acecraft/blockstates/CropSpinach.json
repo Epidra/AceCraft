@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropSpinachStage0" },
+        "age=1": { "model": "acecraft:CropSpinachStage1" },
+        "age=2": { "model": "acecraft:CropSpinachStage2" },
+        "age=3": { "model": "acecraft:CropSpinachStage2" },
+        "age=4": { "model": "acecraft:CropSpinachStage2" },
+        "age=5": { "model": "acecraft:CropSpinachStage2" },
+        "age=6": { "model": "acecraft:CropSpinachStage2" },
+        "age=7": { "model": "acecraft:CropSpinachStage2" }
+    }
+}

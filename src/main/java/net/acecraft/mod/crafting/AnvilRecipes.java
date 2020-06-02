@@ -1,0 +1,202 @@
+package net.acecraft.mod.crafting;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
+import net.acecraft.mod.AceCraft;
+import net.acecraft.mod.ShopKeeper;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.world.World;
+
+public class AnvilRecipes extends AceCraftingManager {
+	
+	/** The static instance of this class */
+    private static final AnvilRecipes INSTANCE = new AnvilRecipes();
+    private final List<IRecipe> recipes = Lists.<IRecipe>newArrayList();
+
+    /** Returns the static instance of this class */
+    public static AnvilRecipes getInstance(){
+        /** The static instance of this class */
+        return INSTANCE;
+    }
+    
+    public AnvilRecipes(){
+    	this.addRecipe(new ItemStack(Items.IRON_DOOR), new Object[]{"XX","XX","XX",'X',Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Blocks.IRON_BARS, 16), new Object[]{"XXX","XXX",'X',Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Blocks.RAIL, 16), new Object[] {"X X", "X#X", "X X", 'X', Items.IRON_INGOT, '#', Items.STICK});
+        this.addRecipe(new ItemStack(Blocks.GOLDEN_RAIL, 6), new Object[] {"X X", "X#X", "XRX", 'X', Items.GOLD_INGOT, 'R', Items.REDSTONE, '#', Items.STICK});
+        this.addRecipe(new ItemStack(Blocks.ACTIVATOR_RAIL, 6), new Object[] {"XSX", "X#X", "XSX", 'X', Items.IRON_INGOT, '#', Blocks.REDSTONE_TORCH, 'S', Items.STICK});
+        this.addRecipe(new ItemStack(Blocks.DETECTOR_RAIL, 6), new Object[] {"X X", "X#X", "XRX", 'X', Items.IRON_INGOT, 'R', Items.REDSTONE, '#', Blocks.STONE_PRESSURE_PLATE});
+        this.addRecipe(new ItemStack(Items.MINECART, 1), new Object[] {"# #", "###", '#', Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Items.CAULDRON, 1), new Object[] {"# #", "# #", "###", '#', Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Items.CHEST_MINECART, 1), new Object[] {"A", "B", 'A', Blocks.CHEST, 'B', Items.MINECART});
+        this.addRecipe(new ItemStack(Items.FURNACE_MINECART, 1), new Object[] {"A", "B", 'A', Blocks.FURNACE, 'B', Items.MINECART});
+        this.addRecipe(new ItemStack(Items.TNT_MINECART, 1), new Object[] {"A", "B", 'A', Blocks.TNT, 'B', Items.MINECART});
+        this.addRecipe(new ItemStack(Items.HOPPER_MINECART, 1), new Object[] {"A", "B", 'A', Blocks.HOPPER, 'B', Items.MINECART});
+        this.addRecipe(new ItemStack(Items.CLOCK, 1), new Object[] {" # ", "#X#", " # ", '#', Items.GOLD_INGOT, 'X', Items.REDSTONE});
+        this.addRecipe(new ItemStack(Items.COMPASS, 1), new Object[] {" # ", "#X#", " # ", '#', Items.IRON_INGOT, 'X', Items.REDSTONE});
+        this.addRecipe(new ItemStack(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 1), new Object[] {"##", '#', Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Blocks.LIGHT_WEIGHTED_PRESSURE_PLATE, 1), new Object[] {"##", '#', Items.GOLD_INGOT});
+        this.addRecipe(new ItemStack(Blocks.HOPPER), new Object[] {"I I", "ICI", " I ", 'I', Items.IRON_INGOT, 'C', Blocks.CHEST});
+        this.addRecipe(new ItemStack(Blocks.IRON_BLOCK),           new Object[]{"XXX","XXX","XXX",'X', Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Blocks.GOLD_BLOCK),           new Object[]{"XXX","XXX","XXX",'X', Items.GOLD_INGOT});
+        this.addRecipe(new ItemStack(ShopKeeper.blockCopper),           new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotCopper});
+        this.addRecipe(new ItemStack(ShopKeeper.blockAluminium),        new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotAluminium});
+        this.addRecipe(new ItemStack(ShopKeeper.blockLead),           new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotLead});
+        this.addRecipe(new ItemStack(ShopKeeper.blockTin),              new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotTin});
+        this.addRecipe(new ItemStack(ShopKeeper.blockZinc),             new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotZinc});
+        this.addRecipe(new ItemStack(ShopKeeper.blockSilver),           new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotSilver});
+        this.addRecipe(new ItemStack(ShopKeeper.blockMythril),          new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotMythril});
+        this.addRecipe(new ItemStack(ShopKeeper.blockIridium),           new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.oreIridium});
+        this.addRecipe(new ItemStack(ShopKeeper.blockAdamantium),       new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotAdamantium});
+        this.addRecipe(new ItemStack(ShopKeeper.blockOrichalcum),           new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotOrichalcum});
+        this.addRecipe(new ItemStack(ShopKeeper.blockUnobtanium),       new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotUnobtanium});
+        this.addRecipe(new ItemStack(ShopKeeper.blockBronze),           new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotBronze});
+        this.addRecipe(new ItemStack(ShopKeeper.blockSteel),            new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotSteel});
+        this.addRecipe(new ItemStack(ShopKeeper.blockBrass),            new Object[]{"XXX","XXX","XXX",'X', ShopKeeper.ingotBrass});
+        this.addRecipe(new ItemStack(Items.IRON_SWORD),        new Object[]{"X","X","I",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.GOLDEN_SWORD),        new Object[]{"X","X","I",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordCopper),       new Object[]{"X","X","I",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordBronze),       new Object[]{"X","X","I",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordSteel),        new Object[]{"X","X","I",'X',ShopKeeper.ingotSteel,     'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordMythril),      new Object[]{"X","X","I",'X',ShopKeeper.ingotMythril,   'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordIridium),       new Object[]{"X","X","I",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordAdamantium),   new Object[]{"X","X","I",'X',ShopKeeper.ingotAdamantium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSwordUnobtanium),   new Object[]{"X","X","I",'X',ShopKeeper.ingotUnobtanium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearIron),       new Object[]{"  X"," I ","I  ",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearGold),       new Object[]{"  X"," I ","I  ",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearCopper),       new Object[]{"  X"," I ","I  ",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearBronze),       new Object[]{"  X"," I ","I  ",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearSteel),        new Object[]{"  X"," I ","I  ",'X',ShopKeeper.ingotSteel,     'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearMythril),      new Object[]{"  X"," I ","I  ",'X',ShopKeeper.ingotMythril,   'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearIridium),       new Object[]{"  X"," I ","I  ",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearAdamantium),   new Object[]{"  X"," I ","I  ",'X',ShopKeeper.ingotAdamantium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolSpearUnobtanium),   new Object[]{"  X"," I ","I  ",'X',ShopKeeper.ingotUnobtanium,'I',Items.STICK});
+        
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerIron),        new Object[]{"XXX","XXX"," I "," I ",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerGold),        new Object[]{"XXX","XXX"," I "," I ",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerCopper),      new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerBronze),      new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerSteel),       new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.ingotSteel,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerMythril),     new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.ingotMythril,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerIridium),     new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerAdamantium),  new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.ingotAdamantium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHammerUnobtanium),  new Object[]{"XXX","XXX"," I "," I ",'X',ShopKeeper.ingotUnobtanium,    'I',Items.STICK});
+        
+        this.addRecipe(new ItemStack(Items.IRON_AXE),        new Object[]{"XX","XI"," I",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.GOLDEN_AXE),        new Object[]{"XX","XI"," I",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeCopper),       new Object[]{"XX","XI"," I",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeBronze),       new Object[]{"XX","XI"," I",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeSteel),        new Object[]{"XX","XI"," I",'X',ShopKeeper.ingotSteel,     'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeMythril),      new Object[]{"XX","XI"," I",'X',ShopKeeper.ingotMythril,   'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeIridium),       new Object[]{"XX","XI"," I",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeAdamantium),   new Object[]{"XX","XI"," I",'X',ShopKeeper.ingotAdamantium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolAxeUnobtanium),   new Object[]{"XX","XI"," I",'X',ShopKeeper.ingotUnobtanium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.IRON_SHOVEL),        new Object[]{"X","I","I",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.GOLDEN_SHOVEL),        new Object[]{"X","I","I",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelCopper),       new Object[]{"X","I","I",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelBronze),       new Object[]{"X","I","I",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelSteel),        new Object[]{"X","I","I",'X',ShopKeeper.ingotSteel,     'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelMythril),      new Object[]{"X","I","I",'X',ShopKeeper.ingotMythril,   'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelIridium),       new Object[]{"X","I","I",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelAdamantium),   new Object[]{"X","I","I",'X',ShopKeeper.ingotAdamantium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolShovelUnobtanium),   new Object[]{"X","I","I",'X',ShopKeeper.ingotUnobtanium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.IRON_HOE),        new Object[]{"XX"," I"," I",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.GOLDEN_HOE),        new Object[]{"XX"," I"," I",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeCopper),       new Object[]{"XX"," I"," I",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeBronze),       new Object[]{"XX"," I"," I",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeSteel),        new Object[]{"XX"," I"," I",'X',ShopKeeper.ingotSteel,     'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeMythril),      new Object[]{"XX"," I"," I",'X',ShopKeeper.ingotMythril,   'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeIridium),       new Object[]{"XX"," I"," I",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeAdamantium),   new Object[]{"XX"," I"," I",'X',ShopKeeper.ingotAdamantium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolHoeUnobtanium),   new Object[]{"XX"," I"," I",'X',ShopKeeper.ingotUnobtanium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.IRON_PICKAXE),        new Object[]{"XXX"," I "," I ",'X',Items.IRON_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.GOLDEN_PICKAXE),        new Object[]{"XXX"," I "," I ",'X',Items.GOLD_INGOT,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeCopper),       new Object[]{"XXX"," I "," I ",'X',ShopKeeper.ingotCopper,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeBronze),       new Object[]{"XXX"," I "," I ",'X',ShopKeeper.ingotBronze,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeSteel),        new Object[]{"XXX"," I "," I ",'X',ShopKeeper.ingotSteel,     'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeMythril),      new Object[]{"XXX"," I "," I ",'X',ShopKeeper.ingotMythril,   'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeIridium),       new Object[]{"XXX"," I "," I ",'X',ShopKeeper.oreIridium,    'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeAdamantium),   new Object[]{"XXX"," I "," I ",'X',ShopKeeper.ingotAdamantium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(ShopKeeper.toolPickaxeUnobtanium),   new Object[]{"XXX"," I "," I ",'X',ShopKeeper.ingotUnobtanium,'I',Items.STICK});
+        this.addRecipe(new ItemStack(Items.IRON_HELMET), new Object[]{"XXX","X X",'X',Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Items.GOLDEN_HELMET), new Object[]{"XXX","X X",'X',Items.GOLD_INGOT});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetAluminium), new Object[]{"XXX","X X",'X',ShopKeeper.ingotAluminium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetCopper), new Object[]{"XXX","X X",'X',ShopKeeper.ingotCopper});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetLead), new Object[]{"XXX","X X",'X',ShopKeeper.ingotLead});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetBronze), new Object[]{"XXX","X X",'X',ShopKeeper.ingotBronze});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetSteel), new Object[]{"XXX","X X",'X',ShopKeeper.ingotSteel});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetMythril), new Object[]{"XXX","X X",'X',ShopKeeper.ingotMythril});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetAdamantium), new Object[]{"XXX","X X",'X',ShopKeeper.ingotAdamantium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorHelmetUnobtanium), new Object[]{"XXX","X X",'X',ShopKeeper.ingotUnobtanium});
+        this.addRecipe(new ItemStack(Items.IRON_CHESTPLATE), new Object[]{"X X","XXX","XXX",'X',Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Items.GOLDEN_CHESTPLATE), new Object[]{"XXX","X X","XXX",'X',Items.GOLD_INGOT});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateAluminium), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotAluminium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateCopper), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotCopper});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateLead), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotLead});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateBronze), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotBronze});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateSteel), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotSteel});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateMythril), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotMythril});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateAdamantium), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotAdamantium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorChestplateUnobtanium), new Object[]{"X X","XXX","XXX",'X',ShopKeeper.ingotUnobtanium});
+        this.addRecipe(new ItemStack(Items.IRON_LEGGINGS), new Object[]{"XXX","X X","X X",'X',Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Items.GOLDEN_LEGGINGS), new Object[]{"XXX","X X","X X",'X',Items.GOLD_INGOT});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsAluminium), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotAluminium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsCopper), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotCopper});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsLead), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotLead});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsBronze), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotBronze});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsSteel), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotSteel});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsMythril), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotMythril});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsAdamantium), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotAdamantium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorLeggingsUnobtanium), new Object[]{"XXX","X X","X X",'X',ShopKeeper.ingotUnobtanium});
+        this.addRecipe(new ItemStack(Items.IRON_BOOTS), new Object[]{"X X","X X",'X',Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(Items.GOLDEN_BOOTS), new Object[]{"X X","X X",'X',Items.GOLD_INGOT});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsAluminium), new Object[]{"X X","X X",'X',ShopKeeper.ingotAluminium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsCopper), new Object[]{"X X","X X",'X',ShopKeeper.ingotCopper});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsLead), new Object[]{"X X","X X",'X',ShopKeeper.ingotLead});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsBronze), new Object[]{"X X","X X",'X',ShopKeeper.ingotBronze});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsSteel), new Object[]{"X X","X X",'X',ShopKeeper.ingotSteel});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsMythril), new Object[]{"X X","X X",'X',ShopKeeper.ingotMythril});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsAdamantium), new Object[]{"X X","X X",'X',ShopKeeper.ingotAdamantium});
+        this.addRecipe(new ItemStack(ShopKeeper.armorBootsUnobtanium), new Object[]{"X X","X X",'X',ShopKeeper.ingotUnobtanium});
+        this.addRecipe(new ItemStack(ShopKeeper.machinaAnvil),            new Object[]{"XXX"," X ","XXX",'X', Items.IRON_INGOT});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilCopper),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotCopper});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilAluminium),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotAluminium});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilLead),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotLead});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilBronze),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotBronze});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilSteel),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotSteel});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilMythril),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotMythril});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilAdamantium),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotAdamantium});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaAnvilUnobtanium),            new Object[]{"XXX"," X ","XXX",'X', ShopKeeper.ingotUnobtanium});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaIngotBasin),       new Object[]{"I  I","IIII",'I', Items.IRON_INGOT});
+        this.addRecipe(new ItemStack(ShopKeeper.machinaAnchor),       new Object[]{"I  ","IIR","I  ",'I', Items.IRON_INGOT, 'R', ShopKeeper.stuffRope});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaBoilerIdle),       new Object[]{" P ", " I ", "ICI", "III", 'I', ShopKeeper.ingotBronze, 'C', Blocks.coal_block, 'P', ShopKeeper.machinaPipeStraightBronze});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaPipeStraightLead, 2),       new Object[]{"I I", "I I", "I I", "I I", 'I', ShopKeeper.ingotLead});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaPipeStraightBronze, 2),       new Object[]{"I I", "I I", "I I", "I I", 'I', ShopKeeper.ingotBronze});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaPipeCurveLead, 3),       new Object[]{"PP", " P", 'P', ShopKeeper.machinaPipeStraightLead});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaPipeCurveBronze, 3),       new Object[]{"PP", " P", 'P', ShopKeeper.machinaPipeStraightBronze});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaPipeCrossingLead, 2),       new Object[]{"PIP", " P ", 'P', ShopKeeper.machinaPipeStraightLead, 'I', ShopKeeper.ingotLead});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaPipeCrossingBronze, 2),       new Object[]{"PIP", " P ", 'P', ShopKeeper.machinaPipeStraightBronze, 'I', ShopKeeper.ingotBronze});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaTurbine),       new Object[]{"I  ", "IA ", "II ", "IIP", 'I', ShopKeeper.ingotBronze, 'A', ShopKeeper.machinaAxle, 'P', ShopKeeper.machinaPipeStraightBronze});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaSolarCollector),       new Object[]{"QQAQQ", "AAAAA", "QQAQQ", "AAAAA", "  L  ", 'L', ShopKeeper.ingotLead, 'A', ShopKeeper.ingotAluminium, 'Q', Items.quartz});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaCable, 2),       new Object[]{"C", "C", 'C', ShopKeeper.ingotCopper});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaEnergyNode),       new Object[]{" Q ", " A ", "CAC", 'A', ShopKeeper.ingotAluminium, 'C', ShopKeeper.machinaCable, 'Q', Items.quartz});
+        //this.addRecipe(new ItemStack(ShopKeeper.machinaBattery),       new Object[]{" Z ", " C ", " A ", "XAX", 'A', ShopKeeper.ingotAluminium, 'X', ShopKeeper.machinaCable, 'C', ShopKeeper.ingotCopper, 'Z', ShopKeeper.ingotZinc});
+    }
+}

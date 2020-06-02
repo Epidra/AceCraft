@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "acecraft:CropOnionStage0" },
+        "age=1": { "model": "acecraft:CropOnionStage1" },
+        "age=2": { "model": "acecraft:CropOnionStage2" },
+        "age=3": { "model": "acecraft:CropOnionStage2" },
+        "age=4": { "model": "acecraft:CropOnionStage2" },
+        "age=5": { "model": "acecraft:CropOnionStage2" },
+        "age=6": { "model": "acecraft:CropOnionStage2" },
+        "age=7": { "model": "acecraft:CropOnionStage2" }
+    }
+}

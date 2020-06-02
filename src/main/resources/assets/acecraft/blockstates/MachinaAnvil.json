@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "acecraft:MachinaAnvil", "y": 180 },
+        "facing=south": { "model": "acecraft:MachinaAnvil", "y":   0 },
+        "facing=west":  { "model": "acecraft:MachinaAnvil", "y":  90 },
+        "facing=east":  { "model": "acecraft:MachinaAnvil", "y": 270 }
+    }
+}

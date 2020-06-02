@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "facing=north,powered=false": { "model": "acecraft:MachinaCampfireOff", "y": 180 },
+        "facing=south,powered=false": { "model": "acecraft:MachinaCampfireOff", "y":   0 },
+        "facing=west,powered=false":  { "model": "acecraft:MachinaCampfireOff", "y":  90 },
+        "facing=east,powered=false":  { "model": "acecraft:MachinaCampfireOff", "y": 270 },
+        "facing=north,powered=true":  { "model": "acecraft:MachinaCampfireOn",  "y": 180 },
+        "facing=south,powered=true":  { "model": "acecraft:MachinaCampfireOn",  "y":   0 },
+        "facing=west,powered=true":   { "model": "acecraft:MachinaCampfireOn",  "y":  90 },
+        "facing=east,powered=true":   { "model": "acecraft:MachinaCampfireOn",  "y": 270 }
+    }
+}

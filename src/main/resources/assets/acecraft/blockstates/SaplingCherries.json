@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "stage=0": { "model": "acecraft:SaplingCherries" },
+        "stage=1": { "model": "acecraft:SaplingCherries" }
+    }
+}
