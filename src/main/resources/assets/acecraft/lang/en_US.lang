@@ -1,0 +1,918 @@
+//Language File en-US
+
+//Creative Tabs
+itemGroup.AceCraft=AceCraft Common
+itemGroup.Machina=AceCraft Machina
+itemGroup.Roof=AceCraft Roof
+
+//Mineral Blocks
+tile.GreenHillEarth.name=Green Hill Earth
+tile.GreenHillGrass.name=Green Hill Grass
+tile.GreenHillStone.name=Green Hill Stone
+tile.GreenHillMoss.name=Green Hill Moss
+
+//Ore Blocks
+tile.OreSalt.name=Salt Ore
+tile.OreSulfur.name=Sulfur Ore
+tile.OreCopper.name=Copper Ore
+tile.OreBauxite.name=Bauxite Ore
+tile.OreLead.name=Lead Ore
+tile.OreTin.name=Tin Ore
+tile.OreZinc.name=Zinc Ore
+tile.OreSilver.name=Silver Ore
+tile.OreMythril.name=Mythril Ore
+tile.OreIridium.name=Iridium Ore
+tile.OreAdamantium.name=Adamantium Ore
+tile.OreOrichalcum.name=Orichalcum Ore
+tile.OreUnobtanium.name=Unobtanium Ore
+tile.OreRuby.name=Ruby Ore
+tile.OrePeridot.name=Peridor Ore
+tile.OreTopaz.name=Topaz Ore
+tile.OreSaphire.name=Saphire Ore
+tile.OreAzurit.name=Azurit Ore
+tile.OreAmber.name=Amber Ore
+tile.OreAmethyst.name=Amethyst Ore
+tile.OreGagat.name=Gagat Ore
+tile.OreOpal.name=Opal Ore
+tile.OreJade.name=Jade Ore
+tile.OreTurquoise.name=Turquoise Ore
+
+//Full Blocks
+tile.BlockMeteor.name=Meteor
+tile.BlockCopper.name=Block of Copper
+tile.BlockAluminium.name=Block of Aluminium
+tile.BlockLead.name=Block of Lead
+tile.BlockTin.name=Block of Tin
+tile.BlockZinc.name=Block of Zinc
+tile.BlockSilver.name=Block of Silver
+tile.BlockMythril.name=Block of Mythril
+tile.BlockIridium.name=Block of Iridium
+tile.BlockAdamantium.name=Block of Adamantium
+tile.BlockOrichalcum.name=Block of Orichalcum
+tile.BlockUnobtanium.name=Block of Unobtanium
+tile.BlockBronze.name=Block of Bronze
+tile.BlockSteel.name=Block of Steel
+tile.BlockBrass.name=Block of Brass
+tile.BlockSalt.name=Block of Salt
+tile.BlockSulfur.name=Block of Sulfur
+tile.BlockFlour.name=Block of Flour
+tile.BlockCoffee.name=Block of Coffee
+tile.BlockRuby.name=Block of Ruby
+tile.BlockPeridot.name=Block of Peridot
+tile.BlockTopaz.name=Block of Topaz
+tile.BlockSaphire.name=Block of Saphire
+tile.BlockAzurit.name=Block of Azurit
+tile.BlockAmber.name=Block of Amber
+tile.BlockAmethyst.name=Block of Amethyst
+tile.BlockGagat.name=Block of Gagat
+tile.BlockOpal.name=Block of Opal
+tile.BlockJade.name=Block of Jade
+tile.BlockTurquoise.name=Block of Turquoise
+
+//Mino Blocks
+tile.MinoBlank.name=Mino
+tile.MinoFire.name=Fire Mino
+tile.MinoAir.name=Air Mino
+tile.MinoThunder.name=Thunder Mino
+tile.MinoWater.name=Water Mino
+tile.MinoIce.name=Ice Mino
+tile.MinoEarth.name=Earth Mino
+tile.MinoMetal.name=Metal Mino
+tile.MinoNature.name=Nature Mino
+tile.MinoLight.name=Light Mino
+tile.MinoDark.name=Dark Mino
+
+//Nuggets
+item.NuggetIron.name=Iron Nugget
+item.NuggetGold.name=Gold Nugget
+item.NuggetCopper.name=Copper Nugget
+item.NuggetBauxite.name=Bauxite Nugget
+item.NuggetLead.name=Lead Nugget
+item.NuggetTin.name=Tin Nugget
+item.NuggetZinc.name=Zinc Nugget
+item.NuggetSilver.name=Silver Nugget
+item.NuggetMythril.name=Mythril Nugget
+item.NuggetIridium.name=Iridium Nugget
+item.NuggetAdamantium.name=Adamantium Nugget
+item.NuggetOrichalcum.name=Orichalcum Nugget
+item.NuggetUnobtanium.name=Unobtanium Nugget
+
+//Ingots
+item.IngotCopper.name=Copper Ingot
+item.IngotAluminium.name=Aluminium Ingot
+item.IngotLead.name=Lead Ingot
+item.IngotTin.name=Tin Ingot
+item.IngotZinc.name=Zinc Ingot
+item.IngotSilver.name=Silver Ingot
+item.IngotMythril.name=Mythril Ingot
+item.IngotIridium.name=Iridium Ingot
+item.IngotAdamantium.name=Adamantium Ingot
+item.IngotOrichalcum.name=Orichalcum Ingot
+item.IngotUnobtanium.name=Unobtanium Ingot
+item.IngotBronze.name=Bronze Ingot
+item.IngotSteel.name=Steel Ingot
+item.IngotBrass.name=Brass Ingot
+
+//Gemstones
+item.GemstoneRuby.name=Ruby
+item.GemstonePeridot.name=Peridot
+item.GemstoneTopaz.name=Topaz
+item.GemstoneSaphire.name=Saphire
+item.GemstoneAzurit.name=Azurit
+item.GemstoneAmber.name=Amber
+item.GemstoneAmethyst.name=Amethyst
+item.GemstoneGagat.name=Gagat
+item.GemstoneOpal.name=Opal
+item.GemstoneJade.name=Jade
+item.GemstoneTurquoise.name=Turquoise
+
+//Powders
+item.PowderSalt.name=Salt
+item.PowderSulfur.name=Sulfur
+item.PowderOrichalcum.name=Orichalk
+item.PowderFlour.name=Flour
+item.PowderCoffee.name=Coffee Powder
+
+//Swords
+item.ToolSwordFlint.name=Flint Sword
+item.ToolSwordCopper.name=Copper Sword
+item.ToolSwordLead.name=Lead Sword
+item.ToolSwordBronze.name=Bronze Sword
+item.ToolSwordSteel.name=Steel Sword
+item.ToolSwordMythril.name=Mythril Sword
+item.ToolSwordIridium.name=Iridium Sword
+item.ToolSwordAdamantium.name=Adamantium Sword
+item.ToolSwordUnobtanium.name=Unobtanium Sword
+
+//Spears
+item.ToolSpearFlint.name=Flint Spear
+item.ToolSpearCopper.name=Copper Spear
+item.ToolSpearLead.name=Lead Spear
+item.ToolSpearBronze.name=Bronze Spear
+item.ToolSpearSteel.name=Steel Spear
+item.ToolSpearMythril.name=Mythril Spear
+item.ToolSpearIridium.name=Iridium Spear
+item.ToolSpearAdamantium.name=Adamantium Spear
+item.ToolSpearUnobtanium.name=Unobtanium Spear
+
+//Axes
+item.ToolAxeFlint.name=Flint Axe
+item.ToolAxeCopper.name=Copper Axe
+item.ToolAxeLead.name=Lead Axe
+item.ToolAxeBronze.name=Bronze Axe
+item.ToolAxeSteel.name=Steel Axe
+item.ToolAxeMythril.name=Mythril Axe
+item.ToolAxeIridium.name=Iridium Axe
+item.ToolAxeAdamantium.name=Adamantium Axe
+item.ToolAxeUnobtanium.name=Unobtanium Axe
+
+//Shovels
+item.ToolShovelFlint.name=Flint Shovel
+item.ToolShovelCopper.name=Copper Shovel
+item.ToolShovelLead.name=Lead Shovel
+item.ToolShovelBronze.name=Bronze Shovel
+item.ToolShovelSteel.name=Steel Shovel
+item.ToolShovelMythril.name=Mythril Shovel
+item.ToolShovelIridium.name=Iridium Shovel
+item.ToolShovelAdamantium.name=Adamantium Shovel
+item.ToolShovelUnobtanium.name=Unobtanium Shovel
+
+//Hoes
+item.ToolHoeFlint.name=Flint Hoe
+item.ToolHoeCopper.name=Copper Hoe
+item.ToolHoeLead.name=Lead Hoe
+item.ToolHoeBronze.name=Bronze Hoe
+item.ToolHoeSteel.name=Steel Hoe
+item.ToolHoeMythril.name=Mythril Hoe
+item.ToolHoeIridium.name=Iridium Hoe
+item.ToolHoeAdamantium.name=Adamantium Hoe
+item.ToolHoeUnobtanium.name=Unobtanium Hoe
+
+//Pickaxes
+item.ToolPickaxeFlint.name=Flint Pickaxe
+item.ToolPickaxeCopper.name=Copper Pickaxe
+item.ToolPickaxeLead.name=Lead Pickaxe
+item.ToolPickaxeBronze.name=Bronze Pickaxe
+item.ToolPickaxeSteel.name=Steel Pickaxe
+item.ToolPickaxeMythril.name=Mythril Pickaxe
+item.ToolPickaxeIridium.name=Iridium Pickaxe
+item.ToolPickaxeAdamantium.name=Adamantium Pickaxe
+item.ToolPickaxeUnobtanium.name=Unobtanium Pickaxe
+
+//Helmets
+item.ArmorHelmetCopper.name=Copper Helmet
+item.ArmorHelmetAluminium.name=Aluminium Helmet
+item.ArmorHelmetLead.name=Lead Helmet
+item.ArmorHelmetBronze.name=Bronze Helmet
+item.ArmorHelmetSteel.name=Steel Helmet
+item.ArmorHelmetMythril.name=Mythril Helmet
+item.ArmorHelmetAdamantium.name=Adamantium Helmet
+item.ArmorHelmetUnobtanium.name=Unobtanium Helmet
+
+//Chestplates
+item.ArmorChestplateCopper.name=Copper Chestplate
+item.ArmorChestplateAluminium.name=Aluminium Chestplate
+item.ArmorChestplateLead.name=Lead Chestplate
+item.ArmorChestplateBronze.name=Bronze Chestplate
+item.ArmorChestplateSteel.name=Steel Chestplate
+item.ArmorChestplateMythril.name=Mythril Chestplate
+item.ArmorChestplateAdamantium.name=Adamantium Chestplate
+item.ArmorChestplateUnobtanium.name=Unobtanium Chestplate
+
+//Leggins
+item.ArmorLegginsCopper.name=Copper Leggins
+item.ArmorLegginsAluminium.name=Aluminium Leggins
+item.ArmorLegginsLead.name=Lead Leggins
+item.ArmorLegginsBronze.name=Bronze Leggins
+item.ArmorLegginsSteel.name=Steel Leggins
+item.ArmorLegginsMythril.name=Mythril Leggins
+item.ArmorLegginsAdamantium.name=Adamantium Leggins
+item.ArmorLegginsUnobtanium.name=Unobtanium Leggins
+
+//Boots
+item.ArmorBootsCopper.name=Copper Boots
+item.ArmorBootsAluminium.name=Aluminium Boots
+item.ArmorBootsLead.name=Lead Boots
+item.ArmorBootsBronze.name=Bronze Boots
+item.ArmorBootsSteel.name=Steel Boots
+item.ArmorBootsMythril.name=Mythril Boots
+item.ArmorBootsAdamantium.name=Adamantium Boots
+item.ArmorBootsUnobtanium.name=Unobtanium Boots
+
+//Buckets Wood
+item.BucketWoodEmpty.name=Wood Bucket
+item.BucketWoodWater.name=Wood Bucket (Water)
+item.BucketWoodLava.name=Wood Bucket (Lava)
+item.BucketWoodMilk.name=Wood Bucket (Milk)
+item.BucketWoodCoconutMilk.name=Wood Bucket (Coconut Milk)
+item.BucketWoodApple.name=Wood Bucket (Apple)
+item.BucketWoodBanana.name=Wood Bucket (Banana)
+item.BucketWoodCactusFruit.name=Wood Bucket (Cactus Fruit)
+item.BucketWoodCherry.name=Wood Bucket (Cherry)
+item.BucketWoodGrapes.name=Wood Bucket (Grapes)
+item.BucketWoodLemon.name=Wood Bucket (Lemon)
+item.BucketWoodOrange.name=Wood Bucket (Orange)
+item.BucketWoodPeach.name=Wood Bucket (Peach)
+item.BucketWoodPineapple.name=Wood Bucket (Pineapple)
+item.BucketWoodTomato.name=Wood Bucket (Tomato)
+
+//Buckets Iron
+item.BucketIronEmpty.name=Iron Bucket
+item.BucketIronWater.name=Iron Bucket (Water)
+item.BucketIronLava.name=Iron Bucket (Lava)
+item.BucketIronMilk.name=Iron Bucket (Milk)
+item.BucketIronCoconutMilk.name=Iron Bucket (Coconut Milk)
+item.BucketIronApple.name=Iron Bucket (Apple)
+item.BucketIronBanana.name=Iron Bucket (Banana)
+item.BucketIronCactusFruit.name=Iron Bucket (Cactus Fruit)
+item.BucketIronCherry.name=Iron Bucket (Cherry)
+item.BucketIronGrapes.name=Iron Bucket (Grapes)
+item.BucketIronLemon.name=Iron Bucket (Lemon)
+item.BucketIronOrange.name=Iron Bucket (Orange)
+item.BucketIronPeach.name=Iron Bucket (Peach)
+item.BucketIronPineapple.name=Iron Bucket (Pineapple)
+item.BucketIronTomato.name=Iron Bucket (Tomato)
+
+//Buckets Copper
+item.BucketCopperEmpty.name=Copper Bucket
+item.BucketCopperWater.name=Copper Bucket (Water)
+item.BucketCopperLava.name=Copper Bucket (Lava)
+item.BucketCopperMilk.name=Copper Bucket (Milk)
+item.BucketCopperCoconutMilk.name=Copper Bucket (Coconut Milk)
+item.BucketCopperApple.name=Copper Bucket (Apple)
+item.BucketCopperBanana.name=Copper Bucket (Banana)
+item.BucketCopperCactusFruit.name=Copper Bucket (Cactus Fruit)
+item.BucketCopperCherry.name=Copper Bucket (Cherry)
+item.BucketCopperGrapes.name=Copper Bucket (Grapes)
+item.BucketCopperLemon.name=Copper Bucket (Lemon)
+item.BucketCopperOrange.name=Copper Bucket (Orange)
+item.BucketCopperPeach.name=Copper Bucket (Peach)
+item.BucketCopperPineapple.name=Copper Bucket (Pineapple)
+item.BucketCopperTomato.name=Copper Bucket (Tomato)
+
+//Buckets Aluminium
+item.BucketAluminiumEmpty.name=Aluminium Bucket
+item.BucketAluminiumWater.name=Aluminium Bucket (Water)
+item.BucketAluminiumLava.name=Aluminium Bucket (Lava)
+item.BucketAluminiumMilk.name=Aluminium Bucket (Milk)
+item.BucketAluminiumCoconutMilk.name=Aluminium Bucket (Coconut Milk)
+item.BucketAluminiumApple.name=Aluminium Bucket (Apple)
+item.BucketAluminiumBanana.name=Aluminium Bucket (Banana)
+item.BucketAluminiumCactusFruit.name=Aluminium Bucket (Cactus Fruit)
+item.BucketAluminiumCherry.name=Aluminium Bucket (Cherry)
+item.BucketAluminiumGrapes.name=Aluminium Bucket (Grapes)
+item.BucketAluminiumLemon.name=Aluminium Bucket (Lemon)
+item.BucketAluminiumOrange.name=Aluminium Bucket (Orange)
+item.BucketAluminiumPeach.name=Aluminium Bucket (Peach)
+item.BucketAluminiumPineapple.name=Aluminium Bucket (Pineapple)
+item.BucketAluminiumTomato.name=Aluminium Bucket (Tomato)
+
+//Buckets Lead
+item.BucketLeadEmpty.name=Lead Bucket
+item.BucketLeadWater.name=Lead Bucket (Water)
+item.BucketLeadLava.name=Lead Bucket (Lava)
+item.BucketLeadMilk.name=Lead Bucket (Milk)
+item.BucketLeadCoconutMilk.name=Lead Bucket (Coconut Milk)
+item.BucketLeadApple.name=Lead Bucket (Apple)
+item.BucketLeadBanana.name=Lead Bucket (Banana)
+item.BucketLeadCactusFruit.name=Lead Bucket (Cactus Fruit)
+item.BucketLeadCherry.name=Lead Bucket (Cherry)
+item.BucketLeadGrapes.name=Lead Bucket (Grapes)
+item.BucketLeadLemon.name=Lead Bucket (Lemon)
+item.BucketLeadOrange.name=Lead Bucket (Orange)
+item.BucketLeadPeach.name=Lead Bucket (Peach)
+item.BucketLeadPineapple.name=Lead Bucket (Pineapple)
+item.BucketLeadTomato.name=Lead Bucket (Tomato)
+
+//Buckets Bronze
+item.BucketBronzeEmpty.name=Bronze Bucket
+item.BucketBronzeWater.name=Bronze Bucket (Water)
+item.BucketBronzeLava.name=Bronze Bucket (Lava)
+item.BucketBronzeMilk.name=Bronze Bucket (Milk)
+item.BucketBronzeCoconutMilk.name=Bronze Bucket (Coconut Milk)
+item.BucketBronzeApple.name=Bronze Bucket (Apple)
+item.BucketBronzeBanana.name=Bronze Bucket (Banana)
+item.BucketBronzeCactusFruit.name=Bronze Bucket (Cactus Fruit)
+item.BucketBronzeCherry.name=Bronze Bucket (Cherry)
+item.BucketBronzeGrapes.name=Bronze Bucket (Grapes)
+item.BucketBronzeLemon.name=Bronze Bucket (Lemon)
+item.BucketBronzeOrange.name=Bronze Bucket (Orange)
+item.BucketBronzePeach.name=Bronze Bucket (Peach)
+item.BucketBronzePineapple.name=Bronze Bucket (Pineapple)
+item.BucketBronzeTomato.name=Bronze Bucket (Tomato)
+
+//Buckets Steel
+item.BucketSteelEmpty.name=Steel Bucket
+item.BucketSteelWater.name=Steel Bucket (Water)
+item.BucketSteelLava.name=Steel Bucket (Lava)
+item.BucketSteelMilk.name=Steel Bucket (Milk)
+item.BucketSteelCoconutMilk.name=Steel Bucket (Coconut Milk)
+item.BucketSteelApple.name=Steel Bucket (Apple)
+item.BucketSteelBanana.name=Steel Bucket (Banana)
+item.BucketSteelCactusFruit.name=Steel Bucket (Cactus Fruit)
+item.BucketSteelCherry.name=Steel Bucket (Cherry)
+item.BucketSteelGrapes.name=Steel Bucket (Grapes)
+item.BucketSteelLemon.name=Steel Bucket (Lemon)
+item.BucketSteelOrange.name=Steel Bucket (Orange)
+item.BucketSteelPeach.name=Steel Bucket (Peach)
+item.BucketSteelPineapple.name=Steel Bucket (Pineapple)
+item.BucketSteelTomato.name=Steel Bucket (Tomato)
+
+//Buckets Mythril
+item.BucketMythrilEmpty.name=Mythril Bucket
+item.BucketMythrilWater.name=Mythril Bucket (Water)
+item.BucketMythrilLava.name=Mythril Bucket (Lava)
+item.BucketMythrilMilk.name=Mythril Bucket (Milk)
+item.BucketMythrilCoconutMilk.name=Mythril Bucket (Coconut Milk)
+item.BucketMythrilApple.name=Mythril Bucket (Apple)
+item.BucketMythrilBanana.name=Mythril Bucket (Banana)
+item.BucketMythrilCactusFruit.name=Mythril Bucket (Cactus Fruit)
+item.BucketMythrilCherry.name=Mythril Bucket (Cherry)
+item.BucketMythrilGrapes.name=Mythril Bucket (Grapes)
+item.BucketMythrilLemon.name=Mythril Bucket (Lemon)
+item.BucketMythrilOrange.name=Mythril Bucket (Orange)
+item.BucketMythrilPeach.name=Mythril Bucket (Peach)
+item.BucketMythrilPineapple.name=Mythril Bucket (Pineapple)
+item.BucketMythrilTomato.name=Mythril Bucket (Tomato)
+
+//Buckets Adamantium
+item.BucketAdamantiumEmpty.name=Adamantium Bucket
+item.BucketAdamantiumWater.name=Adamantium Bucket (Water)
+item.BucketAdamantiumLava.name=Adamantium Bucket (Lava)
+item.BucketAdamantiumMilk.name=Adamantium Bucket (Milk)
+item.BucketAdamantiumCoconutMilk.name=Adamantium Bucket (Coconut Milk)
+item.BucketAdamantiumApple.name=Adamantium Bucket (Apple)
+item.BucketAdamantiumBanana.name=Adamantium Bucket (Banana)
+item.BucketAdamantiumCactusFruit.name=Adamantium Bucket (Cactus Fruit)
+item.BucketAdamantiumCherry.name=Adamantium Bucket (Cherry)
+item.BucketAdamantiumGrapes.name=Adamantium Bucket (Grapes)
+item.BucketAdamantiumLemon.name=Adamantium Bucket (Lemon)
+item.BucketAdamantiumOrange.name=Adamantium Bucket (Orange)
+item.BucketAdamantiumPeach.name=Adamantium Bucket (Peach)
+item.BucketAdamantiumPineapple.name=Adamantium Bucket (Pineapple)
+item.BucketAdamantiumTomato.name=Adamantium Bucket (Tomato)
+
+//Buckets Unobtanium
+item.BucketUnobtaniumEmpty.name=Unobtanium Bucket
+item.BucketUnobtaniumWater.name=Unobtanium Bucket (Water)
+item.BucketUnobtaniumLava.name=Unobtanium Bucket (Lava)
+item.BucketUnobtaniumMilk.name=Unobtanium Bucket (Milk)
+item.BucketUnobtaniumCoconutMilk.name=Unobtanium Bucket (Coconut Milk)
+item.BucketUnobtaniumApple.name=Unobtanium Bucket (Apple)
+item.BucketUnobtaniumBanana.name=Unobtanium Bucket (Banana)
+item.BucketUnobtaniumCactusFruit.name=Unobtanium Bucket (Cactus Fruit)
+item.BucketUnobtaniumCherry.name=Unobtanium Bucket (Cherry)
+item.BucketUnobtaniumGrapes.name=Unobtanium Bucket (Grapes)
+item.BucketUnobtaniumLemon.name=Unobtanium Bucket (Lemon)
+item.BucketUnobtaniumOrange.name=Unobtanium Bucket (Orange)
+item.BucketUnobtaniumPeach.name=Unobtanium Bucket (Peach)
+item.BucketUnobtaniumPineapple.name=Unobtanium Bucket (Pineapple)
+item.BucketUnobtaniumTomato.name=Unobtanium Bucket (Tomato)
+
+//Stuff
+item.StuffFur.name=Fur
+item.StuffIvory.name=Ivory
+item.StuffHemp.name=Hemp
+item.StuffCotton.name=Cotton
+item.StuffRope.name=Rope
+item.StuffClothLinen.name=Linen Cloth
+item.StuffClothWool.name=Wool Cloth
+item.StuffClothSilk.name=Silk Cloth
+item.StuffGear.name=Gear
+item.StuffCoconutFull.name=Coconut
+item.StuffCoconutEmpty.name=Coconut (empty)
+
+//Food
+item.FoodCoconutFlesh.name=Coconut Flesh
+item.FoodMammothMeatRaw.name=Raw Mammoth Meat
+item.FoodMammothMeatCooked.name=Cooked Mammoth Meat
+item.FoodVenisonRaw.name=Raw Venison
+item.FoodVenisonCooked.name=Cooked Venison
+item.FoodMuttonRaw.name=Raw Mutton
+item.FoodMuttonCooked.name=Cooked Mutton
+item.FoodCrabMeatRaw.name=Raw Crab Meat
+item.FoodCrabMeatCooked.name=Cooked Crab Meat
+item.FoodCalamariRaw.name=Raw Calamari
+item.FoodCalamariCooked.name=Cooked Calamari
+item.FoodBanana.name=Banana
+item.FoodLemon.name=Lemon
+item.FoodCherry.name=Cherry
+item.FoodOrange.name=Orange
+item.FoodPeach.name=Peach
+item.FoodCactusFruit.name=Cactus Fruit
+item.FoodTurnip.name=Turnip
+item.FoodGrapes.name=Grapes
+item.FoodOnion.name=Onion
+item.FoodPineapple.name=Pineapple
+item.FoodTomato.name=Tomato
+item.FoodCabbage.name=Cabbage
+item.FoodRice.name=Rice
+item.FoodMaise.name=Maise
+item.FoodCoffeeBeans.name=Coffee Beans
+item.FoodPeas.name=Peas
+item.FoodPickles.name=Pickles
+item.FoodCheeseWheel.name=Cheese Wheel
+item.FoodCheese.name=Cheese
+
+item.FoodRiceball.name=Riceball
+item.FoodRiceBowl.name=Rice Bowl
+item.FoodSalad.name=Salad
+item.FoodFruitSalad.name=Fruit Salad
+item.FoodBurger.name=Burger
+item.FoodCheeseBurger.name=Cheeseburger
+item.FoodKebab.name=Kebab
+item.FoodDungeonFilet.name=Dungeon Filet
+item.FoodStirFry.name=Stir Fry
+item.FoodFriedRice.name=Fried Rice
+item.FoodSavoryPancake.name=Savory Pancake
+item.FoodFrenchFries.name=French Fries
+item.FoodCroquette.name=Croquette
+item.FoodPopcorn.name=Popcorn
+item.FoodScrambledEggs.name=Scrambled Eggs
+item.FoodOmelet.name=Omelet
+item.FoodOmeletRice.name=Omelet Rice
+item.FoodAppleSouffle.name=Apple Souffle
+item.FoodCurryBread.name=Curry Bread
+item.FoodFrenchToast.name=French Toast
+item.FoodDoughnut.name=Doughnut
+item.FoodFriedNoodles.name=Fried Noodles
+item.FoodTempura.name=Tempura
+item.FoodPancake.name=Pancake
+item.FoodPotSticker.name=Pot Sticker
+item.FoodRisotto.name=Risotto
+item.FoodDryCurry.name=Dry Curry
+item.FoodPumpkinStew.name=Pumpkin Stew
+item.FoodFishStew.name=Fish Stew
+item.FoodBoiledEgg.name=Boiled Egg
+item.FoodDumplings.name=Dumplings
+item.FoodCheeseFondue.name=Cheese Fondue
+item.FoodNoodles.name=Noodles
+item.FoodCurryNoodles.name=Curry Noodles
+item.FoodTempuraNoodles.name=Tempura Noodles
+item.FoodMountainStew.name=Mountain Stew
+item.FoodRiceSoup.name=Rice Soup
+item.FoodPorridge.name=Porridge
+item.FoodTempuraRice.name=Tempura Rice
+item.FoodEggOverRice.name=Egg Over Rice
+item.FoodStew.name=Stew
+item.FoodCurryRice.name=Curry Rice
+item.FoodBakedCorn.name=Baked Corn
+item.FoodToastedRiceBall.name=Toasted Rice Ball
+item.FoodToast.name=Toast
+item.FoodDinnerRoll.name=Dinner Roll
+item.FoodPizza.name=Pizza
+item.FoodDoria.name=Doria
+item.FoodGratin.name=Gratin
+item.FoodChocolateCake.name=Chocolate Cake
+item.FoodCheesecake.name=Cheesecake
+item.FoodApplePie.name=Apple Pie
+item.FoodSteamedBun.name=Steamed Bun
+item.FoodCheeseSteamedBun.name=Cheese Steamed Bun
+item.FoodShaomai.name=Shaomai
+item.FoodSteamedEgg.name=Steamed Egg
+item.FoodChineseBun.name=Chinese Bun
+item.FoodCurryBun.name=Curry Bun
+item.FoodSteamedDumplings.name=Steamed Dumplings
+item.FoodSpongeCake.name=Sponge Cake
+item.FoodSteamedCake.name=Steamed Cake
+item.FoodPudding.name=Pudding
+item.FoodPumpkinPudding.name=Pumpkin Pudding
+item.FoodSandwich.name=Sandwich
+item.FoodFruitSandwich.name=Fruit Sandwich
+item.FoodPickledTurnip.name=Pickled Turnip
+item.FoodPickledCucumber.name=Pickled Cucumber
+item.FoodBambooRice.name=Bamboo Rice
+item.FoodMushroomRice.name=Mushroom Rice
+item.FoodSushi.name=Sushi
+item.FoodRaisinBread.name=Raisin Bread
+item.FoodChirashiSushi.name=Chirashi Sushi
+item.FoodIceCream.name=Ice Cream
+item.FoodSeaSaltIceCream.name=Sea-Salt Ice Cream
+item.FoodKrabbyPatty.name=Krabby Patty
+
+//Juice
+item.JuiceApple.name=Apple Juice
+item.JuiceBanana.name=Banana Juice
+item.JuiceCactus.name=Cactus Juice
+item.JuiceCherry.name=Cherry Juice
+item.JuiceChocolateMilk.name=Chocolate Milk
+item.JuiceCoconutMilk.name=Coconut Milk
+item.JuiceCoffee.name=Coffee
+item.JuiceGrapes.name=Grapes Juice
+item.JuiceLemon.name=Lemon Juice
+item.JuiceMilk.name=Milk
+item.JuiceOrange.name=Orange Juice
+item.JuicePeach.name=Peach Juice
+item.JuicePineapple.name=Pineapple Juice
+item.JuiceTomato.name=Tomato Juice
+
+//Liquor
+item.LiquorCoconutRum.name=Coconut Rum
+item.LiquorCider.name=Cider
+item.LiquorRum.name=Rum
+item.LiquorBeer.name=Beer
+item.LiquorSalgam.name=Salgam
+item.LiquorVodka.name=Vodka
+item.LiquorCactusJack.name=Cactus Jack
+item.LiquorSake.name=Sake
+item.LiquorMead.name=Mead
+item.LiquorWineGrapes.name=Grape Wine
+item.LiquorWineCherry.name=Cherry Wine
+item.LiquorWinePineapple.name=Pineapple Wine
+
+//Crops
+tile.CropTurnip.name=Turnip Plant
+tile.CropGrapes.name=Grape Plant
+tile.CropOnion.name=Onion Plant
+tile.CropPineapple.name=Pineapple Plant
+tile.CropTomato.name=Tomato Plant
+tile.CropCabbage.name=Cabbage Plant
+tile.CropRice.name=Rice Plant
+tile.CropMaise.name=Maise Plant
+tile.CropCoffeeBeans.name=Coffee Plant
+tile.CropPeas.name=Pea Plant
+tile.CropPickles.name=Pickles Plant
+tile.CropGoldenCarrot.name=Golden Carrot Plant
+tile.CropHemp.name=Hemp Plant
+tile.CropCotton.name=Cotton Plant
+tile.CropCoconut.name=Coconut Plant
+tile.CropBanana.name=Banana Plant
+
+//Seeds
+item.SeedsWild.name=Wild Seeds
+item.SeedsTurnip.name=Turnip Seeds
+item.SeedsGrapes.name=Grape Seeds
+item.SeedsOnion.name=Onion Seeds
+item.SeedsPineapple.name=Pineapple Seeds
+item.SeedsTomato.name=Tomato Seeds
+item.SeedsCabbage.name=Cabbage Seeds
+item.SeedsRice.name=Rice Seeds
+item.SeedsMaise.name=Maise Seeds
+item.SeedsCoffeeBeans.name=Coffee Seeds
+item.SeedsPeas.name=Pea Seeds
+item.SeedsPickles.name=Pickles Seeds
+item.SeedsHemp.name=Hemp Seeds
+item.SeedsCotton.name=Cotton Seeds
+
+//Tree
+tile.Log.FruitTree.name=Fruit Tree Log
+tile.Log.Golden.name=Golden Tree Log
+tile.Log.PalmTree.name=Palm Tree Log
+
+//Leaves
+tile.LeavesCherryEmpty.name=Cherry Leaves
+tile.LeavesCherryBlossom.name=Cherry Leaves
+tile.LeavesCherryFruit.name=Cherry Leaves
+tile.LeavesLemonEmpty.name=Lemon Leaves
+tile.LeavesLemonBlossom.name=Lemon Leaves
+tile.LeavesLemonFruit.name=Lemon Leaves
+tile.LeavesOrangeEmpty.name=Orange Leaves
+tile.LeavesOrangeBlossom.name=Orange Leaves
+tile.LeavesOrangeFruit.name=Orange Leaves
+tile.LeavesPeachEmpty.name=Peach Leaves
+tile.LeavesPeachBlossom.name=Peach Leaves
+tile.LeavesPeachFruit.name=Peach Leaves
+tile.LeavesAppleEmpty.name=Apple Leaves
+tile.LeavesAppleBlossom.name=Apple Leaves
+tile.LeavesAppleFruit.name=Apple Leaves
+tile.LeavesGoldenEmpty.name=Golden Leaves
+tile.LeavesGoldenBlossom.name=Golden Leaves
+tile.LeavesGoldenFruit.name=Golden Leaves
+tile.LeavesPalmTree.name=Palm Leaves
+
+//Saplings
+tile.Sapling.Apple.name=Apple Tree Sapling
+tile.Sapling.Cherry.name=Cherry Tree Sapling
+tile.Sapling.Lemon.name=Lemon Tree Sapling
+tile.Sapling.Orange.name=Orange Tree Sapling
+tile.Sapling.Peach.name=Peach Tree Sapling
+tile.Sapling.PalmTree.name=Palm Tree Sapling
+tile.Sapling.Coconut.name=Coconut Tree Sapling
+tile.Sapling.Banana.name=Banana Tree Sapling
+tile.Sapling.Golden.name=Golden Tree Sapling
+
+//Beds
+tile.BedBlack.name=Bed
+tile.BedBlue.name=Bed
+tile.BedBrown.name=Bed
+tile.BedCyan.name=Bed
+tile.BedGreen.name=Bed
+tile.BedGrey.name=Bed
+tile.BedLightBlue.name=Bed
+tile.BedLime.name=Bed
+tile.BedMagenta.name=Bed
+tile.BedOrange.name=Bed
+tile.BedPink.name=Bed
+tile.BedPurple.name=Bed
+tile.BedRed.name=Bed
+tile.BedSilver.name=Bed
+tile.BedWhite.name=Bed
+tile.BedYellow.name=Bed
+
+//Machinas
+tile.BlastFurnaceIdle.name=Blast Furnace
+tile.BlastFurnaceActive.name=Blast Furnace
+tile.AceWorkbench.name=Workbench
+tile.SewingStation.name=Sewing Station
+tile.AnvilIron.name=Anvil
+tile.AnvilCopper.name=Anvil
+tile.AnvilAluminium.name=Anvil
+tile.AnvilLead.name=Anvil
+tile.AnvilBronze.name=Anvil
+tile.AnvilSteel.name=Anvil
+tile.AnvilMythril.name=Anvil
+tile.AnvilAdamantium.name=Anvil
+tile.AnvilUnobtanium.name=Anvil
+tile.AceStove.name=Stove
+tile.BonfireIdle.name=Bonfire
+tile.BonfireActive.name=Bonfire
+tile.Keg.name=Keg
+tile.DistilleryIdle.name=Distillery
+tile.DistilleryActive.name=Distillery
+tile.Anchor.name=Anchor
+tile.Rope.name=Rope
+tile.Globe.name=Globe
+tile.Podium.name=Podium
+tile.IngotBasin.name=Ingot Basin
+tile.GearBox.name=Gear Box
+tile.WindmillWool.name=Windmill
+tile.WindmillLeather.name=Windmill
+tile.Waterwheel.name=Waterwheel
+tile.Axle.name=Axle
+tile.FruitPress.name=Fruit Press
+tile.Millstone.name=Millstone
+tile.BoilerIdle.name=Boiler
+tile.BoilerActive.name=Boiler
+tile.PipeStraightLead.name=Steam Pipe
+tile.PipeCurveLead.name=Curved Steam Pipe
+tile.PipeCrossingLead.name=Crossed Steam Pipe
+tile.PipeStraightBronze.name=Steam Pipe
+tile.PipeCurveBronze.name=Curved Steam Pipe
+tile.PipeCrossingBronze.name=Crossed Steam Pipe
+tile.SteamVentLead.name=Steam Vent
+tile.SteamVentBronze.name=Steam Vent
+tile.Turbine.name=Turbine
+tile.Generator.name=Generator
+tile.Bellows.name=Bellows
+tile.SolarCollector.name=Solar Collector
+tile.Cable.name=Cable
+tile.EnergyNode.name=Energy Node
+tile.Battery.name=Battery
+tile.Motor.name=Motor
+
+//Scaffoldings
+tile.ScaffoldingAcacia.name=Wooden Scaffolding
+tile.ScaffoldingBigOak.name=Wooden Scaffolding
+tile.ScaffoldingBirch.name=Wooden Scaffolding
+tile.ScaffoldingJungle.name=Wooden Scaffolding
+tile.ScaffoldingOak.name=Wooden Scaffolding
+tile.ScaffoldingSpruce.name=Wooden Scaffolding
+tile.ScaffoldingFruit.name=Wooden Scaffolding
+tile.ScaffoldingGolden.name=Wooden Scaffolding
+tile.ScaffoldingPalm.name=Wooden Scaffolding
+tile.ScaffoldingAdamantium.name=Metal Scaffolding
+tile.ScaffoldingAluminium.name=Metal Scaffolding
+tile.ScaffoldingBronze.name=Metal Scaffolding
+tile.ScaffoldingCopper.name=Metal Scaffolding
+tile.ScaffoldingIron.name=Metal Scaffolding
+tile.ScaffoldingMythril.name=Metal Scaffolding
+tile.ScaffoldingSteel.name=Metal Scaffolding
+tile.ScaffoldingUnobtanium.name=Metal Scaffolding
+
+//Roof
+tile.RoofAcaciaStraw.name=GreenHillEarth
+tile.RoofAcaciaReeds.name=GreenHillEarth
+tile.RoofAcaciaClay.name=GreenHillEarth
+tile.RoofAcaciaCopper.name=GreenHillEarth
+tile.RoofAcaciaTin.name=GreenHillEarth
+tile.RoofAcaciaBrass.name=GreenHillEarth
+tile.RoofAcaciaGold.name=GreenHillEarth
+tile.RoofAcaciaMythril.name=GreenHillEarth
+tile.RoofAcaciaOrichalcum.name=GreenHillEarth
+tile.RoofAcaciaNether.name=GreenHillEarth
+
+tile.RoofBigOakStraw.name=GreenHillEarth
+tile.RoofBigOakReeds.name=GreenHillEarth
+tile.RoofBigOakClay.name=GreenHillEarth
+tile.RoofBigOakCopper.name=GreenHillEarth
+tile.RoofBigOakTin.name=GreenHillEarth
+tile.RoofBigOakBrass.name=GreenHillEarth
+tile.RoofBigOakGold.name=GreenHillEarth
+tile.RoofBigOakMythril.name=GreenHillEarth
+tile.RoofBigOakOrichalcum.name=GreenHillEarth
+tile.RoofBigOakNether.name=GreenHillEarth
+
+tile.RoofBirchStraw.name=GreenHillEarth
+tile.RoofBirchReeds.name=GreenHillEarth
+tile.RoofBirchClay.name=GreenHillEarth
+tile.RoofBirchCopper.name=GreenHillEarth
+tile.RoofBirchTin.name=GreenHillEarth
+tile.RoofBirchBrass.name=GreenHillEarth
+tile.RoofBirchGold.name=GreenHillEarth
+tile.RoofBirchMythril.name=GreenHillEarth
+tile.RoofBirchOrichalcum.name=GreenHillEarth
+tile.RoofBirchNether.name=GreenHillEarth
+
+tile.RoofJungleStraw.name=GreenHillEarth
+tile.RoofJungleReeds.name=GreenHillEarth
+tile.RoofJungleClay.name=GreenHillEarth
+tile.RoofJungleCopper.name=GreenHillEarth
+tile.RoofJungleTin.name=GreenHillEarth
+tile.RoofJungleBrass.name=GreenHillEarth
+tile.RoofJungleGold.name=GreenHillEarth
+tile.RoofJungleMythril.name=GreenHillEarth
+tile.RoofJungleOrichalcum.name=GreenHillEarth
+tile.RoofJungleNether.name=GreenHillEarth
+
+tile.RoofOakStraw.name=GreenHillEarth
+tile.RoofOakReeds.name=GreenHillEarth
+tile.RoofOakClay.name=GreenHillEarth
+tile.RoofOakCopper.name=GreenHillEarth
+tile.RoofOakTin.name=GreenHillEarth
+tile.RoofOakBrass.name=GreenHillEarth
+tile.RoofOakGold.name=GreenHillEarth
+tile.RoofOakMythril.name=GreenHillEarth
+tile.RoofOakOrichalcum.name=GreenHillEarth
+tile.RoofOakNether.name=GreenHillEarth
+
+tile.RoofSpruceStraw.name=GreenHillEarth
+tile.RoofSpruceReeds.name=GreenHillEarth
+tile.RoofSpruceClay.name=GreenHillEarth
+tile.RoofSpruceCopper.name=GreenHillEarth
+tile.RoofSpruceTin.name=GreenHillEarth
+tile.RoofSpruceBrass.name=GreenHillEarth
+tile.RoofSpruceGold.name=GreenHillEarth
+tile.RoofSpruceMythril.name=GreenHillEarth
+tile.RoofSpruceOrichalcum.name=GreenHillEarth
+tile.RoofSpruceNether.name=GreenHillEarth
+
+tile.RoofFruitStraw.name=GreenHillEarth
+tile.RoofFruitReeds.name=GreenHillEarth
+tile.RoofFruitClay.name=GreenHillEarth
+tile.RoofFruitCopper.name=GreenHillEarth
+tile.RoofFruitTin.name=GreenHillEarth
+tile.RoofFruitBrass.name=GreenHillEarth
+tile.RoofFruitGold.name=GreenHillEarth
+tile.RoofFruitMythril.name=GreenHillEarth
+tile.RoofFruitOrichalcum.name=GreenHillEarth
+tile.RoofFruitNether.name=GreenHillEarth
+
+tile.RoofGoldenStraw.name=GreenHillEarth
+tile.RoofGoldenReeds.name=GreenHillEarth
+tile.RoofGoldenClay.name=GreenHillEarth
+tile.RoofGoldenCopper.name=GreenHillEarth
+tile.RoofGoldenTin.name=GreenHillEarth
+tile.RoofGoldenBrass.name=GreenHillEarth
+tile.RoofGoldenGold.name=GreenHillEarth
+tile.RoofGoldenMythril.name=GreenHillEarth
+tile.RoofGoldenOrichalcum.name=GreenHillEarth
+tile.RoofGoldenNether.name=GreenHillEarth
+
+tile.RoofPalmStraw.name=GreenHillEarth
+tile.RoofPalmReeds.name=GreenHillEarth
+tile.RoofPalmClay.name=GreenHillEarth
+tile.RoofPalmCopper.name=GreenHillEarth
+tile.RoofPalmTin.name=GreenHillEarth
+tile.RoofPalmBrass.name=GreenHillEarth
+tile.RoofPalmGold.name=GreenHillEarth
+tile.RoofPalmMythril.name=GreenHillEarth
+tile.RoofPalmOrichalcum.name=GreenHillEarth
+tile.RoofPalmNether.name=GreenHillEarth
+
+tile.RoofBrickStraw.name=GreenHillEarth
+tile.RoofBrickReeds.name=GreenHillEarth
+tile.RoofBrickClay.name=GreenHillEarth
+tile.RoofBrickCopper.name=GreenHillEarth
+tile.RoofBrickTin.name=GreenHillEarth
+tile.RoofBrickBrass.name=GreenHillEarth
+tile.RoofBrickGold.name=GreenHillEarth
+tile.RoofBrickMythril.name=GreenHillEarth
+tile.RoofBrickOrichalcum.name=GreenHillEarth
+tile.RoofBrickNether.name=GreenHillEarth
+
+tile.RoofCobblestoneStraw.name=GreenHillEarth
+tile.RoofCobblestoneReeds.name=GreenHillEarth
+tile.RoofCobblestoneClay.name=GreenHillEarth
+tile.RoofCobblestoneCopper.name=GreenHillEarth
+tile.RoofCobblestoneTin.name=GreenHillEarth
+tile.RoofCobblestoneBrass.name=GreenHillEarth
+tile.RoofCobblestoneGold.name=GreenHillEarth
+tile.RoofCobblestoneMythril.name=GreenHillEarth
+tile.RoofCobblestoneOrichalcum.name=GreenHillEarth
+tile.RoofCobblestoneNether.name=GreenHillEarth
+
+tile.RoofCobblestoneMossyStraw.name=GreenHillEarth
+tile.RoofCobblestoneMossyReeds.name=GreenHillEarth
+tile.RoofCobblestoneMossyClay.name=GreenHillEarth
+tile.RoofCobblestoneMossyCopper.name=GreenHillEarth
+tile.RoofCobblestoneMossyTin.name=GreenHillEarth
+tile.RoofCobblestoneMossyBrass.name=GreenHillEarth
+tile.RoofCobblestoneMossyGold.name=GreenHillEarth
+tile.RoofCobblestoneMossyMythril.name=GreenHillEarth
+tile.RoofCobblestoneMossyOrichalcum.name=GreenHillEarth
+tile.RoofCobblestoneMossyNether.name=GreenHillEarth
+
+tile.RoofStonebrickStraw.name=GreenHillEarth
+tile.RoofStonebrickReeds.name=GreenHillEarth
+tile.RoofStonebrickClay.name=GreenHillEarth
+tile.RoofStonebrickCopper.name=GreenHillEarth
+tile.RoofStonebrickTin.name=GreenHillEarth
+tile.RoofStonebrickBrass.name=GreenHillEarth
+tile.RoofStonebrickGold.name=GreenHillEarth
+tile.RoofStonebrickMythril.name=GreenHillEarth
+tile.RoofStonebrickOrichalcum.name=GreenHillEarth
+tile.RoofStonebrickNether.name=GreenHillEarth
+
+tile.RoofStonebrickMossyStraw.name=GreenHillEarth
+tile.RoofStonebrickMossyReeds.name=GreenHillEarth
+tile.RoofStonebrickMossyClay.name=GreenHillEarth
+tile.RoofStonebrickMossyCopper.name=GreenHillEarth
+tile.RoofStonebrickMossyTin.name=GreenHillEarth
+tile.RoofStonebrickMossyBrass.name=GreenHillEarth
+tile.RoofStonebrickMossyGold.name=GreenHillEarth
+tile.RoofStonebrickMossyMythril.name=GreenHillEarth
+tile.RoofStonebrickMossyOrichalcum.name=GreenHillEarth
+tile.RoofStonebrickMossyNether.name=GreenHillEarth
+
+tile.RoofSandstoneStraw.name=GreenHillEarth
+tile.RoofSandstoneReeds.name=GreenHillEarth
+tile.RoofSandstoneClay.name=GreenHillEarth
+tile.RoofSandstoneCopper.name=GreenHillEarth
+tile.RoofSandstoneTin.name=GreenHillEarth
+tile.RoofSandstoneBrass.name=GreenHillEarth
+tile.RoofSandstoneGold.name=GreenHillEarth
+tile.RoofSandstoneMythril.name=GreenHillEarth
+tile.RoofSandstoneOrichalcum.name=GreenHillEarth
+tile.RoofSandstoneNether.name=GreenHillEarth
+
+tile.RoofNetherStraw.name=GreenHillEarth
+tile.RoofNetherReeds.name=GreenHillEarth
+tile.RoofNetherClay.name=GreenHillEarth
+tile.RoofNetherCopper.name=GreenHillEarth
+tile.RoofNetherTin.name=GreenHillEarth
+tile.RoofNetherBrass.name=GreenHillEarth
+tile.RoofNetherGold.name=GreenHillEarth
+tile.RoofNetherMythril.name=GreenHillEarth
+tile.RoofNetherOrichalcum.name=GreenHillEarth
+tile.RoofNetherNether.name=GreenHillEarth
+
+tile.RoofQuartzStraw.name=GreenHillEarth
+tile.RoofQuartzReeds.name=GreenHillEarth
+tile.RoofQuartzClay.name=GreenHillEarth
+tile.RoofQuartzCopper.name=GreenHillEarth
+tile.RoofQuartzTin.name=GreenHillEarth
+tile.RoofQuartzBrass.name=GreenHillEarth
+tile.RoofQuartzGold.name=GreenHillEarth
+tile.RoofQuartzMythril.name=GreenHillEarth
+tile.RoofQuartzOrichalcum.name=GreenHillEarth
+tile.RoofQuartzNether.name=GreenHillEarth
+
+entity.Nugget.name=Nugget
+entity.Mammoth.name=Mammoth
+entity.Llama.name=Llama
+entity.Deer.name=Deer
+entity.Goat.name=Goat
+entity.Crab.name=Crab
+entity.CarrotRed.name=Wild Carrot
+entity.CarrotWhite.name=Wild Carrot
+entity.Elephant.name=Elephant

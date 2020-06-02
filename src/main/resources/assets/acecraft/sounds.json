@@ -1,0 +1,25 @@
+{
+    "mammoth.say": {"category": "master","sounds": [{"name": "mammoth-say","stream": false}]},
+    "mammoth.hurt": {"category": "master","sounds": [{"name": "mammoth-hurt","stream": false}]},
+    "mammoth.death": {"category": "master","sounds": [{"name": "mammoth-death","stream": false}]},
+    
+    "llama.say": {"category": "master","sounds": [{"name": "llama-say","stream": false}]},
+    "llama.hurt": {"category": "master","sounds": [{"name": "llama-hurt","stream": false}]},
+    "llama.death": {"category": "master","sounds": [{"name": "llama-death","stream": false}]},
+    
+    "deer.say": {"category": "master","sounds": [{"name": "deer-say","stream": false}]},
+    "deer.hurt": {"category": "master","sounds": [{"name": "deer-hurt","stream": false}]},
+    "deer.death": {"category": "master","sounds": [{"name": "deer-death","stream": false}]},
+    
+    "goat.say": {"category": "master","sounds": [{"name": "goat-say","stream": false}]},
+    "goat.hurt": {"category": "master","sounds": [{"name": "goat-hurt","stream": false}]},
+    "goat.death": {"category": "master","sounds": [{"name": "goat-death","stream": false}]},
+    
+    "crab.say": {"category": "master","sounds": [{"name": "crab-say","stream": false}]},
+    "crab.hurt": {"category": "master","sounds": [{"name": "crab-hurt","stream": false}]},
+    "crab.death": {"category": "master","sounds": [{"name": "crab-death","stream": false}]},
+    
+    "carrot.say": {"category": "master","sounds": [{"name": "carrot-say","stream": false}]},
+    "carrot.hurt": {"category": "master","sounds": [{"name": "carrot-hurt","stream": false}]},
+    "carrot.death": {"category": "master","sounds": [{"name": "carrot-death","stream": false}]},
+}
