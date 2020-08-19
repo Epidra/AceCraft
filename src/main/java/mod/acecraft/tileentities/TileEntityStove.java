@@ -715,7 +715,7 @@ public class TileEntityStove extends TileEntityBase {
     /** ??? */
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        read(pkt.getNbtCompound());
+        //read(pkt.getNbtCompound());
     }
 
     /** Creates a tag containing the TileEntity information, used by vanilla to transmit from server to client */
@@ -727,8 +727,8 @@ public class TileEntityStove extends TileEntityBase {
     }
 
     /** Populates this TileEntity with information from the tag, used by vanilla to transmit from server to client */
-    @Override
-    public void handleUpdateTag(CompoundNBT tag){
-        this.read(tag);
-    }
+  //  @Override
+  //  public void handleUpdateTag(CompoundNBT tag){
+  //      this.read(tag);
+  //  }
 }

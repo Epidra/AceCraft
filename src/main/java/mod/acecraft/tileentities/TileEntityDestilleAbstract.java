@@ -94,12 +94,12 @@ public abstract class TileEntityDestilleAbstract extends TileEntityBase implemen
         addItemBurnTime(map, Items.BLAZE_ROD, 2400);
         addItemBurnTime(map, Items.COAL, 1600);
         addItemBurnTime(map, Items.CHARCOAL, 1600);
-        addItemTagBurnTime(map, ItemTags.LOGS, 300);
-        addItemTagBurnTime(map, ItemTags.PLANKS, 300);
-        addItemTagBurnTime(map, ItemTags.WOODEN_STAIRS, 300);
-        addItemTagBurnTime(map, ItemTags.WOODEN_SLABS, 150);
-        addItemTagBurnTime(map, ItemTags.WOODEN_TRAPDOORS, 300);
-        addItemTagBurnTime(map, ItemTags.WOODEN_PRESSURE_PLATES, 300);
+       // addItemTagBurnTime(map, ItemTags.LOGS, 300);
+       // addItemTagBurnTime(map, ItemTags.PLANKS, 300);
+       // addItemTagBurnTime(map, ItemTags.WOODEN_STAIRS, 300);
+       // addItemTagBurnTime(map, ItemTags.WOODEN_SLABS, 150);
+       // addItemTagBurnTime(map, ItemTags.WOODEN_TRAPDOORS, 300);
+       // addItemTagBurnTime(map, ItemTags.WOODEN_PRESSURE_PLATES, 300);
         addItemBurnTime(map, Blocks.OAK_FENCE, 300);
         addItemBurnTime(map, Blocks.BIRCH_FENCE, 300);
         addItemBurnTime(map, Blocks.SPRUCE_FENCE, 300);
@@ -120,24 +120,24 @@ public abstract class TileEntityDestilleAbstract extends TileEntityBase implemen
         addItemBurnTime(map, Blocks.TRAPPED_CHEST, 300);
         addItemBurnTime(map, Blocks.CRAFTING_TABLE, 300);
         addItemBurnTime(map, Blocks.DAYLIGHT_DETECTOR, 300);
-        addItemTagBurnTime(map, ItemTags.BANNERS, 300);
+       // addItemTagBurnTime(map, ItemTags.BANNERS, 300);
         addItemBurnTime(map, Items.BOW, 300);
         addItemBurnTime(map, Items.FISHING_ROD, 300);
         addItemBurnTime(map, Blocks.LADDER, 300);
-        addItemTagBurnTime(map, ItemTags.SIGNS, 200);
+       // addItemTagBurnTime(map, ItemTags.SIGNS, 200);
         addItemBurnTime(map, Items.WOODEN_SHOVEL, 200);
         addItemBurnTime(map, Items.WOODEN_SWORD, 200);
         addItemBurnTime(map, Items.WOODEN_HOE, 200);
         addItemBurnTime(map, Items.WOODEN_AXE, 200);
         addItemBurnTime(map, Items.WOODEN_PICKAXE, 200);
-        addItemTagBurnTime(map, ItemTags.WOODEN_DOORS, 200);
-        addItemTagBurnTime(map, ItemTags.BOATS, 200);
-        addItemTagBurnTime(map, ItemTags.WOOL, 100);
-        addItemTagBurnTime(map, ItemTags.WOODEN_BUTTONS, 100);
+       // addItemTagBurnTime(map, ItemTags.WOODEN_DOORS, 200);
+       // addItemTagBurnTime(map, ItemTags.BOATS, 200);
+       // addItemTagBurnTime(map, ItemTags.WOOL, 100);
+       // addItemTagBurnTime(map, ItemTags.WOODEN_BUTTONS, 100);
         addItemBurnTime(map, Items.STICK, 100);
-        addItemTagBurnTime(map, ItemTags.SAPLINGS, 100);
+       // addItemTagBurnTime(map, ItemTags.SAPLINGS, 100);
         addItemBurnTime(map, Items.BOWL, 100);
-        addItemTagBurnTime(map, ItemTags.CARPETS, 67);
+      //  addItemTagBurnTime(map, ItemTags.CARPETS, 67);
         addItemBurnTime(map, Blocks.DRIED_KELP_BLOCK, 4001);
         addItemBurnTime(map, Items.CROSSBOW, 300);
         addItemBurnTime(map, Blocks.BAMBOO, 50);
@@ -167,23 +167,23 @@ public abstract class TileEntityDestilleAbstract extends TileEntityBase implemen
         return this.burnTime > 0;
     }
 
-    public void read(CompoundNBT compound) {
-        super.read(compound);
-        this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound, this.items);
-        this.burnTime = compound.getInt("BurnTime");
-        this.cookTime = compound.getInt("CookTime");
-        this.cookTimeTotal = compound.getInt("CookTimeTotal");
-        this.recipesUsed = this.getBurnTime(this.items.get(1));
-        int i = compound.getShort("RecipesUsedSize");
-
-        for(int j = 0; j < i; ++j) {
-            ResourceLocation resourcelocation = new ResourceLocation(compound.getString("RecipeLocation" + j));
-            int k = compound.getInt("RecipeAmount" + j);
-            this.field_214022_n.put(resourcelocation, k);
-        }
-
-    }
+   // public void read(CompoundNBT compound) {
+   //     super.read(compound);
+   //     this.items = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+   //     ItemStackHelper.loadAllItems(compound, this.items);
+   //     this.burnTime = compound.getInt("BurnTime");
+   //     this.cookTime = compound.getInt("CookTime");
+   //     this.cookTimeTotal = compound.getInt("CookTimeTotal");
+   //     this.recipesUsed = this.getBurnTime(this.items.get(1));
+   //     int i = compound.getShort("RecipesUsedSize");
+//
+   //     for(int j = 0; j < i; ++j) {
+   //         ResourceLocation resourcelocation = new ResourceLocation(compound.getString("RecipeLocation" + j));
+   //         int k = compound.getInt("RecipeAmount" + j);
+   //         this.field_214022_n.put(resourcelocation, k);
+   //     }
+//
+   // }
 
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
@@ -465,7 +465,7 @@ public abstract class TileEntityDestilleAbstract extends TileEntityBase implemen
         while(p_214003_1_ > 0) {
             int j = ExperienceOrbEntity.getXPSplit(p_214003_1_);
             p_214003_1_ -= j;
-            p_214003_0_.world.addEntity(new ExperienceOrbEntity(p_214003_0_.world, p_214003_0_.posX, p_214003_0_.posY + 0.5D, p_214003_0_.posZ + 0.5D, j));
+            p_214003_0_.world.addEntity(new ExperienceOrbEntity(p_214003_0_.world, p_214003_0_.getPosX(), p_214003_0_.getPosY() + 0.5D, p_214003_0_.getPosZ() + 0.5D, j));
         }
 
     }

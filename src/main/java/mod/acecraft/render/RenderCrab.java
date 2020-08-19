@@ -18,7 +18,12 @@ public class RenderCrab extends MobRenderer<EntityCrab, ModelCrab<EntityCrab>> {
         super(renderManager, new ModelCrab<>(), 0.5F);
     }
 
-    protected ResourceLocation getEntityTexture(EntityCrab entity) {
-        return TEXTURE;
+    @Override
+    public ResourceLocation getEntityTexture(EntityCrab entity) {
+        return null;
     }
+
+    // protected ResourceLocation getEntityTexture(EntityCrab entity) {
+   //     return TEXTURE;
+   // }
 }

@@ -89,7 +89,7 @@ public class TileBlastFurnace extends TileEntityBase {
     }
 
     /** Populates this TileEntity with information from the tag, used by vanilla to transmit from server to client */
-    @Override
+    //@Override
     public void handleUpdateTag(CompoundNBT tag){
         this.read(tag);
     }
@@ -152,7 +152,7 @@ public class TileBlastFurnace extends TileEntityBase {
     }
 
     public void read(CompoundNBT compound) {
-        super.read(compound);
+      //  super.read(compound);
         int storageSize = compound.getInt("StorageSize");
 
         NonNullList<ItemStack> itemsLoaded = NonNullList.withSize(3 + storageSize, ItemStack.EMPTY);

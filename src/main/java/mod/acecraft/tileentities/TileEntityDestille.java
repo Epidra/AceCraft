@@ -103,7 +103,7 @@ public class TileEntityDestille extends TileEntityDestilleAbstract {
     }
 
     /** Populates this TileEntity with information from the tag, used by vanilla to transmit from server to client */
-    @Override
+    //@Override
     public void handleUpdateTag(CompoundNBT tag){
         this.read(tag);
     }
@@ -248,7 +248,7 @@ public class TileEntityDestille extends TileEntityDestilleAbstract {
 
 
 
-    @Override
+    //@Override
 
     public void read(CompoundNBT tag) {
 
@@ -267,7 +267,7 @@ public class TileEntityDestille extends TileEntityDestilleAbstract {
 
         result = ItemStack.read(tag.getCompound("result"));
 
-        super.read(tag);
+      //  super.read(tag);
 
     }
 

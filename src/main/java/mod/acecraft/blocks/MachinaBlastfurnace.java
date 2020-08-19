@@ -8,8 +8,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootContext;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
@@ -20,7 +21,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootContext;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -32,7 +32,7 @@ public class MachinaBlastfurnace extends BlockBlock {
     public static final VoxelShape AABB = Block.makeCuboidShape(0, 0, 0, 16, 10, 16);
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public static final IProperty<Boolean> LIT = BlockStateProperties.LIT;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 
 
@@ -44,13 +44,13 @@ public class MachinaBlastfurnace extends BlockBlock {
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(LIT, Boolean.valueOf(false)));
     }
 
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             NetworkHooks.openGui((ServerPlayerEntity) player, new ContainerProvider((TileBlastFurnace) tileentity), buf -> buf.writeBlockPos(pos));
         }
 
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Deprecated

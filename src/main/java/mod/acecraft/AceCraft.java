@@ -36,9 +36,9 @@ public class AceCraft {
     // Client/Server Proxy
     public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
 
-    public static final DeferredRegister<Item> ITEMS  = new DeferredRegister<>(ForgeRegistries.ITEMS,  MODID);
+    //public static final DeferredRegister<Item> ITEMS  = new DeferredRegister<>(ForgeRegistries.ITEMS,  MODID);
 
-    public static final RegistryObject<Item> ITEM_ROPE = ITEMS.register("item_rope", () -> new ItemItem(ItemGroup.MISC));
+   // public static final RegistryObject<Item> ITEM_ROPE = ITEMS.register("item_rope", () -> new ItemItem(ItemGroup.MISC));
 
     public AceCraft() {
         final IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -46,17 +46,17 @@ public class AceCraft {
         eventBus.addListener(this::enqueueIMC);
         eventBus.addListener(this::processIMC);
         eventBus.addListener(this::setupClient);
-        eventBus.addListener(this::villagerTrades);
-        eventBus.addListener(this::wandererTrades);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
+       // eventBus.addListener(this::villagerTrades);
+        //eventBus.addListener(this::wandererTrades);
+        //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
         MinecraftForge.EVENT_BUS.register(this);
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+       // ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void setupCommon(final FMLCommonSetupEvent event) {
         AceCraftPacketHandler.register();
-        WorldGen.GenerateOre();
-        WorldGen.GenerateNetherOre();
+      //  WorldGen.GenerateOre();
+      //  WorldGen.GenerateNetherOre();
         //DeferredWorkQueue.runLater(ShopKeeper::addSpawn);
         //ShopKeeper.addTrades();
     }
@@ -75,14 +75,14 @@ public class AceCraft {
         //registerBlockColor here
     }
 
-    @SubscribeEvent
-    public void villagerTrades(VillagerTradesEvent event){
-        if(event.getType() == VillagerProfession.FARMER){
-            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.FOOD_RICEBALL, 16), 8, 10, 0F));
-            event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.STUFF_CURRY,   16), 8, 10, 0F));
-            //RandomTradeBuilder.forEachLevel((level, tradeBuild) -> event.getTrades().get(level.intValue()).add(tradeBuild.build()));
-        }
-    }
+   // @SubscribeEvent
+   // public void villagerTrades(VillagerTradesEvent event){
+   //     if(event.getType() == VillagerProfession.FARMER){
+   //         event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.FOOD_RICEBALL, 16), 8, 10, 0F));
+   //         event.getTrades().get(1).add((entity, random) -> new MerchantOffer(new ItemStack(Items.EMERALD, 1), new ItemStack(ShopKeeper.STUFF_CURRY,   16), 8, 10, 0F));
+   //         //RandomTradeBuilder.forEachLevel((level, tradeBuild) -> event.getTrades().get(level.intValue()).add(tradeBuild.build()));
+   //     }
+   // }
 
     //@SubscribeEvent
     public void wandererTrades(WandererTradesEvent event){

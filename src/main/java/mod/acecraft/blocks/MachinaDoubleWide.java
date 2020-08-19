@@ -15,7 +15,6 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -49,9 +48,9 @@ public abstract class MachinaDoubleWide extends Block {
         return false;
     }
 
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
+    //public BlockRenderLayer getRenderLayer() {
+    //    return BlockRenderLayer.TRANSLUCENT;
+    //}
 
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;

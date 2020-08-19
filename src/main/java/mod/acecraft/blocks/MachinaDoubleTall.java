@@ -48,9 +48,9 @@ public abstract class MachinaDoubleTall extends Block {
         return false;
     }
 
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
+    //public BlockRenderLayer getRenderLayer() {
+    //    return BlockRenderLayer.TRANSLUCENT;
+    //}
 
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;

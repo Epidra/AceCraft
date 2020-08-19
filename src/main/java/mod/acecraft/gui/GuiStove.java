@@ -1,5 +1,6 @@
 package mod.acecraft.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import mod.acecraft.AceCraft;
 import mod.acecraft.container.ContainerStove;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -20,23 +21,28 @@ public class GuiStove extends ContainerScreen<ContainerStove> {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
+
     }
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        if (minecraft == null) {
-            return;
-        }
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        minecraft.getTextureManager().bindTexture(GUI);
-        blit(guiLeft, guiTop, 0, 0, xSize, ySize);
-        //if (container.getProgress() > 0) {
-        //    int l = (int) Math.ceil(container.getProgress() / 100.0 * 16);
-        //    blit(guiLeft + 80, guiTop + 35, 176, 0, l, 16);
-        //}
-    }
+   // @Override
+   // public void render(int mouseX, int mouseY, float partialTicks) {
+   //     this.renderBackground();
+   //     super.render(mouseX, mouseY, partialTicks);
+   //     this.renderHoveredToolTip(mouseX, mouseY);
+   // }
+//
+   // @Override
+   // protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+   //     if (minecraft == null) {
+   //         return;
+   //     }
+   //     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+   //     minecraft.getTextureManager().bindTexture(GUI);
+   //     blit(guiLeft, guiTop, 0, 0, xSize, ySize);
+   //     //if (container.getProgress() > 0) {
+   //     //    int l = (int) Math.ceil(container.getProgress() / 100.0 * 16);
+   //     //    blit(guiLeft + 80, guiTop + 35, 176, 0, l, 16);
+   //     //}
+   // }
 }

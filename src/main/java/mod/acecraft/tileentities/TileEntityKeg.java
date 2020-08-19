@@ -69,7 +69,7 @@ public class TileEntityKeg extends LockableLootTileEntity implements IChestLid, 
     }
 
     public void read(CompoundNBT compound) {
-        super.read(compound);
+       // super.read(compound);
         this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
         if (!this.checkLootAndRead(compound)) {
             ItemStackHelper.loadAllItems(compound, this.chestContents);

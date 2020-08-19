@@ -70,6 +70,11 @@ public class ContainerDestilleAbstract extends RecipeBookContainer<IInventory> {
         (new ServerRecipePlacerFurnace<>(this)).place(p_217056_3_, (IRecipe<IInventory>)p_217056_2_, p_217056_1_);
     }
 
+    @Override
+    public void fillStackedContents(RecipeItemHelper itemHelperIn) {
+
+    }
+
     public boolean matches(IRecipe<? super IInventory> recipeIn) {
         return recipeIn.matches(this.furnaceInventory, this.world);
     }
@@ -89,6 +94,11 @@ public class ContainerDestilleAbstract extends RecipeBookContainer<IInventory> {
     @OnlyIn(Dist.CLIENT)
     public int getSize() {
         return 3;
+    }
+
+    @Override
+    public RecipeBookCategory func_241850_m() {
+        return null;
     }
 
     public boolean canInteractWith(PlayerEntity playerIn) {

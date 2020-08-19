@@ -24,11 +24,11 @@ public class ItemDynamite extends Item {
             itemstack.shrink(1);
         }
 
-        worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+       // worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
         if (!worldIn.isRemote) {
             EntityDynamite snowballentity = new EntityDynamite(worldIn, playerIn);
             snowballentity.setItem(itemstack);
-            snowballentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+        //    snowballentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
             worldIn.addEntity(snowballentity);
             //AceCraftPacketHandler.sendToServer(new MessageDynamiteServer(playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.rotationPitch, playerIn.rotationYaw));
         }

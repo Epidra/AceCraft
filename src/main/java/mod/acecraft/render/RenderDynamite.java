@@ -18,8 +18,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderDynamite extends SpriteRenderer<EntityDynamite> {
-
-    public RenderDynamite(EntityRendererManager renderManager) {
-        super(renderManager, Minecraft.getInstance().getItemRenderer(), 1.0F);
+    public RenderDynamite(EntityRendererManager p_i226035_1_, ItemRenderer p_i226035_2_, float p_i226035_3_, boolean p_i226035_4_) {
+        super(p_i226035_1_, p_i226035_2_, p_i226035_3_, p_i226035_4_);
     }
+
+    // public RenderDynamite(EntityRendererManager renderManager) {
+   //     super(renderManager, Minecraft.getInstance().getItemRenderer(), 1.0F);
+   // }
 }

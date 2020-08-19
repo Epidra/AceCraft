@@ -18,7 +18,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -89,7 +88,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
             IParticleData iparticledata = this.makeParticle();
 
             for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
             }
         }
 
@@ -99,7 +98,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
         if (result.getType() == RayTraceResult.Type.ENTITY) {
             Entity entity = ((EntityRayTraceResult)result).getEntity();
             int i = entity instanceof BlazeEntity ? 3 : 0;
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
+            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), (float)i);
         }
 
         if (!this.world.isRemote) {
@@ -112,7 +111,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
 
     private void explode(){
         float f = 3.0F;
-        this.world.createExplosion(this, this.posX, this.posY + (double)(this.getHeight() / 16.0F), this.posZ, f, Explosion.Mode.DESTROY);
+        this.world.createExplosion(this, this.getPosX(), this.getPosY() + (double)(this.getHeight() / 16.0F), this.getPosZ(), f, Explosion.Mode.DESTROY);
     }
 
     //public void shoot(float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy) {

@@ -8,7 +8,6 @@ import net.minecraft.item.IItemTier;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.LazyLoadBase;
 
 public enum MaterialTool implements IItemTier {
 
@@ -27,7 +26,7 @@ public enum MaterialTool implements IItemTier {
     private final float efficiency;
     private final float attackDamage;
     private final int enchantability;
-    private final LazyLoadBase<Ingredient> repairMaterial;
+    //private final LazyLoadBase<Ingredient> repairMaterial;
 
     private MaterialTool(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn) {
         this.harvestLevel = harvestLevelIn;
@@ -35,7 +34,7 @@ public enum MaterialTool implements IItemTier {
         this.efficiency = efficiencyIn;
         this.attackDamage = attackDamageIn;
         this.enchantability = enchantabilityIn;
-        this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
+      //  this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
     }
 
     public int getMaxUses() {
@@ -58,7 +57,12 @@ public enum MaterialTool implements IItemTier {
         return this.enchantability;
     }
 
+    @Override
     public Ingredient getRepairMaterial() {
-        return this.repairMaterial.getValue();
+        return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);
     }
+
+    // public Ingredient getRepairMaterial() {
+     //   return this.repairMaterial.getValue();
+    //}
 }

@@ -79,17 +79,17 @@ public class Subscriber {
             ShopKeeper.registerItems();
         }
 
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void registerBlockColorHandlers(final ColorHandlerEvent.Block event) {
-            event.getBlockColors().register((x, reader, pos, u) -> reader != null
-                    && pos != null ? CustomBiomeColors.getGrassColor(reader, pos)
-                    : GrassColors.get(0.5D, 1.0D), ShopKeeper.FLOWER_TOYFLOWER);
-            //BlockColors blockColors = event.getBlockColors();
-            //blockColors.register((state, world, pos, tint_index) -> {
-            //    return world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D);
-            //}, block1, block2, blokc3, blokc4);
-        }
+       // @OnlyIn(Dist.CLIENT)
+       // @SubscribeEvent
+       // public static void registerBlockColorHandlers(final ColorHandlerEvent.Block event) {
+       //     event.getBlockColors().register((x, reader, pos, u) -> reader != null
+       //             && pos != null ? CustomBiomeColors.getGrassColor(reader, pos)
+       //             : GrassColors.get(0.5D, 1.0D), ShopKeeper.FLOWER_TOYFLOWER);
+       //     //BlockColors blockColors = event.getBlockColors();
+       //     //blockColors.register((state, world, pos, tint_index) -> {
+       //     //    return world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.get(0.5D, 1.0D);
+       //     //}, block1, block2, blokc3, blokc4);
+       // }
 
         @SubscribeEvent
         public static void registerContainer(RegistryEvent.Register<ContainerType<?>> event) {

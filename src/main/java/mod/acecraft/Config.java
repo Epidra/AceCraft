@@ -1,14 +1,11 @@
 package mod.acecraft;
 
 import mod.acecraft.util.BiomeDictionaryHelper;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import static net.minecraftforge.common.BiomeDictionary.Type.*;
 
 public class Config {
 
@@ -40,8 +37,8 @@ public class Config {
         public final ForgeConfigSpec.IntValue min;
         public final ForgeConfigSpec.IntValue max;
         public final ForgeConfigSpec.IntValue weight;
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> include;
-        public final ForgeConfigSpec.ConfigValue<List<? extends String>> exclude;
+        //public final ForgeConfigSpec.ConfigValue<List<? extends String>> include;
+        //public final ForgeConfigSpec.ConfigValue<List<? extends String>> exclude;
 
         Spawn(ForgeConfigSpec.Builder builder) {
             builder.push("spawn chances");
@@ -52,8 +49,8 @@ public class Config {
             builder.pop();
             builder.push("spawnable biomes");
             builder.comment("BiomeDictionary types to include & exclude.");
-            include = builder.defineList("include", Collections.singletonList(SNOWY.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
-            exclude = builder.defineList("exclude", Arrays.asList(FOREST.toString(), MOUNTAIN.toString(), NETHER.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+            //include = builder.defineList("include", Collections.singletonList(SNOWY.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
+            //exclude = builder.defineList("exclude", Arrays.asList(FOREST.toString(), MOUNTAIN.toString(), NETHER.toString()), o -> BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(String.valueOf(o))));
             builder.pop();
         }
     }

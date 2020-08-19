@@ -122,16 +122,16 @@ public class RecipeStove implements IRecipe<IInventory> {
         return new ItemStack(ShopKeeper.MACHINA_STOVE);
     }
 
-    public static ItemStack deserializeItem(JsonObject p_199798_0_) {
-        String s = JSONUtils.getString(p_199798_0_, "item");
-        Item item = Registry.ITEM.getValue(new ResourceLocation(s)).orElseThrow(() -> {
-            return new JsonSyntaxException("Unknown item '" + s + "'");
-        });
-        if (p_199798_0_.has("data")) {
-            throw new JsonParseException("Disallowed data tag found");
-        } else {
-            int i = JSONUtils.getInt(p_199798_0_, "count", 1);
-            return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(p_199798_0_, true);
-        }
-    }
+  //  public static ItemStack deserializeItem(JsonObject p_199798_0_) {
+  //      String s = JSONUtils.getString(p_199798_0_, "item");
+  //      Item item = Registry.ITEM.getValue(new ResourceLocation(s)).orElseThrow(() -> {
+  //          return new JsonSyntaxException("Unknown item '" + s + "'");
+  //      });
+  //      if (p_199798_0_.has("data")) {
+  //          throw new JsonParseException("Disallowed data tag found");
+  //      } else {
+  //          int i = JSONUtils.getInt(p_199798_0_, "count", 1);
+  //          return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(p_199798_0_, true);
+  //      }
+  //  }
 }

@@ -37,10 +37,10 @@ public class RecipeDestilleSerializer extends ForgeRegistryEntry<IRecipeSerializ
         } else if (nonnulllist.size() > 2) {
             throw new JsonParseException("Too many ingredients for shapeless recipe the max is " + 5);
         } else {
-            ItemStack itemstack = RecipeDestille.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+          //  ItemStack itemstack = RecipeDestille.deserializeItem(JSONUtils.getJsonObject(json, "result"));
             float f = JSONUtils.getFloat(json, "experience", 0.0F);
             int i = JSONUtils.getInt(json, "cookingtime", this.cookingTime);
-            return new RecipeDestille(recipeId, s, nonnulllist, itemstack, f, i);
+            return new RecipeDestille(recipeId, s, nonnulllist,ItemStack.EMPTY/* itemstack*/, f, i);
         }
     }
 

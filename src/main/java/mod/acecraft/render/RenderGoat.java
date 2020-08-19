@@ -18,7 +18,7 @@ public class RenderGoat extends MobRenderer<EntityGoat, ModelGoat<EntityGoat>> {
         super(renderManager, new ModelGoat<>(), 0.5F);
     }
 
-    protected ResourceLocation getEntityTexture(EntityGoat entityGoat) {
+    public ResourceLocation getEntityTexture(EntityGoat entityGoat) {
         return TEXTURE;
     }
 }

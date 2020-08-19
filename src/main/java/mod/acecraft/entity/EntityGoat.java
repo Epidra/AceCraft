@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -39,12 +40,12 @@ public class EntityGoat extends AnimalEntity {
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.16D);
-    }
+   // @Override
+   // protected void registerAttributes() {
+   //     super.registerAttributes();
+   //     this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+   //     this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.16D);
+   // }
 
     //@Override
     //protected SoundEvent getAmbientSound() {
@@ -62,8 +63,13 @@ public class EntityGoat extends AnimalEntity {
     //}
 
     @Nullable
-    @Override
+    //@Override
     public AgeableEntity createChild(AgeableEntity ageableEntity) {
+        return null;
+    }
+
+    @Override
+    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
         return null;
     }
 

@@ -6,7 +6,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -16,7 +15,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,9 +24,9 @@ public class ToolSpear extends SwordItem {
     public ToolSpear(String modid, String name, IItemTier tier, int attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().group(ItemGroup.COMBAT));
         this.setRegistryName(modid, name);
-        this.addPropertyOverride(new ResourceLocation("throwing"), (p_210315_0_, p_210315_1_, p_210315_2_) -> {
-            return p_210315_2_ != null && p_210315_2_.isHandActive() && p_210315_2_.getActiveItemStack() == p_210315_0_ ? 1.0F : 0.0F;
-        });
+        //this.addPropertyOverride(new ResourceLocation("throwing"), (p_210315_0_, p_210315_1_, p_210315_2_) -> {
+        //    return p_210315_2_ != null && p_210315_2_.isHandActive() && p_210315_2_.getActiveItemStack() == p_210315_0_ ? 1.0F : 0.0F;
+        //});
     }
 
     public boolean canPlayerBreakBlockWhileHolding(BlockState state, World worldIn, BlockPos pos, PlayerEntity player) {
@@ -77,7 +75,7 @@ public class ToolSpear extends SwordItem {
                         });
                         if (j == 0) {
                             EntitySpear tridententity = new EntitySpear(worldIn, playerentity, stack);
-                            tridententity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
+                            //tridententity.shoot(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F + (float)j * 0.5F, 1.0F);
                             if (playerentity.abilities.isCreativeMode) {
                                 tridententity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
                             }
@@ -104,10 +102,10 @@ public class ToolSpear extends SwordItem {
                         f3 = f3 * (f5 / f4);
                         playerentity.addVelocity((double)f1, (double)f2, (double)f3);
                         playerentity.startSpinAttack(20);
-                        if (playerentity.onGround) {
-                            float f6 = 1.1999999F;
-                            playerentity.move(MoverType.SELF, new Vec3d(0.0D, (double)1.1999999F, 0.0D));
-                        }
+                        //if (playerentity.onGround) {
+                        //    float f6 = 1.1999999F;
+                        //    playerentity.move(MoverType.SELF, new Vec3d(0.0D, (double)1.1999999F, 0.0D));
+                        //}
 
                         SoundEvent soundevent;
                         if (j >= 3) {
@@ -169,15 +167,15 @@ public class ToolSpear extends SwordItem {
     /**
      * Gets a map of item attribute modifiers, used by ItemSword to increase hit damage.
      */
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
-        Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(equipmentSlot);
-        if (equipmentSlot == EquipmentSlotType.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", 8.0D, AttributeModifier.Operation.ADDITION));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double)-2.9F, AttributeModifier.Operation.ADDITION));
-        }
-
-        return multimap;
-    }
+    //public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType equipmentSlot) {
+    //    Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(equipmentSlot);
+    //    if (equipmentSlot == EquipmentSlotType.MAINHAND) {
+    //        multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", 8.0D, AttributeModifier.Operation.ADDITION));
+    //        multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", (double)-2.9F, AttributeModifier.Operation.ADDITION));
+    //    }
+//
+    //    return multimap;
+    //}
 
     /**
      * Return the enchantability factor of the item, most of the time is based on material.

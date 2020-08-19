@@ -18,7 +18,7 @@ public class RenderDeer extends MobRenderer<EntityDeer, ModelDeer<EntityDeer>> {
         super(renderManager, new ModelDeer<>(), 0.5F);
     }
 
-    protected ResourceLocation getEntityTexture(EntityDeer entity) {
+    public ResourceLocation getEntityTexture(EntityDeer entity) {
         return TEXTURE;
     }
 }

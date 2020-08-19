@@ -17,9 +17,9 @@ public class BlockOre extends BlockBlock {
     /**
      * Perform side-effects from block dropping, such as creating silverfish
      */
-    public void spawnAdditionalDrops(BlockState state, World worldIn, BlockPos pos, ItemStack stack) {
-        super.spawnAdditionalDrops(state, worldIn, pos, stack);
-    }
+   // public void spawnAdditionalDrops(BlockState state, World worldIn, BlockPos pos, ItemStack stack) {
+   //     super.spawnAdditionalDrops(state, worldIn, pos, stack);
+   // }
 
     @Override
     public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {

@@ -16,7 +16,7 @@ public class BlockBlock extends Block {
 
     /** Default Contructor */
     public BlockBlock(String modid, String name, Material material, MaterialColor materialcolor, float hardness, float resistance, SoundType sound, int light) {
-        super(Properties.create(material, materialcolor).hardnessAndResistance(hardness, resistance).sound(sound).lightValue(light));
+        super(Properties.create(material, materialcolor).hardnessAndResistance(hardness, resistance).sound(sound));//.lightValue(light));
         this.setRegistryName(modid, name);
     }
 
@@ -28,7 +28,7 @@ public class BlockBlock extends Block {
 
     /** Contructor with doesNotBlockMovement */
     public BlockBlock(String modid, String name, Material material, MaterialColor materialcolor, float hardness, float resistance, SoundType sound, int light, boolean blockMovement) {
-        super(Properties.create(material, materialcolor).hardnessAndResistance(hardness, resistance).sound(sound).lightValue(light).doesNotBlockMovement());
+        super(Properties.create(material, materialcolor).hardnessAndResistance(hardness, resistance).sound(sound));//.lightValue(light).doesNotBlockMovement());
         this.setRegistryName(modid, name);
     }
 

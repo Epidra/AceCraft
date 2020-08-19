@@ -34,7 +34,7 @@ public class RecipeStoveSerializer extends ForgeRegistryEntry<IRecipeSerializer<
         } else if (nonnulllist.size() > 5) {
             throw new JsonParseException("Too many ingredients for shapeless recipe the max is " + 5);
         } else {
-            ItemStack itemstack = RecipeStove.deserializeItem(JSONUtils.getJsonObject(json, "result"));
+            ItemStack itemstack = ItemStack.EMPTY;//RecipeStove.deserializeItem(JSONUtils.getJsonObject(json, "result"));
             return new RecipeStove(recipeId, s, nonnulllist, itemstack);
         }
     }

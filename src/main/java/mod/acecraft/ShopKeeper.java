@@ -53,7 +53,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
@@ -358,16 +357,16 @@ public class ShopKeeper {
     public static final Item TOOL_SHOVEL_STEEL      = new ToolShovel(MODID, "tool_shovel_steel",      MaterialTool.STEEL,      1, -1.0f);
     public static final Item TOOL_SHOVEL_AURORITE   = new ToolShovel(MODID, "tool_shovel_aurorite",   MaterialTool.AURORITE,   1, -1.0f);
 
-    // Tool Hoe
-    public static final Item TOOL_HOE_BRASS      = new ToolHoe(MODID, "tool_hoe_brass",      MaterialTool.BRASS,      -1.0f);
-    public static final Item TOOL_HOE_GILIUM     = new ToolHoe(MODID, "tool_hoe_gilium",     MaterialTool.GILIUM,     -1.0f);
-    public static final Item TOOL_HOE_ADAMANTIUM = new ToolHoe(MODID, "tool_hoe_adamantium", MaterialTool.ADAMANTIUM, -1.0f);
-    public static final Item TOOL_HOE_MYTHRIL    = new ToolHoe(MODID, "tool_hoe_mythril",    MaterialTool.MYTHRIL,    -1.0f);
-    public static final Item TOOL_HOE_ORICHALCUM = new ToolHoe(MODID, "tool_hoe_orichalcum", MaterialTool.ORICHALCUM, -1.0f);
-    public static final Item TOOL_HOE_COPPER     = new ToolHoe(MODID, "tool_hoe_copper",     MaterialTool.COPPER,     -1.0f);
-    public static final Item TOOL_HOE_BRONZE     = new ToolHoe(MODID, "tool_hoe_bronze",     MaterialTool.BRONZE,     -1.0f);
-    public static final Item TOOL_HOE_STEEL      = new ToolHoe(MODID, "tool_hoe_steel",      MaterialTool.STEEL,      -1.0f);
-    public static final Item TOOL_HOE_AURORITE   = new ToolHoe(MODID, "tool_hoe_aurorite",   MaterialTool.AURORITE,   -1.0f);
+   // // Tool Hoe
+   // public static final Item TOOL_HOE_BRASS      = new ToolHoe(MODID, "tool_hoe_brass",      MaterialTool.BRASS,      -1.0f);
+   // public static final Item TOOL_HOE_GILIUM     = new ToolHoe(MODID, "tool_hoe_gilium",     MaterialTool.GILIUM,     -1.0f);
+   // public static final Item TOOL_HOE_ADAMANTIUM = new ToolHoe(MODID, "tool_hoe_adamantium", MaterialTool.ADAMANTIUM, -1.0f);
+   // public static final Item TOOL_HOE_MYTHRIL    = new ToolHoe(MODID, "tool_hoe_mythril",    MaterialTool.MYTHRIL,    -1.0f);
+   // public static final Item TOOL_HOE_ORICHALCUM = new ToolHoe(MODID, "tool_hoe_orichalcum", MaterialTool.ORICHALCUM, -1.0f);
+   // public static final Item TOOL_HOE_COPPER     = new ToolHoe(MODID, "tool_hoe_copper",     MaterialTool.COPPER,     -1.0f);
+   // public static final Item TOOL_HOE_BRONZE     = new ToolHoe(MODID, "tool_hoe_bronze",     MaterialTool.BRONZE,     -1.0f);
+   // public static final Item TOOL_HOE_STEEL      = new ToolHoe(MODID, "tool_hoe_steel",      MaterialTool.STEEL,      -1.0f);
+   // public static final Item TOOL_HOE_AURORITE   = new ToolHoe(MODID, "tool_hoe_aurorite",   MaterialTool.AURORITE,   -1.0f);
 
     /**Register all stuff, pre is true during preInit and false during Init**/
     static void registerBlocks(){
@@ -669,15 +668,15 @@ public class ShopKeeper {
         Register.registerItem(TOOL_SHOVEL_AURORITE  );
 
         // Tool Hoe
-        Register.registerItem(TOOL_HOE_BRASS     );
-        Register.registerItem(TOOL_HOE_GILIUM    );
-        Register.registerItem(TOOL_HOE_ADAMANTIUM);
-        Register.registerItem(TOOL_HOE_MYTHRIL   );
-        Register.registerItem(TOOL_HOE_ORICHALCUM);
-        Register.registerItem(TOOL_HOE_COPPER    );
-        Register.registerItem(TOOL_HOE_BRONZE    );
-        Register.registerItem(TOOL_HOE_STEEL     );
-        Register.registerItem(TOOL_HOE_AURORITE  );
+      //  Register.registerItem(TOOL_HOE_BRASS     );
+      //  Register.registerItem(TOOL_HOE_GILIUM    );
+      //  Register.registerItem(TOOL_HOE_ADAMANTIUM);
+      //  Register.registerItem(TOOL_HOE_MYTHRIL   );
+      //  Register.registerItem(TOOL_HOE_ORICHALCUM);
+      //  Register.registerItem(TOOL_HOE_COPPER    );
+      //  Register.registerItem(TOOL_HOE_BRONZE    );
+      //  Register.registerItem(TOOL_HOE_STEEL     );
+      //  Register.registerItem(TOOL_HOE_AURORITE  );
     }
 
     //@ObjectHolder(ContainerReference.TEMPLATE_MANAGER_CONTAINER)
@@ -826,39 +825,39 @@ public class ShopKeeper {
     }
 
     static void registerRenderer() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityCrab.class, RenderCrab::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class, RenderDynamite::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, RenderSpear::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityNugget.class, RenderNugget::new);
+       // RenderingRegistry.registerEntityRenderingHandler(EntityCrab.class, RenderCrab::new);
+       // RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class, RenderDynamite::new);
+       // RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, RenderSpear::new);
+       // RenderingRegistry.registerEntityRenderingHandler(EntityNugget.class, RenderNugget::new);
     }
 
-    static void addSpawn() {
-        List<Biome> spawnableBiomes = Lists.newArrayList();
-        List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.SPAWN.include.get()));
-        List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.SPAWN.exclude.get()));
-        if (!includeList.isEmpty()) {
-            for (BiomeDictionary.Type type : includeList) {
-                for (Biome biome : BiomeDictionary.getBiomes(type)) {
-                    if (!biome.getSpawns(EntityClassification.CREATURE).isEmpty()) {
-                        spawnableBiomes.add(biome);
-                    }
-                }
-            }
-            if (!excludeList.isEmpty()) {
-                for (BiomeDictionary.Type type : excludeList) {
-                    Set<Biome> excludeBiomes = BiomeDictionary.getBiomes(type);
-                    for (Biome biome : excludeBiomes) {
-                        spawnableBiomes.remove(biome);
-                    }
-                }
-            }
-        } else {
-            throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
-        }
-        for (Biome biome : spawnableBiomes) {
-            //biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(ENTITY_CRAB, 1, 2, 5));
-        }
-    }
+   // static void addSpawn() {
+   //     List<Biome> spawnableBiomes = Lists.newArrayList();
+   //     List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.SPAWN.include.get()));
+   //     List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.SPAWN.exclude.get()));
+   //     if (!includeList.isEmpty()) {
+   //         for (BiomeDictionary.Type type : includeList) {
+   //             for (Biome biome : BiomeDictionary.getBiomes(type)) {
+   //                 if (!biome.getSpawns(EntityClassification.CREATURE).isEmpty()) {
+   //                     spawnableBiomes.add(biome);
+   //                 }
+   //             }
+   //         }
+   //         if (!excludeList.isEmpty()) {
+   //             for (BiomeDictionary.Type type : excludeList) {
+   //                 Set<Biome> excludeBiomes = BiomeDictionary.getBiomes(type);
+   //                 for (Biome biome : excludeBiomes) {
+   //                     spawnableBiomes.remove(biome);
+   //                 }
+   //             }
+   //         }
+   //     } else {
+   //         throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
+   //     }
+   //     for (Biome biome : spawnableBiomes) {
+   //         //biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(ENTITY_CRAB, 1, 2, 5));
+   //     }
+   // }
 
     static List<SoundEvent> sounds = Lists.newArrayList();
     //public static final SoundEvent LLAMA_AMBIENT = createSound("adelie.ambient");

@@ -12,7 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTables;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 
 import javax.annotation.Nonnull;
@@ -44,12 +44,12 @@ public class EntityCrab extends AnimalEntity {
         this.goalSelector.addGoal(10, new LookRandomlyGoal(this));
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.16D);
-    }
+    //@Override
+    //protected void registerAttributes() {
+    //    super.registerAttributes();
+    //    this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
+    //    this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.16D);
+    //}
 
     //@Override
     //protected SoundEvent getAmbientSound() {
@@ -66,9 +66,14 @@ public class EntityCrab extends AnimalEntity {
     //    return WaddlesSounds.ADELIE_DEATH;
     //}
 
-    @Nullable
+    //@Nullable
+    //@Override
+    //public AgeableEntity createChild(AgeableEntity ageableEntity) {
+    //    return null;
+    //}
+
     @Override
-    public AgeableEntity createChild(AgeableEntity ageableEntity) {
+    public AgeableEntity func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
         return null;
     }
 

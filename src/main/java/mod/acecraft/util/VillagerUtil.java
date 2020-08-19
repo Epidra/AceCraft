@@ -12,7 +12,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.entity.villager.IVillagerDataHolder;
-import net.minecraft.entity.villager.IVillagerType;
 import net.minecraft.item.*;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Potion;
@@ -347,87 +346,29 @@ public class VillagerUtil {
 
         public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
 
-            World world = p_221182_1_.world;
-
-            BlockPos blockpos = world.findNearestStructure(this.field_221228_b, new BlockPos(p_221182_1_), 100, true);
-
-            if (blockpos != null) {
-
-                ItemStack itemstack = FilledMapItem.setupNewMap(world, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
-
-                FilledMapItem.renderBiomePreviewMap(world, itemstack);
-
-                MapData.addTargetDecoration(itemstack, blockpos, "+", this.field_221229_c);
-
-                itemstack.setDisplayName(new TranslationTextComponent("filled_map." + this.field_221228_b.toLowerCase(Locale.ROOT)));
-
-                return new MerchantOffer(new ItemStack(Items.EMERALD, this.field_221227_a), new ItemStack(Items.COMPASS), itemstack, this.field_221230_d, this.field_221231_e, 0.2F);
-
-            } else {
-
-                System.out.println("NO STRUCTURE FOUND: " +  field_221228_b);
-
+          //  World world = p_221182_1_.world;
+//
+          //  BlockPos blockpos = world.findNearestStructure(this.field_221228_b, new BlockPos(p_221182_1_), 100, true);
+//
+          //  if (blockpos != null) {
+//
+          //      ItemStack itemstack = FilledMapItem.setupNewMap(world, blockpos.getX(), blockpos.getZ(), (byte)2, true, true);
+//
+          //      FilledMapItem.renderBiomePreviewMap(world, itemstack);
+//
+          //      MapData.addTargetDecoration(itemstack, blockpos, "+", this.field_221229_c);
+//
+          //      itemstack.setDisplayName(new TranslationTextComponent("filled_map." + this.field_221228_b.toLowerCase(Locale.ROOT)));
+//
+          //      return new MerchantOffer(new ItemStack(Items.EMERALD, this.field_221227_a), new ItemStack(Items.COMPASS), itemstack, this.field_221230_d, this.field_221231_e, 0.2F);
+//
+          //  } else {
+//
+          //      System.out.println("NO STRUCTURE FOUND: " +  field_221228_b);
+//
                 return null;
-
-            }
-
-        }
-
-    }
-
-
-
-    public static class EmeraldForVillageTypeItemTrade implements VillagerTrades.ITrade {
-
-        private final Map<IVillagerType, Item> field_221190_a;
-
-        private final int field_221191_b;
-
-        private final int field_221192_c;
-
-        private final int field_221193_d;
-
-
-
-        public EmeraldForVillageTypeItemTrade(int p_i50538_1_, int p_i50538_2_, int p_i50538_3_, Map<IVillagerType, Item> p_i50538_4_) {
-
-            Registry.VILLAGER_TYPE.stream().filter((p_221188_1_) -> {
-
-                return !p_i50538_4_.containsKey(p_221188_1_);
-
-            }).findAny().ifPresent((p_221189_0_) -> {
-
-                throw new IllegalStateException("Missing trade for villager type: " + Registry.VILLAGER_TYPE.getKey(p_221189_0_));
-
-            });
-
-            this.field_221190_a = p_i50538_4_;
-
-            this.field_221191_b = p_i50538_1_;
-
-            this.field_221192_c = p_i50538_2_;
-
-            this.field_221193_d = p_i50538_3_;
-
-        }
-
-
-
-        @Nullable
-
-        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
-
-            if (p_221182_1_ instanceof IVillagerDataHolder) {
-
-                ItemStack itemstack = new ItemStack(this.field_221190_a.get(((IVillagerDataHolder)p_221182_1_).getVillagerData().getType()), this.field_221191_b);
-
-                return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.field_221192_c, this.field_221193_d, 0.05F);
-
-            } else {
-
-                return null;
-
-            }
+//
+          //  }
 
         }
 
@@ -435,51 +376,109 @@ public class VillagerUtil {
 
 
 
-    public static class EnchantedBookForEmeraldsTrade implements VillagerTrades.ITrade {
+   // public static class EmeraldForVillageTypeItemTrade implements VillagerTrades.ITrade {
+//
+   //   //  private final Map<IVillagerType, Item> field_221190_a;
+//
+   //     private final int field_221191_b;
+//
+   //     private final int field_221192_c;
+//
+   //     private final int field_221193_d;
+//
+//
+//
+   //   //  public EmeraldForVillageTypeItemTrade(int p_i50538_1_, int p_i50538_2_, int p_i50538_3_, Map<IVillagerType, Item> p_i50538_4_) {
+////
+   //   //      Registry.VILLAGER_TYPE.stream().filter((p_221188_1_) -> {
+////
+   //   //          return !p_i50538_4_.containsKey(p_221188_1_);
+////
+   //   //      }).findAny().ifPresent((p_221189_0_) -> {
+////
+   //   //          throw new IllegalStateException("Missing trade for villager type: " + Registry.VILLAGER_TYPE.getKey(p_221189_0_));
+////
+   //   //      });
+////
+   //   //      this.field_221190_a = p_i50538_4_;
+////
+   //   //      this.field_221191_b = p_i50538_1_;
+////
+   //   //      this.field_221192_c = p_i50538_2_;
+////
+   //   //      this.field_221193_d = p_i50538_3_;
+////
+   //   //  }
+////
+////
+////
+   //   //  @Nullable
+////
+   //   //  public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+////
+   //   //      if (p_221182_1_ instanceof IVillagerDataHolder) {
+////
+   //   //          ItemStack itemstack = new ItemStack(this.field_221190_a.get(((IVillagerDataHolder)p_221182_1_).getVillagerData().getType()), this.field_221191_b);
+////
+   //   //          return new MerchantOffer(itemstack, new ItemStack(Items.EMERALD), this.field_221192_c, this.field_221193_d, 0.05F);
+////
+   //   //      } else {
+////
+   //   //          return null;
+////
+   //   //      }
+////
+   //   //  }
+//
+   // }
 
-        private final int field_221194_a;
 
 
-
-        public EnchantedBookForEmeraldsTrade(int p_i50537_1_) {
-
-            this.field_221194_a = p_i50537_1_;
-
-        }
-
-
-
-        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
-
-            Enchantment enchantment = Registry.ENCHANTMENT.getRandom(p_221182_2_);
-
-            int i = MathHelper.nextInt(p_221182_2_, enchantment.getMinLevel(), enchantment.getMaxLevel());
-
-            ItemStack itemstack = EnchantedBookItem.getEnchantedItemStack(new EnchantmentData(enchantment, i));
-
-            int j = 2 + p_221182_2_.nextInt(5 + i * 10) + 3 * i;
-
-            if (enchantment.isTreasureEnchantment()) {
-
-                j *= 2;
-
-            }
-
-
-
-            if (j > 64) {
-
-                j = 64;
-
-            }
-
-
-
-            return new MerchantOffer(new ItemStack(Items.EMERALD, j), new ItemStack(Items.BOOK), itemstack, 12, this.field_221194_a, 0.2F);
-
-        }
-
-    }
+  //  public static class EnchantedBookForEmeraldsTrade implements VillagerTrades.ITrade {
+//
+  //      private final int field_221194_a;
+//
+//
+//
+  //      public EnchantedBookForEmeraldsTrade(int p_i50537_1_) {
+//
+  //          this.field_221194_a = p_i50537_1_;
+//
+  //      }
+//
+//
+//
+  //    //  public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+////
+  //    //      Enchantment enchantment = Registry.ENCHANTMENT.getRandom(p_221182_2_);
+////
+  //    //      int i = MathHelper.nextInt(p_221182_2_, enchantment.getMinLevel(), enchantment.getMaxLevel());
+////
+  //    //      ItemStack itemstack = EnchantedBookItem.getEnchantedItemStack(new EnchantmentData(enchantment, i));
+////
+  //    //      int j = 2 + p_221182_2_.nextInt(5 + i * 10) + 3 * i;
+////
+  //    //      if (enchantment.isTreasureEnchantment()) {
+////
+  //    //          j *= 2;
+////
+  //    //      }
+////
+////
+////
+  //    //      if (j > 64) {
+////
+  //    //          j = 64;
+////
+  //    //      }
+////
+////
+////
+  //    //      return new MerchantOffer(new ItemStack(Items.EMERALD, j), new ItemStack(Items.BOOK), itemstack, 12, this.field_221194_a, 0.2F);
+////
+  //    //  }
+//
+  //  }
 
 
 
@@ -539,67 +538,67 @@ public class VillagerUtil {
 
 
 
-    public static class ItemWithPotionForEmeraldsAndItemsTrade implements VillagerTrades.ITrade {
-
-        private final ItemStack field_221219_a;
-
-        private final int field_221220_b;
-
-        private final int field_221221_c;
-
-        private final int field_221222_d;
-
-        private final int field_221223_e;
-
-        private final Item field_221224_f;
-
-        private final int field_221225_g;
-
-        private final float field_221226_h;
-
-
-
-        public ItemWithPotionForEmeraldsAndItemsTrade(Item p_i50526_1_, int p_i50526_2_, Item p_i50526_3_, int p_i50526_4_, int p_i50526_5_, int p_i50526_6_, int p_i50526_7_) {
-
-            this.field_221219_a = new ItemStack(p_i50526_3_);
-
-            this.field_221221_c = p_i50526_5_;
-
-            this.field_221222_d = p_i50526_6_;
-
-            this.field_221223_e = p_i50526_7_;
-
-            this.field_221224_f = p_i50526_1_;
-
-            this.field_221225_g = p_i50526_2_;
-
-            this.field_221220_b = p_i50526_4_;
-
-            this.field_221226_h = 0.05F;
-
-        }
-
-
-
-        public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
-
-            ItemStack itemstack = new ItemStack(Items.EMERALD, this.field_221221_c);
-
-            List<Potion> list = Registry.POTION.stream().filter((p_221218_0_) -> {
-
-                return !p_221218_0_.getEffects().isEmpty() && PotionBrewing.func_222124_a(p_221218_0_);
-
-            }).collect(Collectors.toList());
-
-            Potion potion = list.get(p_221182_2_.nextInt(list.size()));
-
-            ItemStack itemstack1 = PotionUtils.addPotionToItemStack(new ItemStack(this.field_221219_a.getItem(), this.field_221220_b), potion);
-
-            return new MerchantOffer(itemstack, new ItemStack(this.field_221224_f, this.field_221225_g), itemstack1, this.field_221222_d, this.field_221223_e, this.field_221226_h);
-
-        }
-
-    }
+  //  public static class ItemWithPotionForEmeraldsAndItemsTrade implements VillagerTrades.ITrade {
+//
+  //      private final ItemStack field_221219_a;
+//
+  //      private final int field_221220_b;
+//
+  //      private final int field_221221_c;
+//
+  //      private final int field_221222_d;
+//
+  //      private final int field_221223_e;
+//
+  //      private final Item field_221224_f;
+//
+  //      private final int field_221225_g;
+//
+  //      private final float field_221226_h;
+//
+//
+//
+  //      public ItemWithPotionForEmeraldsAndItemsTrade(Item p_i50526_1_, int p_i50526_2_, Item p_i50526_3_, int p_i50526_4_, int p_i50526_5_, int p_i50526_6_, int p_i50526_7_) {
+//
+  //          this.field_221219_a = new ItemStack(p_i50526_3_);
+//
+  //          this.field_221221_c = p_i50526_5_;
+//
+  //          this.field_221222_d = p_i50526_6_;
+//
+  //          this.field_221223_e = p_i50526_7_;
+//
+  //          this.field_221224_f = p_i50526_1_;
+//
+  //          this.field_221225_g = p_i50526_2_;
+//
+  //          this.field_221220_b = p_i50526_4_;
+//
+  //          this.field_221226_h = 0.05F;
+//
+  //      }
+//
+//
+//
+  //    //  public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+////
+  //    //      ItemStack itemstack = new ItemStack(Items.EMERALD, this.field_221221_c);
+////
+  //    //      List<Potion> list = Registry.POTION.stream().filter((p_221218_0_) -> {
+////
+  //    //          return !p_221218_0_.getEffects().isEmpty() && PotionBrewing.func_222124_a(p_221218_0_);
+////
+  //    //      }).collect(Collectors.toList());
+////
+  //    //      Potion potion = list.get(p_221182_2_.nextInt(list.size()));
+////
+  //    //      ItemStack itemstack1 = PotionUtils.addPotionToItemStack(new ItemStack(this.field_221219_a.getItem(), this.field_221220_b), potion);
+////
+  //    //      return new MerchantOffer(itemstack, new ItemStack(this.field_221224_f, this.field_221225_g), itemstack1, this.field_221222_d, this.field_221223_e, this.field_221226_h);
+////
+  //    //  }
+//
+  //  }
 
 
 

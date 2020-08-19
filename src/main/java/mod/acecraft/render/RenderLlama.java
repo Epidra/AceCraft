@@ -18,7 +18,7 @@ public class RenderLlama extends MobRenderer<EntityLlama, ModelLlama<EntityLlama
         super(renderManager, new ModelLlama<>(), 0.5F);
     }
 
-    protected ResourceLocation getEntityTexture(EntityLlama entityLlama) {
+    public ResourceLocation getEntityTexture(EntityLlama entityLlama) {
         return TEXTURE;
     }
 }

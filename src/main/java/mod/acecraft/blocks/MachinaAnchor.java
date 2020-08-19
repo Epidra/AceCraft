@@ -7,7 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -24,9 +24,9 @@ public class MachinaAnchor extends MachinaBasic {
         super(modid, name, block);
     }
 
-    public BlockRenderLayer getRenderLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    }
+    //public BlockRenderLayer getRenderLayer() {
+    //    return BlockRenderLayer.CUTOUT_MIPPED;
+    //}
 
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
@@ -38,7 +38,7 @@ public class MachinaAnchor extends MachinaBasic {
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
+    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult blockRayTraceResult) {
         if(hand == Hand.MAIN_HAND){
             if(player.inventory.mainInventory.get(player.inventory.currentItem).getItem() == ShopKeeper.STUFF_ROPE){
                 int stacksize = player.getHeldItem(hand).getMaxStackSize();
@@ -63,7 +63,7 @@ public class MachinaAnchor extends MachinaBasic {
                 }
             }
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
 }
