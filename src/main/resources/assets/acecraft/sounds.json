@@ -1,0 +1,30 @@
+{
+    "acecraft.alpaca.ambient": {
+        "category": "neutral",
+        "sounds": [
+            "mob/llama/idle1",
+            "mob/llama/idle2",
+            "mob/llama/idle3",
+            "mob/llama/idle4",
+            "mob/llama/idle5"
+        ],
+        "subtitle": "acecraft:subtitles.alpaca.ambient"
+    },
+    "acecraft.alpaca.death": {
+        "category": "neutral",
+        "sounds": [
+            "mob/llama/death1",
+            "mob/llama/death2"
+        ],
+        "subtitle": "acecraft:subtitles.alpaca.death"
+    },
+    "acecraft.alpaca.hurt": {
+        "category": "neutral",
+        "sounds": [
+            "mob/llama/hurt1",
+            "mob/llama/hurt2",
+            "mob/llama/hurt3"
+        ],
+        "subtitle": "acecraft:subtitles.alpaca.hurt"
+    }
+}

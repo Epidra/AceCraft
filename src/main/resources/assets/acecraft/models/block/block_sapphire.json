@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "acecraft:blocks/block_sapphire"
+        "all": "acecraft:block/block_sapphire"
     }
 }

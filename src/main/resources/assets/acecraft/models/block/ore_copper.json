@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "acecraft:blocks/ore_copper"
+        "all": "acecraft:block/ore_copper"
     }
 }

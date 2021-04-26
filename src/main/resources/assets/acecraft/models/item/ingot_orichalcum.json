@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:items/ingot_orichalcum"
+        "layer0": "acecraft:item/ingot_orichalcum"
     }
 }

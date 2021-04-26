@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "acecraft:items/tool_hoe_gilium"
+        "layer0": "acecraft:item/tool_hoe_gilium"
     }
 }

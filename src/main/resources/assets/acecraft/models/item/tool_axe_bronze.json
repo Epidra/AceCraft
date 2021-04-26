@@ -1,6 +1,6 @@
 {
     "parent": "item/handheld",
     "textures": {
-        "layer0": "acecraft:items/tool_axe_bronze"
+        "layer0": "acecraft:item/tool_axe_bronze"
     }
 }

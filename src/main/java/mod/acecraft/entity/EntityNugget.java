@@ -4,9 +4,7 @@ import mod.acecraft.ShopKeeper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
-import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.IPacket;
@@ -16,9 +14,7 @@ import net.minecraft.particles.ItemParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -28,142 +24,92 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EntityNugget extends ProjectileItemEntity implements IEntityAdditionalSpawnData {
 
-    private ItemStack stack;
+    private ItemStack stack = null;
+
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntityNugget(EntityType<? extends EntityNugget> p_i50159_1_, World p_i50159_2_) {
         super(p_i50159_1_, p_i50159_2_);
     }
 
-    public EntityNugget(FMLPlayMessages.SpawnEntity packet, World worldIn)
-    {
-        super(ShopKeeper.ENTITY_NUGGET, worldIn);
+    public EntityNugget(FMLPlayMessages.SpawnEntity packet, World worldIn){
+        super(ShopKeeper.ENTITY_NUGGET.get(), worldIn);
         PacketBuffer buf = packet.getAdditionalData();
-        stack = buf.readItemStack();
+        stack = buf.readItem();
     }
 
     public EntityNugget(World worldIn, LivingEntity throwerIn, ItemStack itemIn) {
-        super(ShopKeeper.ENTITY_NUGGET, throwerIn, worldIn);
+        super(ShopKeeper.ENTITY_NUGGET.get(), throwerIn, worldIn);
         this.stack = itemIn.copy();
-
     }
 
     public EntityNugget(World worldIn, double x, double y, double z) {
-        super(ShopKeeper.ENTITY_NUGGET, x, y, z, worldIn);
+        super(ShopKeeper.ENTITY_NUGGET.get(), x, y, z, worldIn);
     }
+
+
+
+
+    //----------------------------------------SPAWN_DATA----------------------------------------//
+
+    /** Called by the server when constructing the spawn packet. Data should be added to the provided stream.
+     * @param buffer The packet data stream */
+    public void writeSpawnData(PacketBuffer buffer){
+        buffer.writeItem(this.stack);
+    }
+
+    /** Called by the client when it receives a Entity spawn packet. Data should be read out of the stream in the same way as it was written.
+     * @param additionalData The packet data stream */
+    public void readSpawnData(PacketBuffer additionalData){
+
+    }
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
 
     protected Item getDefaultItem() {
-        return ShopKeeper.NUGGET_COPPER;
-    }
-
-    @Override
-
-    public void writeSpawnData(PacketBuffer buffer) {
-
-        buffer.writeItemStack(this.stack);
-
-    }
-
-
-
-    @Override
-
-    public void readSpawnData(PacketBuffer additionalData) {
-
+        return stack == null ? ShopKeeper.NUGGET_COPPER.get() : stack.getItem();
     }
 
     @OnlyIn(Dist.CLIENT)
-    private IParticleData makeParticle() {
-        ItemStack itemstack = this.func_213882_k();
+    private IParticleData getParticle() {
+        ItemStack itemstack = this.getItemRaw();
         return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
     }
 
     @OnlyIn(Dist.CLIENT)
-    public ItemStack getItem() {
-        return stack;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void handleStatusUpdate(byte id) {
-        if (id == 3) {
-            IParticleData iparticledata = this.makeParticle();
-
+    public void handleEntityEvent(byte p_70103_1_) {
+        if (p_70103_1_ == 3) {
+            IParticleData iparticledata = this.getParticle();
             for(int i = 0; i < 8; ++i) {
-                this.world.addParticle(iparticledata, this.getPosX(), this.getPosY(), this.getPosZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
-
     }
 
-    protected void onImpact(RayTraceResult result) {
-        if (result.getType() == RayTraceResult.Type.ENTITY) {
-            Entity entity = ((EntityRayTraceResult)result).getEntity();
-            int i = entity instanceof BlazeEntity ? 3 : 0;
-            entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.func_234616_v_()), (float)i);
-        }
+    protected void onHitEntity(EntityRayTraceResult p_213868_1_) {
+        super.onHitEntity(p_213868_1_);
+        Entity entity = p_213868_1_.getEntity();
+        int i = 1;
+        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)i);
+    }
 
-        if (!this.world.isRemote) {
-            this.world.setEntityState(this, (byte)3);
-            //explode();
+    protected void onHit(RayTraceResult p_70227_1_) {
+        super.onHit(p_70227_1_);
+        if (!this.level.isClientSide) {
+            this.level.broadcastEntityEvent(this, (byte)3);
+            this.spawnAtLocation(new ItemStack(getItem().getItem()));
             this.remove();
         }
-
     }
-
-    private void explode(){
-        float f = 3.0F;
-        this.world.createExplosion(this, this.getPosX(), this.getPosY() + (double)(this.getHeight() / 16.0F), this.getPosZ(), f, Explosion.Mode.DESTROY);
-    }
-
-    //public void shoot(float rotationPitchIn, float rotationYawIn, float pitchOffset, float velocity, float inaccuracy) {
-    //    float f = -MathHelper.sin(rotationYawIn * ((float)Math.PI / 180F)) * MathHelper.cos(rotationPitchIn * ((float)Math.PI / 180F));
-    //    float f1 = -MathHelper.sin((rotationPitchIn + pitchOffset) * ((float)Math.PI / 180F));
-    //    float f2 = MathHelper.cos(rotationYawIn * ((float)Math.PI / 180F)) * MathHelper.cos(rotationPitchIn * ((float)Math.PI / 180F));
-    //    this.shoot((double)f, (double)f1, (double)f2, velocity, inaccuracy);
-    //    //Vec3d vec3d = entityThrower.getMotion();
-    //    //this.setMotion(this.getMotion().add(vec3d.x, vec3d.y, vec3d.z));
-    //}
 
     @Override
-    public IPacket<?> createSpawnPacket()
-    {
+    public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }
-
-//public class EntityDynamite extends EntityThrowable {
-//
-//    public EntityDynamite(World worldIn){
-//        super(worldIn);
-//    }
-//
-//    public EntityDynamite(World worldIn, EntityLivingBase throwerIn){
-//        super(worldIn, throwerIn);
-//    }
-//
-//    public EntityDynamite(World worldIn, EntityLivingBase throwerIn, String name){
-//        super(worldIn, throwerIn);
-//    }
-//
-//    public EntityDynamite(World worldIn, double x, double y, double z){
-//        super(worldIn, x, y, z);
-//    }
-//
-//    protected void onImpact(RayTraceResult result){
-//        if (result.entityHit != null){
-//            int i = 2;
-//            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
-//        }
-//        for (int j = 0; j < 8; ++j){
-//            this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);
-//        }
-//        if(!this.world.isRemote)
-//            this.explode();
-//        this.setDead();
-//    }
-//
-//    private void explode(){
-//        float f = 3.0F;
-//        this.world.createExplosion(this, this.posX, this.posY + (double)(this.height / 16.0F), this.posZ, f, true);
-//    }
-//
-//}

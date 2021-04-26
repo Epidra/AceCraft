@@ -1,0 +1,19 @@
+
+{
+  "replace": false,
+  "entries": [
+   "acecraft:cabbage_from_grass",
+   "acecraft:corn_from_grass",
+   "acecraft:cucumber_from_grass",
+   "acecraft:eggplant_from_grass",
+   "acecraft:grapes_from_grass",
+   "acecraft:onion_from_grass",
+   "acecraft:pineapple_from_grass",
+   "acecraft:strawberry_from_grass",
+   "acecraft:tomato_from_grass",
+   "acecraft:turnip_from_grass",
+   "acecraft:rice_from_grass",
+   "acecraft:coffee_from_grass",
+   "acecraft:hemp_from_grass"
+  ]
+}

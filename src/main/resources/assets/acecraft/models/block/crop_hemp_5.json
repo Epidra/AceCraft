@@ -1,6 +1,6 @@
 {
     "parent": "acecraft:template/crop",
     "textures": {
-        "crop": "acecraft:blocks/crop_hemp_5"
+        "crop": "acecraft:block/crop_hemp_5"
     }
 }

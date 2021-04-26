@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_block": {
+    "has_item": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -19,7 +19,7 @@
   },
   "requirements": [
     [
-      "has_block"
+      "has_item"
     ]
   ]
 }

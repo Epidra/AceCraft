@@ -1,10 +1,10 @@
 modLoader="javafml"
-loaderVersion="[32,)" #mandatory (26 is current forge version)
+loaderVersion="[35,)" #mandatory
 license="All rights reserved"
 issueTrackerURL="https://github.com/Epidra/AceCraft/issues"
 [[mods]]
 modId="acecraft"
-version="v09"
+version="v03"
 displayName="AceCraft"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/acecraft"
 logoFile="logo.png"
@@ -16,6 +16,12 @@ Lorem Ipsum
 [[dependencies.acecraft]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.1]"
+    versionRange="[1.16.4]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.acecraft]]
+    modId="lucky77"
+    mandatory=true
+    versionRange="[v01,)"
     ordering="NONE"
     side="BOTH"

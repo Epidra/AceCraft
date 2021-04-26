@@ -1,93 +1,48 @@
 package mod.acecraft.items;
 
-import mod.acecraft.ShopKeeper;
-import mod.acecraft.entity.EntityDynamite;
 import mod.acecraft.entity.EntityNugget;
-import mod.acecraft.network.MessageDynamiteServer;
-import mod.acecraft.system.AceCraftPacketHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
 public class ItemNugget extends Item {
 
+    // ...
+
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
+
     /** Default Constructor */
-    public ItemNugget(String modid, String name, ItemGroup group){
-        super(new Properties().group(group));
-        this.setRegistryName(modid, name);
+    public ItemNugget() {
+        super(new Properties().tab(ItemGroup.TAB_MATERIALS));
     }
 
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        if (!playerIn.abilities.isCreativeMode) {
+
+
+
+    //----------------------------------------INTERACTION----------------------------------------//
+
+    public ActionResult<ItemStack> use(World p_77659_1_, PlayerEntity p_77659_2_, Hand p_77659_3_) {
+        ItemStack itemstack = p_77659_2_.getItemInHand(p_77659_3_);
+        p_77659_1_.playSound((PlayerEntity)null, p_77659_2_.getX(), p_77659_2_.getY(), p_77659_2_.getZ(), SoundEvents.SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+        if (!p_77659_1_.isClientSide) {
+            EntityNugget snowballentity = new EntityNugget(p_77659_1_, p_77659_2_, itemstack);
+            snowballentity.setItem(itemstack);
+            snowballentity.shootFromRotation(p_77659_2_, p_77659_2_.xRot, p_77659_2_.yRot, 0.0F, 1.5F, 1.0F);
+            p_77659_1_.addFreshEntity(snowballentity);
+        }
+        p_77659_2_.awardStat(Stats.ITEM_USED.get(this));
+        if (!p_77659_2_.abilities.instabuild) {
             itemstack.shrink(1);
         }
-
-     //   worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-        if (!worldIn.isRemote) {
-            EntityNugget snowballentity = new EntityNugget(worldIn, playerIn, itemstack);
-            snowballentity.setItem(itemstack);
-       //     snowballentity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-            worldIn.addEntity(snowballentity);
-            //AceCraftPacketHandler.sendToServer(new MessageDynamiteServer(playerIn.posX, playerIn.posY, playerIn.posZ, playerIn.rotationPitch, playerIn.rotationYaw));
-        }
-
-        playerIn.addStat(Stats.ITEM_USED.get(this));
-        return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
+        return ActionResult.sidedSuccess(itemstack, p_77659_1_.isClientSide());
     }
 
-    //public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-    //    //if (this.isFood()) {
-    //    //    ItemStack itemstack = playerIn.getHeldItem(handIn);
-    //    //    if (playerIn.canEat(this.getFood().canEatWhenFull())) {
-    //    //        playerIn.setActiveHand(handIn);
-    //    //        return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
-    //    //    } else {
-    //    //        return new ActionResult<>(ActionResultType.FAIL, itemstack);
-    //    //    }
-    //    //} else {
-    //    //    return new ActionResult<>(ActionResultType.PASS, playerIn.getHeldItem(handIn));
-    //    //}
-    //    if (!playerIn.abilities.isCreativeMode){
-    //        playerIn.getHeldItem(handIn).shrink(1);
-    //    }
-    //    worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-    //    if (!worldIn.isRemote){
-    //        EntityDynamite nugget = new EntityDynamite(worldIn, playerIn);
-    //        //EntityDynamite nugget = new EntityDynamite(ShopKeeper.ENTITY_DYNAMITE, worldIn);
-    //        nugget.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-    //        //worldIn.spawnEntity(nugget);
-    //        worldIn.addEntity(nugget);
-    //    }
-    //    //playerIn.addStat(StatList.getObjectUseStats(this));
-    //    //return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-    //    return new ActionResult<>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
-    //}
-
 }
-
-//public class ItemDynamite extends Item {
-//
-//    public ItemDynamite(String name){
-//        this.setUnlocalizedName(name);
-//        this.setRegistryName(name);
-//        this.setCreativeTab(CreativeTabs.TOOLS);
-//    }
-//
-//    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn){
-//        if (!playerIn.capabilities.isCreativeMode){
-//            playerIn.getHeldItem(handIn).shrink(1);
-//        }
-//        worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-//        if (!worldIn.isRemote){
-//            EntityDynamite nugget = new EntityDynamite(worldIn, playerIn);
-//            nugget.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-//            worldIn.spawnEntity(nugget);
-//        }
-//        playerIn.addStat(StatList.getObjectUseStats(this));
-//        return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-//    }
-//
-//}

@@ -1,158 +1,85 @@
 package mod.acecraft.util;
 
-import mod.acecraft.ShopKeeper;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FoundryContent extends ContainerContent {
+public class FoundryContent {
 
-    private List<Integer> amount;
-    private List<String> type;
+    public final String id;
+    public final Item result;
+    public final List<Item> substitutes;
 
-    private int size;
-    private String result;
+    public final Alloy alloy;
 
-    public FoundryContent(){
+    public int amount;
 
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
+
+    public FoundryContent(String id, Item item, Alloy alloy){
+        this(id, item, new ArrayList<Item>(), alloy);
     }
 
-    public int getSize(){
-        return size;
+    public FoundryContent(String id, Item result, List<Item> substitutes, Alloy alloy){
+        this.id = id;
+        this.result = result;
+        this.substitutes = substitutes;
+        this.alloy = alloy;
     }
 
-    private void findSize(){
-        size = 0;
-        for(int i : amount){
-            size += i;
-        }
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
+
+    public boolean isAlloy(){
+        return alloy != null;
     }
 
-    private void findResult(){
-               if(findResult2("iron", 0.7f, "coal", 0.3f)){ result = "steel";
-        } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "bronze";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "brass";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "questorium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "adamantium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "viridium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "kobalium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "denarium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "clavium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "aurelium";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "orichalcum";
-       } else if(findResult2("copper", 0.7f, "tin", 0.3f)){ result = "darksteel";
-        }
-        result = "VOID";
-    }
-
-    private boolean findResult2(String item1, float scale1, String item2, float scale2){
-        int i = 0;
-        float amount1 = -1;
-        float amount2 = -1;
-        for(String s : type){
-            if(s.contains(item1)){
-                amount1 = amount.get(i);
+    public boolean tryToAddItem(Item item){
+        for(Item i : substitutes){
+            if(i == item){
+                amount++;
+                return true;
             }
-            if(s.contains(item2)){
-                amount2 = amount.get(i);
-            }
-            i++;
-        }
-        if(amount1 == -1 || amount2 == -1) return false;
-        float value1 = amount1/size;
-        float value2 = amount2/size;
-        if(value1 > scale1 -0.05f && value1 < scale1 + 0.05f){
-            return value2 > scale2 - 0.05f && value2 < scale2 + 0.05f;
         }
         return false;
     }
 
-    public String getResult(){
-        return result;
+    public ItemStack generateStack(){
+        return new ItemStack(result, amount);
     }
 
-    public Item getResultItem(){
-        if(result.matches("brass")) return ShopKeeper.INGOT_BRASS;
-        if(result.matches("adamantium")) return ShopKeeper.INGOT_ADAMANTIUM;
-        if(result.matches("orichalcum")) return ShopKeeper.INGOT_ORICHALCUM;
-        if(result.matches("bronze")) return ShopKeeper.INGOT_BRONZE;
-        if(result.matches("steel")) return ShopKeeper.INGOT_STEEL;
-
-        return Items.STICK;
+    public void clear(){
+        amount = 0;
     }
 
-    public boolean add(Item item){
-        return add(item.getName().getString());
-    }
 
-    public boolean add(String string) {
-        String refined = refineString(string);
-        if(refined.matches("void")) return false;
-        if(size == 64) return false;
-        Boolean found = false;
-        int i = 0;
-        for(String s : type){
-            if(s.matches(refined)){
-                found = true;
-                amount.set(i, amount.get(i) + 1);
-            }
-            i++;
+
+
+    //----------------------------------------ALLOY----------------------------------------//
+
+    public static class Alloy {
+
+        public final int percent1;
+        public final int percent2;
+        public final String part1;
+        public final String part2;
+        public final int margin;
+
+        public Alloy(int percent1, int percent2, String part1, String part2, int margin){
+            this.percent1 = percent1;
+            this.percent2 = percent2;
+            this.part1 = part1;
+            this.part2 = part2;
+            this.margin = margin;
         }
-        if(!found){
-            type.add(refined);
-            amount.add(1);
-        }
-        findSize();
-        findResult();
-        return true;
-    }
 
-    private String refineString(String s){
-        if(s.contains("iron")) return "iron";
-        if(s.contains("gold")) return "gold";
-        if(s.contains("coal")) return "coal";
-
-        if(s.contains("brass")) return "brass";
-        if(s.contains("questorium")) return "questorium";
-        if(s.contains("gilium")) return "gilium";
-        if(s.contains("adamantium")) return "adamantium";
-        if(s.contains("viridium")) return "viridium";
-        if(s.contains("zinc")) return "zinc";
-        if(s.contains("kobalium")) return "kobalium";
-        if(s.contains("denarium")) return "denarium";
-        if(s.contains("mythril")) return "mythril";
-        if(s.contains("clavium")) return "clavium";
-        if(s.contains("aurelium")) return "aurelium";
-        if(s.contains("nividium")) return "nividium";
-        if(s.contains("tin")) return "tin";
-        if(s.contains("orichalcum")) return "orichalcum";
-        if(s.contains("scarletite")) return "scarletite";
-        if(s.contains("copper")) return "copper";
-        if(s.contains("bronze")) return "bronze";
-        if(s.contains("steel")) return "steel";
-        if(s.contains("darksteel")) return "darksteel";
-        if(s.contains("unobtanium")) return "unobtanium";
-        return "void";
-    }
-
-    public void read(CompoundNBT compound){
-        int count = compound.getInt("ContentCount");
-        type.clear();
-        amount.clear();
-        for(int i = 0; i < count; i++){
-            type.add(compound.getString("ContentType" + i));
-            amount.add(compound.getInt("ContentAmount" + i));
-        }
-    }
-
-    public void write(CompoundNBT compound){
-        compound.putInt("ContentCount", type.size());
-        for (int i = 0; i < type.size(); i++){
-            compound.putString("ContentType" + i, type.get(i));
-            compound.putInt("ContentAmount" + i, amount.get(i));
-        }
     }
 
 }

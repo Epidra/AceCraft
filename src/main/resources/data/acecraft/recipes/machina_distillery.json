@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "F"
+  ],
+  "key": {
+    "C": {
+      "item": "acecraft:block_copper"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "acecraft:machina_distillery"
+  }
+}

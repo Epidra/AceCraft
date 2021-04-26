@@ -3,23 +3,19 @@ package mod.acecraft.util;
 import java.util.function.Supplier;
 
 import mod.acecraft.ShopKeeper;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.IItemTier;
-import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.tags.ItemTags;
 
 public enum MaterialTool implements IItemTier {
 
-    BRASS     (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);      }),
-    GILIUM    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_GILIUM);     }),
-    ADAMANTIUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ADAMANTIUM); }),
-    MYTHRIL   (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_MYTHRIL);    }),
-    ORICHALCUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_ORICHALCUM); }),
-    COPPER    (1, 131, 4.0F, 1.0F, 5, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_COPPER);     }),
-    BRONZE    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_BRONZE);     }),
-    STEEL     (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.fromItems(ShopKeeper.INGOT_STEEL);      }),
-    AURORITE  (3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.fromItems(ShopKeeper.STUFF_AURORITE);   });
+    GILIUM    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.of(ShopKeeper.INGOT_GILIUM.get());     }),
+    ADAMANTIUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.of(ShopKeeper.INGOT_ADAMANTIUM.get()); }),
+    MYTHRIL   (0, 32, 12.0F, 0.0F, 22, () -> { return Ingredient.of(ShopKeeper.INGOT_MYTHRIL.get());    }),
+    ORICHALCUM(3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.of(ShopKeeper.INGOT_ORICHALCUM.get()); }),
+    COPPER    (1, 131, 4.0F, 1.0F, 5, () -> { return Ingredient.of(ShopKeeper.INGOT_COPPER.get());     }),
+    BRONZE    (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.of(ShopKeeper.INGOT_BRONZE.get());     }),
+    STEEL     (2, 250, 6.0F, 2.0F, 14, () -> { return Ingredient.of(ShopKeeper.INGOT_STEEL.get());      }),
+    AURORITE  (3, 1561, 8.0F, 3.0F, 10, () -> { return Ingredient.of(ShopKeeper.STUFF_AURORITE.get());   });
 
     private final int harvestLevel;
     private final int maxUses;
@@ -37,29 +33,34 @@ public enum MaterialTool implements IItemTier {
       //  this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
     }
 
-    public int getMaxUses() {
+    @Override
+    public int getUses() {
         return this.maxUses;
     }
 
-    public float getEfficiency() {
+    @Override
+    public float getSpeed() {
         return this.efficiency;
     }
 
-    public float getAttackDamage() {
+    @Override
+    public float getAttackDamageBonus() {
         return this.attackDamage;
     }
 
-    public int getHarvestLevel() {
+    @Override
+    public int getLevel() {
         return this.harvestLevel;
     }
 
-    public int getEnchantability() {
+    @Override
+    public int getEnchantmentValue() {
         return this.enchantability;
     }
 
     @Override
-    public Ingredient getRepairMaterial() {
-        return Ingredient.fromItems(ShopKeeper.INGOT_BRASS);
+    public Ingredient getRepairIngredient() {
+        return Ingredient.of(ShopKeeper.INGOT_BRASS.get());
     }
 
     // public Ingredient getRepairMaterial() {

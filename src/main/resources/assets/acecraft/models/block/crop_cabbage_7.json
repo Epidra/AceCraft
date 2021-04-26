@@ -1,6 +1,6 @@
 {
     "parent": "acecraft:template/crop",
     "textures": {
-        "crop": "acecraft:blocks/crop_cabbage_7"
+        "crop": "acecraft:block/crop_cabbage_7"
     }
 }

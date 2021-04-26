@@ -1,0 +1,16 @@
+{
+  "type": "acecraft:distilling",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "result": {
+    "item": "acecraft:liquor_mead",
+    "experience": 1.0,
+    "cookingtime": 200
+  }
+}

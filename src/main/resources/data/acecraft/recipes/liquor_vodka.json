@@ -1,5 +1,5 @@
 {
-  "type": "acecraft:destille",
+  "type": "acecraft:distilling",
   "ingredients": [
     {
       "item": "minecraft:glass_bottle"

@@ -1,28 +1,60 @@
 package mod.acecraft.blocks;
 
+import mod.lucky77.blocks.BlockBase;
+import mod.lucky77.tileentities.TileBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockOre extends BlockBlock {
+public class BlockOre extends BlockBase {
+
+    //...
+
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
-    public BlockOre(String modid, String name, Block block) {
-        super(modid, name, block);
+    public BlockOre(Block block) {
+        super(block);
     }
 
-    /**
-     * Perform side-effects from block dropping, such as creating silverfish
-     */
-   // public void spawnAdditionalDrops(BlockState state, World worldIn, BlockPos pos, ItemStack stack) {
-   //     super.spawnAdditionalDrops(state, worldIn, pos, stack);
-   // }
+
+
+
+    //----------------------------------------PLACEMENT----------------------------------------//
+
+    // ...
+
+
+
+
+    //----------------------------------------INTERACTION----------------------------------------//
+
+    @Override
+    public void interact(World world, BlockPos blockPos, PlayerEntity playerEntity, TileBase tileBase) {
+
+    }
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
+
+    // ...
+
+
+
+
+    //----------------------------------------HELPER----------------------------------------//
 
     @Override
     public int getExpDrop(BlockState state, net.minecraft.world.IWorldReader reader, BlockPos pos, int fortune, int silktouch) {
         return silktouch == 0 ? MathHelper.nextInt(RANDOM, 0, 2) : 0;
     }
+
 }

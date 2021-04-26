@@ -2,11 +2,11 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-        "acecraft:block_salt"
+      "acecraft:block_salt"
     ]
   },
   "criteria": {
-    "has_block": {
+    "has_item": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -19,7 +19,7 @@
   },
   "requirements": [
     [
-      "has_block"
+      "has_item"
     ]
   ]
 }

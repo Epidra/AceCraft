@@ -1,0 +1,6 @@
+{
+    "parent": "acecraft:template/crop",
+    "textures": {
+        "crop": "acecraft:block/crop_pineapple_1"
+    }
+}

@@ -1,970 +1,506 @@
 package mod.acecraft;
 
-import com.google.common.base.CaseFormat;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import mod.acecraft.blocks.*;
-import mod.acecraft.container.ContainerBlastFurnace;
-import mod.acecraft.container.ContainerDestille;
-import mod.acecraft.container.ContainerStove;
-import mod.acecraft.crafting.RecipeDestille;
-import mod.acecraft.entity.EntityCrab;
-import mod.acecraft.entity.EntityDynamite;
-import mod.acecraft.entity.EntityNugget;
-import mod.acecraft.entity.EntitySpear;
-import mod.acecraft.gui.GuiBlastFurnace;
-import mod.acecraft.gui.GuiDistille;
-import mod.acecraft.gui.GuiStove;
-import mod.acecraft.items.*;
-import mod.acecraft.render.RenderCrab;
+import mod.acecraft.container.ContainerDistillery;
+import mod.acecraft.container.ContainerFoundry;
+import mod.acecraft.crafting.*;
+import mod.acecraft.entity.*;
+import mod.acecraft.render.RenderAlpaca;
 import mod.acecraft.render.RenderDynamite;
 import mod.acecraft.render.RenderNugget;
 import mod.acecraft.render.RenderSpear;
-import mod.acecraft.tileentities.TileBlastFurnace;
-import mod.acecraft.tileentities.TileEntityDestille;
-import mod.acecraft.tileentities.TileEntityStove;
-import mod.acecraft.util.BiomeDictionaryHelper;
-import mod.acecraft.util.MaterialArmor;
-import mod.acecraft.util.MaterialTool;
-import mod.acecraft.util.VillagerUtil;
-import mod.acecraft.blocks.BlockBlock;
-import mod.acecraft.items.ItemItem;
+import mod.acecraft.items.*;
+import mod.acecraft.screen.ScreenDistillery;
+import mod.acecraft.screen.ScreenFoundry;
+import mod.acecraft.tileentities.*;
+import mod.acecraft.util.*;
+import mod.lucky77.blocks.BlockBlock;
+import mod.lucky77.items.ItemFood;
+import mod.lucky77.items.ItemItem;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.*;
 import net.minecraft.item.crafting.*;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.potion.Effects;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.world.biome.MobSpawnInfo;
+import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.extensions.IForgeContainerType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 
 import static mod.acecraft.AceCraft.MODID;
 
+@SuppressWarnings({"unused", "deprecation"})
 public class ShopKeeper {
 
+    private static final DeferredRegister<Block>                BLOCKS     = DeferredRegister.create(ForgeRegistries.BLOCKS,             MODID);
+    private static final DeferredRegister<Item>                 ITEMS      = DeferredRegister.create(ForgeRegistries.ITEMS,              MODID);
+    private static final DeferredRegister<ContainerType<?>>     CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS,         MODID);
+    private static final DeferredRegister<TileEntityType<?>>    TILES      = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES,      MODID);
+    private static final DeferredRegister<SoundEvent>           SOUNDS     = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,       MODID);
+    private static final DeferredRegister<EntityType<?>>        ENTITIES   = DeferredRegister.create(ForgeRegistries.ENTITIES,           MODID);
+    private static final DeferredRegister<IRecipeSerializer<?>> RECIPES    = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MODID);
+
+
+
+
     // Blocks
-    public static final Block BLOCK_BRASS      = new BlockBlock(MODID, "block_brass",      Blocks.IRON_BLOCK);
-    public static final Block BLOCK_GILIUM     = new BlockBlock(MODID, "block_gilium",     Blocks.IRON_BLOCK);
-    public static final Block BLOCK_ADAMANTIUM = new BlockBlock(MODID, "block_adamantium", Blocks.IRON_BLOCK);
-    public static final Block BLOCK_ZINC       = new BlockBlock(MODID, "block_zinc",       Blocks.IRON_BLOCK);
-    public static final Block BLOCK_MYTHRIL    = new BlockBlock(MODID, "block_mythril",    Blocks.IRON_BLOCK);
-    public static final Block BLOCK_TIN        = new BlockBlock(MODID, "block_tin",        Blocks.IRON_BLOCK);
-    public static final Block BLOCK_ORICHALCUM = new BlockBlock(MODID, "block_orichalcum", Blocks.IRON_BLOCK);
-    public static final Block BLOCK_COPPER     = new BlockBlock(MODID, "block_copper",     Blocks.IRON_BLOCK);
-    public static final Block BLOCK_BRONZE     = new BlockBlock(MODID, "block_bronze",     Blocks.IRON_BLOCK);
-    public static final Block BLOCK_STEEL      = new BlockBlock(MODID, "block_steel",      Blocks.IRON_BLOCK);
+    public static final RegistryObject<Block> BLOCK_COPPER     = register("block_copper",     new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_MYTHRIL    = register("block_mythril",    new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_GILIUM     = register("block_gilium",     new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_TIN        = register("block_tin",        new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_ZINC       = register("block_zinc",       new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_BRONZE     = register("block_bronze",     new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_BRASS      = register("block_brass",      new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_STEEL      = register("block_steel",      new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_ORICHALCUM = register("block_orichalcum", new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_ADAMANTIUM = register("block_adamantium", new BlockBlock(Blocks.IRON_BLOCK),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_SALT       = register("block_salt",       new BlockBlock(Blocks.SAND),          ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_SULFUR     = register("block_sulfur",     new BlockBlock(Blocks.SAND),          ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_RUBY       = register("block_ruby",       new BlockBlock(Blocks.DIAMOND_BLOCK), ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_SAPPHIRE   = register("block_sapphire",   new BlockBlock(Blocks.DIAMOND_BLOCK), ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_AURORITE   = register("block_aurorite",   new BlockBlock(Blocks.DIAMOND_BLOCK), ItemGroup.TAB_BUILDING_BLOCKS);
 
     // Ore
-    public static final Block ORE_GILIUM     = new BlockBlock(MODID, "ore_gilium",     Blocks.IRON_BLOCK);
-    public static final Block ORE_ZINC       = new BlockBlock(MODID, "ore_zinc",       Blocks.IRON_BLOCK);
-    public static final Block ORE_MYTHRIL    = new BlockBlock(MODID, "ore_mythril",    Blocks.IRON_BLOCK);
-    public static final Block ORE_TIN        = new BlockBlock(MODID, "ore_tin",        Blocks.IRON_BLOCK);
-    public static final Block ORE_COPPER     = new BlockBlock(MODID, "ore_copper",     Blocks.IRON_BLOCK);
+    public static final RegistryObject<Block> ORE_COPPER   = register("ore_copper",   new BlockBlock(Blocks.IRON_ORE),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_MYTHRIL  = register("ore_mythril",  new BlockBlock(Blocks.IRON_ORE),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_GILIUM   = register("ore_gilium",   new BlockBlock(Blocks.IRON_ORE),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_TIN      = register("ore_tin",      new BlockBlock(Blocks.IRON_ORE),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_ZINC     = register("ore_zinc",     new BlockBlock(Blocks.IRON_ORE),    ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SALT     = register("ore_salt",     new BlockBlock(Blocks.LAPIS_ORE),   ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SULFUR   = register("ore_sulfur",   new BlockBlock(Blocks.LAPIS_ORE),   ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_RUBY     = register("ore_ruby",     new BlockBlock(Blocks.DIAMOND_ORE), ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SAPPHIRE = register("ore_sapphire", new BlockBlock(Blocks.DIAMOND_ORE), ItemGroup.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_AURORITE = register("ore_aurorite", new BlockBlock(Blocks.DIAMOND_ORE), ItemGroup.TAB_BUILDING_BLOCKS);
 
     // Nuggets
-    public static final Item NUGGET_IRON       = new ItemNugget(MODID, "nugget_iron",       ItemGroup.MATERIALS);
-    public static final Item NUGGET_GOLD       = new ItemNugget(MODID, "nugget_gold",       ItemGroup.MATERIALS);
-    public static final Item NUGGET_GILIUM     = new ItemNugget(MODID, "nugget_gilium",     ItemGroup.MATERIALS);
-    public static final Item NUGGET_ZINC       = new ItemNugget(MODID, "nugget_zinc",       ItemGroup.MATERIALS);
-    public static final Item NUGGET_MYTHRIL    = new ItemNugget(MODID, "nugget_mythril",    ItemGroup.MATERIALS);
-    public static final Item NUGGET_TIN        = new ItemNugget(MODID, "nugget_tin",        ItemGroup.MATERIALS);
-    public static final Item NUGGET_COPPER     = new ItemNugget(MODID, "nugget_copper",     ItemGroup.MATERIALS);
+    public static final RegistryObject<Item> NUGGET_IRON    = register("nugget_iron",    new ItemNugget());
+    public static final RegistryObject<Item> NUGGET_GOLD    = register("nugget_gold",    new ItemNugget());
+    public static final RegistryObject<Item> NUGGET_COPPER  = register("nugget_copper",  new ItemNugget());
+    public static final RegistryObject<Item> NUGGET_MYTHRIL = register("nugget_mythril", new ItemNugget());
+    public static final RegistryObject<Item> NUGGET_GILIUM  = register("nugget_gilium",  new ItemNugget());
+    public static final RegistryObject<Item> NUGGET_TIN     = register("nugget_tin",     new ItemNugget());
+    public static final RegistryObject<Item> NUGGET_ZINC    = register("nugget_zinc",    new ItemNugget());
 
-    // Ingots
-    public static final Item INGOT_BRASS      = new ItemItem(MODID, "ingot_brass",      ItemGroup.MATERIALS);
-    public static final Item INGOT_GILIUM     = new ItemItem(MODID, "ingot_gilium",     ItemGroup.MATERIALS);
-    public static final Item INGOT_ADAMANTIUM = new ItemItem(MODID, "ingot_adamantium", ItemGroup.MATERIALS);
-    public static final Item INGOT_ZINC       = new ItemItem(MODID, "ingot_zinc",       ItemGroup.MATERIALS);
-    public static final Item INGOT_MYTHRIL    = new ItemItem(MODID, "ingot_mythril",    ItemGroup.MATERIALS);
-    public static final Item INGOT_TIN        = new ItemItem(MODID, "ingot_tin",        ItemGroup.MATERIALS);
-    public static final Item INGOT_ORICHALCUM = new ItemItem(MODID, "ingot_orichalcum", ItemGroup.MATERIALS);
-    public static final Item INGOT_COPPER     = new ItemItem(MODID, "ingot_copper",     ItemGroup.MATERIALS);
-    public static final Item INGOT_BRONZE     = new ItemItem(MODID, "ingot_bronze",     ItemGroup.MATERIALS);
-    public static final Item INGOT_STEEL      = new ItemItem(MODID, "ingot_steel",      ItemGroup.MATERIALS);
+    // Ingot
+    public static final RegistryObject<Item> INGOT_COPPER     = register("ingot_copper",     new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_MYTHRIL    = register("ingot_mythril",    new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_GILIUM     = register("ingot_gilium",     new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_TIN        = register("ingot_tin",        new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_ZINC       = register("ingot_zinc",       new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_BRONZE     = register("ingot_bronze",     new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_BRASS      = register("ingot_brass",      new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_STEEL      = register("ingot_steel",      new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_ORICHALCUM = register("ingot_orichalcum", new ItemItem(ItemGroup.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_ADAMANTIUM = register("ingot_adamantium", new ItemItem(ItemGroup.TAB_MATERIALS));
 
+    // Stuff
+    public static final RegistryObject<Item> STUFF_SALT     = register("stuff_salt",     new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_SULFUR   = register("stuff_sulfur",   new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_RICE     = register("stuff_rice",     new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_COFFEE   = register("stuff_coffee",   new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_HEMP     = register("stuff_hemp",     new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_ROPE     = register("stuff_rope",     new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_SLAG     = register("stuff_slag",     new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_RUBY     = register("stuff_ruby",     new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_SAPPHIRE = register("stuff_sapphire", new ItemItem(ItemGroup.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_AURORITE = register("stuff_aurorite", new ItemItem(ItemGroup.TAB_MISC));
 
+    // Food
+    public static final RegistryObject<Item> FOOD_CABBAGE        = register("food_cabbage",        new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_CORN           = register("food_corn",           new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_CUCUMBER       = register("food_cucumber",       new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_EGGPLANT       = register("food_eggplant",       new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_GRAPES         = register("food_grapes",         new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_ONION          = register("food_onion",          new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_PINEAPPLE      = register("food_pineapple",      new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_STRAWBERRY     = register("food_strawberry",     new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_TOMATO         = register("food_tomato",         new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_TURNIP         = register("food_turnip",         new ItemFood(1, 1, false));
+    public static final RegistryObject<Item> FOOD_VICUGNA_RAW    = register("food_vicugna_raw",    new ItemFood(1, 1, true));
+    public static final RegistryObject<Item> FOOD_VICUGNA_COOKED = register("food_vicugna_cooked", new ItemFood(1, 1, true));
 
+    // Liquor
+    public static final RegistryObject<Item> LIQUOR_COFFEE = register("liquor_coffee", new ItemLiquor(Effects.DIG_SPEED,    1.0f, Effects.HUNGER, 0.8f));
+    public static final RegistryObject<Item> LIQUOR_MEAD   = register("liquor_mead",   new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_RUM    = register("liquor_rum",    new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_SAKE   = register("liquor_sake",   new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_SALGAM = register("liquor_salgam", new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_VODKA  = register("liquor_vodka",  new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_WHISKY = register("liquor_whisky", new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_WINE   = register("liquor_wine",   new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_OIL    = register("liquor_oil",    new ItemLiquor(Effects.WITHER,   1.0f, Effects.HUNGER, 1.0f));
 
-    public static final Block BLOCK_AURORITE = new BlockBlock(MODID, "block_aurorite", Blocks.DIAMOND_BLOCK);
-    public static final Block BLOCK_RUBY = new BlockBlock(MODID, "block_ruby", Blocks.DIAMOND_BLOCK);
-    public static final Block BLOCK_SAPPHIRE = new BlockBlock(MODID, "block_sapphire", Blocks.DIAMOND_BLOCK);
-    public static final Block BLOCK_AMETHYST = new BlockBlock(MODID, "block_amethyst", Blocks.DIAMOND_BLOCK);
+    // Crop
+    public static final RegistryObject<Block> CROP_CABBAGE    = register("crop_cabbage",    new BlockCrop("cabbage",   Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_CORN       = register("crop_corn",       new BlockCrop("corn",      Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_CUCUMBER   = register("crop_cucumber",   new BlockCrop("cucumber",  Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_EGGPLANT   = register("crop_eggplant",   new BlockCrop("eggplant",  Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_GRAPES     = register("crop_grapes",     new BlockCrop("grapes",    Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_ONION      = register("crop_onion",      new BlockCrop("onion",     Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_PINEAPPLE  = register("crop_pineapple",  new BlockCrop("pineapple", Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_STRAWBERRY = register("crop_strawberry", new BlockCrop("strawberry",Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_TOMATO     = register("crop_tomato",     new BlockCrop("tomato",    Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_TURNIP     = register("crop_turnip",     new BlockCrop("turnip",    Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_RICE       = register("crop_rice",       new BlockCrop("rice",      Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_COFFEE     = register("crop_coffee",     new BlockCrop("coffee",    Blocks.WHEAT));
+    public static final RegistryObject<Block> CROP_HEMP       = register("crop_hemp",       new BlockCrop("hemp",      Blocks.WHEAT));
 
-    // Other Blocks
-    public static final Block BLOCK_SALT = new BlockBlock(MODID, "block_salt", Blocks.SAND);
-    public static final Block BLOCK_SULFUR = new BlockBlock(MODID, "block_sulfur", Blocks.SAND);
-    //public static final Block BLOCK_FLOUR = new BlockBlock(MODID, "block_flour", Blocks.SAND);
-    //public static final Block BLOCK_COFFEE = new BlockBlock(MODID, "block_coffee", Blocks.SAND);
+    // Seeds
+    public static final RegistryObject<Item> SEED_CABBAGE    = register("seeds_cabbage",    new ItemSeed("cabbage"   ));
+    public static final RegistryObject<Item> SEED_CORN       = register("seeds_corn",       new ItemSeed("corn"      ));
+    public static final RegistryObject<Item> SEED_CUCUMBER   = register("seeds_cucumber",   new ItemSeed("cucumber"  ));
+    public static final RegistryObject<Item> SEED_EGGPLANT   = register("seeds_eggplant",   new ItemSeed("eggplant"  ));
+    public static final RegistryObject<Item> SEED_GRAPES     = register("seeds_grapes",     new ItemSeed("grapes"    ));
+    public static final RegistryObject<Item> SEED_ONION      = register("seeds_onion",      new ItemSeed("onion"     ));
+    public static final RegistryObject<Item> SEED_PINEAPPLE  = register("seeds_pineapple",  new ItemSeed("pineapple" ));
+    public static final RegistryObject<Item> SEED_STRAWBERRY = register("seeds_strawberry", new ItemSeed("strawberry"));
+    public static final RegistryObject<Item> SEED_TOMATO     = register("seeds_tomato",     new ItemSeed("tomato"    ));
+    public static final RegistryObject<Item> SEED_TURNIP     = register("seeds_turnip",     new ItemSeed("turnip"    ));
+    public static final RegistryObject<Item> SEED_RICE       = register("seeds_rice",       new ItemSeed("rice"      ));
+    public static final RegistryObject<Item> SEED_COFFEE     = register("seeds_coffee",     new ItemSeed("coffee"    ));
+    public static final RegistryObject<Item> SEED_HEMP       = register("seeds_hemp",       new ItemSeed("hemp"      ));
 
-    public static final Block ORE_AURORITE = new BlockOre(MODID, "ore_aurorite", Blocks.DIAMOND_ORE);
-    public static final Block ORE_RUBY = new BlockOre(MODID, "ore_ruby", Blocks.DIAMOND_ORE);
-    public static final Block ORE_SAPPHIRE = new BlockOre(MODID, "ore_sapphire", Blocks.DIAMOND_ORE);
-    public static final Block ORE_AMETHYST = new BlockOre(MODID, "ore_amethyst", Blocks.DIAMOND_ORE);
-
-    public static final Block ORE_SALT = new BlockOre(MODID, "ore_salt", Blocks.LAPIS_ORE);
-    public static final Block ORE_SULFUR = new BlockOre(MODID, "ore_sulfur", Blocks.LAPIS_ORE);
-
-    public static final Block CROP_COFFEE = new BlockCrop(MODID, "crop_coffee", 7,  Blocks.GRASS);
-    public static final Block CROP_TURNIP = new BlockCrop(MODID, "crop_turnip", 7, Blocks.GRASS);
-    public static final Block CROP_CABBAGE = new BlockCrop(MODID, "crop_cabbage", 7, Blocks.GRASS);
-    public static final Block CROP_TOMATO = new BlockCrop(MODID, "crop_tomato", 7, Blocks.GRASS);
-    public static final Block CROP_CUCUMBER = new BlockCrop(MODID, "crop_cucumber", 7, Blocks.GRASS);
-    public static final Block CROP_CORN = new BlockCrop(MODID, "crop_corn", 7, Blocks.GRASS);
-    public static final Block CROP_GRAPES = new BlockCrop(MODID, "crop_grapes", 7, Blocks.GRASS);
-    public static final Block CROP_HEMP = new BlockCrop(MODID, "crop_hemp", 7, Blocks.GRASS);
-    public static final Block CROP_STRAWBERRIES = new BlockCrop(MODID, "crop_strawberries", 7, Blocks.GRASS);
-    public static final Block CROP_ONION = new BlockCrop(MODID, "crop_onion", 7, Blocks.GRASS);
-
-    public static final Block FLOWER_BAMBOO = new BlockBush(MODID, "flower_bamboo", Blocks.CORNFLOWER);
-    public static final Block FLOWER_MATSUTAKE = new BlockBush(MODID, "flower_matsutake", Blocks.CORNFLOWER);
-    public static final Block FLOWER_MOONDROP = new BlockBush(MODID, "flower_moondrop", Blocks.CORNFLOWER);
-    public static final Block FLOWER_TOYFLOWER = new BlockBush(MODID, "flower_toyflower", Blocks.CORNFLOWER);
-    public static final Block FLOWER_PINKCAT = new BlockBush(MODID, "flower_pinkcat", Blocks.CORNFLOWER);
-    public static final Block FLOWER_MAGICGRASS = new BlockBush(MODID, "flower_magicgrass", Blocks.CORNFLOWER);
-
-    public static final Item FOOD_COFFEE = new ItemFood(MODID, "food_coffee", 4, 0.4f);
-    public static final Item FOOD_TURNIP = new ItemFood(MODID, "food_turnip",  4, 0.4f);
-    public static final Item FOOD_CABBAGE = new ItemFood(MODID, "food_cabbage",  4, 0.4f);
-    public static final Item FOOD_TOMATO = new ItemFood(MODID, "food_tomato",  4, 0.4f);
-    public static final Item FOOD_CUCUMBER = new ItemFood(MODID, "food_cucumber",  4, 0.4f);
-    public static final Item FOOD_CORN = new ItemFood(MODID, "food_corn",  4, 0.4f);
-    public static final Item FOOD_GRAPES = new ItemFood(MODID, "food_grapes",  4, 0.4f);
-    public static final Item FOOD_STRAWBERRIES = new ItemFood(MODID, "food_strawberries",  4, 0.4f);
-    public static final Item FOOD_ONION = new ItemFood(MODID, "food_onion",  4, 0.4f);
-    public static final Item FOOD_RICEBALL = new ItemFood(MODID, "food_riceball",  4, 0.4f);
-
-    public static final Item DISH_STIRFRY = new ItemDish(MODID, "dish_stirfry",  4, 0.4f);
-    public static final Item DISH_FRIEDRICE = new ItemDish(MODID, "dish_friedrice",  4, 0.4f);
-    public static final Item DISH_SAVORYPANCAKE = new ItemDish(MODID, "dish_savorypancake",  4, 0.4f);
-    public static final Item DISH_FRENCHFRIES = new ItemDish(MODID, "dish_frenchfries",  4, 0.4f);
-    public static final Item DISH_CROQUETTE = new ItemDish(MODID, "dish_croquette",  4, 0.4f);
-    public static final Item DISH_POPCORN = new ItemDish(MODID, "dish_popcorn",  4, 0.4f);
-    public static final Item DISH_CORNFLAKES = new ItemDish(MODID, "dish_cornflakes",  4, 0.4f);
-    public static final Item DISH_SCRAMBLEDEGGS = new ItemDish(MODID, "dish_scrambledeggs",  4, 0.4f);
-    public static final Item DISH_OMELET = new ItemDish(MODID, "dish_omelet",  4, 0.4f);
-    public static final Item DISH_OMELETRICE = new ItemDish(MODID, "dish_omeletrice",  4, 0.4f);
-    public static final Item DISH_APPLESOUFFLE = new ItemDish(MODID, "dish_applesouffle",  4, 0.4f);
-    public static final Item DISH_CURRYBREAD = new ItemDish(MODID, "dish_currybread",  4, 0.4f);
-    public static final Item DISH_FRENCHTOAST = new ItemDish(MODID, "dish_frenchtoast",  4, 0.4f);
-    public static final Item DISH_FRIEDNODDLES = new ItemDish(MODID, "dish_friednoodles",  4, 0.4f);
-    public static final Item DISH_TEMPURA = new ItemDish(MODID, "dish_tempura",  4, 0.4f);
-    public static final Item DISH_PANCAKE = new ItemDish(MODID, "dish_pancake",  4, 0.4f);
-    public static final Item DISH_POTSTICKER = new ItemDish(MODID, "dish_potsticker",  4, 0.4f);
-    public static final Item DISH_RISOTTO = new ItemDish(MODID, "dish_risotto",  4, 0.4f);
-    public static final Item DISH_HOTMILK = new ItemDish(MODID, "dish_hotmilk",  4, 0.4f);
-    public static final Item DISH_HOTCHOCOLATE = new ItemDish(MODID, "dish_hotchocolate",  4, 0.4f);
-    public static final Item DISH_PUMPKINSTEW = new ItemDish(MODID, "dish_pumpkinstew",  4, 0.4f);
-    public static final Item DISH_BOILEDEGG = new ItemDish(MODID, "dish_boiledegg",  4, 0.4f);
-    public static final Item DISH_DUMPLINGS = new ItemDish(MODID, "dish_dumplings",  4, 0.4f);
-    public static final Item DISH_NOODLES = new ItemDish(MODID, "dish_noodles",  4, 0.4f);
-    public static final Item DISH_CURRYNOODLES = new ItemDish(MODID, "dish_currynoodles",  4, 0.4f);
-    public static final Item DISH_TEMPURANOODLES = new ItemDish(MODID, "dish_tempuranoodles",  4, 0.4f);
-    public static final Item DISH_RICESOUP = new ItemDish(MODID, "dish_ricesoup",  4, 0.4f);
-    public static final Item DISH_PORRIDGE = new ItemDish(MODID, "dish_porridge",  4, 0.4f);
-    public static final Item DISH_TEMPURARICE = new ItemDish(MODID, "dish_tempurarice",  4, 0.4f);
-    public static final Item DISH_EGGOVERRICE = new ItemDish(MODID, "dish_eggoverrice",  4, 0.4f);
-    public static final Item DISH_CURRYRICE = new ItemDish(MODID, "dish_curryrice",  4, 0.4f);
-    public static final Item DISH_TOAST = new ItemDish(MODID, "dish_toast",  4, 0.4f);
-    public static final Item DISH_STEAMEDBUN = new ItemDish(MODID, "dish_steamedbun",  4, 0.4f);
-    public static final Item DISH_SHAOMI = new ItemDish(MODID, "dish_shaomi",  4, 0.4f);
-    public static final Item DISH_CURRYBUN = new ItemDish(MODID, "dish_currybun",  4, 0.4f);
-    public static final Item DISH_STEAMEDDUMPLINGS = new ItemDish(MODID, "dish_steameddumplings",  4, 0.4f);
-    public static final Item DISH_SPONGECAKE = new ItemDish(MODID, "dish_spongecake",  4, 0.4f);
-    public static final Item DISH_STEAMEDCAKE = new ItemDish(MODID, "dish_steamedcake",  4, 0.4f);
-    public static final Item DISH_PUDDING = new ItemDish(MODID, "dish_pudding",  4, 0.4f);
-    public static final Item DISH_PUMPKINPUDDING = new ItemDish(MODID, "dish_pumpkinpudding",  4, 0.4f);
-    public static final Item DISH_SALAD = new ItemDish(MODID, "dish_salad",  4, 0.4f);
-    public static final Item DISH_SANDWICH = new ItemDish(MODID, "dish_sandwich",  4, 0.4f);
-    public static final Item DISH_FRUITSANDWICH = new ItemDish(MODID, "dish_fruitsandwich",  4, 0.4f);
-    public static final Item DISH_PICKLEDTURNIPS = new ItemDish(MODID, "dish_pickledturnips",  4, 0.4f);
-    public static final Item DISH_PICKLEDCUCUMBER = new ItemDish(MODID, "dish_pickledcucumber",  4, 0.4f);
-    public static final Item DISH_BAMBOORICE = new ItemDish(MODID, "dish_bamboorice",  4, 0.4f);
-    public static final Item DISH_MATSUTAKERICE = new ItemDish(MODID, "dish_matsutakerice",  4, 0.4f);
-    public static final Item DISH_SUSHI = new ItemDish(MODID, "dish_sushi",  4, 0.4f);
-    public static final Item DISH_RAISINBREAD = new ItemDish(MODID, "dish_raisinbread",  4, 0.4f);
-    public static final Item DISH_SASHIMI = new ItemDish(MODID, "dish_sashimi",  4, 0.4f);
-    public static final Item DISH_CHIRASHISUSHI = new ItemDish(MODID, "dish_chirashisushi",  4, 0.4f);
-
-    //public static final Item SEEDS_WILD = new ItemSeedWild(MODID, "seeds_wild", new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_COFFEE = new ItemSeed(MODID, "seeds_coffee", CROP_COFFEE, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_TURNIP = new ItemSeed(MODID, "seeds_turnip", CROP_TURNIP, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_CABBAGE = new ItemSeed(MODID, "seeds_cabbage", CROP_CABBAGE, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_TOMATO = new ItemSeed(MODID, "seeds_tomato", CROP_TOMATO, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_CUCUMBER = new ItemSeed(MODID, "seeds_cucumber", CROP_CUCUMBER, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_CORN = new ItemSeed(MODID, "seeds_corn", CROP_CORN, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_GRAPES = new ItemSeed(MODID, "seeds_grapes", CROP_GRAPES, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_HEMP = new ItemSeed(MODID, "seeds_hemp", CROP_HEMP, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_STRAWBERRIES = new ItemSeed(MODID, "seeds_strawberries", CROP_STRAWBERRIES, new Item.Properties().group(ItemGroup.FOOD));
-    public static final Item SEEDS_ONION = new ItemSeed(MODID, "seeds_onion", CROP_ONION, new Item.Properties().group(ItemGroup.FOOD));
-
-    //public static final Item FOOD_VENISON_RAW = new ItemFood(MODID, "food_venison_raw",  4, 0.4f);
-    //public static final Item FOOD_VENISON_COOKED = new ItemFood(MODID, "food_venison_cooked",  4, 0.4f);
-    //public static final Item FOOD_VICUGNA_RAW = new ItemFood(MODID, "food_vicugna_raw",  4, 0.4f);
-    //public static final Item FOOD_VICUGNA_COOKED = new ItemFood(MODID, "food_vicugna_cooked",  4, 0.4f);
-
-    public static final Item STUFF_DYNAMITE = new ItemDynamite(MODID, "stuff_dynamite", ItemGroup.TOOLS);
-    public static final Item STUFF_ROPE = new ItemItem(MODID, "stuff_rope", ItemGroup.MISC);
-    public static final Item STUFF_HEMP = new ItemItem(MODID, "stuff_hemp", ItemGroup.MISC);
-    //public static final Item STUFF_GEAR_WOODEN = new ItemItem(MODID, "stuff_gear_wooden", ItemGroup.MISC);
-    public static final Item STUFF_AURORITE = new ItemItem(MODID, "stuff_aurorite", ItemGroup.MISC);
-    public static final Item STUFF_RUBY = new ItemItem(MODID, "stuff_ruby", ItemGroup.MISC);
-    public static final Item STUFF_SAPPHIRE = new ItemItem(MODID, "stuff_sapphire", ItemGroup.MISC);
-    public static final Item STUFF_AMETHYST = new ItemItem(MODID, "stuff_amethyst", ItemGroup.MISC);
-    //public static final Item STUFF_FLOUR = new ItemItem(MODID, "stuff_flour", ItemGroup.FOOD);
-    //public static final Item STUFF_COFFEE = new ItemItem(MODID, "stuff_coffee", ItemGroup.FOOD);
-    public static final Item STUFF_SALT = new ItemItem(MODID, "stuff_salt", ItemGroup.MISC);
-    public static final Item STUFF_SULFUR = new ItemItem(MODID, "stuff_sulfur", ItemGroup.MISC);
-    public static final Item STUFF_CURRY = new ItemItem(MODID, "stuff_curry", ItemGroup.MISC);
-
-    public static final Block MACHINA_ROPE = new MachinaRope(MODID, "machina_rope", Blocks.BLACK_WOOL);
-    public static final Block MACHINA_ANCHOR = new MachinaAnchor(MODID, "machina_anchor", Blocks.IRON_BLOCK);
-    public static final Block MACHINA_DESTILLERY = new MachinaDestille(MODID, "machina_destillery", Blocks.IRON_BLOCK);
-    public static final Block MACHINA_GLOBE = new MachinaGlobe(MODID, "machina_globe", Blocks.LAPIS_BLOCK);
-    public static final Block MACHINA_BLASTFURNACE = new MachinaBlastfurnace(MODID, "machina_blastfurnace", Blocks.IRON_BLOCK);
-    //public static final Block MACHINA_KEG = new BlockBlock(MODID, "machina_keg", Blocks.IRON_BLOCK);
-    public static final Block MACHINA_STOVE = new MachinaStove(MODID, "machina_stove", Blocks.STONE);
-
-    public static final Item LIQUOR_COFFEE = new ItemFood(MODID, "liquor_coffee",  4, 0.4f);
-    public static final Item LIQUOR_RUM = new ItemFood(MODID, "liquor_rum",  4, 0.4f);
-    //public static final Item LIQUOR_SAKE = new ItemFood(MODID, "liquor_sake",  4, 0.4f);
-    public static final Item LIQUOR_SALGAM = new ItemFood(MODID, "liquor_salgam",  4, 0.4f);
-    public static final Item LIQUOR_VODKA = new ItemFood(MODID, "liquor_vodka",  4, 0.4f);
-    public static final Item LIQUOR_BEER = new ItemFood(MODID, "liquor_beer",  4, 0.4f);
-    public static final Item LIQUOR_CIDER = new ItemFood(MODID, "liquor_cider",  4, 0.4f);
-    public static final Item LIQUOR_WINE = new ItemFood(MODID, "liquor_wine",  4, 0.4f);
-    public static final Item LIQUOR_OIL = new ItemFood(MODID, "liquor_oil",  4, 0.4f);
+    // Machina
+    public static final RegistryObject<Block> MACHINA_GLOBE        = register("machina_globe",        new BlockGlobe(),        ItemGroup.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_FOUNDRY      = register("machina_foundry",      new BlockFoundry(),      ItemGroup.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_DISTILLERY   = register("machina_distillery",   new BlockDistillery(),   ItemGroup.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_COOKINGBOARD = register("machina_cookingboard", new BlockCookingBoard(), ItemGroup.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_KEG          = register("machina_keg",          new BlockKeg(),          ItemGroup.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_ANCHOR       = register("machina_anchor",       new BlockAnchor(),       ItemGroup.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_ROPE         = register("machina_rope",         new BlockRope(),         ItemGroup.TAB_DECORATIONS);
 
     // Armor Boots
-    public static final Item ARMOR_BOOTS_BRASS      = new ItemArmor(MODID, "armor_boots_brass",      MaterialArmor.BRASS,      EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_GILIUM     = new ItemArmor(MODID, "armor_boots_gilium",     MaterialArmor.GILIUM,     EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_ADAMANTIUM = new ItemArmor(MODID, "armor_boots_adamantium", MaterialArmor.ADAMANTIUM, EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_MYTHRIL    = new ItemArmor(MODID, "armor_boots_mythril",    MaterialArmor.MYTHRIL,    EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_ORICHALCUM = new ItemArmor(MODID, "armor_boots_orichalcum", MaterialArmor.ORICHALCUM, EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_COPPER     = new ItemArmor(MODID, "armor_boots_copper",     MaterialArmor.COPPER,     EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_BRONZE     = new ItemArmor(MODID, "armor_boots_bronze",     MaterialArmor.BRONZE,     EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_STEEL      = new ItemArmor(MODID, "armor_boots_steel",      MaterialArmor.STEEL,      EquipmentSlotType.FEET);
-    public static final Item ARMOR_BOOTS_AURORITE   = new ItemArmorColor(MODID, "armor_boots_aurorite",   MaterialArmor.AURORITE,   EquipmentSlotType.FEET);
+    public static final RegistryObject<Item> ARMOR_BOOTS_GILIUM     = register("armor_boots_gilium",     new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_ADAMANTIUM = register("armor_boots_adamantium", new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_MYTHRIL    = register("armor_boots_mythril",    new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_ORICHALCUM = register("armor_boots_orichalcum", new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_COPPER     = register("armor_boots_copper",     new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_BRONZE     = register("armor_boots_bronze",     new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_STEEL      = register("armor_boots_steel",      new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlotType.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_AURORITE   = register("armor_boots_aurorite",   new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlotType.FEET));
 
     // Armor Chestplate
-    public static final Item ARMOR_PLATE_BRASS      = new ItemArmor(MODID, "armor_plate_brass",      MaterialArmor.BRASS,      EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_GILIUM     = new ItemArmor(MODID, "armor_plate_gilium",     MaterialArmor.GILIUM,     EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_ADAMANTIUM = new ItemArmor(MODID, "armor_plate_adamantium", MaterialArmor.ADAMANTIUM, EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_MYTHRIL    = new ItemArmor(MODID, "armor_plate_mythril",    MaterialArmor.MYTHRIL,    EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_ORICHALCUM = new ItemArmor(MODID, "armor_plate_orichalcum", MaterialArmor.ORICHALCUM, EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_COPPER     = new ItemArmor(MODID, "armor_plate_copper",     MaterialArmor.COPPER,     EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_BRONZE     = new ItemArmor(MODID, "armor_plate_bronze",     MaterialArmor.BRONZE,     EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_STEEL      = new ItemArmor(MODID, "armor_plate_steel",      MaterialArmor.STEEL,      EquipmentSlotType.CHEST);
-    public static final Item ARMOR_PLATE_AURORITE   = new ItemArmorColor(MODID, "armor_plate_aurorite",   MaterialArmor.AURORITE,   EquipmentSlotType.CHEST);
+    public static final RegistryObject<Item> ARMOR_PLATE_GILIUM     = register("armor_plate_gilium",     new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_ADAMANTIUM = register("armor_plate_adamantium", new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_MYTHRIL    = register("armor_plate_mythril",    new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_ORICHALCUM = register("armor_plate_orichalcum", new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_COPPER     = register("armor_plate_copper",     new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_BRONZE     = register("armor_plate_bronze",     new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_STEEL      = register("armor_plate_steel",      new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlotType.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_AURORITE   = register("armor_plate_aurorite",   new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlotType.CHEST));
 
     // Armor Leggings
-    public static final Item ARMOR_LEGGINGS_BRASS      = new ItemArmor(MODID, "armor_leggings_brass",      MaterialArmor.BRASS,      EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_GILIUM     = new ItemArmor(MODID, "armor_leggings_gilium",     MaterialArmor.GILIUM,     EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_ADAMANTIUM = new ItemArmor(MODID, "armor_leggings_adamantium", MaterialArmor.ADAMANTIUM, EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_MYTHRIL    = new ItemArmor(MODID, "armor_leggings_mythril",    MaterialArmor.MYTHRIL,    EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_ORICHALCUM = new ItemArmor(MODID, "armor_leggings_orichalcum", MaterialArmor.ORICHALCUM, EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_COPPER     = new ItemArmor(MODID, "armor_leggings_copper",     MaterialArmor.COPPER,     EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_BRONZE     = new ItemArmor(MODID, "armor_leggings_bronze",     MaterialArmor.BRONZE,     EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_STEEL      = new ItemArmor(MODID, "armor_leggings_steel",      MaterialArmor.STEEL,      EquipmentSlotType.LEGS);
-    public static final Item ARMOR_LEGGINGS_AURORITE   = new ItemArmorColor(MODID, "armor_leggings_aurorite",   MaterialArmor.AURORITE,   EquipmentSlotType.LEGS);
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_GILIUM     = register("armor_leggings_gilium",     new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_ADAMANTIUM = register("armor_leggings_adamantium", new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_MYTHRIL    = register("armor_leggings_mythril",    new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_ORICHALCUM = register("armor_leggings_orichalcum", new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_COPPER     = register("armor_leggings_copper",     new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_BRONZE     = register("armor_leggings_bronze",     new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_STEEL      = register("armor_leggings_steel",      new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlotType.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_AURORITE   = register("armor_leggings_aurorite",   new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlotType.LEGS));
 
     // Armor Helmet
-    public static final Item ARMOR_HELMET_BRASS      = new ItemArmor(MODID, "armor_helmet_brass",      MaterialArmor.BRASS,      EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_GILIUM     = new ItemArmor(MODID, "armor_helmet_gilium",     MaterialArmor.GILIUM,     EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_ADAMANTIUM = new ItemArmor(MODID, "armor_helmet_adamantium", MaterialArmor.ADAMANTIUM, EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_MYTHRIL    = new ItemArmor(MODID, "armor_helmet_mythril",    MaterialArmor.MYTHRIL,    EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_ORICHALCUM = new ItemArmor(MODID, "armor_helmet_orichalcum", MaterialArmor.ORICHALCUM, EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_COPPER     = new ItemArmor(MODID, "armor_helmet_copper",     MaterialArmor.COPPER,     EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_BRONZE     = new ItemArmor(MODID, "armor_helmet_bronze",     MaterialArmor.BRONZE,     EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_STEEL      = new ItemArmor(MODID, "armor_helmet_steel",      MaterialArmor.STEEL,      EquipmentSlotType.HEAD);
-    public static final Item ARMOR_HELMET_AURORITE   = new ItemArmorColor(MODID, "armor_helmet_aurorite",   MaterialArmor.AURORITE,   EquipmentSlotType.HEAD);
+    public static final RegistryObject<Item> ARMOR_HELMET_GILIUM     = register("armor_helmet_gilium",     new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_ADAMANTIUM = register("armor_helmet_adamantium", new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_MYTHRIL    = register("armor_helmet_mythril",    new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_ORICHALCUM = register("armor_helmet_orichalcum", new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_COPPER     = register("armor_helmet_copper",     new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_BRONZE     = register("armor_helmet_bronze",     new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_STEEL      = register("armor_helmet_steel",      new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlotType.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_AURORITE   = register("armor_helmet_aurorite",   new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlotType.HEAD));
 
     // Tool Sword
-    public static final Item TOOL_SWORD_BRASS      = new ToolSword(MODID, "tool_sword_brass",      MaterialTool.BRASS,      1, -1.0f);
-    public static final Item TOOL_SWORD_GILIUM     = new ToolSword(MODID, "tool_sword_gilium",     MaterialTool.GILIUM,     1, -1.0f);
-    public static final Item TOOL_SWORD_ADAMANTIUM = new ToolSword(MODID, "tool_sword_adamantium", MaterialTool.ADAMANTIUM, 1, -1.0f);
-    public static final Item TOOL_SWORD_MYTHRIL    = new ToolSword(MODID, "tool_sword_mythril",    MaterialTool.MYTHRIL,    1, -1.0f);
-    public static final Item TOOL_SWORD_ORICHALCUM = new ToolSword(MODID, "tool_sword_orichalcum", MaterialTool.ORICHALCUM, 1, -1.0f);
-    public static final Item TOOL_SWORD_COPPER     = new ToolSword(MODID, "tool_sword_copper",     MaterialTool.COPPER,     1, -1.0f);
-    public static final Item TOOL_SWORD_BRONZE     = new ToolSword(MODID, "tool_sword_bronze",     MaterialTool.BRONZE,     1, -1.0f);
-    public static final Item TOOL_SWORD_STEEL      = new ToolSword(MODID, "tool_sword_steel",      MaterialTool.STEEL,      1, -1.0f);
-    public static final Item TOOL_SWORD_AURORITE   = new ToolSword(MODID, "tool_sword_aurorite",   MaterialTool.AURORITE,   1, -1.0f);
+    public static final RegistryObject<Item> TOOL_SWORD_GILIUM     = register("tool_sword_gilium",     new ToolSword(MaterialTool.GILIUM,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_ADAMANTIUM = register("tool_sword_adamantium", new ToolSword(MaterialTool.ADAMANTIUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_MYTHRIL    = register("tool_sword_mythril",    new ToolSword(MaterialTool.MYTHRIL,    2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_ORICHALCUM = register("tool_sword_orichalcum", new ToolSword(MaterialTool.ORICHALCUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_COPPER     = register("tool_sword_copper",     new ToolSword(MaterialTool.COPPER,     1, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_BRONZE     = register("tool_sword_bronze",     new ToolSword(MaterialTool.BRONZE,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_STEEL      = register("tool_sword_steel",      new ToolSword(MaterialTool.STEEL,      2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SWORD_AURORITE   = register("tool_sword_aurorite",   new ToolSword(MaterialTool.AURORITE,   3, -1.0f));
 
     // Tool Spear
-    public static final Item TOOL_SPEAR_BRASS      = new ToolSpear(MODID, "tool_spear_brass",      MaterialTool.BRASS,      1, -1.0f);
-    public static final Item TOOL_SPEAR_GILIUM     = new ToolSpear(MODID, "tool_spear_gilium",     MaterialTool.GILIUM,     1, -1.0f);
-    public static final Item TOOL_SPEAR_ADAMANTIUM = new ToolSpear(MODID, "tool_spear_adamantium", MaterialTool.ADAMANTIUM, 1, -1.0f);
-    public static final Item TOOL_SPEAR_MYTHRIL    = new ToolSpear(MODID, "tool_spear_mythril",    MaterialTool.MYTHRIL,    1, -1.0f);
-    public static final Item TOOL_SPEAR_ORICHALCUM = new ToolSpear(MODID, "tool_spear_orichalcum", MaterialTool.ORICHALCUM, 1, -1.0f);
-    public static final Item TOOL_SPEAR_COPPER     = new ToolSpear(MODID, "tool_spear_copper",     MaterialTool.COPPER,     1, -1.0f);
-    public static final Item TOOL_SPEAR_BRONZE     = new ToolSpear(MODID, "tool_spear_bronze",     MaterialTool.BRONZE,     1, -1.0f);
-    public static final Item TOOL_SPEAR_STEEL      = new ToolSpear(MODID, "tool_spear_steel",      MaterialTool.STEEL,      1, -1.0f);
-    public static final Item TOOL_SPEAR_AURORITE   = new ToolSpear(MODID, "tool_spear_aurorite",   MaterialTool.AURORITE,   1, -1.0f);
+    public static final RegistryObject<Item> TOOL_SPEAR_GILIUM     = register("tool_spear_gilium",     new ToolSpear(MaterialTool.GILIUM,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_ADAMANTIUM = register("tool_spear_adamantium", new ToolSpear(MaterialTool.ADAMANTIUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_MYTHRIL    = register("tool_spear_mythril",    new ToolSpear(MaterialTool.MYTHRIL,    2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_ORICHALCUM = register("tool_spear_orichalcum", new ToolSpear(MaterialTool.ORICHALCUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_COPPER     = register("tool_spear_copper",     new ToolSpear(MaterialTool.COPPER,     1, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_BRONZE     = register("tool_spear_bronze",     new ToolSpear(MaterialTool.BRONZE,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_STEEL      = register("tool_spear_steel",      new ToolSpear(MaterialTool.STEEL,      2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SPEAR_AURORITE   = register("tool_spear_aurorite",   new ToolSpear(MaterialTool.AURORITE,   3, -1.0f));
 
     // Tool Axe
-    public static final Item TOOL_AXE_BRASS      = new ToolAxe(MODID, "tool_axe_brass",      MaterialTool.BRASS,      1, -1.0f);
-    public static final Item TOOL_AXE_GILIUM     = new ToolAxe(MODID, "tool_axe_gilium",     MaterialTool.GILIUM,     1, -1.0f);
-    public static final Item TOOL_AXE_ADAMANTIUM = new ToolAxe(MODID, "tool_axe_adamantium", MaterialTool.ADAMANTIUM, 1, -1.0f);
-    public static final Item TOOL_AXE_MYTHRIL    = new ToolAxe(MODID, "tool_axe_mythril",    MaterialTool.MYTHRIL,    1, -1.0f);
-    public static final Item TOOL_AXE_ORICHALCUM = new ToolAxe(MODID, "tool_axe_orichalcum", MaterialTool.ORICHALCUM, 1, -1.0f);
-    public static final Item TOOL_AXE_COPPER     = new ToolAxe(MODID, "tool_axe_copper",     MaterialTool.COPPER,     1, -1.0f);
-    public static final Item TOOL_AXE_BRONZE     = new ToolAxe(MODID, "tool_axe_bronze",     MaterialTool.BRONZE,     1, -1.0f);
-    public static final Item TOOL_AXE_STEEL      = new ToolAxe(MODID, "tool_axe_steel",      MaterialTool.STEEL,      1, -1.0f);
-    public static final Item TOOL_AXE_AURORITE   = new ToolAxe(MODID, "tool_axe_aurorite",   MaterialTool.AURORITE,   1, -1.0f);
+    public static final RegistryObject<Item> TOOL_AXE_GILIUM     = register("tool_axe_gilium",     new ToolAxe(MaterialTool.GILIUM,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_ADAMANTIUM = register("tool_axe_adamantium", new ToolAxe(MaterialTool.ADAMANTIUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_MYTHRIL    = register("tool_axe_mythril",    new ToolAxe(MaterialTool.MYTHRIL,    2, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_ORICHALCUM = register("tool_axe_orichalcum", new ToolAxe(MaterialTool.ORICHALCUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_COPPER     = register("tool_axe_copper",     new ToolAxe(MaterialTool.COPPER,     1, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_BRONZE     = register("tool_axe_bronze",     new ToolAxe(MaterialTool.BRONZE,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_STEEL      = register("tool_axe_steel",      new ToolAxe(MaterialTool.STEEL,      2, -1.0f));
+    public static final RegistryObject<Item> TOOL_AXE_AURORITE   = register("tool_axe_aurorite",   new ToolAxe(MaterialTool.AURORITE,   3, -1.0f));
 
     // Tool Pickaxe
-    public static final Item TOOL_PICKAXE_BRASS      = new ToolPickaxe(MODID, "tool_pickaxe_brass",      MaterialTool.BRASS,      1, -1.0f);
-    public static final Item TOOL_PICKAXE_GILIUM     = new ToolPickaxe(MODID, "tool_pickaxe_gilium",     MaterialTool.GILIUM,     1, -1.0f);
-    public static final Item TOOL_PICKAXE_ADAMANTIUM = new ToolPickaxe(MODID, "tool_pickaxe_adamantium", MaterialTool.ADAMANTIUM, 1, -1.0f);
-    public static final Item TOOL_PICKAXE_MYTHRIL    = new ToolPickaxe(MODID, "tool_pickaxe_mythril",    MaterialTool.MYTHRIL,    1, -1.0f);
-    public static final Item TOOL_PICKAXE_ORICHALCUM = new ToolPickaxe(MODID, "tool_pickaxe_orichalcum", MaterialTool.ORICHALCUM, 1, -1.0f);
-    public static final Item TOOL_PICKAXE_COPPER     = new ToolPickaxe(MODID, "tool_pickaxe_copper",     MaterialTool.COPPER,     1, -1.0f);
-    public static final Item TOOL_PICKAXE_BRONZE     = new ToolPickaxe(MODID, "tool_pickaxe_bronze",     MaterialTool.BRONZE,     1, -1.0f);
-    public static final Item TOOL_PICKAXE_STEEL      = new ToolPickaxe(MODID, "tool_pickaxe_steel",      MaterialTool.STEEL,      1, -1.0f);
-    public static final Item TOOL_PICKAXE_AURORITE   = new ToolPickaxe(MODID, "tool_pickaxe_aurorite",   MaterialTool.AURORITE,   1, -1.0f);
+    public static final RegistryObject<Item> TOOL_PICKAXE_GILIUM     = register("tool_pickaxe_gilium",     new ToolPickaxe(MaterialTool.GILIUM,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_ADAMANTIUM = register("tool_pickaxe_adamantium", new ToolPickaxe(MaterialTool.ADAMANTIUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_MYTHRIL    = register("tool_pickaxe_mythril",    new ToolPickaxe(MaterialTool.MYTHRIL,    2, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_ORICHALCUM = register("tool_pickaxe_orichalcum", new ToolPickaxe(MaterialTool.ORICHALCUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_COPPER     = register("tool_pickaxe_copper",     new ToolPickaxe(MaterialTool.COPPER,     1, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_BRONZE     = register("tool_pickaxe_bronze",     new ToolPickaxe(MaterialTool.BRONZE,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_STEEL      = register("tool_pickaxe_steel",      new ToolPickaxe(MaterialTool.STEEL,      2, -1.0f));
+    public static final RegistryObject<Item> TOOL_PICKAXE_AURORITE   = register("tool_pickaxe_aurorite",   new ToolPickaxe(MaterialTool.AURORITE,   3, -1.0f));
 
     // Tool Shovel
-    public static final Item TOOL_SHOVEL_BRASS      = new ToolShovel(MODID, "tool_shovel_brass",      MaterialTool.BRASS,      1, -1.0f);
-    public static final Item TOOL_SHOVEL_GILIUM     = new ToolShovel(MODID, "tool_shovel_gilium",     MaterialTool.GILIUM,     1, -1.0f);
-    public static final Item TOOL_SHOVEL_ADAMANTIUM = new ToolShovel(MODID, "tool_shovel_adamantium", MaterialTool.ADAMANTIUM, 1, -1.0f);
-    public static final Item TOOL_SHOVEL_MYTHRIL    = new ToolShovel(MODID, "tool_shovel_mythril",    MaterialTool.MYTHRIL,    1, -1.0f);
-    public static final Item TOOL_SHOVEL_ORICHALCUM = new ToolShovel(MODID, "tool_shovel_orichalcum", MaterialTool.ORICHALCUM, 1, -1.0f);
-    public static final Item TOOL_SHOVEL_COPPER     = new ToolShovel(MODID, "tool_shovel_copper",     MaterialTool.COPPER,     1, -1.0f);
-    public static final Item TOOL_SHOVEL_BRONZE     = new ToolShovel(MODID, "tool_shovel_bronze",     MaterialTool.BRONZE,     1, -1.0f);
-    public static final Item TOOL_SHOVEL_STEEL      = new ToolShovel(MODID, "tool_shovel_steel",      MaterialTool.STEEL,      1, -1.0f);
-    public static final Item TOOL_SHOVEL_AURORITE   = new ToolShovel(MODID, "tool_shovel_aurorite",   MaterialTool.AURORITE,   1, -1.0f);
+    public static final RegistryObject<Item> TOOL_SHOVEL_GILIUM     = register("tool_shovel_gilium",     new ToolShovel(MaterialTool.GILIUM,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_ADAMANTIUM = register("tool_shovel_adamantium", new ToolShovel(MaterialTool.ADAMANTIUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_MYTHRIL    = register("tool_shovel_mythril",    new ToolShovel(MaterialTool.MYTHRIL,    2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_ORICHALCUM = register("tool_shovel_orichalcum", new ToolShovel(MaterialTool.ORICHALCUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_COPPER     = register("tool_shovel_copper",     new ToolShovel(MaterialTool.COPPER,     1, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_BRONZE     = register("tool_shovel_bronze",     new ToolShovel(MaterialTool.BRONZE,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_STEEL      = register("tool_shovel_steel",      new ToolShovel(MaterialTool.STEEL,      2, -1.0f));
+    public static final RegistryObject<Item> TOOL_SHOVEL_AURORITE   = register("tool_shovel_aurorite",   new ToolShovel(MaterialTool.AURORITE,   3, -1.0f));
 
-   // // Tool Hoe
-   // public static final Item TOOL_HOE_BRASS      = new ToolHoe(MODID, "tool_hoe_brass",      MaterialTool.BRASS,      -1.0f);
-   // public static final Item TOOL_HOE_GILIUM     = new ToolHoe(MODID, "tool_hoe_gilium",     MaterialTool.GILIUM,     -1.0f);
-   // public static final Item TOOL_HOE_ADAMANTIUM = new ToolHoe(MODID, "tool_hoe_adamantium", MaterialTool.ADAMANTIUM, -1.0f);
-   // public static final Item TOOL_HOE_MYTHRIL    = new ToolHoe(MODID, "tool_hoe_mythril",    MaterialTool.MYTHRIL,    -1.0f);
-   // public static final Item TOOL_HOE_ORICHALCUM = new ToolHoe(MODID, "tool_hoe_orichalcum", MaterialTool.ORICHALCUM, -1.0f);
-   // public static final Item TOOL_HOE_COPPER     = new ToolHoe(MODID, "tool_hoe_copper",     MaterialTool.COPPER,     -1.0f);
-   // public static final Item TOOL_HOE_BRONZE     = new ToolHoe(MODID, "tool_hoe_bronze",     MaterialTool.BRONZE,     -1.0f);
-   // public static final Item TOOL_HOE_STEEL      = new ToolHoe(MODID, "tool_hoe_steel",      MaterialTool.STEEL,      -1.0f);
-   // public static final Item TOOL_HOE_AURORITE   = new ToolHoe(MODID, "tool_hoe_aurorite",   MaterialTool.AURORITE,   -1.0f);
+    // // Tool Hoe
+    public static final RegistryObject<Item> TOOL_HOE_GILIUM     = register("tool_hoe_gilium",     new ToolHoe(MaterialTool.GILIUM,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_ADAMANTIUM = register("tool_hoe_adamantium", new ToolHoe(MaterialTool.ADAMANTIUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_MYTHRIL    = register("tool_hoe_mythril",    new ToolHoe(MaterialTool.MYTHRIL,    2, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_ORICHALCUM = register("tool_hoe_orichalcum", new ToolHoe(MaterialTool.ORICHALCUM, 3, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_COPPER     = register("tool_hoe_copper",     new ToolHoe(MaterialTool.COPPER,     1, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_BRONZE     = register("tool_hoe_bronze",     new ToolHoe(MaterialTool.BRONZE,     2, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_STEEL      = register("tool_hoe_steel",      new ToolHoe(MaterialTool.STEEL,      2, -1.0f));
+    public static final RegistryObject<Item> TOOL_HOE_AURORITE   = register("tool_hoe_aurorite",   new ToolHoe(MaterialTool.AURORITE,   3, -1.0f));
 
-    /**Register all stuff, pre is true during preInit and false during Init**/
-    static void registerBlocks(){
+    // Tool Other
+    public static final RegistryObject<Item> TOOL_DYNAMITE = register("tool_dynamite", new ToolDynamite());
 
-        // Blocks
-        Register.registerBlock(BLOCK_BRASS     , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_GILIUM    , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_ADAMANTIUM, ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_ZINC      , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_MYTHRIL   , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_TIN       , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_ORICHALCUM, ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_COPPER    , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_BRONZE    , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_STEEL     , ItemGroup.BUILDING_BLOCKS);
+    // Sounds
+    public static final RegistryObject<SoundEvent> SOUND_ALPACA_AMBIENT = register("acecraft.alpaca.ambient", new SoundEvent(new ResourceLocation(MODID, "acecraft.alpaca.ambient")));
+    public static final RegistryObject<SoundEvent> SOUND_ALPACA_HURT    = register("acecraft.alpaca.hurt",    new SoundEvent(new ResourceLocation(MODID, "acecraft.alpaca.hurt")));
+    public static final RegistryObject<SoundEvent> SOUND_ALPACA_DEATH   = register("acecraft.alpaca.death",   new SoundEvent(new ResourceLocation(MODID, "acecraft.alpaca.death")));
 
-        // Ore
-        Register.registerBlock(ORE_GILIUM    , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_ZINC      , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_MYTHRIL   , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_TIN       , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_COPPER    , ItemGroup.BUILDING_BLOCKS);
+    // Tile Entity
+    public static final RegistryObject<TileEntityType<TileFoundry>>    TILE_FOUNDRY    = TILES.register("foundry",    () -> TileEntityType.Builder.of(TileFoundry::new,    MACHINA_FOUNDRY.get()).build(null));
+    public static final RegistryObject<TileEntityType<TileDistillery>> TILE_DISTILLERY = TILES.register("distillery", () -> TileEntityType.Builder.of(TileDistillery::new, MACHINA_DISTILLERY.get()).build(null));
 
-        Register.registerBlock(BLOCK_AURORITE, ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_RUBY    , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_SAPPHIRE, ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_AMETHYST, ItemGroup.BUILDING_BLOCKS);
+    // Container
+    public static final RegistryObject<ContainerType<ContainerFoundry>>    CONTAINER_FOUNDRY    = CONTAINERS.register("foundry",    () -> IForgeContainerType.create(ContainerFoundry::new));
+    public static final RegistryObject<ContainerType<ContainerDistillery>> CONTAINER_DISTILLERY = CONTAINERS.register("distillery", () -> IForgeContainerType.create(ContainerDistillery::new));
 
-        // Other Blocks
-        Register.registerBlock(BLOCK_SALT  , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(BLOCK_SULFUR, ItemGroup.BUILDING_BLOCKS);
-        //Register.registerBlock(BLOCK_FLOUR , ItemGroup.BUILDING_BLOCKS);
-        //Register.registerBlock(BLOCK_COFFEE, ItemGroup.BUILDING_BLOCKS);
+    // Loot Tables
+    public static final ResourceLocation ALPACA_WHITE      = new ResourceLocation(MODID, "entities/alpaca/white");
+    public static final ResourceLocation ALPACA_ORANGE     = new ResourceLocation(MODID, "entities/alpaca/orange");
+    public static final ResourceLocation ALPACA_MAGENTA    = new ResourceLocation(MODID, "entities/alpaca/magenta");
+    public static final ResourceLocation ALPACA_LIGHT_BLUE = new ResourceLocation(MODID, "entities/alpaca/light_blue");
+    public static final ResourceLocation ALPACA_YELLOW     = new ResourceLocation(MODID, "entities/alpaca/yellow");
+    public static final ResourceLocation ALPACA_LIME       = new ResourceLocation(MODID, "entities/alpaca/lime");
+    public static final ResourceLocation ALPACA_PINK       = new ResourceLocation(MODID, "entities/alpaca/pink");
+    public static final ResourceLocation ALPACA_GRAY       = new ResourceLocation(MODID, "entities/alpaca/gray");
+    public static final ResourceLocation ALPACA_LIGHT_GRAY = new ResourceLocation(MODID, "entities/alpaca/light_gray");
+    public static final ResourceLocation ALPACA_CYAN       = new ResourceLocation(MODID, "entities/alpaca/cyan");
+    public static final ResourceLocation ALPACA_PURPLE     = new ResourceLocation(MODID, "entities/alpaca/purple");
+    public static final ResourceLocation ALPACA_BLUE       = new ResourceLocation(MODID, "entities/alpaca/blue");
+    public static final ResourceLocation ALPACA_BROWN      = new ResourceLocation(MODID, "entities/alpaca/brown");
+    public static final ResourceLocation ALPACA_GREEN      = new ResourceLocation(MODID, "entities/alpaca/green");
+    public static final ResourceLocation ALPACA_RED        = new ResourceLocation(MODID, "entities/alpaca/red");
+    public static final ResourceLocation ALPACA_BLACK      = new ResourceLocation(MODID, "entities/alpaca/black");
 
-        Register.registerBlock(ORE_AURORITE, ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_RUBY    , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_SAPPHIRE, ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_AMETHYST, ItemGroup.BUILDING_BLOCKS);
+    // Ore Spawn
+    public static ConfiguredFeature<?, ?> SPAWN_GILIUM   = null;
+    public static ConfiguredFeature<?, ?> SPAWN_ZINC     = null;
+    public static ConfiguredFeature<?, ?> SPAWN_MYTHRIL  = null;
+    public static ConfiguredFeature<?, ?> SPAWN_TIN      = null;
+    public static ConfiguredFeature<?, ?> SPAWN_COPPER   = null;
+    public static ConfiguredFeature<?, ?> SPAWN_AURORITE = null;
+    public static ConfiguredFeature<?, ?> SPAWN_RUBY     = null;
+    public static ConfiguredFeature<?, ?> SPAWN_SAPPHIRE = null;
+    public static ConfiguredFeature<?, ?> SPAWN_SALT     = null;
+    public static ConfiguredFeature<?, ?> SPAWN_SULFUR   = null;
 
-        Register.registerBlock(ORE_SALT  , ItemGroup.BUILDING_BLOCKS);
-        Register.registerBlock(ORE_SULFUR, ItemGroup.BUILDING_BLOCKS);
+    // Recipes
+    public static final IRecipeType<RecipeDistillery> RECIPE_DISTILLERY = register("acecraft:distilling");
+    public static final RegistryObject<RecipeDistillerySerializer> SERIALIZER_DISTILLERY = RECIPES.register("distilling", RecipeDistillerySerializer::new);
 
-        Register.registerBlock(CROP_COFFEE      );
-        Register.registerBlock(CROP_TURNIP      );
-        Register.registerBlock(CROP_CABBAGE     );
-        Register.registerBlock(CROP_TOMATO      );
-        Register.registerBlock(CROP_CUCUMBER    );
-        Register.registerBlock(CROP_CORN        );
-        Register.registerBlock(CROP_GRAPES      );
-        Register.registerBlock(CROP_HEMP        );
-        Register.registerBlock(CROP_STRAWBERRIES);
-        Register.registerBlock(CROP_ONION       );
+    // Entities
+    public static final RegistryObject<EntityType<EntityAlpaca>>   ENTITY_ALPACA   = ENTITIES.register("alpaca",   () -> EntityType.Builder.of(EntityAlpaca::new,                    EntityClassification.CREATURE).sized(0.9F, 1.3F).setTrackingRange(10).build(new ResourceLocation(MODID, "alpaca").toString()));
+    public static final RegistryObject<EntityType<EntityDynamite>> ENTITY_DYNAMITE = ENTITIES.register("dynamite", () -> EntityType.Builder.of(factoryDynamite(EntityDynamite::new), EntityClassification.MISC).noSummon().sized(0.25F, 0.25F).setTrackingRange(100).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).setCustomClientFactory(EntityDynamite::new).build(new ResourceLocation(MODID, "dynamite").toString()));
+    public static final RegistryObject<EntityType<EntitySpear>>    ENTITY_SPEAR    = ENTITIES.register("spear",    () -> EntityType.Builder.of(factorySpear(EntitySpear::new),       EntityClassification.MISC).noSummon().sized(0.25F, 0.25F).setTrackingRange(100).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).setCustomClientFactory(EntitySpear::new   ).build(new ResourceLocation(MODID, "spear").toString()));
+    public static final RegistryObject<EntityType<EntityNugget>>   ENTITY_NUGGET   = ENTITIES.register("nugget",   () -> EntityType.Builder.of(factoryNugget(EntityNugget::new),     EntityClassification.MISC).noSummon().sized(0.25F, 0.25F).setTrackingRange(100).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).setCustomClientFactory(EntityNugget::new  ).build(new ResourceLocation(MODID, "nugget").toString()));
 
-        Register.registerBlock(FLOWER_BAMBOO    , ItemGroup.DECORATIONS);
-        Register.registerBlock(FLOWER_MATSUTAKE , ItemGroup.DECORATIONS);
-        Register.registerBlock(FLOWER_MOONDROP  , ItemGroup.DECORATIONS);
-        Register.registerBlock(FLOWER_TOYFLOWER , ItemGroup.DECORATIONS);
-        Register.registerBlock(FLOWER_PINKCAT   , ItemGroup.DECORATIONS);
-        Register.registerBlock(FLOWER_MAGICGRASS, ItemGroup.DECORATIONS);
+    // Spawn Eggs
+    public static final RegistryObject<ItemSpawnEgg> SPAWNEGG_ALPACA = ITEMS.register("spawnegg_alpaca", () -> new ItemSpawnEgg(() -> ENTITY_ALPACA.get(), 12345, 67890, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
-        Register.registerBlock(MACHINA_ROPE);
-        Register.registerBlock(MACHINA_ANCHOR      , ItemGroup.DECORATIONS);
-        Register.registerBlock(MACHINA_DESTILLERY  , ItemGroup.DECORATIONS);
-        Register.registerBlock(MACHINA_GLOBE       , ItemGroup.DECORATIONS);
-        Register.registerBlock(MACHINA_BLASTFURNACE, ItemGroup.DECORATIONS);
-        //Register.registerBlock(MACHINA_KEG         , ItemGroup.DECORATIONS);
-        Register.registerBlock(MACHINA_STOVE       , ItemGroup.DECORATIONS);
+    // Client Render Factory
+    private static <T extends EntityDynamite> EntityType.IFactory<T> factoryDynamite(EntityType.IFactory<T> factory){ return factory; }
+    private static <T extends EntitySpear>    EntityType.IFactory<T> factorySpear(   EntityType.IFactory<T> factory){ return factory; }
+    private static <T extends EntityNugget>   EntityType.IFactory<T> factoryNugget(  EntityType.IFactory<T> factory){ return factory; }
 
 
+
+    //----------------------------------------REGISTER----------------------------------------//
+
+    static void register(){
+        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    static void registerItems(){
-
-        // Nuggets
-        Register.registerItem(NUGGET_IRON      );
-        Register.registerItem(NUGGET_GOLD      );
-        Register.registerItem(NUGGET_GILIUM    );
-        Register.registerItem(NUGGET_ZINC      );
-        Register.registerItem(NUGGET_MYTHRIL   );
-        Register.registerItem(NUGGET_TIN       );
-        Register.registerItem(NUGGET_COPPER    );
-
-        // Ingots
-        Register.registerItem(INGOT_BRASS     );
-        Register.registerItem(INGOT_GILIUM    );
-        Register.registerItem(INGOT_ADAMANTIUM);
-        Register.registerItem(INGOT_ZINC      );
-        Register.registerItem(INGOT_MYTHRIL   );
-        Register.registerItem(INGOT_TIN       );
-        Register.registerItem(INGOT_ORICHALCUM);
-        Register.registerItem(INGOT_COPPER    );
-        Register.registerItem(INGOT_BRONZE    );
-        Register.registerItem(INGOT_STEEL     );
-
-        Register.registerItem(FOOD_COFFEE      );
-        Register.registerItem(FOOD_TURNIP      );
-        Register.registerItem(FOOD_CABBAGE     );
-        Register.registerItem(FOOD_TOMATO      );
-        Register.registerItem(FOOD_CUCUMBER    );
-        Register.registerItem(FOOD_CORN        );
-        Register.registerItem(FOOD_GRAPES      );
-        Register.registerItem(FOOD_STRAWBERRIES);
-        Register.registerItem(FOOD_ONION       );
-        Register.registerItem(FOOD_RICEBALL       );
-
-        Register.registerItem(DISH_STIRFRY);
-        Register.registerItem(DISH_FRIEDRICE);
-        Register.registerItem(DISH_SAVORYPANCAKE);
-        Register.registerItem(DISH_FRENCHFRIES);
-        Register.registerItem(DISH_CROQUETTE);
-        Register.registerItem(DISH_POPCORN);
-        Register.registerItem(DISH_CORNFLAKES);
-        Register.registerItem(DISH_SCRAMBLEDEGGS);
-        Register.registerItem(DISH_OMELET);
-        Register.registerItem(DISH_OMELETRICE);
-        Register.registerItem(DISH_APPLESOUFFLE);
-        Register.registerItem(DISH_CURRYBREAD);
-        Register.registerItem(DISH_FRENCHTOAST);
-        Register.registerItem(DISH_FRIEDNODDLES);
-        Register.registerItem(DISH_TEMPURA);
-        Register.registerItem(DISH_PANCAKE);
-        Register.registerItem(DISH_POTSTICKER);
-        Register.registerItem(DISH_RISOTTO);
-        Register.registerItem(DISH_HOTMILK);
-        Register.registerItem(DISH_HOTCHOCOLATE);
-        Register.registerItem(DISH_PUMPKINSTEW);
-        Register.registerItem(DISH_BOILEDEGG);
-        Register.registerItem(DISH_DUMPLINGS);
-        Register.registerItem(DISH_NOODLES);
-        Register.registerItem(DISH_CURRYNOODLES);
-        Register.registerItem(DISH_TEMPURANOODLES);
-        Register.registerItem(DISH_RICESOUP);
-        Register.registerItem(DISH_PORRIDGE);
-        Register.registerItem(DISH_TEMPURARICE);
-        Register.registerItem(DISH_EGGOVERRICE);
-        Register.registerItem(DISH_CURRYRICE);
-        Register.registerItem(DISH_TOAST);
-        Register.registerItem(DISH_STEAMEDBUN);
-        Register.registerItem(DISH_SHAOMI);
-        Register.registerItem(DISH_CURRYBUN);
-        Register.registerItem(DISH_STEAMEDDUMPLINGS);
-        Register.registerItem(DISH_SPONGECAKE);
-        Register.registerItem(DISH_STEAMEDCAKE);
-        Register.registerItem(DISH_PUDDING);
-        Register.registerItem(DISH_PUMPKINPUDDING);
-        Register.registerItem(DISH_SALAD);
-        Register.registerItem(DISH_SANDWICH);
-        Register.registerItem(DISH_FRUITSANDWICH);
-        Register.registerItem(DISH_PICKLEDTURNIPS);
-        Register.registerItem(DISH_PICKLEDCUCUMBER);
-        Register.registerItem(DISH_BAMBOORICE);
-        Register.registerItem(DISH_MATSUTAKERICE);
-        Register.registerItem(DISH_SUSHI);
-        Register.registerItem(DISH_RAISINBREAD);
-        Register.registerItem(DISH_SASHIMI);
-        Register.registerItem(DISH_CHIRASHISUSHI);
-
-        //Register.registerItem(SEEDS_WILD        );
-        Register.registerItem(SEEDS_COFFEE      );
-        Register.registerItem(SEEDS_TURNIP      );
-        Register.registerItem(SEEDS_CABBAGE     );
-        Register.registerItem(SEEDS_TOMATO      );
-        Register.registerItem(SEEDS_CUCUMBER    );
-        Register.registerItem(SEEDS_CORN        );
-        Register.registerItem(SEEDS_GRAPES      );
-        Register.registerItem(SEEDS_HEMP        );
-        Register.registerItem(SEEDS_STRAWBERRIES);
-        Register.registerItem(SEEDS_ONION       );
-
-        //Register.registerItem(FOOD_VENISON_RAW   );
-        //Register.registerItem(FOOD_VENISON_COOKED);
-        //Register.registerItem(FOOD_VICUGNA_RAW   );
-        //Register.registerItem(FOOD_VICUGNA_COOKED);
-
-        Register.registerItem(STUFF_DYNAMITE);
-
-        Register.registerItem(STUFF_ROPE       );
-        Register.registerItem(STUFF_HEMP       );
-        //Register.registerItem(STUFF_GEAR_WOODEN);
-        Register.registerItem(STUFF_AURORITE);
-        Register.registerItem(STUFF_RUBY    );
-        Register.registerItem(STUFF_SAPPHIRE);
-        Register.registerItem(STUFF_AMETHYST);
-        //Register.registerItem(STUFF_FLOUR );
-        ///Register.registerItem(STUFF_COFFEE);
-        Register.registerItem(STUFF_SALT  );
-        Register.registerItem(STUFF_SULFUR);
-
-        Register.registerItem(STUFF_CURRY       );
-
-        Register.registerItem(LIQUOR_COFFEE);
-        Register.registerItem(LIQUOR_RUM   );
-        //Register.registerItem(LIQUOR_SAKE  );
-        Register.registerItem(LIQUOR_SALGAM);
-        Register.registerItem(LIQUOR_VODKA );
-        Register.registerItem(LIQUOR_BEER  );
-        Register.registerItem(LIQUOR_CIDER );
-        Register.registerItem(LIQUOR_WINE  );
-
-        Register.registerItem(LIQUOR_OIL       );
-
-        // Armor Boots
-        Register.registerItem(ARMOR_BOOTS_BRASS     );
-        Register.registerItem(ARMOR_BOOTS_GILIUM    );
-        Register.registerItem(ARMOR_BOOTS_ADAMANTIUM);
-        Register.registerItem(ARMOR_BOOTS_MYTHRIL   );
-        Register.registerItem(ARMOR_BOOTS_ORICHALCUM);
-        Register.registerItem(ARMOR_BOOTS_COPPER    );
-        Register.registerItem(ARMOR_BOOTS_BRONZE    );
-        Register.registerItem(ARMOR_BOOTS_STEEL     );
-        Register.registerItem(ARMOR_BOOTS_AURORITE  );
-
-        // Armor Chestplate
-        Register.registerItem(ARMOR_PLATE_BRASS     );
-        Register.registerItem(ARMOR_PLATE_GILIUM    );
-        Register.registerItem(ARMOR_PLATE_ADAMANTIUM);
-        Register.registerItem(ARMOR_PLATE_MYTHRIL   );
-        Register.registerItem(ARMOR_PLATE_ORICHALCUM);
-        Register.registerItem(ARMOR_PLATE_COPPER    );
-        Register.registerItem(ARMOR_PLATE_BRONZE    );
-        Register.registerItem(ARMOR_PLATE_STEEL     );
-        Register.registerItem(ARMOR_PLATE_AURORITE  );
-
-        // Armor Leggings
-        Register.registerItem(ARMOR_LEGGINGS_BRASS     );
-        Register.registerItem(ARMOR_LEGGINGS_GILIUM    );
-        Register.registerItem(ARMOR_LEGGINGS_ADAMANTIUM);
-        Register.registerItem(ARMOR_LEGGINGS_MYTHRIL   );
-        Register.registerItem(ARMOR_LEGGINGS_ORICHALCUM);
-        Register.registerItem(ARMOR_LEGGINGS_COPPER    );
-        Register.registerItem(ARMOR_LEGGINGS_BRONZE    );
-        Register.registerItem(ARMOR_LEGGINGS_STEEL     );
-        Register.registerItem(ARMOR_LEGGINGS_AURORITE  );
-
-        // Armor Helmet
-        Register.registerItem(ARMOR_HELMET_BRASS     );
-        Register.registerItem(ARMOR_HELMET_GILIUM    );
-        Register.registerItem(ARMOR_HELMET_ADAMANTIUM);
-        Register.registerItem(ARMOR_HELMET_MYTHRIL   );
-        Register.registerItem(ARMOR_HELMET_ORICHALCUM);
-        Register.registerItem(ARMOR_HELMET_COPPER    );
-        Register.registerItem(ARMOR_HELMET_BRONZE    );
-        Register.registerItem(ARMOR_HELMET_STEEL     );
-        Register.registerItem(ARMOR_HELMET_AURORITE  );
-
-        // Tool Sword
-        Register.registerItem(TOOL_SWORD_BRASS     );
-        Register.registerItem(TOOL_SWORD_GILIUM    );
-        Register.registerItem(TOOL_SWORD_ADAMANTIUM);
-        Register.registerItem(TOOL_SWORD_MYTHRIL   );
-        Register.registerItem(TOOL_SWORD_ORICHALCUM);
-        Register.registerItem(TOOL_SWORD_COPPER    );
-        Register.registerItem(TOOL_SWORD_BRONZE    );
-        Register.registerItem(TOOL_SWORD_STEEL     );
-        Register.registerItem(TOOL_SWORD_AURORITE  );
-
-        // Tool Spear
-        Register.registerItem(TOOL_SPEAR_BRASS     );
-        Register.registerItem(TOOL_SPEAR_GILIUM    );
-        Register.registerItem(TOOL_SPEAR_ADAMANTIUM);
-        Register.registerItem(TOOL_SPEAR_MYTHRIL   );
-        Register.registerItem(TOOL_SPEAR_ORICHALCUM);
-        Register.registerItem(TOOL_SPEAR_COPPER    );
-        Register.registerItem(TOOL_SPEAR_BRONZE    );
-        Register.registerItem(TOOL_SPEAR_STEEL     );
-        Register.registerItem(TOOL_SPEAR_AURORITE  );
-
-        // Tool Axe
-        Register.registerItem(TOOL_AXE_BRASS     );
-        Register.registerItem(TOOL_AXE_GILIUM    );
-        Register.registerItem(TOOL_AXE_ADAMANTIUM);
-        Register.registerItem(TOOL_AXE_MYTHRIL   );
-        Register.registerItem(TOOL_AXE_ORICHALCUM);
-        Register.registerItem(TOOL_AXE_COPPER    );
-        Register.registerItem(TOOL_AXE_BRONZE    );
-        Register.registerItem(TOOL_AXE_STEEL     );
-        Register.registerItem(TOOL_AXE_AURORITE  );
-
-        // Tool Pickaxe
-        Register.registerItem(TOOL_PICKAXE_BRASS     );
-        Register.registerItem(TOOL_PICKAXE_GILIUM    );
-        Register.registerItem(TOOL_PICKAXE_ADAMANTIUM);
-        Register.registerItem(TOOL_PICKAXE_MYTHRIL   );
-        Register.registerItem(TOOL_PICKAXE_ORICHALCUM);
-        Register.registerItem(TOOL_PICKAXE_COPPER    );
-        Register.registerItem(TOOL_PICKAXE_BRONZE    );
-        Register.registerItem(TOOL_PICKAXE_STEEL     );
-        Register.registerItem(TOOL_PICKAXE_AURORITE  );
-
-        // Tool Shovel
-        Register.registerItem(TOOL_SHOVEL_BRASS     );
-        Register.registerItem(TOOL_SHOVEL_GILIUM    );
-        Register.registerItem(TOOL_SHOVEL_ADAMANTIUM);
-        Register.registerItem(TOOL_SHOVEL_MYTHRIL   );
-        Register.registerItem(TOOL_SHOVEL_ORICHALCUM);
-        Register.registerItem(TOOL_SHOVEL_COPPER    );
-        Register.registerItem(TOOL_SHOVEL_BRONZE    );
-        Register.registerItem(TOOL_SHOVEL_STEEL     );
-        Register.registerItem(TOOL_SHOVEL_AURORITE  );
-
-        // Tool Hoe
-      //  Register.registerItem(TOOL_HOE_BRASS     );
-      //  Register.registerItem(TOOL_HOE_GILIUM    );
-      //  Register.registerItem(TOOL_HOE_ADAMANTIUM);
-      //  Register.registerItem(TOOL_HOE_MYTHRIL   );
-      //  Register.registerItem(TOOL_HOE_ORICHALCUM);
-      //  Register.registerItem(TOOL_HOE_COPPER    );
-      //  Register.registerItem(TOOL_HOE_BRONZE    );
-      //  Register.registerItem(TOOL_HOE_STEEL     );
-      //  Register.registerItem(TOOL_HOE_AURORITE  );
-    }
-
-    //@ObjectHolder(ContainerReference.TEMPLATE_MANAGER_CONTAINER)
-    public final static ContainerType<ContainerBlastFurnace> TYPE_BLASTFURNACE = IForgeContainerType.create(ContainerBlastFurnace::new);
-    public final static ContainerType<ContainerDestille> TYPE_DESTILLE         = IForgeContainerType.create(ContainerDestille::new);
-
-    public static TileEntityType<TileEntity> TYPE_BLASTFURNACE_TILE;
-    public static TileEntityType<TileEntity> TYPE_DESTILLE_TILE;
-
-    static List<EntityType> entities = Lists.newArrayList();
-
-    static List<Item> spawnEggs = Lists.newArrayList();
-
-    public static void registerContainer(IForgeRegistry<ContainerType<?>> registry){ // WRONG PART
-        //registry.register(TYPE_BLASTFURNACE.setRegistryName(MODID, "blastfurnace"));
-        //registry.register(TYPE_DESTILLE.setRegistryName(MODID, "destille"));
-    }
-
-    static void registerGUI(){
-        ScreenManager.registerFactory(ContainerBlastFurnace.TYPE, GuiBlastFurnace::new);
-        ScreenManager.registerFactory(ContainerDestille.TYPE, GuiDistille::new);
-        ScreenManager.registerFactory(ContainerStove.TYPE, GuiStove::new);
-        //ScreenManager.<TYPE_BLASTFURNACE, GuiBlastFurnace>registerFactory(TYPE_BLASTFURNACE, GuiBlastFurnace::new);
-    }
-
-
-
-
-
-    public static final IRecipeType<RecipeDestille> DESTILLING_RECIPES = registerRecipeType("destilling");
-
-
-
-
-    //public static final EntityType<EntityDynamite> ENTITY_DYNAMITE = createThrowableEntity(EntityDynamite.class, EntityDynamite::new);
-    //public static final EntityType<EntitySpear>    ENTITY_SPEAR    = createProjectileEntity(EntitySpear.class,    EntitySpear::new);
-    //public static final EntityType<EntityNugget>   ENTITY_NUGGET   = createThrowableEntity(EntityNugget.class,   EntityNugget::new);
-
-    public static final EntityType<EntityDynamite> ENTITY_DYNAMITE = register("dynamite", EntityType.Builder.<EntityDynamite>create(EntityClassification.MISC)
-
-            .disableSerialization()
-
-            .disableSummoning()
-
-            .size(0.25F, 0.25F)
-
-            .setTrackingRange(4)
-
-            .setUpdateInterval(5)
-
-            .setCustomClientFactory(EntityDynamite::new));
-
-    public static final EntityType<EntityNugget> ENTITY_NUGGET = register("nugget", EntityType.Builder.<EntityNugget>create(EntityClassification.MISC)
-
-            .disableSerialization()
-
-            .disableSummoning()
-
-            .size(0.25F, 0.25F)
-
-            .setTrackingRange(4)
-
-            .setUpdateInterval(5)
-
-            .setCustomClientFactory(EntityNugget::new));
-
-    public static final EntityType<EntitySpear> ENTITY_SPEAR = register("spear", EntityType.Builder.<EntitySpear>create(EntityClassification.MISC)
-
-            .disableSerialization()
-
-            .disableSummoning()
-
-            .size(0.25F, 0.25F)
-
-            .setTrackingRange(4)
-
-            .setUpdateInterval(5)
-
-            .setCustomClientFactory(EntitySpear::new));
-
-    //public static final EntityType<EntityCrab>   ENTITY_CRAB   = createEntity(EntityCrab.class,   EntityCrab::new, 1, 1, 1, 1);
-
-    //public static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
-    //    ResourceLocation location = new ResourceLocation(AceCraft.MODID, name);
-    //    EntityType<T> entityType = builder.build(location.toString());
-    //    entityType.setRegistryName(location);
-    //    entities.add(entityType);
-    //    return entityType;
-    //}
-
-    public static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
-
-        ResourceLocation location = new ResourceLocation(MODID, name);
-
-        EntityType<T> entityType = builder.build(location.toString());
-
-        entityType.setRegistryName(location);
-
-        entities.add(entityType);
-
-        return entityType;
-
-    }
-
-
-    private static <T extends ThrowableEntity> EntityType<T> createThrowableEntity(Class<T> entityClass, EntityType.IFactory<T> factory) {
-        ResourceLocation location = new ResourceLocation(AceCraft.MODID, classToStringT(entityClass));
-        EntityType<T> entity = EntityType.Builder.create(factory, EntityClassification.MISC)
-                .size(1,1)
-                //.setCustomClientFactory(EntityDynamite::new)
-                .setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        entity.setRegistryName(location);
-        entities.add(entity);
-        return entity;
-    }
-
-    private static <T extends AbstractArrowEntity> EntityType<T> createProjectileEntity(Class<T> entityClass, EntityType.IFactory<T> factory) {
-        ResourceLocation location = new ResourceLocation(AceCraft.MODID, classToStringP(entityClass));
-        EntityType<T> entity = EntityType.Builder.create(factory, EntityClassification.MISC).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        entity.setRegistryName(location);
-        entities.add(entity);
-        return entity;
-    }
-
-    private static String classToStringA(Class<? extends AnimalEntity> entityClass) {
-        return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, entityClass.getSimpleName()).replace("entity_", "");
-    }
-
-    private static String classToStringT(Class<? extends ThrowableEntity> entityClass) {
-        return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, entityClass.getSimpleName()).replace("entity_", "");
-    }
-
-    private static String classToStringP(Class<? extends AbstractArrowEntity> entityClass) {
-        return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, entityClass.getSimpleName()).replace("entity_", "");
-    }
-
-    private static <T extends AnimalEntity> EntityType<T> createEntity(Class<T> entityClass, EntityType.IFactory<T> factory, float width, float height, int eggPrimary, int eggSecondary) {
-        ResourceLocation location = new ResourceLocation(AceCraft.MODID, classToStringA(entityClass));
-        EntityType<T> entity = EntityType.Builder.create(factory, EntityClassification.CREATURE).size(width, height).setTrackingRange(64).setUpdateInterval(1).build(location.toString());
-        entity.setRegistryName(location);
-        entities.add(entity);
-        Item spawnEgg = new SpawnEggItem(entity, eggPrimary, eggSecondary, (new Item.Properties()).group(ItemGroup.MISC));
-        spawnEgg.setRegistryName(new ResourceLocation(AceCraft.MODID, classToStringA(entityClass) + "_spawn_egg"));
-        spawnEggs.add(spawnEgg);
-        return entity;
-    }
-
-    static void registerRenderer() {
-       // RenderingRegistry.registerEntityRenderingHandler(EntityCrab.class, RenderCrab::new);
-       // RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class, RenderDynamite::new);
-       // RenderingRegistry.registerEntityRenderingHandler(EntitySpear.class, RenderSpear::new);
-       // RenderingRegistry.registerEntityRenderingHandler(EntityNugget.class, RenderNugget::new);
-    }
-
-   // static void addSpawn() {
-   //     List<Biome> spawnableBiomes = Lists.newArrayList();
-   //     List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.SPAWN.include.get()));
-   //     List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.SPAWN.exclude.get()));
-   //     if (!includeList.isEmpty()) {
-   //         for (BiomeDictionary.Type type : includeList) {
-   //             for (Biome biome : BiomeDictionary.getBiomes(type)) {
-   //                 if (!biome.getSpawns(EntityClassification.CREATURE).isEmpty()) {
-   //                     spawnableBiomes.add(biome);
-   //                 }
-   //             }
-   //         }
-   //         if (!excludeList.isEmpty()) {
-   //             for (BiomeDictionary.Type type : excludeList) {
-   //                 Set<Biome> excludeBiomes = BiomeDictionary.getBiomes(type);
-   //                 for (Biome biome : excludeBiomes) {
-   //                     spawnableBiomes.remove(biome);
-   //                 }
-   //             }
-   //         }
-   //     } else {
-   //         throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
-   //     }
-   //     for (Biome biome : spawnableBiomes) {
-   //         //biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(ENTITY_CRAB, 1, 2, 5));
-   //     }
-   // }
-
-    static List<SoundEvent> sounds = Lists.newArrayList();
-    //public static final SoundEvent LLAMA_AMBIENT = createSound("adelie.ambient");
-    //public static final SoundEvent LLAMA_BABY_AMBIENT = createSound("adelie.baby.ambient");
-    //public static final SoundEvent LLAMA_DEATH = createSound("adelie.death");
-    //public static final SoundEvent LLAMA_HURT = createSound("adelie.hurt");
-
-    private static SoundEvent createSound(String name) {
-        ResourceLocation resourceLocation = new ResourceLocation(AceCraft.MODID, name);
-        SoundEvent sound = new SoundEvent(resourceLocation);
-        sound.setRegistryName(resourceLocation);
-        sounds.add(sound);
-        return sound;
-    }
-
-    private static <T extends IRecipe<?>> IRecipeType<T> registerRecipeType(final String key) {
-        return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(MODID, key), new IRecipeType<T>() {
-            public String toString() {
-                return MODID + ":" + key;
+    static <T extends IRecipe<?>> IRecipeType<T> register(final String key)
+    {
+        return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(key), new IRecipeType<T>()
+        {
+            @Override
+            public String toString()
+            {
+                return key;
             }
         });
     }
 
-
-
-    public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event){
-        event.getRegistry().register(TileBlastFurnace.TYPE);
-        event.getRegistry().register(TileEntityDestille.TYPE);
-        event.getRegistry().register(TileEntityStove.TYPE);
+    public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
+        //if (event.getCategory() == Biome.Category.PLAINS) {
+            event.getSpawns().getSpawner(EntityClassification.CREATURE).add(new MobSpawnInfo.Spawners(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
+        //}
     }
 
-    private static final Map<VillagerProfession, Int2ObjectMap<VillagerTrades.ITrade[]>> VANILLA_TRADES = new HashMap<>();
+    public static void registerEntities() {
+        EntitySpawnPlacementRegistry.register(ENTITY_ALPACA.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
+        GlobalEntityTypeAttributes.put(ENTITY_ALPACA.get(), EntityAlpaca.createAttributes().build());
+    }
+    private static RegistryObject<Block> register(String name, Block block){
+        return register(name, block, null);
+    }
 
+    private static RegistryObject<Block> register(String name, Block block, ItemGroup itemGroup){
+        if(itemGroup != null){ ITEMS.register(name, () -> new BlockItem(block, (new Item.Properties()).tab(itemGroup))); }
+        return BLOCKS.register(name, () -> block);
+    }
 
+    private static RegistryObject<Item> register(String name, Item item){
+        return ITEMS.register(name, () -> item);
+    }
 
-    static void addTrades() {
+    private static RegistryObject<SoundEvent> register(String name, SoundEvent sound){
+        return SOUNDS.register(name, () -> sound);
+    }
 
+    private static RegistryObject<EntityType<?>> register(String name, EntityType entity){
+        return ENTITIES.register(name, () -> entity);
+    }
 
-
-
-
-        addVillagerTrades(VillagerProfession.FARMER,  VillagerUtil.newTradeMap(ImmutableMap.of(1, new VillagerTrades.ITrade[] {
-
-                //new BasicTrade(new ItemStack(ExplorerItems.LEEK), new ItemStack(Items.EMERALD), 22, 16, 2),
-
-                new VillagerUtil.ItemsForEmeraldsTrade(FOOD_RICEBALL, 16, 16, 1),
-
-                new VillagerUtil.ItemsForEmeraldsTrade(STUFF_CURRY, 16, 16, 1),})));
-
-
-
-        //addVillagerTrades(VillagerProfession.BUTCHER,  VillagerUtil.newTradeMap(ImmutableMap.of(3, new VillagerTrades.ITrade[] {
-
-        //        new VillagerUtil.EmeraldForItemsTrade(ExplorerItems.LAMB_SHANK, 7, 16, 20)})));
-
-
-
-        //addVillagerTrades(VillagerProfession.CLERIC,  VillagerUtil.newTradeMap(ImmutableMap.of(3, new VillagerTrades.ITrade[] {
-
-        //        new VillagerUtil.ItemsForEmeraldsTrade(ExplorerItems.NOCTILUCA, 5, 1, 15)})));
+    public static ConfiguredFeature<?, ?> buildOreSpawn(String name, BlockState state, int veinSize, int maxHeight, int spawnRate, boolean isNether) {
+        OreFeatureConfig config = new OreFeatureConfig(isNether ? OreFeatureConfig.FillerBlockType.NETHER_ORE_REPLACEABLES : OreFeatureConfig.FillerBlockType.NATURAL_STONE, state, veinSize);
+        ConfiguredFeature<?, ?> feature = Feature.ORE.configured(config)
+                .range(maxHeight)
+                .squared()
+                .chance(spawnRate);
+        Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(AceCraft.MODID, name), feature  );
+        return feature;
 
     }
 
+    public static void registerOreSpawn(){
+        SPAWN_GILIUM   = buildOreSpawn("ore_gilium",   ShopKeeper.ORE_GILIUM.get().defaultBlockState(),   Config.GILIUM.veinSize.get(),   Config.GILIUM.maxHeight.get(),   Config.GILIUM.spawnRate.get(),   true);
+        SPAWN_ZINC     = buildOreSpawn("ore_zinc",     ShopKeeper.ORE_ZINC.get().defaultBlockState(),     Config.ZINC.veinSize.get(),     Config.ZINC.maxHeight.get(),     Config.ZINC.spawnRate.get(),     false);
+        SPAWN_MYTHRIL  = buildOreSpawn("ore_mythril",  ShopKeeper.ORE_MYTHRIL.get().defaultBlockState(),  Config.MYTHRIL.veinSize.get(),  Config.MYTHRIL.maxHeight.get(),  Config.MYTHRIL.spawnRate.get(),  false);
+        SPAWN_TIN      = buildOreSpawn("ore_tin",      ShopKeeper.ORE_TIN.get().defaultBlockState(),      Config.TIN.veinSize.get(),      Config.TIN.maxHeight.get(),      Config.TIN.spawnRate.get(),      false);
+        SPAWN_COPPER   = buildOreSpawn("ore_copper",   ShopKeeper.ORE_COPPER.get().defaultBlockState(),   Config.COPPER.veinSize.get(),   Config.COPPER.maxHeight.get(),   Config.COPPER.spawnRate.get(),   false);
+        SPAWN_AURORITE = buildOreSpawn("ore_aurorite", ShopKeeper.ORE_AURORITE.get().defaultBlockState(), Config.AURORITE.veinSize.get(), Config.AURORITE.maxHeight.get(), Config.AURORITE.spawnRate.get(), false);
+        SPAWN_RUBY     = buildOreSpawn("ore_ruby",     ShopKeeper.ORE_RUBY.get().defaultBlockState(),     Config.RUBY.veinSize.get(),     Config.RUBY.maxHeight.get(),     Config.RUBY.spawnRate.get(),     false);
+        SPAWN_SAPPHIRE = buildOreSpawn("ore_sapphire", ShopKeeper.ORE_SAPPHIRE.get().defaultBlockState(), Config.SAPPHIRE.veinSize.get(), Config.SAPPHIRE.maxHeight.get(), Config.SAPPHIRE.spawnRate.get(), false);
+        SPAWN_SALT     = buildOreSpawn("ore_salt",     ShopKeeper.ORE_SALT.get().defaultBlockState(),     Config.SALT.veinSize.get(),     Config.SALT.maxHeight.get(),     Config.SALT.spawnRate.get(),     false);
+        SPAWN_SULFUR   = buildOreSpawn("ore_sulfur",   ShopKeeper.ORE_SULFUR.get().defaultBlockState(),   Config.SULFUR.veinSize.get(),   Config.SULFUR.maxHeight.get(),   Config.SULFUR.spawnRate.get(),   false);
+    }
 
-    public static void addVillagerTrades(VillagerProfession prof, Int2ObjectMap<VillagerTrades.ITrade[]> newTrades) {
 
 
 
-        Int2ObjectMap<VillagerTrades.ITrade[]> profTrades = VANILLA_TRADES.getOrDefault(prof, new Int2ObjectOpenHashMap<>());
+    //----------------------------------------SETUP----------------------------------------//
 
-        Int2ObjectMap<List<VillagerTrades.ITrade>> mutableTrades = new Int2ObjectOpenHashMap<>();
+    static void setup(FMLCommonSetupEvent event){
+        registerEntities();
+    }
 
-        Int2ObjectMap<VillagerTrades.ITrade[]> newProfList = newTrades;
+    @OnlyIn(Dist.CLIENT)
+    static void setup(FMLClientSetupEvent event){
+        RenderTypeLookup.setRenderLayer(CROP_CABBAGE.get(),    RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_CORN.get(),       RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_CUCUMBER.get(),   RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_EGGPLANT.get(),   RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_GRAPES.get(),     RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_ONION.get(),      RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_PINEAPPLE.get(),  RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_STRAWBERRY.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_TOMATO.get(),     RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_TURNIP.get(),     RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_RICE.get(),       RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_COFFEE.get(),     RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(CROP_HEMP.get(),       RenderType.cutout());
 
-        for (int i = 1; i < 6; i++)
+        RenderingRegistry.registerEntityRenderingHandler(ENTITY_ALPACA.get(),   RenderAlpaca::new);
+        RenderingRegistry.registerEntityRenderingHandler(ENTITY_DYNAMITE.get(), new renderFactoryDynamite());
+        RenderingRegistry.registerEntityRenderingHandler(ENTITY_SPEAR.get(),    RenderSpear::new);
+        RenderingRegistry.registerEntityRenderingHandler(ENTITY_NUGGET.get(),   new renderFactoryNugget());
+        DeferredWorkQueue.runLater(() -> {
+            ScreenManager.register(CONTAINER_FOUNDRY.get(),    ScreenFoundry::new);
+            ScreenManager.register(CONTAINER_DISTILLERY.get(), ScreenDistillery::new);
+        });
+    }
 
-        {
-
-            mutableTrades.put(i, NonNullList.create());
-
+    private static class renderFactoryDynamite implements IRenderFactory<EntityDynamite> {
+        @Override
+        public EntityRenderer<? super EntityDynamite> createRenderFor(EntityRendererManager manager) {
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            return new RenderDynamite(manager, itemRenderer, 1.0f, false);
         }
-
-        newProfList.int2ObjectEntrySet().forEach(e ->
-
-        {
-
-            Arrays.stream(e.getValue()).forEach(mutableTrades.get(e.getIntKey())::add);
-
-        });
-
-        profTrades.int2ObjectEntrySet().forEach(e ->
-
-        {
-
-            Arrays.stream(e.getValue()).forEach(mutableTrades.get(e.getIntKey())::add);
-
-        });
-
-        MinecraftForge.EVENT_BUS.post(new VillagerTradesEvent(mutableTrades, prof));
-
-        mutableTrades.int2ObjectEntrySet().forEach(e -> newProfList.put(e.getIntKey(), e.getValue().toArray(new VillagerTrades.ITrade[0])));
-
-        VillagerTrades.VILLAGER_DEFAULT_TRADES.put(prof, newProfList);
-
     }
 
-
-
+    private static class renderFactoryNugget implements IRenderFactory<EntityNugget> {
+        @Override
+        public EntityRenderer<? super EntityNugget> createRenderFor(EntityRendererManager manager) {
+            ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+            return new RenderNugget(manager, itemRenderer, 1.0f, false);
+        }
+    }
 
 }

@@ -2,17 +2,20 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-        "acecraft:liquor_coffee",
-        "acecraft:liquor_rum",
-        "acecraft:liquor_sake",
-        "acecraft:liquor_salgam",
-        "acecraft:liquor_vodka",
-        "acecraft:liquor_beer",
-        "acecraft:liquor_cider"
+      "acecraft:liquor_coffee",
+      "acecraft:liquor_mead",
+      "acecraft:liquor_rum",
+      "acecraft:liquor_sake",
+      "acecraft:liquor_salgam",
+      "acecraft:liquor_vodka",
+      "acecraft:liquor_whisky",
+      "acecraft:liquor_wine",
+      "acecraft:liquor_oil_sunflower",
+      "acecraft:liquor_oil_hemp"
     ]
   },
   "criteria": {
-    "has_block": {
+    "has_item": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -25,7 +28,7 @@
   },
   "requirements": [
     [
-      "has_block"
+      "has_item"
     ]
   ]
 }

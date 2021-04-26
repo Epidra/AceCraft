@@ -1,11 +1,11 @@
 {
-  "type": "acecraft:destille",
+  "type": "acecraft:distilling",
   "ingredients": [
     {
       "item": "minecraft:glass_bottle"
     },
     {
-      "item": "acecraft:food_coffee"
+      "item": "acecraft:stuff_coffee"
     }
   ],
   "result": {
