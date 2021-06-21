@@ -334,7 +334,7 @@ public class EntityAlpaca extends AnimalEntity implements IShearable, net.minecr
     }
 
     protected float getStandingEyeHeight(Pose p_213348_1_, EntitySize p_213348_2_) {
-        return 0.95F * p_213348_2_.height;
+        return 1F * p_213348_2_.height;
     }
 
     @Override

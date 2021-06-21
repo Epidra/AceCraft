@@ -71,13 +71,13 @@
   "item.acecraft.food_vicugna_cooked": "Gekochtes Vicugna",
 
   "item.acecraft.liquor_coffee": "Kaffee",
-  "item.acecraft.liquor_mead": "Met",
+  "item.acecraft.liquor_moonshine": "Fusel",
   "item.acecraft.liquor_rum": "Rum",
   "item.acecraft.liquor_sake": "Sake",
   "item.acecraft.liquor_salgam": "Salgam",
   "item.acecraft.liquor_vodka": "Vodka",
   "item.acecraft.liquor_whisky": "Whisky",
-  "item.acecraft.liquor_wine": "Wein",
+  "item.acecraft.liquor_brandy": "Branntwein",
   "item.acecraft.liquor_oil": "Öl",
 
   "block.acecraft.crop_cabbage": "Kohlpflanze",
@@ -109,7 +109,7 @@
   "item.acecraft.seeds_hemp": "Hanfsamen",
 
   "block.acecraft.machina_globe": "Globus",
-  "block.acecraft.machina_foundr": "Erzschmelze",
+  "block.acecraft.machina_foundry": "Erzschmelze",
   "block.acecraft.machina_distillery": "Destille",
   "block.acecraft.machina_cookingboard": "Kochbrett",
   "block.acecraft.machina_keg": "Fass",

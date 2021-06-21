@@ -17,6 +17,7 @@ import mod.acecraft.util.*;
 import mod.lucky77.blocks.BlockBlock;
 import mod.lucky77.items.ItemFood;
 import mod.lucky77.items.ItemItem;
+import mod.lucky77.util.BiomeDictionaryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -158,15 +159,15 @@ public class ShopKeeper {
     public static final RegistryObject<Item> FOOD_VICUGNA_COOKED = register("food_vicugna_cooked", new ItemFood(1, 1, true));
 
     // Liquor
-    public static final RegistryObject<Item> LIQUOR_COFFEE = register("liquor_coffee", new ItemLiquor(Effects.DIG_SPEED,    1.0f, Effects.HUNGER, 0.8f));
-    public static final RegistryObject<Item> LIQUOR_MEAD   = register("liquor_mead",   new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_RUM    = register("liquor_rum",    new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_SAKE   = register("liquor_sake",   new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_SALGAM = register("liquor_salgam", new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_VODKA  = register("liquor_vodka",  new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_WHISKY = register("liquor_whisky", new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_WINE   = register("liquor_wine",   new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_OIL    = register("liquor_oil",    new ItemLiquor(Effects.WITHER,   1.0f, Effects.HUNGER, 1.0f));
+    public static final RegistryObject<Item> LIQUOR_COFFEE    = register("liquor_coffee",    new ItemLiquor(Effects.DIG_SPEED,    1.0f, Effects.HUNGER, 0.8f));
+    public static final RegistryObject<Item> LIQUOR_MOONSHINE = register("liquor_moonshine", new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_RUM       = register("liquor_rum",       new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_SAKE      = register("liquor_sake",      new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_SALGAM    = register("liquor_salgam",    new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_VODKA     = register("liquor_vodka",     new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_WHISKY    = register("liquor_whisky",    new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_BRANDY    = register("liquor_brandy",    new ItemLiquor(Effects.DAMAGE_BOOST, 0.3f, Effects.CONFUSION, 0.3f));
+    public static final RegistryObject<Item> LIQUOR_OIL       = register("liquor_oil",       new ItemLiquor(Effects.WITHER,   1.0f, Effects.HUNGER, 1.0f));
 
     // Crop
     public static final RegistryObject<Block> CROP_CABBAGE    = register("crop_cabbage",    new BlockCrop("cabbage",   Blocks.WHEAT));
@@ -398,9 +399,15 @@ public class ShopKeeper {
     }
 
     public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
-        //if (event.getCategory() == Biome.Category.PLAINS) {
-            event.getSpawns().getSpawner(EntityClassification.CREATURE).add(new MobSpawnInfo.Spawners(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
-        //}
+        List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.include.get()));
+        List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.exclude.get()));
+        if (!includeList.isEmpty()) {
+            if (types.stream().noneMatch(excludeList::contains) && types.stream().anyMatch(includeList::contains)) {
+                event.getSpawns().getSpawner(EntityClassification.CREATURE).add(new MobSpawnInfo.Spawners(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
+            }
+        } else {
+            throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
+        }
     }
 
     public static void registerEntities() {
