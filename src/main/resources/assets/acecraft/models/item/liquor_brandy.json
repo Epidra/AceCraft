@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "acecraft:item/liquor_mead"
+        "layer0": "acecraft:item/liquor_brandy"
     }
 }

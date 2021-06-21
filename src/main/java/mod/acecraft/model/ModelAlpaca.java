@@ -1,6 +1,8 @@
 package mod.acecraft.model;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import mod.acecraft.entity.EntityAlpaca;
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
@@ -89,15 +91,20 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableModel<T> {
 
     //----------------------------------------RENDER----------------------------------------//
 
-    //@Override
-    //public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-    //    Body.render(matrixStack, buffer, packedLight, packedOverlay);
-    //    LegBackRight.render(matrixStack, buffer, packedLight, packedOverlay);
-    //    LegBackLeft.render(matrixStack, buffer, packedLight, packedOverlay);
-    //    LegFrontRight.render(matrixStack, buffer, packedLight, packedOverlay);
-    //    LegFrontLeft.render(matrixStack, buffer, packedLight, packedOverlay);
-    //    Head.render(matrixStack, buffer, packedLight, packedOverlay);
-    //}
+    @Override
+    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+        matrixStack.pushPose();
+        matrixStack.scale(0.8f, 0.8f, 0.8f);
+        matrixStack.translate(0, 0.35, 0);
+        super.renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        matrixStack.popPose();
+        //Body.render(matrixStack, buffer, packedLight, packedOverlay);
+        //LegBackRight.render(matrixStack, buffer, packedLight, packedOverlay);
+        //LegBackLeft.render(matrixStack, buffer, packedLight, packedOverlay);
+        //LegFrontRight.render(matrixStack, buffer, packedLight, packedOverlay);
+        //LegFrontLeft.render(matrixStack, buffer, packedLight, packedOverlay);
+        //Head.render(matrixStack, buffer, packedLight, packedOverlay);
+    }
 
 
 
