@@ -1,27 +1,27 @@
 package mod.acecraft.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import mod.acecraft.AceCraft;
-import mod.acecraft.container.ContainerDistillery;
+import com.mojang.blaze3d.vertex.PoseStack;
+import mod.acecraft.menu.MenuDistillery;
 import mod.lucky77.screen.ScreenBase;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ScreenDistillery extends ScreenBase<ContainerDistillery> {
+public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AceCraft.MODID + ":" + "textures/gui/distillery.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("acecraft" + ":" + "textures/gui/distillery.png");
 
 
 
 
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
-    public ScreenDistillery(ContainerDistillery container, PlayerInventory player, ITextComponent name) {
+    public ScreenDistillery(MenuDistillery container, Inventory player, Component name) {
         super(container, player, name, 176, 204);
     }
 
@@ -37,13 +37,12 @@ public class ScreenDistillery extends ScreenBase<ContainerDistillery> {
 
     //----------------------------------------RENDER----------------------------------------//
 
-    protected void renderLabels(MatrixStack matrixStack, int mousePosX, int MousePosY) {
+    protected void renderLabels(PoseStack matrixStack, int mousePosX, int MousePosY) {
 
     }
 
-    protected void renderBg(MatrixStack matrixStack, float partialTick, int mousePosX, int mousePosY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bind(this.TEXTURE);
+    protected void renderBg(PoseStack matrixStack, float partialTick, int mousePosX, int mousePosY) {
+        RenderSystem.setShaderTexture(0, this.TEXTURE);
         int i = this.leftPos;
         int j = this.topPos;
         this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.imageHeight);

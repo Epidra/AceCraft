@@ -1,63 +1,77 @@
 package mod.acecraft.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import mod.acecraft.AceCraft;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import mod.acecraft.ModelHandler;
 import mod.acecraft.entity.EntityAlpaca;
 import mod.acecraft.model.ModelAlpaca;
 import mod.acecraft.model.ModelAlpacaWool;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.item.DyeColor;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.SheepFurModel;
+import net.minecraft.client.model.SheepModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.layers.SheepFurLayer;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderAlpacaLayer extends LayerRenderer<EntityAlpaca, ModelAlpaca<EntityAlpaca>> {
+public class RenderAlpacaLayer extends RenderLayer<EntityAlpaca, ModelAlpaca<EntityAlpaca>> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AceCraft.MODID, "textures/entity/alpaca_fur.png");
-    private final ModelAlpacaWool<EntityAlpaca> model = new ModelAlpacaWool<>();
+    private static final ResourceLocation TEXTURE = new ResourceLocation("acecraft", "textures/entity/alpaca_fur.png");
+    private final ModelAlpacaWool<EntityAlpaca> model;
 
-
-
-
-    //----------------------------------------CONSTRUCTOR----------------------------------------//
-
-    public RenderAlpacaLayer(IEntityRenderer<EntityAlpaca, ModelAlpaca<EntityAlpaca>> rendererIn) {
-        super(rendererIn);
+    public RenderAlpacaLayer(RenderLayerParent<EntityAlpaca, ModelAlpaca<EntityAlpaca>> p_174533_, EntityModelSet ems) {
+        super(p_174533_);
+        this.model = new ModelAlpacaWool<>(ems.bakeLayer(ModelHandler.ALPACA_LAYER));
     }
 
+    public void render(PoseStack p_117421_, MultiBufferSource p_117422_, int p_117423_, EntityAlpaca p_117424_, float p_117425_, float p_117426_, float p_117427_, float p_117428_, float p_117429_, float p_117430_) {
+        if (!p_117424_.isSheared()) {
+            if (p_117424_.isInvisible()) {
+                Minecraft minecraft = Minecraft.getInstance();
+                boolean flag = minecraft.shouldEntityAppearGlowing(p_117424_);
+                if (flag) {
+                    this.getParentModel().copyPropertiesTo(this.model);
+                    this.model.prepareMobModel(p_117424_, p_117425_, p_117426_, p_117427_);
+                    this.model.setupAnim(p_117424_, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_);
+                    VertexConsumer vertexconsumer = p_117422_.getBuffer(RenderType.outline(TEXTURE));
+                    this.model.renderToBuffer(p_117421_, vertexconsumer, p_117423_, LivingEntityRenderer.getOverlayCoords(p_117424_, 0.0F), 0.0F, 0.0F, 0.0F, 1.0F);
+                }
 
-
-
-    //----------------------------------------RENDER----------------------------------------//
-
-    public void render(MatrixStack p_225628_1_, IRenderTypeBuffer p_225628_2_, int p_225628_3_, EntityAlpaca p_225628_4_, float p_225628_5_, float p_225628_6_, float p_225628_7_, float p_225628_8_, float p_225628_9_, float p_225628_10_) {
-        if (!p_225628_4_.isSheared() && !p_225628_4_.isInvisible()) {
-            float f;
-            float f1;
-            float f2;
-            if (p_225628_4_.hasCustomName() && "jeb_".equals(p_225628_4_.getName().getContents())) {
-                int i1 = 25;
-                int i = p_225628_4_.tickCount / 25 + p_225628_4_.getId();
-                int j = DyeColor.values().length;
-                int k = i % j;
-                int l = (i + 1) % j;
-                float f3 = ((float)(p_225628_4_.tickCount % 25) + p_225628_7_) / 25.0F;
-                float[] afloat1 = SheepEntity.getColorArray(DyeColor.byId(k));
-                float[] afloat2 = SheepEntity.getColorArray(DyeColor.byId(l));
-                f = afloat1[0] * (1.0F - f3) + afloat2[0] * f3;
-                f1 = afloat1[1] * (1.0F - f3) + afloat2[1] * f3;
-                f2 = afloat1[2] * (1.0F - f3) + afloat2[2] * f3;
             } else {
-                float[] afloat = SheepEntity.getColorArray(p_225628_4_.getColor());
-                f = afloat[0];
-                f1 = afloat[1];
-                f2 = afloat[2];
+                float f;
+                float f1;
+                float f2;
+                if (p_117424_.hasCustomName() && "jeb_".equals(p_117424_.getName().getContents())) {
+                    int i1 = 25;
+                    int i = p_117424_.tickCount / 25 + p_117424_.getId();
+                    int j = DyeColor.values().length;
+                    int k = i % j;
+                    int l = (i + 1) % j;
+                    float f3 = ((float)(p_117424_.tickCount % 25) + p_117427_) / 25.0F;
+                    float[] afloat1 = EntityAlpaca.getColorArray(DyeColor.byId(k));
+                    float[] afloat2 = EntityAlpaca.getColorArray(DyeColor.byId(l));
+                    f = afloat1[0] * (1.0F - f3) + afloat2[0] * f3;
+                    f1 = afloat1[1] * (1.0F - f3) + afloat2[1] * f3;
+                    f2 = afloat1[2] * (1.0F - f3) + afloat2[2] * f3;
+                } else {
+                    float[] afloat = EntityAlpaca.getColorArray(p_117424_.getColor());
+                    f = afloat[0];
+                    f1 = afloat[1];
+                    f2 = afloat[2];
+                }
+
+                coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, TEXTURE, p_117421_, p_117422_, p_117423_, p_117424_, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_, p_117427_, f, f1, f2);
             }
-            coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, TEXTURE, p_225628_1_, p_225628_2_, p_225628_3_, p_225628_4_, p_225628_5_, p_225628_6_, p_225628_8_, p_225628_9_, p_225628_10_, p_225628_7_, f, f1, f2);
         }
     }
 

@@ -1,8 +1,8 @@
 package mod.acecraft;
 
 import mod.lucky77.util.BiomeDictionaryHelper;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,7 +21,7 @@ public class Config {
     public static final ConfigOre ZINC     = new ConfigOre(BUILDER, "zinc",     6,  64,  8);
     public static final ConfigOre MYTHRIL  = new ConfigOre(BUILDER, "mythril",  6,  48, 12);
     public static final ConfigOre TIN      = new ConfigOre(BUILDER, "tin",      6,  64,  8);
-    public static final ConfigOre COPPER   = new ConfigOre(BUILDER, "copper",   6, 128, 16);
+    //public static final ConfigOre COPPER   = new ConfigOre(BUILDER, "copper",   6, 128, 16);
     public static final ConfigOre AURORITE = new ConfigOre(BUILDER, "aurorite", 2, 128,  4);
     public static final ConfigOre RUBY     = new ConfigOre(BUILDER, "ruby",     2,  64,  4);
     public static final ConfigOre SAPPHIRE = new ConfigOre(BUILDER, "sapphire", 2,  64,  4);
@@ -92,7 +92,7 @@ public class Config {
             entry = builder.defineList("entry", Arrays.asList(
                     "gold,minecraft:gold_ingot,acecraft:nugget_gold,minecraft:gold_ore",
                     "iron,minecraft:iron_ingot,acecraft:nugget_iron,minecraft:iron_ore",
-                    "copper,acecraft:ingot_copper",
+                    "copper,minecraft:copper_ingot",
                     "tin,acecraft:ingot_tin",
                     "zinc,acecraft:ingot_zinc",
                     "mythril,acecraft:ingot_mythril",

@@ -1,31 +1,32 @@
 package mod.acecraft.screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
-import mod.acecraft.AceCraft;
-import mod.acecraft.container.ContainerFoundry;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import mod.acecraft.menu.MenuFoundry;
 import mod.acecraft.network.MessageEjectServer;
 import mod.acecraft.network.MessageIgniteServer;
 import mod.acecraft.system.AceCraftPacketHandler;
 import mod.acecraft.util.FoundryContent;
 import mod.lucky77.screen.ScreenBase;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
+public class ScreenFoundry extends ScreenBase<MenuFoundry> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(AceCraft.MODID + ":" + "textures/gui/foundry.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("acecraft" + ":" + "textures/gui/foundry.png");
 
 
 
 
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
-    public ScreenFoundry(ContainerFoundry container, PlayerInventory player, ITextComponent name) {
+    public ScreenFoundry(MenuFoundry container, Inventory player, Component name) {
         super(container, player, name, 176, 204);
     }
 
@@ -49,7 +50,7 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
     //----------------------------------------RENDER----------------------------------------//
 
     /** Draw the foreground layer for the GuiContainer (everything in front of the items) */
-    protected void renderLabels(MatrixStack matrixstack, int mouseX, int mouseY){
+    protected void renderLabels(PoseStack matrixstack, int mouseX, int mouseY){
         int pos = 0;
         for(FoundryContent fc : menu.logic().content){
             if(fc.amount > 0){
@@ -60,9 +61,8 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
     }
 
     /** Draws the background layer of this container (behind the items). */
-    protected void renderBg(MatrixStack matrixstack, float partialTicks, int mouseX, int mouseY){
-        GlStateManager._blendColor(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bind(TEXTURE);
+    protected void renderBg(PoseStack matrixstack, float partialTicks, int mouseX, int mouseY){
+        RenderSystem.setShaderTexture(0, TEXTURE);
         int i = (this.width  - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         this.blit(matrixstack, i, j, 0, 0, this.imageWidth, this.imageHeight);

@@ -4,12 +4,17 @@ import mod.acecraft.network.MessageEjectClient;
 import mod.acecraft.network.MessageEjectServer;
 import mod.acecraft.network.MessageIgniteClient;
 import mod.acecraft.network.MessageIgniteServer;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ChunkMap;
+import net.minecraft.server.level.ChunkTracker;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkSource;
+import net.minecraft.world.level.chunk.ChunkStatus;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.fmllegacy.network.NetworkRegistry;
+import net.minecraftforge.fmllegacy.network.PacketDistributor;
+import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
 
 public class AceCraftPacketHandler {
 
@@ -48,11 +53,11 @@ public class AceCraftPacketHandler {
         INSTANCE.sendToServer(message);
     }
 
-    public static <MSG> void sendTo(MSG msg, ServerPlayerEntity player) {
+    public static <MSG> void sendTo(MSG msg, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), msg);
     }
 
-    public static <MSG> void sendToChunk(MSG msg, Chunk chunk) {
+    public static <MSG> void sendToChunk(MSG msg, LevelChunk chunk) {
         INSTANCE.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), msg);
     }
 

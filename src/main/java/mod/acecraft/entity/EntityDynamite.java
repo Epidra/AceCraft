@@ -1,102 +1,81 @@
 package mod.acecraft.entity;
 
 import mod.acecraft.ShopKeeper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ItemParticleData;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.Explosion;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
 
-public class EntityDynamite extends ProjectileItemEntity {
-
-    // ...
+public class EntityDynamite extends ThrowableItemProjectile {
 
 
 
-
-    //----------------------------------------CONSTRUCTOR----------------------------------------//
-
-    public EntityDynamite(EntityType<? extends EntityDynamite> p_i50159_1_, World p_i50159_2_) {
-        super(p_i50159_1_, p_i50159_2_);
+    public EntityDynamite(EntityType<? extends EntityDynamite> p_37391_, Level p_37392_) {
+        super(p_37391_, p_37392_);
     }
 
-    public EntityDynamite(FMLPlayMessages.SpawnEntity packet, World worldIn){
+    public EntityDynamite(FMLPlayMessages.SpawnEntity packet, Level worldIn){
         super(ShopKeeper.ENTITY_DYNAMITE.get(), worldIn);
-        PacketBuffer buf = packet.getAdditionalData();
+        FriendlyByteBuf buf = packet.getAdditionalData();
     }
 
-    public EntityDynamite(World worldIn, LivingEntity throwerIn) {
-        super(ShopKeeper.ENTITY_DYNAMITE.get(), throwerIn, worldIn);
+    public EntityDynamite(Level p_37399_, LivingEntity p_37400_) {
+        super(ShopKeeper.ENTITY_DYNAMITE.get(), p_37400_, p_37399_);
     }
 
-    public EntityDynamite(World worldIn, double x, double y, double z) {
-        super(ShopKeeper.ENTITY_DYNAMITE.get(), x, y, z, worldIn);
+    public EntityDynamite(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
+        super(ShopKeeper.ENTITY_DYNAMITE.get(), p_37395_, p_37396_, p_37397_, p_37394_);
     }
 
-
-
-
-    //----------------------------------------SUPPORT----------------------------------------//
 
     protected Item getDefaultItem() {
-        return ShopKeeper.TOOL_DYNAMITE.get();
+        return Items.SNOWBALL;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    private IParticleData getParticle() {
+    private ParticleOptions getParticle() {
         ItemStack itemstack = this.getItemRaw();
-        return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
+        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public void handleEntityEvent(byte p_70103_1_) {
-        if (p_70103_1_ == 3) {
-            IParticleData iparticledata = this.getParticle();
+    public void handleEntityEvent(byte p_37402_) {
+        if (p_37402_ == 3) {
+            ParticleOptions particleoptions = this.getParticle();
+
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
+
     }
 
-    protected void onHitEntity(EntityRayTraceResult p_213868_1_) {
-        super.onHitEntity(p_213868_1_);
-        Entity entity = p_213868_1_.getEntity();
-        int i = 0;
+    protected void onHitEntity(EntityHitResult p_37404_) {
+        super.onHitEntity(p_37404_);
+        Entity entity = p_37404_.getEntity();
+        int i = entity instanceof Blaze ? 3 : 0;
         entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)i);
     }
 
-    protected void onHit(RayTraceResult p_70227_1_) {
-        super.onHit(p_70227_1_);
+    protected void onHit(HitResult p_37406_) {
+        super.onHit(p_37406_);
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);
-            this.explode();
-            this.remove();
+            this.discard();
         }
-    }
 
-    private void explode(){
-        float f = 3.0F;
-        this.level.explode(this, this.getX(), this.getY() + (double)(this.getEyeHeight() / 16.0F), this.getZ(), f, Explosion.Mode.BREAK);
     }
-
-    @Override
-    public IPacket<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
 }

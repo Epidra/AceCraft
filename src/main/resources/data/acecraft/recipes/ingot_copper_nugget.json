@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "acecraft:nugget_copper"
-  },
-  "result": "acecraft:ingot_copper",
-  "experience": 1.0,
-  "cookingtime": 200
-}

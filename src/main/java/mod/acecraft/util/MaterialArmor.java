@@ -1,23 +1,24 @@
 package mod.acecraft.util;
 
-import java.util.function.Supplier;
-
 import mod.acecraft.ShopKeeper;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public enum MaterialArmor implements IArmorMaterial {
+import java.util.function.Supplier;
+
+public enum MaterialArmor implements ArmorMaterial {
 
     GILIUM    ("acecraft:gilium",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_GILIUM.get());     }),
     ADAMANTIUM("acecraft:adamantium", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_ADAMANTIUM.get()); }),
     MYTHRIL   ("acecraft:mythril",    15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_MYTHRIL.get());    }),
     ORICHALCUM("acecraft:orichalcum", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_ORICHALCUM.get()); }),
-    COPPER    ("acecraft:copper",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_COPPER.get());     }),
+    COPPER    ("acecraft:copper",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(Items.COPPER_INGOT);     }),
     BRONZE    ("acecraft:bronze",     25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_BRONZE.get());     }),
     STEEL     ("acecraft:steel",      25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_STEEL.get());      }),
     AURORITE  ("acecraft:aurorite",   33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.of(ShopKeeper.STUFF_AURORITE.get());   });
@@ -46,12 +47,12 @@ public enum MaterialArmor implements IArmorMaterial {
     }
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlotType slot) {
+    public int getDurabilityForSlot(EquipmentSlot slot) {
         return MAX_DAMAGE_ARRAY[slot.getIndex()] * this.maxDamageFactor;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlotType slot) {
+    public int getDefenseForSlot(EquipmentSlot slot) {
         return this.damageReductionAmountArray[slot.getIndex()];
     }
 

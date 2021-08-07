@@ -1,115 +1,110 @@
 package mod.acecraft.entity;
 
 import mod.acecraft.ShopKeeper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.particles.ItemParticleData;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.fmllegacy.common.registry.IEntityAdditionalSpawnData;
+import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 
-public class EntityNugget extends ProjectileItemEntity implements IEntityAdditionalSpawnData {
+public class EntityNugget extends ThrowableItemProjectile implements IEntityAdditionalSpawnData {
 
     private ItemStack stack = null;
 
 
 
-
-    //----------------------------------------CONSTRUCTOR----------------------------------------//
-
-    public EntityNugget(EntityType<? extends EntityNugget> p_i50159_1_, World p_i50159_2_) {
-        super(p_i50159_1_, p_i50159_2_);
+    public EntityNugget(EntityType<? extends EntityNugget> p_37391_, Level p_37392_) {
+        super(p_37391_, p_37392_);
     }
 
-    public EntityNugget(FMLPlayMessages.SpawnEntity packet, World worldIn){
+    public EntityNugget(FMLPlayMessages.SpawnEntity packet, Level worldIn){
         super(ShopKeeper.ENTITY_NUGGET.get(), worldIn);
-        PacketBuffer buf = packet.getAdditionalData();
+        FriendlyByteBuf buf = packet.getAdditionalData();
         stack = buf.readItem();
     }
 
-    public EntityNugget(World worldIn, LivingEntity throwerIn, ItemStack itemIn) {
-        super(ShopKeeper.ENTITY_NUGGET.get(), throwerIn, worldIn);
+    public EntityNugget(Level p_37399_, LivingEntity p_37400_, ItemStack itemIn) {
+        super(ShopKeeper.ENTITY_NUGGET.get(), p_37400_, p_37399_);
         this.stack = itemIn.copy();
     }
 
-    public EntityNugget(World worldIn, double x, double y, double z) {
-        super(ShopKeeper.ENTITY_NUGGET.get(), x, y, z, worldIn);
+    public EntityNugget(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
+        super(ShopKeeper.ENTITY_NUGGET.get(), p_37395_, p_37396_, p_37397_, p_37394_);
     }
 
 
-
-
-    //----------------------------------------SPAWN_DATA----------------------------------------//
-
     /** Called by the server when constructing the spawn packet. Data should be added to the provided stream.
      * @param buffer The packet data stream */
-    public void writeSpawnData(PacketBuffer buffer){
+    public void writeSpawnData(FriendlyByteBuf buffer){
         buffer.writeItem(this.stack);
     }
 
     /** Called by the client when it receives a Entity spawn packet. Data should be read out of the stream in the same way as it was written.
      * @param additionalData The packet data stream */
-    public void readSpawnData(PacketBuffer additionalData){
+    public void readSpawnData(FriendlyByteBuf additionalData){
 
     }
 
 
 
-
-    //----------------------------------------SUPPORT----------------------------------------//
 
     protected Item getDefaultItem() {
-        return stack == null ? ShopKeeper.NUGGET_COPPER.get() : stack.getItem();
+        return stack == null ? ShopKeeper.NUGGET_GILIUM.get() : stack.getItem();
     }
 
-    @OnlyIn(Dist.CLIENT)
-    private IParticleData getParticle() {
+    private ParticleOptions getParticle() {
         ItemStack itemstack = this.getItemRaw();
-        return (IParticleData)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleData(ParticleTypes.ITEM, itemstack));
+        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public void handleEntityEvent(byte p_70103_1_) {
-        if (p_70103_1_ == 3) {
-            IParticleData iparticledata = this.getParticle();
+    public void handleEntityEvent(byte p_37402_) {
+        if (p_37402_ == 3) {
+            ParticleOptions particleoptions = this.getParticle();
+
             for(int i = 0; i < 8; ++i) {
-                this.level.addParticle(iparticledata, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+                this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
+
     }
 
-    protected void onHitEntity(EntityRayTraceResult p_213868_1_) {
-        super.onHitEntity(p_213868_1_);
-        Entity entity = p_213868_1_.getEntity();
-        int i = 1;
+    protected void onHitEntity(EntityHitResult p_37404_) {
+        super.onHitEntity(p_37404_);
+        Entity entity = p_37404_.getEntity();
+        int i = entity instanceof Blaze ? 3 : 0;
         entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)i);
     }
 
-    protected void onHit(RayTraceResult p_70227_1_) {
-        super.onHit(p_70227_1_);
+    protected void onHit(HitResult p_37406_) {
+        super.onHit(p_37406_);
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);
-            this.spawnAtLocation(new ItemStack(getItem().getItem()));
-            this.remove();
+            this.discard();
         }
+
     }
 
+
     @Override
-    public IPacket<?> getAddEntityPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 }

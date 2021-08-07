@@ -14,7 +14,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:ingot_copper"
+            "item": "minecraft:copper_ingot"
           }
         ]
       }

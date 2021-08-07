@@ -1,10 +1,10 @@
 package mod.acecraft.network;
 
 import mod.acecraft.system.AceCraftPacketHandler;
-import mod.acecraft.tileentities.TileFoundry;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.network.NetworkEvent;
+import mod.acecraft.blockentity.BlockEntityFoundry;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -30,13 +30,13 @@ public class MessageIgniteServer {
 
     //----------------------------------------ENCODE/DECODE----------------------------------------//
 
-    public static void encode (MessageIgniteServer msg, PacketBuffer buf) {
+    public static void encode (MessageIgniteServer msg, FriendlyByteBuf buf) {
         buf.writeInt(msg.x);
         buf.writeInt(msg.y);
         buf.writeInt(msg.z);
     }
 
-    public static MessageIgniteServer decode (PacketBuffer buf) {
+    public static MessageIgniteServer decode (FriendlyByteBuf buf) {
         int _x = buf.readInt();
         int _y = buf.readInt();
         int _z = buf.readInt();
@@ -51,7 +51,7 @@ public class MessageIgniteServer {
     public static class Handler {
         public static void handle (final MessageIgniteServer message, Supplier<NetworkEvent.Context> context) {
             BlockPos pos = new BlockPos(message.x, message.y, message.z);
-            TileFoundry te = (TileFoundry) context.get().getSender().level.getBlockEntity(pos);
+            BlockEntityFoundry te = (BlockEntityFoundry) context.get().getSender().level.getBlockEntity(pos);
 
             context.get().enqueueWork(() ->{
                 te.ignite();

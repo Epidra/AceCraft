@@ -1,14 +1,16 @@
 package mod.acecraft.crafting;
 
 import mod.acecraft.ShopKeeper;
+import mod.lucky77.blockentity.BlockEntityBase;
 import mod.lucky77.crafting.RecipeBase;
-import mod.lucky77.tileentities.TileBase;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 
 public class RecipeDistillery extends RecipeBase {
 
@@ -38,12 +40,12 @@ public class RecipeDistillery extends RecipeBase {
     //----------------------------------------SUPPORT----------------------------------------//
 
     @Override
-    public boolean matches(TileBase tile, World p_77569_2_) {
+    public boolean matches(BlockEntityBase tile, Level p_77569_2_) {
         return this.ingredient.test(tile.getItem(0)) && this.ingredient.test(tile.getItem(1));
     }
 
     @Override
-    public ItemStack assemble(TileBase p_77572_1_) {
+    public ItemStack assemble(BlockEntityBase p_77572_1_) {
         return this.result.copy();
     }
 
@@ -77,7 +79,7 @@ public class RecipeDistillery extends RecipeBase {
         return this.id;
     }
 
-    public IRecipeType<?> getType() {
+    public RecipeType<?> getType() {
         return ShopKeeper.RECIPE_DISTILLERY;
     }
 
@@ -85,7 +87,7 @@ public class RecipeDistillery extends RecipeBase {
         return new ItemStack(Blocks.FURNACE);
     }
 
-    public IRecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return ShopKeeper.SERIALIZER_DISTILLERY.get();
     }
 

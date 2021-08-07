@@ -1,6 +1,6 @@
 package mod.acecraft.util;
 
-import mod.lucky77.util.LogicBase;
+import mod.lucky77.logic.LogicBase;
 
 import java.util.ArrayList;
 import java.util.List;
