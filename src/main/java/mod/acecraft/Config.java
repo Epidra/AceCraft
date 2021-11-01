@@ -33,6 +33,7 @@ public class Config {
 
 
 
+
     //----------------------------------------CONFIG_ORE----------------------------------------//
 
     public static class ConfigOre {
@@ -49,6 +50,7 @@ public class Config {
             builder.pop();
         }
     }
+
 
 
 
@@ -77,6 +79,7 @@ public class Config {
             builder.pop();
         }
     }
+
 
 
 
@@ -117,8 +120,11 @@ public class Config {
 
 
 
+
     //----------------------------------------BUILDER----------------------------------------//
 
     public static final ForgeConfigSpec spec = BUILDER.build();
+
+
 
 }

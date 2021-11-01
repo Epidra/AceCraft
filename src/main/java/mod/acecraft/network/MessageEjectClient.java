@@ -17,6 +17,7 @@ public class MessageEjectClient {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public MessageEjectClient(BlockPos pos) {
@@ -24,6 +25,7 @@ public class MessageEjectClient {
         this.y = pos.getY();
         this.z = pos.getZ();
     }
+
 
 
 
@@ -46,6 +48,7 @@ public class MessageEjectClient {
 
 
 
+
     //----------------------------------------HANDLER----------------------------------------//
 
     public static class Handler {
@@ -58,5 +61,7 @@ public class MessageEjectClient {
             context.get().setPacketHandled(true);
         }
     }
+
+
 
 }

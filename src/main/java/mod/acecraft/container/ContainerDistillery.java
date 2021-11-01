@@ -18,18 +18,19 @@ public class ContainerDistillery extends ContainerBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor **/
     public ContainerDistillery(int windowID, PlayerInventory playerInventory, TileBase tile) {
         super(ShopKeeper.CONTAINER_DISTILLERY.get(), windowID, playerInventory, tile);
-
     }
 
     /** Forge Registry Constructor **/
     public ContainerDistillery(int windowID, PlayerInventory playerInventory, PacketBuffer packetBuffer) {
         super(ShopKeeper.CONTAINER_DISTILLERY.get(), windowID, playerInventory, packetBuffer);
     }
+
 
 
 
@@ -58,7 +59,6 @@ public class ContainerDistillery extends ContainerBase {
         if (i == 0) {
             i = 200;
         }
-
         return this.data.get(0) * 13 / i;
     }
 
@@ -77,18 +77,11 @@ public class ContainerDistillery extends ContainerBase {
                 if (!this.moveItemStackTo(itemstack1, 3, 39, true)) {
                     return ItemStack.EMPTY;
                 }
-
                 slot.onQuickCraft(itemstack1, itemstack);
             } else if (index != 1 && index != 0) {
-                //if (this.canSmelt(itemstack1)) {
                 if (!this.moveItemStackTo(itemstack1, 0, 3, false)) {
                     return ItemStack.EMPTY;
                 }
-                //} else if (this.isFuel(itemstack1)) {
-                //    if (!this.moveItemStackTo(itemstack1, 1, 2, false)) {
-                //        return ItemStack.EMPTY;
-                //    }
-                //} else
                 if (index >= 3 && index < 30) {
                     if (!this.moveItemStackTo(itemstack1, 30, 39, false)) {
                         return ItemStack.EMPTY;
@@ -99,21 +92,19 @@ public class ContainerDistillery extends ContainerBase {
             } else if (!this.moveItemStackTo(itemstack1, 3, 39, false)) {
                 return ItemStack.EMPTY;
             }
-
             if (itemstack1.isEmpty()) {
                 slot.set(ItemStack.EMPTY);
             } else {
                 slot.setChanged();
             }
-
             if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
-
             slot.onTake(player, itemstack1);
         }
-
         return itemstack;
     }
+
+
 
 }

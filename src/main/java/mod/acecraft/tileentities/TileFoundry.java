@@ -54,6 +54,7 @@ public class TileFoundry extends TileBase<LogicFoundry> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public TileFoundry(TileEntityType<?> tileEntityTypeIn) {
@@ -63,6 +64,7 @@ public class TileFoundry extends TileBase<LogicFoundry> {
     public TileFoundry() {
         this(ShopKeeper.TILE_FOUNDRY.get());
     }
+
 
 
 
@@ -90,6 +92,7 @@ public class TileFoundry extends TileBase<LogicFoundry> {
             this.setChanged();
         }
     }
+
 
 
 
@@ -122,6 +125,7 @@ public class TileFoundry extends TileBase<LogicFoundry> {
 
 
 
+
     //----------------------------------------NETWORK----------------------------------------//
 
     @Override
@@ -131,6 +135,7 @@ public class TileFoundry extends TileBase<LogicFoundry> {
         save(nbtTagCompound);
         return new SUpdateTileEntityPacket(this.worldPosition, ShopKeeper.TILE_FOUNDRY.get().hashCode(), nbtTagCompound);
     }
+
 
 
 
@@ -275,6 +280,12 @@ public class TileFoundry extends TileBase<LogicFoundry> {
         }
     }
 
+
+
+
+
+    //----------------------------------------BASIC----------------------------------------//
+
     @Override
     public ITextComponent getName() {
         return new TranslationTextComponent("tile.destillery.name");
@@ -288,5 +299,7 @@ public class TileFoundry extends TileBase<LogicFoundry> {
     private LogicFoundry logic(){
         return (LogicFoundry) logic;
     }
+
+
 
 }

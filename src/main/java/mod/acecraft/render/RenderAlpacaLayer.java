@@ -23,11 +23,13 @@ public class RenderAlpacaLayer extends LayerRenderer<EntityAlpaca, ModelAlpaca<E
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public RenderAlpacaLayer(IEntityRenderer<EntityAlpaca, ModelAlpaca<EntityAlpaca>> rendererIn) {
         super(rendererIn);
     }
+
 
 
 
@@ -60,5 +62,7 @@ public class RenderAlpacaLayer extends LayerRenderer<EntityAlpaca, ModelAlpaca<E
             coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, TEXTURE, p_225628_1_, p_225628_2_, p_225628_3_, p_225628_4_, p_225628_5_, p_225628_6_, p_225628_8_, p_225628_9_, p_225628_10_, p_225628_7_, f, f1, f2);
         }
     }
+
+
 
 }

@@ -13,13 +13,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum MaterialArmor implements IArmorMaterial {
 
-    GILIUM    ("acecraft:gilium",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_GILIUM.get());     }),
+    GILIUM    ("acecraft:gilium",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON,    0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_GILIUM.get());     }),
     ADAMANTIUM("acecraft:adamantium", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_ADAMANTIUM.get()); }),
-    MYTHRIL   ("acecraft:mythril",    15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_MYTHRIL.get());    }),
+    MYTHRIL   ("acecraft:mythril",    15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON,    0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_MYTHRIL.get());    }),
     ORICHALCUM("acecraft:orichalcum", 33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_ORICHALCUM.get()); }),
-    COPPER    ("acecraft:copper",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_COPPER.get());     }),
-    BRONZE    ("acecraft:bronze",     25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_BRONZE.get());     }),
-    STEEL     ("acecraft:steel",      25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ARMOR_EQUIP_CHAIN, 0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_STEEL.get());      }),
+    COPPER    ("acecraft:copper",     15, new int[]{1, 4, 5, 2},  9, SoundEvents.ARMOR_EQUIP_IRON,    0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_COPPER.get());     }),
+    BRONZE    ("acecraft:bronze",     25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ARMOR_EQUIP_CHAIN,   0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_BRONZE.get());     }),
+    STEEL     ("acecraft:steel",      25, new int[]{3, 6, 7, 3}, 12, SoundEvents.ARMOR_EQUIP_CHAIN,   0.0F, () -> { return Ingredient.of(ShopKeeper.INGOT_STEEL.get());      }),
     AURORITE  ("acecraft:aurorite",   33, new int[]{3, 6, 8, 3}, 10, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, () -> { return Ingredient.of(ShopKeeper.STUFF_AURORITE.get());   });
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};
@@ -29,7 +29,12 @@ public enum MaterialArmor implements IArmorMaterial {
     private final int enchantability;
     private final SoundEvent soundEvent;
     private final float toughness;
-    //private final LazyLoadBase<Ingredient> repairMaterial;
+
+
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     private MaterialArmor(String nameIn, int maxDamageFactorIn, int[] damageReductionAmountsIn, int enchantabilityIn, SoundEvent equipSoundIn, float p_i48533_8_, Supplier<Ingredient> repairMaterialSupplier) {
         this.name = nameIn;
@@ -38,8 +43,13 @@ public enum MaterialArmor implements IArmorMaterial {
         this.enchantability = enchantabilityIn;
         this.soundEvent = equipSoundIn;
         this.toughness = p_i48533_8_;
-       // this.repairMaterial = new LazyLoadBase<>(repairMaterialSupplier);
     }
+
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
 
     public SoundEvent getSoundEvent() {
         return this.soundEvent;
@@ -83,4 +93,7 @@ public enum MaterialArmor implements IArmorMaterial {
     public float getKnockbackResistance() {
         return 0;
     }
+
+
+
 }

@@ -17,12 +17,14 @@ public class ItemNugget extends Item {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ItemNugget() {
         super(new Properties().tab(ItemGroup.TAB_MATERIALS));
     }
+
 
 
 
@@ -44,5 +46,7 @@ public class ItemNugget extends Item {
         }
         return ActionResult.sidedSuccess(itemstack, p_77659_1_.isClientSide());
     }
+
+
 
 }

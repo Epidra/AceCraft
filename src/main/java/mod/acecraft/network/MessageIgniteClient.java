@@ -17,6 +17,7 @@ public class MessageIgniteClient {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public MessageIgniteClient(BlockPos pos) {
@@ -24,6 +25,7 @@ public class MessageIgniteClient {
         this.y = pos.getY();
         this.z = pos.getZ();
     }
+
 
 
 
@@ -46,6 +48,7 @@ public class MessageIgniteClient {
 
 
 
+
     //----------------------------------------HANDLER----------------------------------------//
 
     public static class Handler {
@@ -58,5 +61,7 @@ public class MessageIgniteClient {
             context.get().setPacketHandled(true);
         }
     }
+
+
 
 }

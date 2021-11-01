@@ -16,6 +16,7 @@ public class EntitySpear extends AbstractArrowEntity {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntitySpear(EntityType<? extends EntitySpear> type, World worldIn) {
@@ -38,11 +39,14 @@ public class EntitySpear extends AbstractArrowEntity {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     @Override
     protected ItemStack getPickupItem() {
         return null;
     }
+
+
 
 }

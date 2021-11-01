@@ -15,6 +15,12 @@ public class AceCraftPacketHandler {
 
     private static final String PROTOCOL_VERSION = Integer.toString(1);
 
+
+
+
+
+    //----------------------------------------INSTANCE----------------------------------------//
+
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
             new ResourceLocation("acecraft", "main"),
             () -> PROTOCOL_VERSION,
@@ -25,15 +31,17 @@ public class AceCraftPacketHandler {
 
 
 
+
     //----------------------------------------REGISTER----------------------------------------//
 
     public static void register(){
         int disc = 0;
-        INSTANCE.registerMessage(disc++, MessageEjectClient.class, MessageEjectClient::encode, MessageEjectClient::decode, MessageEjectClient.Handler::handle);
-        INSTANCE.registerMessage(disc++, MessageEjectServer.class, MessageEjectServer::encode, MessageEjectServer::decode, MessageEjectServer.Handler::handle);
+        INSTANCE.registerMessage(disc++, MessageEjectClient.class,  MessageEjectClient::encode,  MessageEjectClient::decode,  MessageEjectClient.Handler::handle);
+        INSTANCE.registerMessage(disc++, MessageEjectServer.class,  MessageEjectServer::encode,  MessageEjectServer::decode,  MessageEjectServer.Handler::handle);
         INSTANCE.registerMessage(disc++, MessageIgniteClient.class, MessageIgniteClient::encode, MessageIgniteClient::decode, MessageIgniteClient.Handler::handle);
         INSTANCE.registerMessage(disc++, MessageIgniteServer.class, MessageIgniteServer::encode, MessageIgniteServer::decode, MessageIgniteServer.Handler::handle);
     }
+
 
 
 
@@ -59,5 +67,7 @@ public class AceCraftPacketHandler {
     public static <MSG> void sendToAll(MSG msg) {
         INSTANCE.send(PacketDistributor.ALL.noArg(), msg);
     }
+
+
 
 }

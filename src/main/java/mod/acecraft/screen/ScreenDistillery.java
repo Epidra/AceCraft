@@ -19,6 +19,7 @@ public class ScreenDistillery extends ScreenBase<ContainerDistillery> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ScreenDistillery(ContainerDistillery container, PlayerInventory player, ITextComponent name) {
@@ -28,9 +29,11 @@ public class ScreenDistillery extends ScreenBase<ContainerDistillery> {
 
 
 
+
     //----------------------------------------INPUT----------------------------------------//
 
     // ...
+
 
 
 
@@ -58,6 +61,7 @@ public class ScreenDistillery extends ScreenBase<ContainerDistillery> {
 
 
 
+
     //----------------------------------------COMMAND----------------------------------------//
 
     // ...
@@ -65,8 +69,11 @@ public class ScreenDistillery extends ScreenBase<ContainerDistillery> {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     // ...
+
+
 
 }

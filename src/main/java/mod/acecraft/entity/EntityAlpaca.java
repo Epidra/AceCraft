@@ -71,11 +71,13 @@ public class EntityAlpaca extends AnimalEntity implements IShearable, net.minecr
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntityAlpaca(EntityType<? extends EntityAlpaca> p_i50245_1_, World p_i50245_2_) {
         super(p_i50245_1_, p_i50245_2_);
     }
+
 
 
 
@@ -302,7 +304,6 @@ public class EntityAlpaca extends AnimalEntity implements IShearable, net.minecr
         if (this.isBaby()) {
             this.ageUp(60);
         }
-
     }
 
     @Nullable
@@ -358,5 +359,7 @@ public class EntityAlpaca extends AnimalEntity implements IShearable, net.minecr
         }
         return java.util.Collections.emptyList();
     }
+
+
 
 }

@@ -12,11 +12,14 @@ public class ItemArmor extends ArmorItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ItemArmor(IArmorMaterial materialIn, EquipmentSlotType slot) {
         super(materialIn, slot, new Properties().tab(ItemGroup.TAB_COMBAT));
     }
+
+
 
 }

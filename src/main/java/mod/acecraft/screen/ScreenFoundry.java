@@ -23,11 +23,13 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ScreenFoundry(ContainerFoundry container, PlayerInventory player, ITextComponent name) {
         super(container, player, name, 176, 204);
     }
+
 
 
 
@@ -39,9 +41,9 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         if (mouseButton == 0){ if(mouseRect( 91, 29, 70, 22, mouseX, mouseY)) { commandEject();  } }
         if (mouseButton == 0){ if(mouseRect( 91,  5, 70, 22, mouseX, mouseY)) { commandIgnite(); } }
-
         return false;
     }
+
 
 
 
@@ -95,6 +97,7 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
 
 
 
+
     //----------------------------------------COMMAND----------------------------------------//
 
     private void commandEject(){
@@ -108,6 +111,7 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     /** Checks if mouse is inside a rectangle **/
@@ -117,5 +121,7 @@ public class ScreenFoundry extends ScreenBase<ContainerFoundry> {
         }
         return false;
     }
+
+
 
 }

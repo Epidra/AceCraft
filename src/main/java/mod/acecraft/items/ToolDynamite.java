@@ -14,12 +14,14 @@ public class ToolDynamite extends Item {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ToolDynamite(){
         super(new Properties().tab(ItemGroup.TAB_TOOLS));
     }
+
 
 
 
@@ -41,5 +43,7 @@ public class ToolDynamite extends Item {
         }
         return ActionResult.sidedSuccess(itemstack, p_77659_1_.isClientSide());
     }
+
+
 
 }

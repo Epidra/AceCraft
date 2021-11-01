@@ -29,6 +29,7 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableModel<T> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ModelAlpaca() {
@@ -69,6 +70,7 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableModel<T> {
 
 
 
+
     //----------------------------------------ANIMATION----------------------------------------//
 
     @Override
@@ -89,6 +91,7 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableModel<T> {
 
 
 
+
     //----------------------------------------RENDER----------------------------------------//
 
     @Override
@@ -98,13 +101,8 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableModel<T> {
         matrixStack.translate(0, 0.35, 0);
         super.renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         matrixStack.popPose();
-        //Body.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegBackRight.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegBackLeft.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegFrontRight.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegFrontLeft.render(matrixStack, buffer, packedLight, packedOverlay);
-        //Head.render(matrixStack, buffer, packedLight, packedOverlay);
     }
+
 
 
 
@@ -120,5 +118,7 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableModel<T> {
     protected Iterable<ModelRenderer> bodyParts() {
         return ImmutableList.of(this.Body, this.LegBackLeft, this.LegBackRight, this.LegFrontLeft, this.LegFrontRight);
     }
+
+
 
 }

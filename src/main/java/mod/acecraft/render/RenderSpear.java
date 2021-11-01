@@ -16,11 +16,13 @@ public class RenderSpear extends EntityRenderer<EntitySpear> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public RenderSpear(EntityRendererManager renderManagerIn) {
         super(renderManagerIn);
     }
+
 
 
 
@@ -31,5 +33,7 @@ public class RenderSpear extends EntityRenderer<EntitySpear> {
     public ResourceLocation getTextureLocation(EntitySpear p_110775_1_) {
         return TRIDENT;
     }
+
+
 
 }

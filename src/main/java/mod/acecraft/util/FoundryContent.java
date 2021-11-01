@@ -19,6 +19,7 @@ public class FoundryContent {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public FoundryContent(String id, Item item, Alloy alloy){
@@ -31,6 +32,7 @@ public class FoundryContent {
         this.substitutes = substitutes;
         this.alloy = alloy;
     }
+
 
 
 
@@ -62,6 +64,7 @@ public class FoundryContent {
 
 
 
+
     //----------------------------------------ALLOY----------------------------------------//
 
     public static class Alloy {
@@ -81,5 +84,7 @@ public class FoundryContent {
         }
 
     }
+
+
 
 }

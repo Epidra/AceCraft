@@ -3,16 +3,12 @@ package mod.acecraft;
 import mod.acecraft.crafting.ModifierAddItem;
 import mod.acecraft.entity.EntityAlpaca;
 import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootPool;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -26,6 +22,14 @@ import java.util.Set;
 import static mod.acecraft.AceCraft.MODID;
 
 public class Subscriber {
+
+    // ...
+
+
+
+
+
+    //----------------------------------------EVENT_FORGE----------------------------------------//
 
     @ObjectHolder(MODID)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
@@ -52,7 +56,6 @@ public class Subscriber {
                 event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SALT);
                 event.getGeneration().getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SULFUR);
             }
-
         }
 
         @SubscribeEvent
@@ -70,11 +73,13 @@ public class Subscriber {
                 }
             }
         }
-
     }
 
 
 
+
+
+    //----------------------------------------EVENT_MOD----------------------------------------//
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
@@ -88,4 +93,7 @@ public class Subscriber {
         }
 
     }
+
+
+
 }

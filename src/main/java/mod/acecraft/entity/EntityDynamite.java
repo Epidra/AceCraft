@@ -29,6 +29,7 @@ public class EntityDynamite extends ProjectileItemEntity {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntityDynamite(EntityType<? extends EntityDynamite> p_i50159_1_, World p_i50159_2_) {
@@ -47,6 +48,7 @@ public class EntityDynamite extends ProjectileItemEntity {
     public EntityDynamite(World worldIn, double x, double y, double z) {
         super(ShopKeeper.ENTITY_DYNAMITE.get(), x, y, z, worldIn);
     }
+
 
 
 

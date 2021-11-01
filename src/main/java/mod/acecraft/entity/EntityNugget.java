@@ -29,6 +29,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntityNugget(EntityType<? extends EntityNugget> p_i50159_1_, World p_i50159_2_) {
@@ -53,6 +54,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
 
 
 
+
     //----------------------------------------SPAWN_DATA----------------------------------------//
 
     /** Called by the server when constructing the spawn packet. Data should be added to the provided stream.
@@ -66,6 +68,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
     public void readSpawnData(PacketBuffer additionalData){
 
     }
+
 
 
 
@@ -112,4 +115,7 @@ public class EntityNugget extends ProjectileItemEntity implements IEntityAdditio
     public IPacket<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
+
+
+
 }

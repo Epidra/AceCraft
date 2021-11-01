@@ -11,6 +11,7 @@ public class ItemLiquor extends Item {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
@@ -21,11 +22,14 @@ public class ItemLiquor extends Item {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     public UseAction getUseAnimation(ItemStack stack) {
         return UseAction.DRINK;
     }
+
+
 
 }
 

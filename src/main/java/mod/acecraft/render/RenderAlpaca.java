@@ -17,6 +17,7 @@ public class RenderAlpaca extends MobRenderer<EntityAlpaca, ModelAlpaca<EntityAl
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public RenderAlpaca(EntityRendererManager renderManager) {
@@ -27,11 +28,14 @@ public class RenderAlpaca extends MobRenderer<EntityAlpaca, ModelAlpaca<EntityAl
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     @Override
     public ResourceLocation getTextureLocation(EntityAlpaca p_110775_1_) {
         return TEXTURE;
     }
+
+
 
 }

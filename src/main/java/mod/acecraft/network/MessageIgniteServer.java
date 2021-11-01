@@ -17,6 +17,7 @@ public class MessageIgniteServer {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public MessageIgniteServer(BlockPos pos) {
@@ -24,6 +25,7 @@ public class MessageIgniteServer {
         this.y = pos.getY();
         this.z = pos.getZ();
     }
+
 
 
 
@@ -46,20 +48,21 @@ public class MessageIgniteServer {
 
 
 
+
     //----------------------------------------HANDLER----------------------------------------//
 
     public static class Handler {
         public static void handle (final MessageIgniteServer message, Supplier<NetworkEvent.Context> context) {
             BlockPos pos = new BlockPos(message.x, message.y, message.z);
             TileFoundry te = (TileFoundry) context.get().getSender().level.getBlockEntity(pos);
-
             context.get().enqueueWork(() ->{
                 te.ignite();
             });
-
             AceCraftPacketHandler.sendToChunk(new MessageIgniteClient(new BlockPos(message.x, message.y, message.z)), context.get().getSender().level.getChunkAt(pos));
             context.get().setPacketHandled(true);
         }
     }
+
+
 
 }

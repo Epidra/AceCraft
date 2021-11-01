@@ -43,7 +43,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -78,6 +77,7 @@ public class ShopKeeper {
     private static final DeferredRegister<SoundEvent>           SOUNDS     = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,       MODID);
     private static final DeferredRegister<EntityType<?>>        ENTITIES   = DeferredRegister.create(ForgeRegistries.ENTITIES,           MODID);
     private static final DeferredRegister<IRecipeSerializer<?>> RECIPES    = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MODID);
+
 
 
 
@@ -374,6 +374,8 @@ public class ShopKeeper {
 
 
 
+
+
     //----------------------------------------REGISTER----------------------------------------//
 
     static void register(){
@@ -386,8 +388,7 @@ public class ShopKeeper {
         RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    static <T extends IRecipe<?>> IRecipeType<T> register(final String key)
-    {
+    static <T extends IRecipe<?>> IRecipeType<T> register(final String key){
         return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(key), new IRecipeType<T>()
         {
             @Override
@@ -462,6 +463,7 @@ public class ShopKeeper {
 
 
 
+
     //----------------------------------------SETUP----------------------------------------//
 
     static void setup(FMLCommonSetupEvent event){
@@ -509,5 +511,7 @@ public class ShopKeeper {
             return new RenderNugget(manager, itemRenderer, 1.0f, false);
         }
     }
+
+
 
 }

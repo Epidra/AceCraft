@@ -38,7 +38,6 @@ public class TileDistillery extends TileBase<LogicBase> {
                 default: return 0;
             }
         }
-
         public void set(int index, int value) {
             switch(index) {
                 case 0: TileDistillery.this.litTime          = value; break;
@@ -47,7 +46,6 @@ public class TileDistillery extends TileBase<LogicBase> {
                 case 3: TileDistillery.this.cookingTotalTime = value; break;
             }
         }
-
         public int getCount() {
             return 4;
         }
@@ -55,6 +53,7 @@ public class TileDistillery extends TileBase<LogicBase> {
 
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     protected final IRecipeType<? extends RecipeBase> recipeType = ShopKeeper.RECIPE_DISTILLERY;
+
 
 
 
@@ -68,6 +67,7 @@ public class TileDistillery extends TileBase<LogicBase> {
     public TileDistillery() {
         this(ShopKeeper.TILE_DISTILLERY.get());
     }
+
 
 
 
@@ -132,6 +132,7 @@ public class TileDistillery extends TileBase<LogicBase> {
 
 
 
+
     //----------------------------------------SAVE/LOAD----------------------------------------//
 
     public void load(BlockState p_230337_1_, CompoundNBT p_230337_2_) { //TODO: MARK
@@ -162,6 +163,7 @@ public class TileDistillery extends TileBase<LogicBase> {
 
 
 
+
     //----------------------------------------NETWORK----------------------------------------//
 
     @Override
@@ -171,6 +173,7 @@ public class TileDistillery extends TileBase<LogicBase> {
         save(nbtTagCompound);
         return new SUpdateTileEntityPacket(this.worldPosition, ShopKeeper.TILE_DISTILLERY.get().hashCode(), nbtTagCompound);
     }
+
 
 
 
@@ -244,14 +247,18 @@ public class TileDistillery extends TileBase<LogicBase> {
         if (p_70299_2_.getCount() > this.getMaxStackSize()) {
             p_70299_2_.setCount(this.getMaxStackSize());
         }
-
         if (p_70299_1_ == 0 && !flag) {
             this.cookingTotalTime = this.getTotalCookTime();
             this.cookingProgress = 0;
             this.setChanged();
         }
-
     }
+
+
+
+
+
+    //----------------------------------------BASIC----------------------------------------//
 
     @Override
     public IIntArray getIntArray() {
@@ -268,12 +275,13 @@ public class TileDistillery extends TileBase<LogicBase> {
             ResourceLocation resourcelocation = p_193056_1_.getId();
             this.recipesUsed.addTo(resourcelocation, 1);
         }
-
     }
 
     @Nullable
     public IRecipe<?> getRecipeUsed() {
         return null;
     }
+
+
 
 }

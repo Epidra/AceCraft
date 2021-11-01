@@ -14,12 +14,14 @@ public class ItemArmorColor extends ArmorItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ItemArmorColor(IArmorMaterial materialIn, EquipmentSlotType slot) {
         super(materialIn, slot, new Properties().tab(ItemGroup.TAB_COMBAT));
     }
+
 
 
 
@@ -37,5 +39,7 @@ public class ItemArmorColor extends ArmorItem {
     public static int getCurrentFrame(World worldIn) {
         return Math.round((float)((System.currentTimeMillis() >> 6) % 24L));
     }
+
+
 
 }

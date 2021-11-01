@@ -19,6 +19,7 @@ public class ContainerProvider implements INamedContainerProvider {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ContainerProvider(@Nonnull TileBase tile) {
@@ -28,7 +29,8 @@ public class ContainerProvider implements INamedContainerProvider {
 
 
 
-    //----------------------------------------FUNCTION----------------------------------------//
+
+    //----------------------------------------CREATE----------------------------------------//
 
     @Nullable
     @Override
@@ -41,11 +43,14 @@ public class ContainerProvider implements INamedContainerProvider {
 
 
 
-    //----------------------------------------SUPPORT----------------------------------------//
+
+    //----------------------------------------BASIC----------------------------------------//
 
     @Override
     public ITextComponent getDisplayName() {
         return this.tile.getName();
     }
+
+
 
 }

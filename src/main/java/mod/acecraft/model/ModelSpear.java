@@ -18,11 +18,13 @@ public class ModelSpear extends Model {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ModelSpear(Function<ResourceLocation, RenderType> renderTypeIn) {
         super(renderTypeIn);
     }
+
 
 
 
@@ -33,5 +35,7 @@ public class ModelSpear extends Model {
     public void renderToBuffer(MatrixStack p_225598_1_, IVertexBuilder p_225598_2_, int p_225598_3_, int p_225598_4_, float p_225598_5_, float p_225598_6_, float p_225598_7_, float p_225598_8_) {
 
     }
+
+
 
 }
