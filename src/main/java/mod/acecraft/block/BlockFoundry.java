@@ -34,8 +34,8 @@ import java.util.List;
 public class BlockFoundry extends MachinaTall implements EntityBlock {
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-
     public static final VoxelShape AABB = Block.box(1, 0, 1, 15, 16, 15);
+
 
 
 
@@ -51,9 +51,11 @@ public class BlockFoundry extends MachinaTall implements EntityBlock {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
+
 
 
 
@@ -67,31 +69,6 @@ public class BlockFoundry extends MachinaTall implements EntityBlock {
 
 
 
-
-    //----------------------------------------SUPPORT----------------------------------------//
-
-    @Deprecated
-    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return AABB;
-    }
-
-    //@Nullable
-    //@Override
-    //public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-    //    return new BlockEntityFoundry();
-    //}
-
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-        List<ItemStack> drops = new ArrayList<>();
-        drops.add(new ItemStack(this));
-        return drops;
-    }
-
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, OFFSET, LIT);
-    }
 
 
     //----------------------------------------BLOCKENTITY----------------------------------------//
@@ -107,8 +84,32 @@ public class BlockFoundry extends MachinaTall implements EntityBlock {
 
     @Nullable
     protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> type, BlockEntityType<? extends BlockEntityFoundry> typeCustom) {
-        //return level.isClientSide ? null : createTickerHelper(type, typeCustom, BlockEntityArcade::serverTick);
         return createTickerHelper(type, typeCustom, BlockEntityFoundry::serverTick);
     }
+
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
+
+    @Deprecated
+    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
+        return AABB;
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+        List<ItemStack> drops = new ArrayList<>();
+        drops.add(new ItemStack(this));
+        return drops;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, OFFSET, LIT);
+    }
+
+
 
 }

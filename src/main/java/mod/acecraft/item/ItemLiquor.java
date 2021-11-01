@@ -16,6 +16,7 @@ public class ItemLiquor extends Item {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
@@ -26,11 +27,14 @@ public class ItemLiquor extends Item {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     public UseAnim getUseAnimation(ItemStack p_41452_) {
         return UseAnim.DRINK;
     }
+
+
 
 }
 

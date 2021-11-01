@@ -18,6 +18,7 @@ public class MenuProvider implements net.minecraft.world.MenuProvider {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public MenuProvider(@Nonnull BlockEntityBase tile) {
@@ -27,7 +28,8 @@ public class MenuProvider implements net.minecraft.world.MenuProvider {
 
 
 
-    //----------------------------------------FUNCTION----------------------------------------//
+
+    //----------------------------------------CREATE----------------------------------------//
 
     @Nullable
     @Override
@@ -40,11 +42,14 @@ public class MenuProvider implements net.minecraft.world.MenuProvider {
 
 
 
-    //----------------------------------------SUPPORT----------------------------------------//
+
+    //----------------------------------------BASIC----------------------------------------//
 
     @Override
     public TextComponent getDisplayName() {
         return this.tile.getName();
     }
+
+
 
 }

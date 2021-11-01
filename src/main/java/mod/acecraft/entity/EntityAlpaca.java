@@ -52,6 +52,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public class EntityAlpaca extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable {
+
     private static final int EAT_ANIMATION_TICKS = 40;
     private static final EntityDataAccessor<Byte> DATA_WOOL_ID = SynchedEntityData.defineId(EntityAlpaca.class, EntityDataSerializers.BYTE);
     private static final Map<DyeColor, ItemLike> ITEM_BY_DYE = Util.make(Maps.newEnumMap(DyeColor.class), (p_29841_) -> {
@@ -78,23 +79,21 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
     private int eatAnimationTick;
     private EatBlockGoal eatBlockGoal;
 
-    private static float[] createSheepColor(DyeColor p_29866_) {
-        if (p_29866_ == DyeColor.WHITE) {
-            return new float[]{0.9019608F, 0.9019608F, 0.9019608F};
-        } else {
-            float[] afloat = p_29866_.getTextureDiffuseColors();
-            float f = 0.75F;
-            return new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
-        }
-    }
 
-    public static float[] getColorArray(DyeColor p_29830_) {
-        return COLORARRAY_BY_COLOR.get(p_29830_);
-    }
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntityAlpaca(EntityType<? extends EntityAlpaca> p_29806_, Level p_29807_) {
         super(p_29806_, p_29807_);
     }
+
+
+
+
+
+    //----------------------------------------SETUP----------------------------------------//
 
     protected void registerGoals() {
         this.eatBlockGoal = new EatBlockGoal(this);
@@ -114,14 +113,6 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         super.customServerAiStep();
     }
 
-    public void aiStep() {
-        if (this.level.isClientSide) {
-            this.eatAnimationTick = Math.max(0, this.eatAnimationTick - 1);
-        }
-
-        super.aiStep();
-    }
-
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, (double)0.23F);
     }
@@ -131,44 +122,129 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         this.entityData.define(DATA_WOOL_ID, (byte)0);
     }
 
+
+
+
+
+    //----------------------------------------INTERACTION----------------------------------------//
+
+    public InteractionResult mobInteract(Player p_29853_, InteractionHand p_29854_) {
+        ItemStack itemstack = p_29853_.getItemInHand(p_29854_);
+        if (false && itemstack.getItem() == Items.SHEARS) { //Forge: Moved to onSheared
+            if (!this.level.isClientSide && this.readyForShearing()) {
+                this.shear(SoundSource.PLAYERS);
+                this.gameEvent(GameEvent.SHEAR, p_29853_);
+                itemstack.hurtAndBreak(1, p_29853_, (p_29822_) -> {
+                    p_29822_.broadcastBreakEvent(p_29854_);
+                });
+                return InteractionResult.SUCCESS;
+            } else {
+                return InteractionResult.CONSUME;
+            }
+        } else {
+            return super.mobInteract(p_29853_, p_29854_);
+        }
+    }
+
+    public void aiStep() {
+        if (this.level.isClientSide) {
+            this.eatAnimationTick = Math.max(0, this.eatAnimationTick - 1);
+        }
+        super.aiStep();
+    }
+
+
+
+
+
+    //----------------------------------------SAVE/LOAD----------------------------------------//
+
+    public void addAdditionalSaveData(CompoundTag p_29864_) {
+        super.addAdditionalSaveData(p_29864_);
+        p_29864_.putBoolean("Sheared", this.isSheared());
+        p_29864_.putByte("Color", (byte)this.getColor().getId());
+    }
+
+    public void readAdditionalSaveData(CompoundTag p_29845_) {
+        super.readAdditionalSaveData(p_29845_);
+        this.setSheared(p_29845_.getBoolean("Sheared"));
+        this.setColor(DyeColor.byId(p_29845_.getByte("Color")));
+    }
+
+
+
+
+
+    //----------------------------------------COLOR----------------------------------------//
+
+    private static float[] createSheepColor(DyeColor p_29866_) {
+        if (p_29866_ == DyeColor.WHITE) {
+            return new float[]{0.9019608F, 0.9019608F, 0.9019608F};
+        } else {
+            float[] afloat = p_29866_.getTextureDiffuseColors();
+            float f = 0.75F;
+            return new float[]{afloat[0] * 0.75F, afloat[1] * 0.75F, afloat[2] * 0.75F};
+        }
+    }
+
+    public static float[] getColorArray(DyeColor p_29830_) {
+        return COLORARRAY_BY_COLOR.get(p_29830_);
+    }
+
+    public DyeColor getColor() {
+        return DyeColor.byId(this.entityData.get(DATA_WOOL_ID) & 15);
+    }
+
+
+
+
+
+    //----------------------------------------SOUND----------------------------------------//
+
+    protected SoundEvent getAmbientSound() {
+        return ShopKeeper.SOUND_ALPACA_AMBIENT.get();
+    }
+
+    protected SoundEvent getHurtSound(DamageSource p_29872_) {
+        return ShopKeeper.SOUND_ALPACA_HURT.get();
+    }
+
+    protected SoundEvent getDeathSound() {
+        return ShopKeeper.SOUND_ALPACA_DEATH.get();
+    }
+
+    protected void playStepSound(BlockPos p_29861_, BlockState p_29862_) {
+        this.playSound(SoundEvents.SHEEP_STEP, 0.15F, 1.0F);
+    }
+
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
+
     public ResourceLocation getDefaultLootTable() {
         if (this.isSheared()) {
             return this.getType().getDefaultLootTable();
         } else {
             switch(this.getColor()) {
-                case WHITE:
                 default:
-                    return ShopKeeper.ALPACA_WHITE;
-                case ORANGE:
-                    return ShopKeeper.ALPACA_ORANGE;
-                case MAGENTA:
-                    return ShopKeeper.ALPACA_MAGENTA;
-                case LIGHT_BLUE:
-                    return ShopKeeper.ALPACA_LIGHT_BLUE;
-                case YELLOW:
-                    return ShopKeeper.ALPACA_YELLOW;
-                case LIME:
-                    return ShopKeeper.ALPACA_LIME;
-                case PINK:
-                    return ShopKeeper.ALPACA_PINK;
-                case GRAY:
-                    return ShopKeeper.ALPACA_GRAY;
-                case LIGHT_GRAY:
-                    return ShopKeeper.ALPACA_LIGHT_GRAY;
-                case CYAN:
-                    return ShopKeeper.ALPACA_CYAN;
-                case PURPLE:
-                    return ShopKeeper.ALPACA_PURPLE;
-                case BLUE:
-                    return ShopKeeper.ALPACA_BLUE;
-                case BROWN:
-                    return ShopKeeper.ALPACA_BROWN;
-                case GREEN:
-                    return ShopKeeper.ALPACA_GREEN;
-                case RED:
-                    return ShopKeeper.ALPACA_RED;
-                case BLACK:
-                    return ShopKeeper.ALPACA_BLACK;
+                case WHITE:      return ShopKeeper.ALPACA_WHITE;
+                case ORANGE:     return ShopKeeper.ALPACA_ORANGE;
+                case MAGENTA:    return ShopKeeper.ALPACA_MAGENTA;
+                case LIGHT_BLUE: return ShopKeeper.ALPACA_LIGHT_BLUE;
+                case YELLOW:     return ShopKeeper.ALPACA_YELLOW;
+                case LIME:       return ShopKeeper.ALPACA_LIME;
+                case PINK:       return ShopKeeper.ALPACA_PINK;
+                case GRAY:       return ShopKeeper.ALPACA_GRAY;
+                case LIGHT_GRAY: return ShopKeeper.ALPACA_LIGHT_GRAY;
+                case CYAN:       return ShopKeeper.ALPACA_CYAN;
+                case PURPLE:     return ShopKeeper.ALPACA_PURPLE;
+                case BLUE:       return ShopKeeper.ALPACA_BLUE;
+                case BROWN:      return ShopKeeper.ALPACA_BROWN;
+                case GREEN:      return ShopKeeper.ALPACA_GREEN;
+                case RED:        return ShopKeeper.ALPACA_RED;
+                case BLACK:      return ShopKeeper.ALPACA_BLACK;
             }
         }
     }
@@ -179,7 +255,6 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         } else {
             super.handleEntityEvent(p_29814_);
         }
-
     }
 
     public float getHeadEatPositionScale(float p_29881_) {
@@ -201,24 +276,6 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         }
     }
 
-    public InteractionResult mobInteract(Player p_29853_, InteractionHand p_29854_) {
-        ItemStack itemstack = p_29853_.getItemInHand(p_29854_);
-        if (false && itemstack.getItem() == Items.SHEARS) { //Forge: Moved to onSheared
-            if (!this.level.isClientSide && this.readyForShearing()) {
-                this.shear(SoundSource.PLAYERS);
-                this.gameEvent(GameEvent.SHEAR, p_29853_);
-                itemstack.hurtAndBreak(1, p_29853_, (p_29822_) -> {
-                    p_29822_.broadcastBreakEvent(p_29854_);
-                });
-                return InteractionResult.SUCCESS;
-            } else {
-                return InteractionResult.CONSUME;
-            }
-        } else {
-            return super.mobInteract(p_29853_, p_29854_);
-        }
-    }
-
     public void shear(SoundSource p_29819_) {
         this.level.playSound((Player)null, this, SoundEvents.SHEEP_SHEAR, p_29819_, 1.0F, 1.0F);
         this.setSheared(true);
@@ -237,38 +294,6 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         return this.isAlive() && !this.isSheared() && !this.isBaby();
     }
 
-    public void addAdditionalSaveData(CompoundTag p_29864_) {
-        super.addAdditionalSaveData(p_29864_);
-        p_29864_.putBoolean("Sheared", this.isSheared());
-        p_29864_.putByte("Color", (byte)this.getColor().getId());
-    }
-
-    public void readAdditionalSaveData(CompoundTag p_29845_) {
-        super.readAdditionalSaveData(p_29845_);
-        this.setSheared(p_29845_.getBoolean("Sheared"));
-        this.setColor(DyeColor.byId(p_29845_.getByte("Color")));
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return ShopKeeper.SOUND_ALPACA_AMBIENT.get();
-    }
-
-    protected SoundEvent getHurtSound(DamageSource p_29872_) {
-        return ShopKeeper.SOUND_ALPACA_HURT.get();
-    }
-
-    protected SoundEvent getDeathSound() {
-        return ShopKeeper.SOUND_ALPACA_DEATH.get();
-    }
-
-    protected void playStepSound(BlockPos p_29861_, BlockState p_29862_) {
-        this.playSound(SoundEvents.SHEEP_STEP, 0.15F, 1.0F);
-    }
-
-    public DyeColor getColor() {
-        return DyeColor.byId(this.entityData.get(DATA_WOOL_ID) & 15);
-    }
-
     public void setColor(DyeColor p_29856_) {
         byte b0 = this.entityData.get(DATA_WOOL_ID);
         this.entityData.set(DATA_WOOL_ID, (byte)(b0 & 240 | p_29856_.getId() & 15));
@@ -285,7 +310,6 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         } else {
             this.entityData.set(DATA_WOOL_ID, (byte)(b0 & -17));
         }
-
     }
 
     public static DyeColor getRandomSheepColor(Random p_29843_) {
@@ -371,4 +395,7 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         }
         return java.util.Collections.emptyList();
     }
+
+
+
 }

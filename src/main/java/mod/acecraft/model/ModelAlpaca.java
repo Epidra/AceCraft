@@ -34,52 +34,37 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableListModel<T> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ModelAlpaca(ModelPart part) {
-
         super(false, 6.0F, 0.0F);
-
-        //super(true, 30.0f, 2.0f, 3.0f, 2.5f, 35.0f);
-
-        //texWidth = 64;
-        //texHeight = 64;
-
         Body = part.getChild("body");
-
         LegBackRight = part.getChild("leg_back_right");
-
         LegBackLeft = part.getChild("leg_back_left");
-
         LegFrontRight = part.getChild("leg_front_right");
-
         LegFrontLeft = part.getChild("leg_front_left");
-
         Head = part.getChild("head");
     }
 
 
+
+
+
+    //----------------------------------------CREATE----------------------------------------//
+
     public static LayerDefinition createBodyLayer() {
         MeshDefinition modelDefinition = new MeshDefinition();
         PartDefinition def = modelDefinition.getRoot();
-
         def.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -19.0F, -8.0F, 10.0F, 8.0F, 16.0F), PartPose.offset(0.0F, 24.0F, 0.0F));
-
         def.addOrReplaceChild("leg_back_right", CubeListBuilder.create().texOffs(36, 0).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 12.0F, 3.0F), PartPose.offset(-2.5F, 12.0F, 5.5F));
-
         def.addOrReplaceChild("leg_back_left", CubeListBuilder.create().texOffs(0, 38).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 12.0F, 3.0F), PartPose.offset(2.5F, 12.0F, 5.5F));
-
         def.addOrReplaceChild("leg_front_right", CubeListBuilder.create().texOffs(36, 24).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 12.0F, 3.0F), PartPose.offset(-2.5F, 12.0F, -5.5F));
-
         def.addOrReplaceChild("leg_front_left", CubeListBuilder.create().texOffs(24, 24).addBox(-1.5F, 0.0F, -1.5F, 3.0F, 12.0F, 3.0F), PartPose.offset(2.5F, 12.0F, -5.5F));
-
         def.addOrReplaceChild("head", CubeListBuilder.create().texOffs(26, 39).addBox(-3.5F, -21.0F, -2.0F, 3.0F, 4.0F, 2.0F).texOffs(36, 39).addBox(0.5F, -21.0F, -2.0F, 3.0F, 4.0F, 2.0F).texOffs(0, 24).addBox(-3.0F, -18.0F, -5.0F, 6.0F, 8.0F, 6.0F).texOffs(0, 0).addBox(-2.0F, -10.0F, -4.0F, 4.0F, 12.0F, 4.0F).texOffs(12, 38).addBox(-2.0F, -14.0F, -8.0F, 4.0F, 4.0F, 3.0F), PartPose.offset(0.0F, 7.0F, -7.0F));
-
-
-
-
         return LayerDefinition.create(modelDefinition, 64, 64);
     }
+
 
 
 
@@ -104,6 +89,7 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableListModel<T> {
 
 
 
+
     //----------------------------------------RENDER----------------------------------------//
 
     @Override
@@ -113,13 +99,8 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableListModel<T> {
         matrixStack.translate(0, 0.35, 0);
         super.renderToBuffer(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         matrixStack.popPose();
-        //Body.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegBackRight.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegBackLeft.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegFrontRight.render(matrixStack, buffer, packedLight, packedOverlay);
-        //LegFrontLeft.render(matrixStack, buffer, packedLight, packedOverlay);
-        //Head.render(matrixStack, buffer, packedLight, packedOverlay);
     }
+
 
 
 
@@ -135,5 +116,7 @@ public class ModelAlpaca<T extends EntityAlpaca>  extends AgeableListModel<T> {
     protected Iterable<ModelPart> bodyParts() {
         return ImmutableList.of(this.Body, this.LegBackLeft, this.LegBackRight, this.LegFrontLeft, this.LegFrontRight);
     }
+
+
 
 }

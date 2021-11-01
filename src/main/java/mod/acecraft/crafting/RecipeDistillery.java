@@ -23,6 +23,7 @@ public class RecipeDistillery extends RecipeBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public RecipeDistillery(ResourceLocation id, Ingredient ingredient, ItemStack item, String group, float experienceIn, int cookTimeIn) {
@@ -33,6 +34,7 @@ public class RecipeDistillery extends RecipeBase {
         this.group = group;
         this.experience = experienceIn;
     }
+
 
 
 
@@ -58,6 +60,12 @@ public class RecipeDistillery extends RecipeBase {
         nonnulllist.add(this.ingredient);
         return nonnulllist;
     }
+
+
+
+
+
+    //----------------------------------------GETTER/SETTER----------------------------------------//
 
     public float getExperience() {
         return this.experience;
@@ -90,5 +98,7 @@ public class RecipeDistillery extends RecipeBase {
     public RecipeSerializer<?> getSerializer() {
         return ShopKeeper.SERIALIZER_DISTILLERY.get();
     }
+
+
 
 }

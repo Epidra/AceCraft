@@ -18,6 +18,7 @@ public class BlockOre extends BlockBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
@@ -28,9 +29,11 @@ public class BlockOre extends BlockBase {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
+
 
 
 
@@ -45,9 +48,11 @@ public class BlockOre extends BlockBase {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     // ...
+
 
 
 
@@ -58,5 +63,7 @@ public class BlockOre extends BlockBase {
     public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader reader, BlockPos pos, int fortune, int silktouch) {
         return silktouch == 0 ? RANDOM.nextInt(2)+1 : 0;
     }
+
+
 
 }

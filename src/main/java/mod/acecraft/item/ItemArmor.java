@@ -12,11 +12,14 @@ public class ItemArmor extends ArmorItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ItemArmor(ArmorMaterial materialIn, EquipmentSlot slot) {
         super(materialIn, slot, new Properties().tab(CreativeModeTab.TAB_COMBAT));
     }
+
+
 
 }

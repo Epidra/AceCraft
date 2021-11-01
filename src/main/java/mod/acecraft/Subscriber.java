@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import mod.acecraft.crafting.ModifierAddItem;
 import mod.acecraft.entity.EntityAlpaca;
 import mod.lucky77.util.BiomeDictionaryHelper;
-import net.minecraft.client.model.WolfModel;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +42,14 @@ import static net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDER
 
 public class Subscriber {
 
+    // ...
+
+
+
+
+
+    //----------------------------------------EVENT_FORGE----------------------------------------//
+
     @ObjectHolder(AceCraft.MODID)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
     public static class RegistryEventsForge {
@@ -61,14 +68,12 @@ public class Subscriber {
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_ZINC);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_MYTHRIL);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_TIN);
-                //event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_COPPER);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_AURORITE);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SAPPHIRE);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_RUBY);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SALT);
                 event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SULFUR);
             }
-
         }
 
         @SubscribeEvent
@@ -86,8 +91,13 @@ public class Subscriber {
                 }
             }
         }
-
     }
+
+
+
+
+
+    //----------------------------------------EVENT_MOD----------------------------------------//
 
     @Mod.EventBusSubscriber(modid = "acecraft", bus = Mod.EventBusSubscriber.Bus.MOD)
     public class MobRegistry {
@@ -101,44 +111,21 @@ public class Subscriber {
             SPAWN_EGGS.add(spawnEgg);
             return ENTITY_DEFERRED.register(name, () -> entity);
         }
+
         @SubscribeEvent
         public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
             SpawnPlacements.register(ShopKeeper.ENTITY_ALPACA.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EntityAlpaca::checkAnimalSpawnRules);
         }
+
         @SubscribeEvent
         public static void addEntityAttributes(EntityAttributeCreationEvent event) {
             event.put(ShopKeeper.ENTITY_ALPACA.get(), EntityAlpaca.createAttributes().build());
         }
-        //@SubscribeEvent
-        //public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
-        //    for (Item spawnEgg : SPAWN_EGGS) {
-        //        Preconditions.checkNotNull(spawnEgg.getRegistryName(), "registryName");
-        //        event.getRegistry().register(spawnEgg);
-        //    }
-        //}
-    }
 
-
-
-
-    @ObjectHolder("acecraft")
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEventsMod2 {
         @SubscribeEvent
         public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
             ev.getRegistry().register(new ModifierAddItem.Serializer().setRegistryName("acecraft", "add_item"));
         }
-    }
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    //@ObjectHolder(Ivalice.MODID)
-    @Mod.EventBusSubscriber(modid = "acecraft")
-    public static class RegistryEventsMod {
-        //@SubscribeEvent
-        //public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
-        //    ev.getRegistry().register(new ModifierAddItem.Serializer().setRegistryName(Ivalice.MODID, "add_item"));
-        //}
 
         @SubscribeEvent(priority = EventPriority.HIGH)
         public static void addSpawn(BiomeLoadingEvent event) {
@@ -160,4 +147,7 @@ public class Subscriber {
             }
         }
     }
+
+
+
 }

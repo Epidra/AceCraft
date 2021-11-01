@@ -59,6 +59,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public BlockEntityFoundry(BlockEntityType<?> tileEntityTypeIn, BlockPos blockpos, BlockState blockstate) {
@@ -72,8 +73,8 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
 
 
-    //----------------------------------------UPDATE----------------------------------------//
 
+    //----------------------------------------SERVER_TICK----------------------------------------//
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, BlockEntityFoundry BE){
         boolean isDirty = false;
@@ -95,6 +96,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
             BE.setChanged();
         }
     }
+
 
 
 
@@ -127,6 +129,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
 
 
+
     //----------------------------------------NETWORK----------------------------------------//
 
     @Override
@@ -136,6 +139,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
         save(nbtTagCompound);
         return new ClientboundBlockEntityDataPacket(this.worldPosition, ShopKeeper.TILE_FOUNDRY.get().hashCode(), nbtTagCompound);
     }
+
 
 
 
@@ -280,6 +284,12 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
         }
     }
 
+
+
+
+
+    //----------------------------------------BASIC----------------------------------------//
+
     @Override
     public TextComponent getName() {
         return new TextComponent("tile.destillery.name");
@@ -293,5 +303,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
     private LogicFoundry logic(){
         return (LogicFoundry) logic;
     }
+
+
 
 }

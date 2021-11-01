@@ -14,6 +14,7 @@ public class BlockCrop extends CropBlock {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
@@ -25,6 +26,7 @@ public class BlockCrop extends CropBlock {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
@@ -32,9 +34,11 @@ public class BlockCrop extends CropBlock {
 
 
 
+
     //----------------------------------------INTERACTION----------------------------------------//
 
     // ...
+
 
 
 
@@ -58,5 +62,7 @@ public class BlockCrop extends CropBlock {
         if(id.matches("hemp"      )) return ShopKeeper.SEED_HEMP.get();
         return ShopKeeper.SEED_CABBAGE.get();
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 package mod.acecraft.screen;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.acecraft.menu.MenuFoundry;
@@ -10,7 +9,6 @@ import mod.acecraft.system.AceCraftPacketHandler;
 import mod.acecraft.util.FoundryContent;
 import mod.lucky77.screen.ScreenBase;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,11 +22,13 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ScreenFoundry(MenuFoundry container, Inventory player, Component name) {
         super(container, player, name, 176, 204);
     }
+
 
 
 
@@ -43,6 +43,7 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
 
         return false;
     }
+
 
 
 
@@ -95,6 +96,7 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
 
 
 
+
     //----------------------------------------COMMAND----------------------------------------//
 
     private void commandEject(){
@@ -108,6 +110,7 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     /** Checks if mouse is inside a rectangle **/
@@ -117,5 +120,7 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
         }
         return false;
     }
+
+
 
 }

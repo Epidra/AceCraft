@@ -19,6 +19,7 @@ public class BlockGlobe extends MachinaBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
@@ -29,9 +30,11 @@ public class BlockGlobe extends MachinaBase {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
+
 
 
 
@@ -46,16 +49,14 @@ public class BlockGlobe extends MachinaBase {
 
 
 
-    //----------------------------------------SUPPORT----------------------------------------//
 
-    //@Override
-    //public boolean hasTileEntity(BlockState state) {
-    //    return false;
-    //}
+    //----------------------------------------SUPPORT----------------------------------------//
 
     @Deprecated
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return AABB;
     }
+
+
 
 }

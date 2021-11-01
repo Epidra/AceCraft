@@ -11,11 +11,14 @@ public class ToolSword extends SwordItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ToolSword(Tier tier, int attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_COMBAT));
     }
+
+
 
 }

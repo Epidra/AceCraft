@@ -31,6 +31,10 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
 
 
 
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
+
     public EntityNugget(EntityType<? extends EntityNugget> p_37391_, Level p_37392_) {
         super(p_37391_, p_37392_);
     }
@@ -51,6 +55,11 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
     }
 
 
+
+
+
+    //----------------------------------------SPAWNDATA----------------------------------------//
+
     /** Called by the server when constructing the spawn packet. Data should be added to the provided stream.
      * @param buffer The packet data stream */
     public void writeSpawnData(FriendlyByteBuf buffer){
@@ -63,27 +72,24 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
 
     }
 
-
-
-
-    protected Item getDefaultItem() {
-        return stack == null ? ShopKeeper.NUGGET_GILIUM.get() : stack.getItem();
+    @Override
+    public Packet<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    private ParticleOptions getParticle() {
-        ItemStack itemstack = this.getItemRaw();
-        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
-    }
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
 
     public void handleEntityEvent(byte p_37402_) {
         if (p_37402_ == 3) {
             ParticleOptions particleoptions = this.getParticle();
-
             for(int i = 0; i < 8; ++i) {
                 this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
-
     }
 
     protected void onHitEntity(EntityHitResult p_37404_) {
@@ -99,12 +105,17 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
             this.level.broadcastEntityEvent(this, (byte)3);
             this.discard();
         }
+    }
 
+    protected Item getDefaultItem() {
+        return stack == null ? ShopKeeper.NUGGET_GILIUM.get() : stack.getItem();
+    }
+
+    private ParticleOptions getParticle() {
+        ItemStack itemstack = this.getItemRaw();
+        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
     }
 
 
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
+
 }

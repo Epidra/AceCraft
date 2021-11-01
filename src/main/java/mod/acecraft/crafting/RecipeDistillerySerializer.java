@@ -18,6 +18,7 @@ public class RecipeDistillerySerializer extends ForgeRegistryEntry<RecipeSeriali
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     public RecipeDistillery fromJson(ResourceLocation recipeId, JsonObject json) {
@@ -56,5 +57,7 @@ public class RecipeDistillerySerializer extends ForgeRegistryEntry<RecipeSeriali
         buffer.writeFloat(recipe.experience);
         buffer.writeVarInt(recipe.getCookingTime());
     }
+
+
 
 }

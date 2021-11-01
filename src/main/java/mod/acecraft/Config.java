@@ -21,7 +21,6 @@ public class Config {
     public static final ConfigOre ZINC     = new ConfigOre(BUILDER, "zinc",     6,  64,  8);
     public static final ConfigOre MYTHRIL  = new ConfigOre(BUILDER, "mythril",  6,  48, 12);
     public static final ConfigOre TIN      = new ConfigOre(BUILDER, "tin",      6,  64,  8);
-    //public static final ConfigOre COPPER   = new ConfigOre(BUILDER, "copper",   6, 128, 16);
     public static final ConfigOre AURORITE = new ConfigOre(BUILDER, "aurorite", 2, 128,  4);
     public static final ConfigOre RUBY     = new ConfigOre(BUILDER, "ruby",     2,  64,  4);
     public static final ConfigOre SAPPHIRE = new ConfigOre(BUILDER, "sapphire", 2,  64,  4);
@@ -29,6 +28,7 @@ public class Config {
     public static final ConfigOre SULFUR   = new ConfigOre(BUILDER, "sulfur",   4,  32, 12);
     public static final ConfigMob ALPACA = new ConfigMob(BUILDER, "alpaca", 1, 2, 6);
     public static final ConfigFoundry FOUNDRY = new ConfigFoundry(BUILDER);
+
 
 
 
@@ -49,6 +49,7 @@ public class Config {
             builder.pop();
         }
     }
+
 
 
 
@@ -77,6 +78,7 @@ public class Config {
             builder.pop();
         }
     }
+
 
 
 
@@ -117,8 +119,11 @@ public class Config {
 
 
 
+
     //----------------------------------------BUILDER----------------------------------------//
 
     public static final ForgeConfigSpec spec = BUILDER.build();
+
+
 
 }

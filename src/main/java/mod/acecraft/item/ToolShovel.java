@@ -11,11 +11,14 @@ public class ToolShovel extends ShovelItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ToolShovel(Tier tier, float attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_TOOLS));
     }
+
+
 
 }

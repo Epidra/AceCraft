@@ -30,7 +30,8 @@ public class BlockAnchor extends MachinaCube {
 
 
 
-                                 
+
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
@@ -41,9 +42,11 @@ public class BlockAnchor extends MachinaCube {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
+
 
 
 
@@ -79,12 +82,8 @@ public class BlockAnchor extends MachinaCube {
 
 
 
-    //----------------------------------------SUPPORT----------------------------------------//
 
-    //@Override
-    //public boolean hasTileEntity(BlockState state) {
-    //    return false;
-    //}
+    //----------------------------------------SUPPORT----------------------------------------//
 
     @Override
     public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
@@ -105,5 +104,7 @@ public class BlockAnchor extends MachinaCube {
                 return Shapes.block();
         }
     }
+
+
 
 }

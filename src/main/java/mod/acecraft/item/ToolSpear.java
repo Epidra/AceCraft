@@ -11,11 +11,14 @@ public class ToolSpear extends SwordItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ToolSpear(Tier tier, int attackDamageIn, float attackSpeedIn) {
         super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_TOOLS));
     }
+
+
 
 }

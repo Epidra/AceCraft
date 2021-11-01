@@ -1,15 +1,10 @@
 package mod.acecraft;
 
-import com.mojang.blaze3d.platform.ScreenManager;
 import mod.acecraft.block.*;
 import mod.acecraft.menu.MenuDistillery;
 import mod.acecraft.menu.MenuFoundry;
 import mod.acecraft.crafting.*;
 import mod.acecraft.entity.*;
-import mod.acecraft.render.RenderAlpaca;
-import mod.acecraft.render.RenderDynamite;
-import mod.acecraft.render.RenderNugget;
-import mod.acecraft.render.RenderSpear;
 import mod.acecraft.item.*;
 import mod.acecraft.screen.ScreenDistillery;
 import mod.acecraft.screen.ScreenFoundry;
@@ -18,22 +13,15 @@ import mod.acecraft.util.*;
 import mod.lucky77.block.BlockBlock;
 import mod.lucky77.item.ItemFood;
 import mod.lucky77.item.ItemItem;
-import mod.lucky77.util.BiomeDictionaryHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.particle.BreakingItemParticle;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.data.worldgen.Features;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -46,12 +34,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
@@ -60,7 +45,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -71,24 +55,23 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.*;
 
 import static net.minecraft.world.entity.MobCategory.CREATURE;
-import static net.minecraft.world.entity.MobCategory.MISC;
 
 @SuppressWarnings({"unused", "deprecation"})
 public class ShopKeeper {
 
-    private static final DeferredRegister<Block>                BLOCKS     = DeferredRegister.create(ForgeRegistries.BLOCKS,             AceCraft.MODID);
-    private static final DeferredRegister<Item>                 ITEMS      = DeferredRegister.create(ForgeRegistries.ITEMS,              AceCraft.MODID);
-    private static final DeferredRegister<MenuType<?>>     CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS,         AceCraft.MODID);
-    private static final DeferredRegister<BlockEntityType<?>>    TILES      = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,      AceCraft.MODID);
-    private static final DeferredRegister<SoundEvent>           SOUNDS     = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,       AceCraft.MODID);
-    private static final DeferredRegister<EntityType<?>>        ENTITIES   = DeferredRegister.create(ForgeRegistries.ENTITIES,           AceCraft.MODID);
+    private static final DeferredRegister<Block>               BLOCKS     = DeferredRegister.create(ForgeRegistries.BLOCKS,             AceCraft.MODID);
+    private static final DeferredRegister<Item>                ITEMS      = DeferredRegister.create(ForgeRegistries.ITEMS,              AceCraft.MODID);
+    private static final DeferredRegister<MenuType<?>>         CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS,         AceCraft.MODID);
+    private static final DeferredRegister<BlockEntityType<?>>  TILES      = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,     AceCraft.MODID);
+    private static final DeferredRegister<SoundEvent>          SOUNDS     = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,       AceCraft.MODID);
+    private static final DeferredRegister<EntityType<?>>       ENTITIES   = DeferredRegister.create(ForgeRegistries.ENTITIES,           AceCraft.MODID);
     private static final DeferredRegister<RecipeSerializer<?>> RECIPES    = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AceCraft.MODID);
 
 
 
 
+
     // Blocks
-    //public static final RegistryObject<Block> BLOCK_COPPER     = register("block_copper",     new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> BLOCK_MYTHRIL    = register("block_mythril",    new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> BLOCK_GILIUM     = register("block_gilium",     new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> BLOCK_TIN        = register("block_tin",        new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -105,7 +88,6 @@ public class ShopKeeper {
     public static final RegistryObject<Block> BLOCK_AURORITE   = register("block_aurorite",   new BlockBlock(Blocks.DIAMOND_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     // Ore
-    //public static final RegistryObject<Block> ORE_COPPER   = register("ore_copper",   new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> ORE_MYTHRIL  = register("ore_mythril",  new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> ORE_GILIUM   = register("ore_gilium",   new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
     public static final RegistryObject<Block> ORE_TIN      = register("ore_tin",      new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -117,16 +99,12 @@ public class ShopKeeper {
     public static final RegistryObject<Block> ORE_AURORITE = register("ore_aurorite", new BlockBlock(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     // Nuggets
-    //public static final RegistryObject<Item> NUGGET_IRON    = register("nugget_iron",    new ItemNugget());
-    //public static final RegistryObject<Item> NUGGET_GOLD    = register("nugget_gold",    new ItemNugget());
-    //public static final RegistryObject<Item> NUGGET_COPPER  = register("nugget_copper",  new ItemNugget());
     public static final RegistryObject<Item> NUGGET_MYTHRIL = register("nugget_mythril", new ItemNugget());
     public static final RegistryObject<Item> NUGGET_GILIUM  = register("nugget_gilium",  new ItemNugget());
     public static final RegistryObject<Item> NUGGET_TIN     = register("nugget_tin",     new ItemNugget());
     public static final RegistryObject<Item> NUGGET_ZINC    = register("nugget_zinc",    new ItemNugget());
 
     // Ingot
-    //public static final RegistryObject<Item> INGOT_COPPER     = register("ingot_copper",     new ItemItem(CreativeModeTab.TAB_MATERIALS));
     public static final RegistryObject<Item> INGOT_MYTHRIL    = register("ingot_mythril",    new ItemItem(CreativeModeTab.TAB_MATERIALS));
     public static final RegistryObject<Item> INGOT_GILIUM     = register("ingot_gilium",     new ItemItem(CreativeModeTab.TAB_MATERIALS));
     public static final RegistryObject<Item> INGOT_TIN        = register("ingot_tin",        new ItemItem(CreativeModeTab.TAB_MATERIALS));
@@ -164,7 +142,7 @@ public class ShopKeeper {
     public static final RegistryObject<Item> FOOD_VICUGNA_COOKED = register("food_vicugna_cooked", new ItemFood(1, 1, true));
 
     // Liquor
-    public static final RegistryObject<Item> LIQUOR_COFFEE    = register("liquor_coffee",    new ItemLiquor(MobEffects.DIG_SPEED,    1.0f, MobEffects.HUNGER, 0.8f));
+    public static final RegistryObject<Item> LIQUOR_COFFEE    = register("liquor_coffee",    new ItemLiquor(MobEffects.DIG_SPEED,    1.0f, MobEffects.HUNGER,    0.8f));
     public static final RegistryObject<Item> LIQUOR_MOONSHINE = register("liquor_moonshine", new ItemLiquor(MobEffects.DAMAGE_BOOST, 0.3f, MobEffects.CONFUSION, 0.3f));
     public static final RegistryObject<Item> LIQUOR_RUM       = register("liquor_rum",       new ItemLiquor(MobEffects.DAMAGE_BOOST, 0.3f, MobEffects.CONFUSION, 0.3f));
     public static final RegistryObject<Item> LIQUOR_SAKE      = register("liquor_sake",      new ItemLiquor(MobEffects.DAMAGE_BOOST, 0.3f, MobEffects.CONFUSION, 0.3f));
@@ -172,7 +150,7 @@ public class ShopKeeper {
     public static final RegistryObject<Item> LIQUOR_VODKA     = register("liquor_vodka",     new ItemLiquor(MobEffects.DAMAGE_BOOST, 0.3f, MobEffects.CONFUSION, 0.3f));
     public static final RegistryObject<Item> LIQUOR_WHISKY    = register("liquor_whisky",    new ItemLiquor(MobEffects.DAMAGE_BOOST, 0.3f, MobEffects.CONFUSION, 0.3f));
     public static final RegistryObject<Item> LIQUOR_BRANDY    = register("liquor_brandy",    new ItemLiquor(MobEffects.DAMAGE_BOOST, 0.3f, MobEffects.CONFUSION, 0.3f));
-    public static final RegistryObject<Item> LIQUOR_OIL       = register("liquor_oil",       new ItemLiquor(MobEffects.WITHER,       1.0f, MobEffects.HUNGER, 1.0f));
+    public static final RegistryObject<Item> LIQUOR_OIL       = register("liquor_oil",       new ItemLiquor(MobEffects.WITHER,       1.0f, MobEffects.HUNGER,    1.0f));
 
     // Crop
     public static final RegistryObject<Block> CROP_CABBAGE    = register("crop_cabbage",    new BlockCrop("cabbage",   Blocks.WHEAT));
@@ -303,7 +281,7 @@ public class ShopKeeper {
     public static final RegistryObject<Item> TOOL_SHOVEL_STEEL      = register("tool_shovel_steel",      new ToolShovel(MaterialTool.STEEL,      2, -1.0f));
     public static final RegistryObject<Item> TOOL_SHOVEL_AURORITE   = register("tool_shovel_aurorite",   new ToolShovel(MaterialTool.AURORITE,   3, -1.0f));
 
-    // // Tool Hoe
+    // Tool Hoe
     public static final RegistryObject<Item> TOOL_HOE_GILIUM     = register("tool_hoe_gilium",     new ToolHoe(MaterialTool.GILIUM,     2, -1.0f));
     public static final RegistryObject<Item> TOOL_HOE_ADAMANTIUM = register("tool_hoe_adamantium", new ToolHoe(MaterialTool.ADAMANTIUM, 3, -1.0f));
     public static final RegistryObject<Item> TOOL_HOE_MYTHRIL    = register("tool_hoe_mythril",    new ToolHoe(MaterialTool.MYTHRIL,    2, -1.0f));
@@ -312,9 +290,6 @@ public class ShopKeeper {
     public static final RegistryObject<Item> TOOL_HOE_BRONZE     = register("tool_hoe_bronze",     new ToolHoe(MaterialTool.BRONZE,     2, -1.0f));
     public static final RegistryObject<Item> TOOL_HOE_STEEL      = register("tool_hoe_steel",      new ToolHoe(MaterialTool.STEEL,      2, -1.0f));
     public static final RegistryObject<Item> TOOL_HOE_AURORITE   = register("tool_hoe_aurorite",   new ToolHoe(MaterialTool.AURORITE,   3, -1.0f));
-
-    // Tool Other
-    // public static final RegistryObject<Item> TOOL_DYNAMITE = register("tool_dynamite", new ToolDynamite());
 
     // Sounds
     public static final RegistryObject<SoundEvent> SOUND_ALPACA_AMBIENT = register("acecraft.alpaca.ambient", new SoundEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.ambient")));
@@ -352,7 +327,6 @@ public class ShopKeeper {
     public static ConfiguredFeature<?, ?> SPAWN_ZINC     = null;
     public static ConfiguredFeature<?, ?> SPAWN_MYTHRIL  = null;
     public static ConfiguredFeature<?, ?> SPAWN_TIN      = null;
-    //public static ConfiguredFeature<?, ?> SPAWN_COPPER   = null;
     public static ConfiguredFeature<?, ?> SPAWN_AURORITE = null;
     public static ConfiguredFeature<?, ?> SPAWN_RUBY     = null;
     public static ConfiguredFeature<?, ?> SPAWN_SAPPHIRE = null;
@@ -360,22 +334,18 @@ public class ShopKeeper {
     public static ConfiguredFeature<?, ?> SPAWN_SULFUR   = null;
 
     // Recipes
-    public static final RecipeType<RecipeDistillery> RECIPE_DISTILLERY = register("acecraft:distilling");
+    public static final RecipeType<RecipeDistillery>               RECIPE_DISTILLERY     = register("acecraft:distilling");
     public static final RegistryObject<RecipeDistillerySerializer> SERIALIZER_DISTILLERY = RECIPES.register("distilling", RecipeDistillerySerializer::new);
 
     // Entities
     public static final RegistryObject<EntityType<EntityAlpaca>>   ENTITY_ALPACA   = ENTITIES.register("alpaca",   () -> EntityType.Builder.of(EntityAlpaca::new,                    CREATURE).sized(0.9F, 1.3F).setTrackingRange(10).build(new ResourceLocation(AceCraft.MODID, "alpaca").toString()));
-    public static final RegistryObject<EntityType<EntityDynamite>> ENTITY_DYNAMITE = null;//ENTITIES.register("dynamite", () -> EntityType.Builder.of(EntityDynamite::new,                    MISC).noSummon().sized(0.25F, 0.25F).setTrackingRange(100).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).build(new ResourceLocation(AceCraft.MODID, "dynamite").toString()));
-  //public static final RegistryObject<EntityType<EntitySpear>>    ENTITY_SPEAR    = ENTITIES.register("spear",    () -> EntityType.Builder.of(factorySpear(EntitySpear::new),       MISC).noSummon().sized(0.25F, 0.25F).setTrackingRange(100).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).build(new ResourceLocation(AceCraft.MODID, "spear").toString()));
-    public static final RegistryObject<EntityType<EntityNugget>>   ENTITY_NUGGET   = null;//ENTITIES.register("nugget",   () -> EntityType.Builder.of(EntityNugget::new,                    MISC).noSummon().sized(0.25F, 0.25F).setTrackingRange(100).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).build(new ResourceLocation(AceCraft.MODID, "nugget").toString()));
+    public static final RegistryObject<EntityType<EntityDynamite>> ENTITY_DYNAMITE = null;
+    public static final RegistryObject<EntityType<EntityNugget>>   ENTITY_NUGGET   = null;
 
     // Spawn Eggs
     public static final RegistryObject<ItemSpawnEgg> SPAWNEGG_ALPACA = ITEMS.register("spawnegg_alpaca", () -> new ItemSpawnEgg(() -> ENTITY_ALPACA.get(), 12345, 67890, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-    // Client Render Factory
-    //private static <T extends EntityDynamite> EntityType.EntityFactory<T> factoryDynamite(EntityType.EntityFactory<T> factory){ return factory; }
-    //private static <T extends EntitySpear>    EntityType.EntityFactory<T> factorySpear(   EntityType.EntityFactory<T> factory){ return factory; }
-    //private static <T extends EntityNugget>   EntityType.EntityFactory<T> factoryNugget(  EntityType.EntityFactory<T> factory){ return factory; }
+
 
 
 
@@ -391,8 +361,7 @@ public class ShopKeeper {
         RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    static <T extends Recipe<?>> RecipeType<T> register(final String key)
-    {
+    static <T extends Recipe<?>> RecipeType<T> register(final String key) {
         return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(key), new RecipeType<T>()
         {
             @Override
@@ -403,32 +372,10 @@ public class ShopKeeper {
         });
     }
 
-    //public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
-    //    List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.include.get()));
-    //    List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.exclude.get()));
-    //    if (!includeList.isEmpty()) {
-    //        if (types.stream().noneMatch(excludeList::contains) && types.stream().anyMatch(includeList::contains)) {
-    //            event.getSpawns().getSpawner(CREATURE).add(new MobSpawnInfo.Spawners(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
-    //        }
-    //    } else {
-    //        throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
-    //    }
-    //}
-
-
     public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
-        //if (event.getCategory() == Biome.Category.PLAINS) {
         event.getSpawns().getSpawner(CREATURE).add(new MobSpawnSettings.SpawnerData(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
-        //}
     }
 
-
-
-    //public static void registerEntities() {
-    //    event.getSpawns().getSpawner(CREATURE).add(new MobSpawnSettings.SpawnerData(ENTITY_CHOCOBO.get(), Config.CHOCOBO.weight.get(), Config.CHOCOBO.min.get(), Config.CHOCOBO.max.get()));
-    //    //EntitySpawnPlacementRegistry.register(ENTITY_ALPACA.get(), EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::checkAnimalSpawnRules);
-    //    //GlobalEntityTypeAttributes.put(ENTITY_ALPACA.get(), EntityAlpaca.createAttributes().build());
-    //}
     private static RegistryObject<Block> register(String name, Block block){
         return register(name, block, null);
     }
@@ -450,35 +397,17 @@ public class ShopKeeper {
         return ENTITIES.register(name, () -> entity);
     }
 
-
-
-
     public static ConfiguredFeature<?, ?> buildOreSpawn(String name, BlockState state, int veinSize, int maxHeight, int spawnRate, boolean isNether) {
         RangeDecoratorConfiguration RANGE_10_10 = new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.belowTop(maxHeight)));
         ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreConfiguration(isNether ? OreConfiguration.Predicates.NETHERRACK : OreConfiguration.Predicates.NATURAL_STONE, state, veinSize)).range(RANGE_10_10).squared().count(spawnRate);
-        //OreConfiguration config = new OreConfiguration(isNether ? OreConfiguration.Predicates.NETHER_ORE_REPLACEABLES : OreConfiguration.Predicates.NATURAL_STONE, state, veinSize);
-        //ConfiguredFeature<?, ?> feature = Feature.ORE.configured(config)
-        //        //.range(maxHeight)
-        //        .squared();
-        //WorldGenerationContext
-        //        //.chance(spawnRate);
-        ////Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(AceCraft.MODID, name), feature  );
-        //return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, p_127056_, p_127057_);
-        //return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, name, ;
         return feature;
-
     }
-
-
-
-
 
     public static void registerOreSpawn(){
         SPAWN_GILIUM   = buildOreSpawn("ore_gilium",   ShopKeeper.ORE_GILIUM.get().defaultBlockState(),   Config.GILIUM.veinSize.get(),   Config.GILIUM.maxHeight.get(),   Config.GILIUM.spawnRate.get(),   true);
         SPAWN_ZINC     = buildOreSpawn("ore_zinc",     ShopKeeper.ORE_ZINC.get().defaultBlockState(),     Config.ZINC.veinSize.get(),     Config.ZINC.maxHeight.get(),     Config.ZINC.spawnRate.get(),     false);
         SPAWN_MYTHRIL  = buildOreSpawn("ore_mythril",  ShopKeeper.ORE_MYTHRIL.get().defaultBlockState(),  Config.MYTHRIL.veinSize.get(),  Config.MYTHRIL.maxHeight.get(),  Config.MYTHRIL.spawnRate.get(),  false);
         SPAWN_TIN      = buildOreSpawn("ore_tin",      ShopKeeper.ORE_TIN.get().defaultBlockState(),      Config.TIN.veinSize.get(),      Config.TIN.maxHeight.get(),      Config.TIN.spawnRate.get(),      false);
-        //SPAWN_COPPER   = buildOreSpawn("ore_copper",   ShopKeeper.ORE_COPPER.get().defaultBlockState(),   Config.COPPER.veinSize.get(),   Config.COPPER.maxHeight.get(),   Config.COPPER.spawnRate.get(),   false);
         SPAWN_AURORITE = buildOreSpawn("ore_aurorite", ShopKeeper.ORE_AURORITE.get().defaultBlockState(), Config.AURORITE.veinSize.get(), Config.AURORITE.maxHeight.get(), Config.AURORITE.spawnRate.get(), false);
         SPAWN_RUBY     = buildOreSpawn("ore_ruby",     ShopKeeper.ORE_RUBY.get().defaultBlockState(),     Config.RUBY.veinSize.get(),     Config.RUBY.maxHeight.get(),     Config.RUBY.spawnRate.get(),     false);
         SPAWN_SAPPHIRE = buildOreSpawn("ore_sapphire", ShopKeeper.ORE_SAPPHIRE.get().defaultBlockState(), Config.SAPPHIRE.veinSize.get(), Config.SAPPHIRE.maxHeight.get(), Config.SAPPHIRE.spawnRate.get(), false);
@@ -489,16 +418,10 @@ public class ShopKeeper {
 
 
 
+
     //----------------------------------------SETUP----------------------------------------//
 
     static void setup(FMLCommonSetupEvent event){
-        //registerEntities();
-    }
-
-    static {
-
-        //EntityRenderers.register(ENTITY_DYNAMITE.get(), ThrownItemRenderer::new);
-        //EntityRenderers.register(ENTITY_NUGGET.get(),   ThrownItemRenderer::new);
 
     }
 
@@ -517,32 +440,10 @@ public class ShopKeeper {
         ItemBlockRenderTypes.setRenderLayer(CROP_RICE.get(),       RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CROP_COFFEE.get(),     RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CROP_HEMP.get(),       RenderType.cutout());
-
-        //RenderingRegistry.registerEntityRenderingHandler(ENTITY_ALPACA.get(),   RenderAlpaca::new);
-        //RenderingRegistry.registerEntityRenderingHandler(ENTITY_DYNAMITE.get(), new renderFactoryDynamite());
-        //RenderingRegistry.registerEntityRenderingHandler(ENTITY_SPEAR.get(),    RenderSpear::new);
-        //RenderingRegistry.registerEntityRenderingHandler(ENTITY_NUGGET.get(),   new renderFactoryNugget());
-        //DeferredWorkQueue.runLater(() -> {
         MenuScreens.register(CONTAINER_FOUNDRY.get(),    ScreenFoundry::new);
         MenuScreens.register(CONTAINER_DISTILLERY.get(), ScreenDistillery::new);
-        //});
     }
 
-    //private static class renderFactoryDynamite implements IRenderFactory<EntityDynamite> {
-    //    @Override
-    //    public EntityRenderer<? super EntityDynamite> createRenderFor(EntityRenderDispatcher manager) {
-    //        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-    //        return new ThrownItemRenderer<EntityDynamite>(manager, 1, false);
-    //        Snowball
-    //    }
-    //}
 
-   //private static class renderFactoryNugget implements IRenderFactory<EntityNugget> {
-   //    @Override
-   //    public EntityRenderer<? super EntityNugget> createRenderFor(EntityRenderDispatcher manager) {
-   //        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-   //        return new RenderNugget(manager, itemRenderer, 1.0f, false);
-   //    }
-   //}
 
 }

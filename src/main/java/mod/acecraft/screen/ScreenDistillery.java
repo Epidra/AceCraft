@@ -5,7 +5,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import mod.acecraft.menu.MenuDistillery;
 import mod.lucky77.screen.ScreenBase;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,6 +18,7 @@ public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public ScreenDistillery(MenuDistillery container, Inventory player, Component name) {
@@ -28,9 +28,11 @@ public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
 
 
+
     //----------------------------------------INPUT----------------------------------------//
 
     // ...
+
 
 
 
@@ -57,6 +59,7 @@ public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
 
 
+
     //----------------------------------------COMMAND----------------------------------------//
 
     // ...
@@ -64,8 +67,11 @@ public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
 
 
+
     //----------------------------------------SUPPORT----------------------------------------//
 
     // ...
+
+
 
 }

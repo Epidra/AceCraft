@@ -12,11 +12,13 @@ public class LogicFoundry extends LogicBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public LogicFoundry(){
 
     }
+
 
 
 
@@ -43,6 +45,7 @@ public class LogicFoundry extends LogicBase {
         }
         return s;
     }
+
 
 
 
@@ -124,5 +127,7 @@ public class LogicFoundry extends LogicBase {
 
         return lastID;
     }
+
+
 
 }

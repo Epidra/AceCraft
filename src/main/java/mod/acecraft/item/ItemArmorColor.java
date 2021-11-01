@@ -17,12 +17,14 @@ public class ItemArmorColor extends ArmorItem {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Default Constructor */
     public ItemArmorColor(ArmorMaterial materialIn, EquipmentSlot slot) {
         super(materialIn, slot, new Properties().tab(CreativeModeTab.TAB_COMBAT));
     }
+
 
 
 
@@ -40,5 +42,7 @@ public class ItemArmorColor extends ArmorItem {
     public static int getCurrentFrame(Level worldIn) {
         return Math.round((float)((System.currentTimeMillis() >> 6) % 24L));
     }
+
+
 
 }

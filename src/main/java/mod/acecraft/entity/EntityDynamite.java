@@ -23,7 +23,13 @@ import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
 
 public class EntityDynamite extends ThrowableItemProjectile {
 
+    // ...
 
+
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     public EntityDynamite(EntityType<? extends EntityDynamite> p_37391_, Level p_37392_) {
         super(p_37391_, p_37392_);
@@ -43,24 +49,18 @@ public class EntityDynamite extends ThrowableItemProjectile {
     }
 
 
-    protected Item getDefaultItem() {
-        return Items.SNOWBALL;
-    }
 
-    private ParticleOptions getParticle() {
-        ItemStack itemstack = this.getItemRaw();
-        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
-    }
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
 
     public void handleEntityEvent(byte p_37402_) {
         if (p_37402_ == 3) {
             ParticleOptions particleoptions = this.getParticle();
-
             for(int i = 0; i < 8; ++i) {
                 this.level.addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
-
     }
 
     protected void onHitEntity(EntityHitResult p_37404_) {
@@ -76,6 +76,17 @@ public class EntityDynamite extends ThrowableItemProjectile {
             this.level.broadcastEntityEvent(this, (byte)3);
             this.discard();
         }
-
     }
+
+    protected Item getDefaultItem() {
+        return Items.SNOWBALL;
+    }
+
+    private ParticleOptions getParticle() {
+        ItemStack itemstack = this.getItemRaw();
+        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
+    }
+
+
+
 }

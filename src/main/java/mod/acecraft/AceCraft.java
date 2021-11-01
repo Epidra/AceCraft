@@ -10,19 +10,16 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("acecraft")
 public class AceCraft {
 
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
     // The Mod ID
     public static final String MODID = "acecraft";
     // Client/Server Proxy
     public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+
 
 
 
@@ -40,6 +37,7 @@ public class AceCraft {
 
 
 
+
     //----------------------------------------SETUP----------------------------------------//
 
     private void setupCommon(final FMLCommonSetupEvent event) {
@@ -51,5 +49,7 @@ public class AceCraft {
     private void setupClient(final FMLClientSetupEvent event) {
         ShopKeeper.setup(event);
     }
+
+
 
 }

@@ -7,18 +7,13 @@ import mod.acecraft.entity.EntityAlpaca;
 import mod.acecraft.model.ModelAlpaca;
 import mod.acecraft.model.ModelAlpacaWool;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.SheepFurModel;
-import net.minecraft.client.model.SheepModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.entity.layers.SheepFurLayer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -29,10 +24,22 @@ public class RenderAlpacaLayer extends RenderLayer<EntityAlpaca, ModelAlpaca<Ent
     private static final ResourceLocation TEXTURE = new ResourceLocation("acecraft", "textures/entity/alpaca_fur.png");
     private final ModelAlpacaWool<EntityAlpaca> model;
 
+
+
+
+
+    //----------------------------------------CONSTRUCTOR----------------------------------------//
+
     public RenderAlpacaLayer(RenderLayerParent<EntityAlpaca, ModelAlpaca<EntityAlpaca>> p_174533_, EntityModelSet ems) {
         super(p_174533_);
         this.model = new ModelAlpacaWool<>(ems.bakeLayer(ModelHandler.ALPACA_LAYER));
     }
+
+
+
+
+
+    //----------------------------------------RENDER----------------------------------------//
 
     public void render(PoseStack p_117421_, MultiBufferSource p_117422_, int p_117423_, EntityAlpaca p_117424_, float p_117425_, float p_117426_, float p_117427_, float p_117428_, float p_117429_, float p_117430_) {
         if (!p_117424_.isSheared()) {
@@ -46,7 +53,6 @@ public class RenderAlpacaLayer extends RenderLayer<EntityAlpaca, ModelAlpaca<Ent
                     VertexConsumer vertexconsumer = p_117422_.getBuffer(RenderType.outline(TEXTURE));
                     this.model.renderToBuffer(p_117421_, vertexconsumer, p_117423_, LivingEntityRenderer.getOverlayCoords(p_117424_, 0.0F), 0.0F, 0.0F, 0.0F, 1.0F);
                 }
-
             } else {
                 float f;
                 float f1;
@@ -69,10 +75,11 @@ public class RenderAlpacaLayer extends RenderLayer<EntityAlpaca, ModelAlpaca<Ent
                     f1 = afloat[1];
                     f2 = afloat[2];
                 }
-
                 coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, TEXTURE, p_117421_, p_117422_, p_117423_, p_117424_, p_117425_, p_117426_, p_117428_, p_117429_, p_117430_, p_117427_, f, f1, f2);
             }
         }
     }
+
+
 
 }

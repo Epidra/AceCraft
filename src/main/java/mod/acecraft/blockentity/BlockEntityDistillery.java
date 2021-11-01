@@ -40,7 +40,6 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
                 default: return 0;
             }
         }
-
         public void set(int index, int value) {
             switch(index) {
                 case 0: BlockEntityDistillery.this.litTime          = value; break;
@@ -49,7 +48,6 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
                 case 3: BlockEntityDistillery.this.cookingTotalTime = value; break;
             }
         }
-
         public int getCount() {
             return 4;
         }
@@ -57,6 +55,7 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
 
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
     protected final RecipeType<? extends RecipeBase> recipeType = ShopKeeper.RECIPE_DISTILLERY;
+
 
 
 
@@ -74,7 +73,8 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
 
 
 
-    //----------------------------------------UPDATE----------------------------------------//
+
+    //----------------------------------------SERVER_TICK----------------------------------------//
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, BlockEntityDistillery BE) {
         boolean flag = BE.isLit();
@@ -134,6 +134,7 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
 
 
 
+
     //----------------------------------------SAVE/LOAD----------------------------------------//
 
     public void load(CompoundTag p_230337_2_) { //TODO: MARK
@@ -164,6 +165,7 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
 
 
 
+
     //----------------------------------------NETWORK----------------------------------------//
 
     @Override
@@ -173,6 +175,7 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
         save(nbtTagCompound);
         return new ClientboundBlockEntityDataPacket(this.worldPosition, ShopKeeper.TILE_DISTILLERY.get().hashCode(), nbtTagCompound);
     }
+
 
 
 
@@ -246,14 +249,18 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
         if (p_70299_2_.getCount() > this.getMaxStackSize()) {
             p_70299_2_.setCount(this.getMaxStackSize());
         }
-
         if (p_70299_1_ == 0 && !flag) {
             this.cookingTotalTime = this.getTotalCookTime();
             this.cookingProgress = 0;
             this.setChanged();
         }
-
     }
+
+
+
+
+
+    //----------------------------------------BASIC----------------------------------------//
 
     @Override
     public ContainerData getIntArray() {
@@ -270,12 +277,13 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
             ResourceLocation resourcelocation = p_193056_1_.getId();
             this.recipesUsed.addTo(resourcelocation, 1);
         }
-
     }
 
     @Nullable
     public Recipe<?> getRecipeUsed() {
         return null;
     }
+
+
 
 }

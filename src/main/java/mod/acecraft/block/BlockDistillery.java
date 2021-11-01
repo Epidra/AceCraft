@@ -44,6 +44,7 @@ public class BlockDistillery extends MachinaBase implements EntityBlock {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
@@ -55,9 +56,11 @@ public class BlockDistillery extends MachinaBase implements EntityBlock {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
+
 
 
 
@@ -72,13 +75,28 @@ public class BlockDistillery extends MachinaBase implements EntityBlock {
 
 
 
-    //----------------------------------------SUPPORT----------------------------------------//
 
-    //@Nullable
-    //@Override
-    //public BlockEntity createBlockEntity(BlockState state, BlockGetter world) {
-    //    return new BlockEntityDistillery();
-    //}
+    //----------------------------------------BLOCKENTITY----------------------------------------//
+
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new BlockEntityDistillery(pos, state);
+    }
+
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return createTicker(level, type, ShopKeeper.TILE_DISTILLERY.get());
+    }
+
+    @Nullable
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> type, BlockEntityType<? extends BlockEntityDistillery> typeCustom) {
+        return createTickerHelper(type, typeCustom, BlockEntityDistillery::serverTick);
+    }
+
+
+
+
+
+    //----------------------------------------SUPPORT----------------------------------------//
 
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         Direction enumfacing = state.getValue(FACING);
@@ -105,21 +123,5 @@ public class BlockDistillery extends MachinaBase implements EntityBlock {
     }
 
 
-    //----------------------------------------BLOCKENTITY----------------------------------------//
-
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new BlockEntityDistillery(pos, state);
-    }
-
-    @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTicker(level, type, ShopKeeper.TILE_DISTILLERY.get());
-    }
-
-    @Nullable
-    protected static <T extends BlockEntity> BlockEntityTicker<T> createTicker(Level level, BlockEntityType<T> type, BlockEntityType<? extends BlockEntityDistillery> typeCustom) {
-        //return level.isClientSide ? null : createTickerHelper(type, typeCustom, BlockEntityArcade::serverTick);
-        return createTickerHelper(type, typeCustom, BlockEntityDistillery::serverTick);
-    }
 
 }

@@ -19,12 +19,14 @@ public class BlockCookingBoard extends MachinaBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
     public BlockCookingBoard() {
         super(Blocks.OAK_PLANKS);
     }
+
 
 
 
@@ -36,12 +38,14 @@ public class BlockCookingBoard extends MachinaBase {
 
 
 
+
     //----------------------------------------INTERACTION----------------------------------------//
 
     @Override
     public void interact(Level world, BlockPos blockPos, Player playerEntity, BlockEntityBase tileBase) {
 
     }
+
 
 
 
@@ -57,5 +61,7 @@ public class BlockCookingBoard extends MachinaBase {
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return AABB;
     }
+
+
 
 }

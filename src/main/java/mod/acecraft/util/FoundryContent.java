@@ -11,10 +11,9 @@ public class FoundryContent {
     public final String id;
     public final Item result;
     public final List<Item> substitutes;
-
     public final Alloy alloy;
-
     public int amount;
+
 
 
 
@@ -31,6 +30,7 @@ public class FoundryContent {
         this.substitutes = substitutes;
         this.alloy = alloy;
     }
+
 
 
 
@@ -62,6 +62,7 @@ public class FoundryContent {
 
 
 
+
     //----------------------------------------ALLOY----------------------------------------//
 
     public static class Alloy {
@@ -81,5 +82,7 @@ public class FoundryContent {
         }
 
     }
+
+
 
 }

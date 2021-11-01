@@ -22,6 +22,7 @@ public class BlockRope extends MachinaBase {
 
 
 
+
     //----------------------------------------CONSTRUCTOR----------------------------------------//
 
     /** Contructor with predefined BlockProperty */
@@ -32,9 +33,11 @@ public class BlockRope extends MachinaBase {
 
 
 
+
     //----------------------------------------PLACEMENT----------------------------------------//
 
     // ...
+
 
 
 
@@ -49,12 +52,8 @@ public class BlockRope extends MachinaBase {
 
 
 
-    //----------------------------------------SUPPORT----------------------------------------//
 
-    //@Override
-    //public boolean hasTileEntity(BlockState state) {
-    //    return false;
-    //}
+    //----------------------------------------SUPPORT----------------------------------------//
 
     @Override
     public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
@@ -72,5 +71,7 @@ public class BlockRope extends MachinaBase {
             world.destroyBlock(pos, true);
         }
     }
+
+
 
 }
