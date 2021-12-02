@@ -17,8 +17,12 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Registry;
+import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.features.OreFeatures;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -38,19 +42,21 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RangeDecoratorConfiguration;
 import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
+import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.*;
 
@@ -88,15 +94,15 @@ public class ShopKeeper {
     public static final RegistryObject<Block> BLOCK_AURORITE   = register("block_aurorite",   new BlockBlock(Blocks.DIAMOND_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     // Ore
-    public static final RegistryObject<Block> ORE_MYTHRIL  = register("ore_mythril",  new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_GILIUM   = register("ore_gilium",   new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_TIN      = register("ore_tin",      new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_ZINC     = register("ore_zinc",     new BlockBlock(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SALT     = register("ore_salt",     new BlockBlock(Blocks.LAPIS_ORE),   CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SULFUR   = register("ore_sulfur",   new BlockBlock(Blocks.LAPIS_ORE),   CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_RUBY     = register("ore_ruby",     new BlockBlock(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SAPPHIRE = register("ore_sapphire", new BlockBlock(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_AURORITE = register("ore_aurorite", new BlockBlock(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_MYTHRIL  = register("ore_mythril",  new BlockOre(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_GILIUM   = register("ore_gilium",   new BlockOre(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_TIN      = register("ore_tin",      new BlockOre(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_ZINC     = register("ore_zinc",     new BlockOre(Blocks.IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SALT     = register("ore_salt",     new BlockOre(Blocks.LAPIS_ORE),   CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SULFUR   = register("ore_sulfur",   new BlockOre(Blocks.LAPIS_ORE),   CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_RUBY     = register("ore_ruby",     new BlockOre(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SAPPHIRE = register("ore_sapphire", new BlockOre(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_AURORITE = register("ore_aurorite", new BlockOre(Blocks.DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     // Nuggets
     public static final RegistryObject<Item> NUGGET_MYTHRIL = register("nugget_mythril", new ItemNugget());
@@ -301,8 +307,8 @@ public class ShopKeeper {
     public static final RegistryObject<BlockEntityType<BlockEntityDistillery>> TILE_DISTILLERY = TILES.register("distillery", () -> BlockEntityType.Builder.of(BlockEntityDistillery::new, MACHINA_DISTILLERY.get()).build(null));
 
     // Container
-    public static final RegistryObject<MenuType<MenuFoundry>>    CONTAINER_FOUNDRY    = CONTAINERS.register("foundry",    () -> IForgeContainerType.create(MenuFoundry::new));
-    public static final RegistryObject<MenuType<MenuDistillery>> CONTAINER_DISTILLERY = CONTAINERS.register("distillery", () -> IForgeContainerType.create(MenuDistillery::new));
+    public static final RegistryObject<MenuType<MenuFoundry>>    CONTAINER_FOUNDRY    = CONTAINERS.register("foundry",    () -> IForgeMenuType.create(MenuFoundry::new));
+    public static final RegistryObject<MenuType<MenuDistillery>> CONTAINER_DISTILLERY = CONTAINERS.register("distillery", () -> IForgeMenuType.create(MenuDistillery::new));
 
     // Loot Tables
     public static final ResourceLocation ALPACA_WHITE      = new ResourceLocation(AceCraft.MODID, "entities/alpaca/white");
@@ -323,15 +329,15 @@ public class ShopKeeper {
     public static final ResourceLocation ALPACA_BLACK      = new ResourceLocation(AceCraft.MODID, "entities/alpaca/black");
 
     // Ore Spawn
-    public static ConfiguredFeature<?, ?> SPAWN_GILIUM   = null;
-    public static ConfiguredFeature<?, ?> SPAWN_ZINC     = null;
-    public static ConfiguredFeature<?, ?> SPAWN_MYTHRIL  = null;
-    public static ConfiguredFeature<?, ?> SPAWN_TIN      = null;
-    public static ConfiguredFeature<?, ?> SPAWN_AURORITE = null;
-    public static ConfiguredFeature<?, ?> SPAWN_RUBY     = null;
-    public static ConfiguredFeature<?, ?> SPAWN_SAPPHIRE = null;
-    public static ConfiguredFeature<?, ?> SPAWN_SALT     = null;
-    public static ConfiguredFeature<?, ?> SPAWN_SULFUR   = null;
+    public static PlacedFeature SPAWN_GILIUM   = null;
+    public static PlacedFeature SPAWN_ZINC     = null;
+    public static PlacedFeature SPAWN_MYTHRIL  = null;
+    public static PlacedFeature SPAWN_TIN      = null;
+    public static PlacedFeature SPAWN_AURORITE = null;
+    public static PlacedFeature SPAWN_RUBY     = null;
+    public static PlacedFeature SPAWN_SAPPHIRE = null;
+    public static PlacedFeature SPAWN_SALT     = null;
+    public static PlacedFeature SPAWN_SULFUR   = null;
 
     // Recipes
     public static final RecipeType<RecipeDistillery>               RECIPE_DISTILLERY     = register("acecraft:distilling");
@@ -352,13 +358,13 @@ public class ShopKeeper {
     //----------------------------------------REGISTER----------------------------------------//
 
     static void register(){
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        BLOCKS.register(    FMLJavaModLoadingContext.get().getModEventBus());
+        ITEMS.register(     FMLJavaModLoadingContext.get().getModEventBus());
         CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        TILES.register(     FMLJavaModLoadingContext.get().getModEventBus());
+        SOUNDS.register(    FMLJavaModLoadingContext.get().getModEventBus());
+        ENTITIES.register(  FMLJavaModLoadingContext.get().getModEventBus());
+        RECIPES.register(   FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     static <T extends Recipe<?>> RecipeType<T> register(final String key) {
@@ -397,10 +403,12 @@ public class ShopKeeper {
         return ENTITIES.register(name, () -> entity);
     }
 
-    public static ConfiguredFeature<?, ?> buildOreSpawn(String name, BlockState state, int veinSize, int maxHeight, int spawnRate, boolean isNether) {
-        RangeDecoratorConfiguration RANGE_10_10 = new RangeDecoratorConfiguration(UniformHeight.of(VerticalAnchor.aboveBottom(0), VerticalAnchor.belowTop(maxHeight)));
-        ConfiguredFeature<?, ?> feature = Feature.ORE.configured(new OreConfiguration(isNether ? OreConfiguration.Predicates.NETHERRACK : OreConfiguration.Predicates.NATURAL_STONE, state, veinSize)).range(RANGE_10_10).squared().count(spawnRate);
-        return feature;
+    public static PlacedFeature buildOreSpawn(String name, BlockState state, int veinSize, int maxHeight, int spawnRate, boolean isNether) {
+
+        List<OreConfiguration.TargetBlockState> TARGETLIST = List.of(OreConfiguration.target(isNether ? OreFeatures.NETHER_ORE_REPLACEABLES : OreFeatures.STONE_ORE_REPLACEABLES, state));
+        ConfiguredFeature<?, ?> FEATURE = FeatureUtils.register(name, Feature.ORE.configured(new OreConfiguration(TARGETLIST, veinSize)));
+        PlacedFeature PLACED = PlacementUtils.register(name, FEATURE.placed(commonOrePlacement(spawnRate, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(maxHeight)))));
+        return PLACED;
     }
 
     public static void registerOreSpawn(){
@@ -413,6 +421,20 @@ public class ShopKeeper {
         SPAWN_SAPPHIRE = buildOreSpawn("ore_sapphire", ShopKeeper.ORE_SAPPHIRE.get().defaultBlockState(), Config.SAPPHIRE.veinSize.get(), Config.SAPPHIRE.maxHeight.get(), Config.SAPPHIRE.spawnRate.get(), false);
         SPAWN_SALT     = buildOreSpawn("ore_salt",     ShopKeeper.ORE_SALT.get().defaultBlockState(),     Config.SALT.veinSize.get(),     Config.SALT.maxHeight.get(),     Config.SALT.spawnRate.get(),     false);
         SPAWN_SULFUR   = buildOreSpawn("ore_sulfur",   ShopKeeper.ORE_SULFUR.get().defaultBlockState(),   Config.SULFUR.veinSize.get(),   Config.SULFUR.maxHeight.get(),   Config.SULFUR.spawnRate.get(),   false);
+
+
+    }
+
+    private static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
+        return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
+    }
+
+    private static List<PlacementModifier> commonOrePlacement(int p_195344_, PlacementModifier p_195345_) {
+        return orePlacement(CountPlacement.of(p_195344_), p_195345_);
+    }
+
+    private static List<PlacementModifier> rareOrePlacement(int p_195350_, PlacementModifier p_195351_) {
+        return orePlacement(RarityFilter.onAverageOnceEvery(p_195350_), p_195351_);
     }
 
 

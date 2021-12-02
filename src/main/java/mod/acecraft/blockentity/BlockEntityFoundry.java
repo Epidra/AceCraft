@@ -21,11 +21,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.function.Function;
 
 public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
@@ -103,6 +105,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
     //----------------------------------------SAVE/LOAD----------------------------------------//
 
+    @Override
     public void load(CompoundTag nbt){
         super.load(nbt);
         this.coalAmount = nbt.getInt("Coal");
@@ -114,6 +117,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
         logic().load(nbt.getString("Content"));
     }
 
+    @Override
     public CompoundTag save(CompoundTag compound){
         super.save(compound);
         compound.putInt("Coal", this.coalAmount);
@@ -126,18 +130,40 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
         return compound;
     }
 
+    @Override
+    public void saveAdditional(CompoundTag compound){
+        super.saveAdditional(compound);
+        compound.putInt("Coal", this.coalAmount);
+        compound.putInt("CookTime", this.cookTime);
+        compound.putInt("CookTimeMax", this.cookTimeMax);
+        if(logic().content.isEmpty()){
+            createMaterialMap();
+        }
+        compound.putString("Content", logic().save());
+    }
+
 
 
 
 
     //----------------------------------------NETWORK----------------------------------------//
 
-    @Override
-    @Nullable
-    public ClientboundBlockEntityDataPacket getUpdatePacket(){
-        CompoundTag nbtTagCompound = new CompoundTag();
-        save(nbtTagCompound);
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, ShopKeeper.TILE_FOUNDRY.get().hashCode(), nbtTagCompound);
+    //@Override
+    //@Nullable
+    //public ClientboundBlockEntityDataPacket getUpdatePacket(){
+    //    CompoundTag nbtTagCompound = new CompoundTag();
+    //    save(nbtTagCompound);
+    //    return new ClientboundBlockEntityDataPacket(this.worldPosition, ShopKeeper.TILE_FOUNDRY.get().hashCode(), nbtTagCompound);
+    //}
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = this.saveWithoutMetadata();
+        save(tag);
+        return tag;
     }
 
 

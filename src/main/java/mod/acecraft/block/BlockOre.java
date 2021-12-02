@@ -9,7 +9,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.OreBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
 public class BlockOre extends BlockBase {
 
@@ -23,7 +25,8 @@ public class BlockOre extends BlockBase {
 
     /** Contructor with predefined BlockProperty */
     public BlockOre(Block block) {
-        super(block);
+        //super(block);
+        super(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(3.0F, 3.0F));
     }
 
 
@@ -59,10 +62,10 @@ public class BlockOre extends BlockBase {
 
     //----------------------------------------HELPER----------------------------------------//
 
-    @Override
-    public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader reader, BlockPos pos, int fortune, int silktouch) {
-        return silktouch == 0 ? RANDOM.nextInt(2)+1 : 0;
-    }
+    //@Override
+    //public int getExpDrop(BlockState state, net.minecraft.world.level.LevelReader reader, BlockPos pos, int fortune, int silktouch) {
+    //    return silktouch == 0 ? RANDOM.nextInt(2)+1 : 0;
+    //}
 
 
 

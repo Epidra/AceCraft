@@ -19,11 +19,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkHooks;
 
 public class EntityNugget extends ThrowableItemProjectile implements IEntityAdditionalSpawnData {
 
@@ -39,11 +36,11 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
         super(p_37391_, p_37392_);
     }
 
-    public EntityNugget(FMLPlayMessages.SpawnEntity packet, Level worldIn){
-        super(ShopKeeper.ENTITY_NUGGET.get(), worldIn);
-        FriendlyByteBuf buf = packet.getAdditionalData();
-        stack = buf.readItem();
-    }
+    //public EntityNugget(FMLPlayMessages.SpawnEntity packet, Level worldIn){
+    //    super(ShopKeeper.ENTITY_NUGGET.get(), worldIn);
+    //    FriendlyByteBuf buf = packet.getAdditionalData();
+    //    stack = buf.readItem();
+    //}
 
     public EntityNugget(Level p_37399_, LivingEntity p_37400_, ItemStack itemIn) {
         super(ShopKeeper.ENTITY_NUGGET.get(), p_37400_, p_37399_);

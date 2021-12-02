@@ -27,10 +27,10 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,18 +61,18 @@ public class Subscriber {
                 ShopKeeper.registerEntity(event, types);
             }
             if (event.getCategory() == NETHER) {
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_GILIUM);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_GILIUM);
             } else if(event.getCategory() == THEEND) {
                 // empty
             } else {
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_ZINC);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_MYTHRIL);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_TIN);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_AURORITE);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SAPPHIRE);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_RUBY);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SALT);
-                event.getGeneration().getFeatures(UNDERGROUND_ORES).add(() -> ShopKeeper.SPAWN_SULFUR);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_ZINC);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_MYTHRIL);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_TIN);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_AURORITE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SAPPHIRE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_RUBY);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SALT);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SULFUR);
             }
         }
 
@@ -127,25 +127,25 @@ public class Subscriber {
             ev.getRegistry().register(new ModifierAddItem.Serializer().setRegistryName("acecraft", "add_item"));
         }
 
-        @SubscribeEvent(priority = EventPriority.HIGH)
-        public static void addSpawn(BiomeLoadingEvent event) {
-            if (event.getName() != null) {
-                Biome biome = ForgeRegistries.BIOMES.getValue(event.getName());
-                if (biome != null) {
-                    ResourceKey<Biome> resourceKey = ResourceKey.create(ForgeRegistries.Keys.BIOMES, event.getName());
-                    List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.include.get()));
-                    List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.exclude.get()));
-                    if (!includeList.isEmpty()) {
-                        Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(resourceKey);
-                        if (biomeTypes.stream().noneMatch(excludeList::contains) && biomeTypes.stream().anyMatch(includeList::contains)) {
-                            event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ShopKeeper.ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
-                        }
-                    } else {
-                        throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
-                    }
-                }
-            }
-        }
+        //@SubscribeEvent(priority = EventPriority.HIGH)
+        //public static void addSpawn(BiomeLoadingEvent event) {
+        //    if (event.getName() != null) {
+        //        Biome biome = ForgeRegistries.BIOMES.getValue(event.getName());
+        //        if (biome != null) {
+        //            ResourceKey<Biome> resourceKey = ResourceKey.create(ForgeRegistries.Keys.BIOMES, event.getName());
+        //            List<BiomeDictionary.Type> includeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.include.get()));
+        //            List<BiomeDictionary.Type> excludeList = Arrays.asList(BiomeDictionaryHelper.toBiomeTypeArray(Config.ALPACA.exclude.get()));
+        //            if (!includeList.isEmpty()) {
+        //                Set<BiomeDictionary.Type> biomeTypes = BiomeDictionary.getTypes(resourceKey);
+        //                if (biomeTypes.stream().noneMatch(excludeList::contains) && biomeTypes.stream().anyMatch(includeList::contains)) {
+        //                    event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(ShopKeeper.ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
+        //                }
+        //            } else {
+        //                throw new IllegalArgumentException("Do not leave the BiomeDictionary type inclusion list empty. If you wish to disable spawning of an entity, set the weight to 0 instead.");
+        //            }
+        //        }
+        //    }
+        //}
     }
 
 

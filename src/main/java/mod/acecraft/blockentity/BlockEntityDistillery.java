@@ -19,10 +19,13 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
+import java.util.function.Function;
 
 public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
 
@@ -162,18 +165,40 @@ public class BlockEntityDistillery extends BlockEntityBase<LogicBase> {
         return p_189515_1_;
     }
 
+    public void saveAdditional(CompoundTag p_189515_1_) {
+        super.saveAdditional(p_189515_1_);
+        p_189515_1_.putInt("BurnTime", this.litTime);
+        p_189515_1_.putInt("CookTime", this.cookingProgress);
+        p_189515_1_.putInt("CookTimeTotal", this.cookingTotalTime);
+        CompoundTag compoundnbt = new CompoundTag();
+        this.recipesUsed.forEach((p_235643_1_, p_235643_2_) -> {
+            compoundnbt.putInt(p_235643_1_.toString(), p_235643_2_);
+        });
+        p_189515_1_.put("RecipesUsed", compoundnbt);
+    }
+
 
 
 
 
     //----------------------------------------NETWORK----------------------------------------//
 
-    @Override
-    @Nullable
-    public ClientboundBlockEntityDataPacket getUpdatePacket(){
-        CompoundTag nbtTagCompound = new CompoundTag();
-        save(nbtTagCompound);
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, ShopKeeper.TILE_DISTILLERY.get().hashCode(), nbtTagCompound);
+    //@Override
+    //@Nullable
+    //public ClientboundBlockEntityDataPacket getUpdatePacket(){
+    //    CompoundTag nbtTagCompound = new CompoundTag();
+    //    save(nbtTagCompound);
+    //    return new ClientboundBlockEntityDataPacket(this.worldPosition, ShopKeeper.TILE_DISTILLERY.get().hashCode(), nbtTagCompound);
+    //}
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = this.saveWithoutMetadata();
+        save(tag);
+        return tag;
     }
 
 

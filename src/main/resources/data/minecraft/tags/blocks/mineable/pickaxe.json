@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "acecraft:block_mythril",
+    "acecraft:block_gilium",
+    "acecraft:block_tin",
+    "acecraft:block_zinc",
+    "acecraft:block_bronze",
+    "acecraft:block_brass",
+    "acecraft:block_steel",
+    "acecraft:block_orichalcum",
+    "acecraft:block_adamantium",
+    "acecraft:block_salt",
+    "acecraft:block_sulfur",
+    "acecraft:block_ruby",
+    "acecraft:block_sapphire",
+    "acecraft:block_aurorite",
+    "acecraft:ore_mythril",
+    "acecraft:ore_gilium",
+    "acecraft:ore_tin",
+    "acecraft:ore_zinc",
+    "acecraft:ore_salt",
+    "acecraft:ore_sulfur",
+    "acecraft:ore_ruby",
+    "acecraft:ore_sapphire",
+    "acecraft:ore_aurorite"
+  ]
+}

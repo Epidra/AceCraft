@@ -17,9 +17,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fmllegacy.network.FMLPlayMessages;
 
 public class EntityDynamite extends ThrowableItemProjectile {
 
@@ -35,10 +32,10 @@ public class EntityDynamite extends ThrowableItemProjectile {
         super(p_37391_, p_37392_);
     }
 
-    public EntityDynamite(FMLPlayMessages.SpawnEntity packet, Level worldIn){
-        super(ShopKeeper.ENTITY_DYNAMITE.get(), worldIn);
-        FriendlyByteBuf buf = packet.getAdditionalData();
-    }
+    //public EntityDynamite(FMLPlayMessages.SpawnEntity packet, Level worldIn){
+    //    super(ShopKeeper.ENTITY_DYNAMITE.get(), worldIn);
+    //    FriendlyByteBuf buf = packet.getAdditionalData();
+    //}
 
     public EntityDynamite(Level p_37399_, LivingEntity p_37400_) {
         super(ShopKeeper.ENTITY_DYNAMITE.get(), p_37400_, p_37399_);
