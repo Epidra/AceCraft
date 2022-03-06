@@ -16,7 +16,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:ingot_mythril"
+            "items": ["acecraft:ingot_mythril"]
           }
         ]
       }

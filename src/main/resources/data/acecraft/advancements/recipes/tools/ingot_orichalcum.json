@@ -14,7 +14,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:ingot_orichalcum"
+            "items": ["acecraft:ingot_orichalcum"]
           }
         ]
       }

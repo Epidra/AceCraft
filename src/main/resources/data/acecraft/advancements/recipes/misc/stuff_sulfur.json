@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:stuff_sulfur"
+            "items": ["acecraft:stuff_sulfur"]
           }
         ]
       }

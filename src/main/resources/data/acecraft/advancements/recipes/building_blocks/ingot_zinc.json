@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:ingot_zinc"
+            "items": ["acecraft:ingot_zinc"]
           }
         ]
       }

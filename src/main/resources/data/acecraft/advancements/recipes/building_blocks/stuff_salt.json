@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:stuff_salt"
+            "items": ["acecraft:stuff_salt"]
           }
         ]
       }

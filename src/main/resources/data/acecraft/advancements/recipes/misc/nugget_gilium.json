@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-        "acecraft:ingot_gilium"
+        "acecraft:ingot_gilium_nugget"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:nugget_gilium"
+            "items": ["acecraft:nugget_gilium"]
           }
         ]
       }

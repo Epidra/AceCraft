@@ -1,27 +1,29 @@
 modLoader="javafml"
-loaderVersion="[38,)" #mandatory
+loaderVersion="[40,)" #mandatory
 license="All rights reserved"
 issueTrackerURL="https://github.com/Epidra/AceCraft/issues"
 [[mods]]
 modId="acecraft"
-version="4.0"
+version="5.0"
 displayName="AceCraft"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/acecraft"
 logoFile="logo.png"
-credits="Thanks for this example mod goes to Java" #optional
-authors="Love, Cheese and small house plants" #optional
+credits="" #optional
+authors="Epidra2077" #optional
 description='''
-Lorem Ipsum
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+aliquyam erat, sed diam voluptua.
 '''
 [[dependencies.acecraft]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18,1.19)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.acecraft]]
     modId="lucky77"
     mandatory=true
-    versionRange="[1.0,)"
+    versionRange="[2.0,)"
     ordering="NONE"
     side="BOTH"

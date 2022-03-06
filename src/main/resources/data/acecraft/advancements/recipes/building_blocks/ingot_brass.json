@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:ingot_brass"
+            "items": ["acecraft:ingot_brass"]
           }
         ]
       }

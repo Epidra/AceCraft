@@ -23,7 +23,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -41,9 +40,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -53,25 +49,24 @@ import java.util.stream.Collectors;
 
 public class EntityAlpaca extends Animal implements Shearable, net.minecraftforge.common.IForgeShearable {
 
-    private static final int EAT_ANIMATION_TICKS = 40;
     private static final EntityDataAccessor<Byte> DATA_WOOL_ID = SynchedEntityData.defineId(EntityAlpaca.class, EntityDataSerializers.BYTE);
     private static final Map<DyeColor, ItemLike> ITEM_BY_DYE = Util.make(Maps.newEnumMap(DyeColor.class), (p_29841_) -> {
-        p_29841_.put(DyeColor.WHITE, Blocks.WHITE_WOOL);
-        p_29841_.put(DyeColor.ORANGE, Blocks.ORANGE_WOOL);
-        p_29841_.put(DyeColor.MAGENTA, Blocks.MAGENTA_WOOL);
+        p_29841_.put(DyeColor.WHITE,      Blocks.WHITE_WOOL);
+        p_29841_.put(DyeColor.ORANGE,     Blocks.ORANGE_WOOL);
+        p_29841_.put(DyeColor.MAGENTA,    Blocks.MAGENTA_WOOL);
         p_29841_.put(DyeColor.LIGHT_BLUE, Blocks.LIGHT_BLUE_WOOL);
-        p_29841_.put(DyeColor.YELLOW, Blocks.YELLOW_WOOL);
-        p_29841_.put(DyeColor.LIME, Blocks.LIME_WOOL);
-        p_29841_.put(DyeColor.PINK, Blocks.PINK_WOOL);
-        p_29841_.put(DyeColor.GRAY, Blocks.GRAY_WOOL);
+        p_29841_.put(DyeColor.YELLOW,     Blocks.YELLOW_WOOL);
+        p_29841_.put(DyeColor.LIME,       Blocks.LIME_WOOL);
+        p_29841_.put(DyeColor.PINK,       Blocks.PINK_WOOL);
+        p_29841_.put(DyeColor.GRAY,       Blocks.GRAY_WOOL);
         p_29841_.put(DyeColor.LIGHT_GRAY, Blocks.LIGHT_GRAY_WOOL);
-        p_29841_.put(DyeColor.CYAN, Blocks.CYAN_WOOL);
-        p_29841_.put(DyeColor.PURPLE, Blocks.PURPLE_WOOL);
-        p_29841_.put(DyeColor.BLUE, Blocks.BLUE_WOOL);
-        p_29841_.put(DyeColor.BROWN, Blocks.BROWN_WOOL);
-        p_29841_.put(DyeColor.GREEN, Blocks.GREEN_WOOL);
-        p_29841_.put(DyeColor.RED, Blocks.RED_WOOL);
-        p_29841_.put(DyeColor.BLACK, Blocks.BLACK_WOOL);
+        p_29841_.put(DyeColor.CYAN,       Blocks.CYAN_WOOL);
+        p_29841_.put(DyeColor.PURPLE,     Blocks.PURPLE_WOOL);
+        p_29841_.put(DyeColor.BLUE,       Blocks.BLUE_WOOL);
+        p_29841_.put(DyeColor.BROWN,      Blocks.BROWN_WOOL);
+        p_29841_.put(DyeColor.GREEN,      Blocks.GREEN_WOOL);
+        p_29841_.put(DyeColor.RED,        Blocks.RED_WOOL);
+        p_29841_.put(DyeColor.BLACK,      Blocks.BLACK_WOOL);
     });
     private static final Map<DyeColor, float[]> COLORARRAY_BY_COLOR = Maps.<DyeColor, float[]>newEnumMap(Arrays.stream(DyeColor.values()).collect(Collectors.toMap((p_29868_) -> {
         return p_29868_;
@@ -128,22 +123,8 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
 
     //----------------------------------------INTERACTION----------------------------------------//
 
-    public InteractionResult mobInteract(Player p_29853_, InteractionHand p_29854_) {
-        ItemStack itemstack = p_29853_.getItemInHand(p_29854_);
-        if (false && itemstack.getItem() == Items.SHEARS) { //Forge: Moved to onSheared
-            if (!this.level.isClientSide && this.readyForShearing()) {
-                this.shear(SoundSource.PLAYERS);
-                this.gameEvent(GameEvent.SHEAR, p_29853_);
-                itemstack.hurtAndBreak(1, p_29853_, (p_29822_) -> {
-                    p_29822_.broadcastBreakEvent(p_29854_);
-                });
-                return InteractionResult.SUCCESS;
-            } else {
-                return InteractionResult.CONSUME;
-            }
-        } else {
-            return super.mobInteract(p_29853_, p_29854_);
-        }
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        return super.mobInteract(player, hand);
     }
 
     public void aiStep() {
@@ -254,16 +235,6 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
             this.eatAnimationTick = 40;
         } else {
             super.handleEntityEvent(p_29814_);
-        }
-    }
-
-    public float getHeadEatPositionScale(float p_29881_) {
-        if (this.eatAnimationTick <= 0) {
-            return 0.0F;
-        } else if (this.eatAnimationTick >= 4 && this.eatAnimationTick <= 36) {
-            return 1.0F;
-        } else {
-            return this.eatAnimationTick < 4 ? ((float)this.eatAnimationTick - p_29881_) / 4.0F : -((float)(this.eatAnimationTick - 40) - p_29881_) / 4.0F;
         }
     }
 

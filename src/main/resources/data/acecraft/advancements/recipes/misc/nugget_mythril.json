@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-        "acecraft:ingot_mythril"
+        "acecraft:ingot_mythril_nugget"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:nugget_mythril"
+            "items": ["acecraft:nugget_mythril"]
           }
         ]
       }

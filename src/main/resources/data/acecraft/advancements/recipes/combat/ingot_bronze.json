@@ -16,7 +16,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:ingot_bronze"
+            "items": ["acecraft:ingot_bronze"]
           }
         ]
       }

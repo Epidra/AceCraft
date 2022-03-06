@@ -1,11 +1,11 @@
 package mod.acecraft.util;
 
-import mod.lucky77.logic.LogicBase;
+import mod.lucky77.util.Dummy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogicFoundry extends LogicBase {
+public class LogicFoundry extends Dummy {
 
     public List<FoundryContent> content = new ArrayList<>();
 

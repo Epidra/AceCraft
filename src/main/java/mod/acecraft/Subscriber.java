@@ -3,7 +3,6 @@ package mod.acecraft;
 import com.google.common.collect.Lists;
 import mod.acecraft.crafting.ModifierAddItem;
 import mod.acecraft.entity.EntityAlpaca;
-import mod.lucky77.util.BiomeDictionaryHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -15,8 +14,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
@@ -32,7 +31,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -53,6 +51,8 @@ public class Subscriber {
     @ObjectHolder(AceCraft.MODID)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
     public static class RegistryEventsForge {
+
+
         @SubscribeEvent(priority = EventPriority.HIGH)
         public static void onBiomesLoading(final BiomeLoadingEvent event) {
             if (event.getName() != null) {
@@ -65,14 +65,22 @@ public class Subscriber {
             } else if(event.getCategory() == THEEND) {
                 // empty
             } else {
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_ZINC);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_MYTHRIL);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_TIN);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_AURORITE);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SAPPHIRE);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_RUBY);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SALT);
-                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SULFUR);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_ZINC_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_ZINC_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_MYTHRIL_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_MYTHRIL_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_TIN_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_TIN_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_AURORITE_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_AURORITE_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SAPPHIRE_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SAPPHIRE_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_RUBY_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_RUBY_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SALT_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SALT_DEEP);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SULFUR_BASE);
+                event.getGeneration().addFeature(UNDERGROUND_ORES, ShopKeeper.SPAWN_SULFUR_DEEP);
             }
         }
 
@@ -125,6 +133,11 @@ public class Subscriber {
         @SubscribeEvent
         public static void registerModifiers(RegistryEvent.Register<GlobalLootModifierSerializer<?>> ev) {
             ev.getRegistry().register(new ModifierAddItem.Serializer().setRegistryName("acecraft", "add_item"));
+        }
+
+        @SubscribeEvent
+        public static void onItemregistering(final RegistryEvent.Register<Item> reg){
+            ShopKeeper.RECIPE_DISTILLERY     = RecipeType.register("acecraft:distilling");
         }
 
         //@SubscribeEvent(priority = EventPriority.HIGH)

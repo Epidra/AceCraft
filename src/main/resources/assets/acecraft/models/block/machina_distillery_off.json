@@ -4,8 +4,8 @@
     "textures": {
         "log": "minecraft:block/oak_log",
         "iron": "minecraft:block/iron_block",
-        "copper": "acecraft:block/block_copper",
-        "particle": "acecraft:block/block_copper"
+        "copper": "minecraft:block/copper_block",
+        "particle": "minecraft:block/copper_block"
     },
     "display": {
         "gui": {

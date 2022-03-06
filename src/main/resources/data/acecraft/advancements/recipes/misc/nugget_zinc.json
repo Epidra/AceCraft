@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-        "acecraft:ingot_zinc"
+        "acecraft:ingot_zinc_nugget"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:nugget_zinc"
+            "items": ["acecraft:nugget_zinc"]
           }
         ]
       }

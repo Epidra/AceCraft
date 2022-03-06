@@ -1,6 +1,6 @@
 package mod.acecraft;
 
-import mod.lucky77.util.BiomeDictionaryHelper;
+import mod.lucky77.system.SystemBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.BiomeDictionary;
@@ -17,15 +17,23 @@ public class Config {
 
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ConfigOre GILIUM   = new ConfigOre(BUILDER, "gilium",   6, 128, 16);
-    public static final ConfigOre ZINC     = new ConfigOre(BUILDER, "zinc",     6,  64,  8);
-    public static final ConfigOre MYTHRIL  = new ConfigOre(BUILDER, "mythril",  6,  48, 12);
-    public static final ConfigOre TIN      = new ConfigOre(BUILDER, "tin",      6,  64,  8);
-    public static final ConfigOre AURORITE = new ConfigOre(BUILDER, "aurorite", 2, 128,  4);
-    public static final ConfigOre RUBY     = new ConfigOre(BUILDER, "ruby",     2,  64,  4);
-    public static final ConfigOre SAPPHIRE = new ConfigOre(BUILDER, "sapphire", 2,  64,  4);
-    public static final ConfigOre SALT     = new ConfigOre(BUILDER, "salt",     4,  96, 12);
-    public static final ConfigOre SULFUR   = new ConfigOre(BUILDER, "sulfur",   4,  32, 12);
+    public static final ConfigOre GILIUM        = new ConfigOre(BUILDER, "gilium",         6, 128, 16);
+    public static final ConfigOre ZINC_BASE     = new ConfigOre(BUILDER, "zinc_base",      6,  64,  8);
+    public static final ConfigOre ZINC_DEEP     = new ConfigOre(BUILDER, "zinc_deep",      6,  64,  8);
+    public static final ConfigOre MYTHRIL_BASE  = new ConfigOre(BUILDER, "mythril_base",  12,  48,  4);
+    public static final ConfigOre MYTHRIL_DEEP  = new ConfigOre(BUILDER, "mythril_deep",  12,  48,  4);
+    public static final ConfigOre TIN_BASE      = new ConfigOre(BUILDER, "tin_base",       6,  64,  8);
+    public static final ConfigOre TIN_DEEP      = new ConfigOre(BUILDER, "tin_deep",       6,  64,  8);
+    public static final ConfigOre AURORITE_BASE = new ConfigOre(BUILDER, "aurorite_base",  3, 128,  3);
+    public static final ConfigOre AURORITE_DEEP = new ConfigOre(BUILDER, "aurorite_deep",  3, 128,  3);
+    public static final ConfigOre RUBY_BASE     = new ConfigOre(BUILDER, "ruby_base",      3,  64,  3);
+    public static final ConfigOre RUBY_DEEP     = new ConfigOre(BUILDER, "ruby_deep",      3,  64,  3);
+    public static final ConfigOre SAPPHIRE_BASE = new ConfigOre(BUILDER, "sapphire_base",  3,  64,  3);
+    public static final ConfigOre SAPPHIRE_DEEP = new ConfigOre(BUILDER, "sapphire_deep",  3,  64,  3);
+    public static final ConfigOre SALT_BASE     = new ConfigOre(BUILDER, "salt_base",     16,  96,  1);
+    public static final ConfigOre SALT_DEEP     = new ConfigOre(BUILDER, "salt_deep",     16,  96,  1);
+    public static final ConfigOre SULFUR_BASE   = new ConfigOre(BUILDER, "sulfur_base",   16,  32,  1);
+    public static final ConfigOre SULFUR_DEEP   = new ConfigOre(BUILDER, "sulfur_deep",   16,  32,  1);
     public static final ConfigMob ALPACA = new ConfigMob(BUILDER, "alpaca", 1, 2, 6);
     public static final ConfigFoundry FOUNDRY = new ConfigFoundry(BUILDER);
 
@@ -41,10 +49,10 @@ public class Config {
         public final ForgeConfigSpec.IntValue spawnRate;
 
         ConfigOre(ForgeConfigSpec.Builder builder, String id, int _veinSize, int _maxHeight, int _spawnRate){
-            builder.push("oregen " + id);
+            builder.push("oregen_" + id);
             builder.comment("This is a Comment for OreGen");
-            veinSize  = builder.defineInRange("veinsize",  _veinSize,  0, 128);
-            maxHeight = builder.defineInRange("maxheight", _maxHeight, 0, 128);
+            veinSize  = builder.defineInRange("veinsize",  _veinSize,  0, 64);
+            maxHeight = builder.defineInRange("maxheight", _maxHeight, 0, 256);
             spawnRate = builder.defineInRange("spawnrate", _spawnRate, 0, 128);
             builder.pop();
         }
@@ -73,8 +81,8 @@ public class Config {
             builder.pop();
             builder.push("spawnable biomes " + id);
             spawnBlocks = builder.defineList("spawn blocks", Collections.singletonList(Blocks.GRASS_BLOCK.getRegistryName().toString()), o -> o instanceof String && ForgeRegistries.BLOCKS.getKeys().contains(new ResourceLocation(o.toString())));
-            include = builder.defineList("include", Arrays.asList(SAVANNA.toString(), HILLS.toString(), MESA.toString()), o -> o instanceof String && (o.equals("") || BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(o.toString()))));
-            exclude = builder.defineList("exclude", Arrays.asList(FOREST.toString(), SNOWY.toString(), OCEAN.toString(), NETHER.toString()), o -> o instanceof String && (o.equals("") || BiomeDictionary.Type.getAll().contains(BiomeDictionaryHelper.getType(o.toString()))));
+            include = builder.defineList("include", Arrays.asList(SAVANNA.toString(), HILLS.toString(), MESA.toString()), o -> o instanceof String && (o.equals("") || BiomeDictionary.Type.getAll().contains(SystemBiomes.getType(o.toString()))));
+            exclude = builder.defineList("exclude", Arrays.asList(FOREST.toString(), SNOWY.toString(), OCEAN.toString(), NETHER.toString()), o -> o instanceof String && (o.equals("") || BiomeDictionary.Type.getAll().contains(SystemBiomes.getType(o.toString()))));
             builder.pop();
         }
     }
@@ -83,7 +91,7 @@ public class Config {
 
 
 
-    //----------------------------------------CONFIG_MOB----------------------------------------//
+    //----------------------------------------CONFIG_FOUNDRY----------------------------------------//
 
     public static class ConfigFoundry {
         public final ForgeConfigSpec.ConfigValue<List<? extends String>> entry;

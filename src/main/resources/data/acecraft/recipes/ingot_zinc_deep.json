@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "acecraft:ore_zinc_deep"
+  },
+  "result": "acecraft:ingot_zinc",
+  "experience": 0.5,
+  "cookingtime": 200
+}

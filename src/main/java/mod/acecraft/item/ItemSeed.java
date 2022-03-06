@@ -183,7 +183,7 @@ public class ItemSeed extends Item {
                         return false;
                     }
 
-                    CompoundTag compoundtag1 = blockentity.save(new CompoundTag());
+                    CompoundTag compoundtag1 = blockentity.saveWithoutMetadata();
                     CompoundTag compoundtag2 = compoundtag1.copy();
                     compoundtag1.merge(compoundtag);
                     compoundtag1.putInt("x", p_40585_.getX());

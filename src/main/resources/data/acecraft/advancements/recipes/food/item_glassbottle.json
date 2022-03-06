@@ -20,7 +20,7 @@
       "conditions": {
         "items": [
           {
-            "item": "minecraft:glass_bottle"
+            "items": ["minecraft:glass_bottle"]
           }
         ]
       }

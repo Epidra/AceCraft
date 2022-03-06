@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "acecraft:stuff_aurorite"
+            "items": ["acecraft:stuff_aurorite"]
           }
         ]
       }

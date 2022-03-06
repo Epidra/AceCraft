@@ -3,7 +3,10 @@ package mod.acecraft;
 import mod.acecraft.system.AceCraftPacketHandler;
 import mod.acecraft.system.ClientProxy;
 import mod.acecraft.system.CommonProxy;
+import mod.lucky77.system.SystemStructures;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -14,6 +17,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("acecraft")
 public class AceCraft {
+
+    // TODO: Add Topaz Geode
+    // TODO Add Stone and Deepslate variants for Ores
+    // TODO: Fix Dynamite
+    // TODO: Fix Ore Throwing
+    // TODO: Fix Block GUIs
+    // TODO: Make Alpaca smaller
+    // TODO: Add Book concerning infos about Alpacas/Llamas
+    // TODO: Add Book concerning infos about geodes
+    // TODO: Add Book concerning infos about Ores and Alloy smelting
 
     // The Mod ID
     public static final String MODID = "acecraft";
@@ -31,7 +44,12 @@ public class AceCraft {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.spec);
         MinecraftForge.EVENT_BUS.register(this);
-        ShopKeeper.register();
+        ShopKeeper.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        // For events that happen after initialization. This is probably going to be use a lot.
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+        //forgeBus.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
+        //forgeBus.addListener(EventPriority.NORMAL, StructureRuinedHouse::setupStructureSpawns);
     }
 
 
@@ -42,12 +60,20 @@ public class AceCraft {
 
     private void setupCommon(final FMLCommonSetupEvent event) {
         ShopKeeper.registerOreSpawn();
+        ShopKeeper.registerStructureConfigs();
         AceCraftPacketHandler.register();
         ShopKeeper.setup(event);
     }
 
     private void setupClient(final FMLClientSetupEvent event) {
         ShopKeeper.setup(event);
+    }
+
+    public void addDimensionalSpacing(final WorldEvent.Load event){
+        //SystemStructures.addDimensionalSpacing(event,
+        //        ShopKeeper.STRUCTURE_RUINED_HOUSE.get(),
+        //        ShopKeeper.CONFIGURED_RUN_DOWN_HOUSE
+        //);
     }
 
 

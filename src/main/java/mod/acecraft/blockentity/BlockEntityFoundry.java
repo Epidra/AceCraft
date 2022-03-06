@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -21,13 +20,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Function;
 
 public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
@@ -118,19 +114,6 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
     }
 
     @Override
-    public CompoundTag save(CompoundTag compound){
-        super.save(compound);
-        compound.putInt("Coal", this.coalAmount);
-        compound.putInt("CookTime", this.cookTime);
-        compound.putInt("CookTimeMax", this.cookTimeMax);
-        if(logic().content.isEmpty()){
-            createMaterialMap();
-        }
-        compound.putString("Content", logic().save());
-        return compound;
-    }
-
-    @Override
     public void saveAdditional(CompoundTag compound){
         super.saveAdditional(compound);
         compound.putInt("Coal", this.coalAmount);
@@ -162,7 +145,7 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
     public CompoundTag getUpdateTag() {
         CompoundTag tag = this.saveWithoutMetadata();
-        save(tag);
+        saveAdditional(tag);
         return tag;
     }
 

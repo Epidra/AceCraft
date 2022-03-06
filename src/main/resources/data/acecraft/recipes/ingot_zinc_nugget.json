@@ -4,6 +4,6 @@
     "item": "acecraft:nugget_zinc"
   },
   "result": "acecraft:ingot_zinc",
-  "experience": 1.0,
+  "experience": 0.5,
   "cookingtime": 200
 }

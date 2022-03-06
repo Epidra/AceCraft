@@ -1,6 +1,5 @@
 package mod.acecraft.item;
 
-import com.mojang.blaze3d.shaders.Effect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;

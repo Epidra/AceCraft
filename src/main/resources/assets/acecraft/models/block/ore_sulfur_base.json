@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "acecraft:block/ore_sulfur_base"
+    }
+}
