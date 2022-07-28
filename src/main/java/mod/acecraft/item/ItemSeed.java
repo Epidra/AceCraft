@@ -208,7 +208,7 @@ public class ItemSeed extends Item {
     }
 
     public Block getBlock() {
-        return this.getBlockRaw() == null ? null : this.getBlockRaw().delegate.get();
+        return this.getBlockRaw() == null ? null : this.getBlockRaw();
     }
 
     private Block getBlockRaw() {

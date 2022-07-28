@@ -69,7 +69,7 @@ public class BlockDistillery extends MachinaBase implements EntityBlock {
 
     @Override
     public void interact(Level world, BlockPos pos, Player player, BlockEntityBase tile) {
-        NetworkHooks.openGui((ServerPlayer) player, new MenuProvider(tile), buf -> buf.writeBlockPos(pos));
+        NetworkHooks.openScreen((ServerPlayer) player, new MenuProvider(tile), buf -> buf.writeBlockPos(pos));
     }
 
 

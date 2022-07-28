@@ -9,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.ContainerData;
@@ -299,10 +298,10 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
 
     //----------------------------------------BASIC----------------------------------------//
 
-    @Override
-    public TextComponent getName() {
-        return new TextComponent("tile.destillery.name");
-    }
+    // @Override
+    // public TextComponent getName() {
+    //     return new TextComponent("tile.destillery.name");
+    // }
 
     @Override
     public ContainerData getIntArray() {

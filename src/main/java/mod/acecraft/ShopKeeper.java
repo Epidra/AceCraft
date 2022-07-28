@@ -50,20 +50,15 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -80,12 +75,12 @@ public class ShopKeeper {
 
     private static final DeferredRegister<Block>               BLOCKS     = DeferredRegister.create(ForgeRegistries.BLOCKS,             AceCraft.MODID);
     private static final DeferredRegister<Item>                ITEMS      = DeferredRegister.create(ForgeRegistries.ITEMS,              AceCraft.MODID);
-    private static final DeferredRegister<MenuType<?>>         CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS,         AceCraft.MODID);
-    private static final DeferredRegister<BlockEntityType<?>>  TILES      = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES,     AceCraft.MODID);
+    private static final DeferredRegister<MenuType<?>>         CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES,         AceCraft.MODID);
+    private static final DeferredRegister<BlockEntityType<?>>  TILES      = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, AceCraft.MODID);
     private static final DeferredRegister<SoundEvent>          SOUNDS     = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS,       AceCraft.MODID);
-    private static final DeferredRegister<EntityType<?>>       ENTITIES   = DeferredRegister.create(ForgeRegistries.ENTITIES,           AceCraft.MODID);
-    private static final DeferredRegister<RecipeSerializer<?>> RECIPES    = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AceCraft.MODID);
-    private static final DeferredRegister<StructureFeature<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, AceCraft.MODID);
+    private static final DeferredRegister<EntityType<?>>       ENTITIES   = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES,       AceCraft.MODID);
+    //private static final DeferredRegister<RecipeSerializer<?>> RECIPES    = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AceCraft.MODID);
+    //private static final DeferredRegister<StructureFeature<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.FEATURES, AceCraft.MODID);
 
 
 
@@ -373,9 +368,9 @@ public class ShopKeeper {
     public static Holder<PlacedFeature> SPAWN_SULFUR_DEEP   = null;
 
     // Recipes
-    public static RecipeType<RecipeDistillery>               RECIPE_DISTILLERY     = null;
+    //public static RecipeType<RecipeDistillery>               RECIPE_DISTILLERY     = null;
     //public static final Lazy<RecipeDistillery> lazy = Lazy.of(() -> Registry.register(Registry.RECIPE_TYPE, typeName, new RecipeDistillery());
-    public static final RegistryObject<RecipeDistillerySerializer> SERIALIZER_DISTILLERY = RECIPES.register("distilling", RecipeDistillerySerializer::new);
+    //public static final RegistryObject<RecipeDistillerySerializer> SERIALIZER_DISTILLERY = RECIPES.register("distilling", RecipeDistillerySerializer::new);
 
     // Entities
     public static final RegistryObject<EntityType<EntityAlpaca>>   ENTITY_ALPACA   = ENTITIES.register("alpaca",   () -> EntityType.Builder.of(EntityAlpaca::new,                    CREATURE).sized(0.9F, 1.3F).setTrackingRange(10).build(new ResourceLocation(AceCraft.MODID, "alpaca").toString()));
@@ -389,7 +384,7 @@ public class ShopKeeper {
     /**
      * Static instance of our structure so we can reference it and add it to biomes easily.
      */
-    public static ConfiguredStructureFeature<?, ?> CONFIGURED_RUN_DOWN_HOUSE = null;
+    //public static ConfiguredStructureFeature<?, ?> CONFIGURED_RUN_DOWN_HOUSE = null;
     // Dummy JigsawConfiguration values for now. We will modify the pool at runtime since we cannot get json pool files here at mod init.
     // You can create and register your pools in code, pass in the code create pool here, and delete both newConfig and newContext in RunDownHouseStructure's createPiecesGenerator.
     // Note: JigsawConfiguration only takes 0 - 7 size so that's another reason why we are going to bypass that "codec" by changing size at runtime to get higher sizes.
@@ -407,8 +402,8 @@ public class ShopKeeper {
         TILES.register(     FMLbus);
         SOUNDS.register(    FMLbus);
         ENTITIES.register(  FMLbus);
-        RECIPES.register(   FMLbus);
-        STRUCTURES.register(FMLbus);
+        //RECIPES.register(   FMLbus);
+        //STRUCTURES.register(FMLbus);
     }
 
     // Conveniance function: Take a RegistryObject<Block> and make a corresponding RegistryObject<Item> from it
@@ -437,13 +432,13 @@ public class ShopKeeper {
         });
     }
 
-    public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
-        event.getSpawns().getSpawner(CREATURE).add(new MobSpawnSettings.SpawnerData(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
-    }
+    // public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
+    //     event.getSpawns().getSpawner(CREATURE).add(new MobSpawnSettings.SpawnerData(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
+    // }
 
-    private static RegistryObject<StructureFeature<JigsawConfiguration>> register(String name, StructureFeature<JigsawConfiguration> structure){
-        return STRUCTURES.register(name, () -> (structure));
-    }
+    // private static RegistryObject<StructureFeature<JigsawConfiguration>> register(String name, StructureFeature<JigsawConfiguration> structure){
+    //     return STRUCTURES.register(name, () -> (structure));
+    // }
 
     private static RegistryObject<Block> registerB(String name,  java.util.function.Supplier<? extends Block> block){
         return registerB(name, block, null);
@@ -540,19 +535,6 @@ public class ShopKeeper {
 
     @OnlyIn(Dist.CLIENT)
     static void setup(FMLClientSetupEvent event){
-        ItemBlockRenderTypes.setRenderLayer(CROP_CABBAGE.get(),    RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_CORN.get(),       RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_CUCUMBER.get(),   RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_EGGPLANT.get(),   RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_GRAPES.get(),     RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_ONION.get(),      RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_PINEAPPLE.get(),  RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_STRAWBERRY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_TOMATO.get(),     RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_TURNIP.get(),     RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_RICE.get(),       RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_COFFEE.get(),     RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CROP_HEMP.get(),       RenderType.cutout());
         MenuScreens.register(CONTAINER_FOUNDRY.get(),    ScreenFoundry::new);
         MenuScreens.register(CONTAINER_DISTILLERY.get(), ScreenDistillery::new);
     }
@@ -572,10 +554,10 @@ public class ShopKeeper {
      * We can register configured structures at any time before a world is clicked on and made.
      * But the best time to register configured features by code is honestly to do it in FMLCommonSetupEvent.
      */
-    public static void registerConfiguredStructures() {
-        Registry<ConfiguredStructureFeature<?, ?>> registry = BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE;
-        Registry.register(registry, new ResourceLocation(AceCraft.MODID, "configured_run_down_house"), CONFIGURED_RUN_DOWN_HOUSE);
-    }
+    //public static void registerConfiguredStructures() {
+    //    Registry<ConfiguredStructureFeature<?, ?>> registry = BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE;
+    //    Registry.register(registry, new ResourceLocation(AceCraft.MODID, "configured_run_down_house"), CONFIGURED_RUN_DOWN_HOUSE);
+    //}
 
     public static void generateTradeData(){
         SystemTrades.addTradeToProfession(VillagerProfession.ARMORER, 1, new VillagerTrades.ItemListing[]{

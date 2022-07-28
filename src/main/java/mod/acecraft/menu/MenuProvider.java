@@ -3,7 +3,7 @@ package mod.acecraft.menu;
 import mod.acecraft.blockentity.BlockEntityDistillery;
 import mod.acecraft.blockentity.BlockEntityFoundry;
 import mod.lucky77.blockentity.BlockEntityBase;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -45,9 +45,14 @@ public class MenuProvider implements net.minecraft.world.MenuProvider {
 
     //----------------------------------------BASIC----------------------------------------//
 
+    // @Override
+    // public TextComponent getDisplayName() {
+    //     return this.tile.getName();
+    // }
+
     @Override
-    public TextComponent getDisplayName() {
-        return this.tile.getName();
+    public Component getDisplayName() {
+        return Component.empty();
     }
 
 

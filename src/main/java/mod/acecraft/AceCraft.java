@@ -5,7 +5,7 @@ import mod.acecraft.system.ClientProxy;
 import mod.acecraft.system.CommonProxy;
 import mod.lucky77.system.SystemStructures;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.*;
 import net.minecraftforge.fml.common.Mod;
@@ -69,7 +69,7 @@ public class AceCraft {
         ShopKeeper.setup(event);
     }
 
-    public void addDimensionalSpacing(final WorldEvent.Load event){
+    public void addDimensionalSpacing(final LevelEvent.Load event){
         //SystemStructures.addDimensionalSpacing(event,
         //        ShopKeeper.STRUCTURE_RUINED_HOUSE.get(),
         //        ShopKeeper.CONFIGURED_RUN_DOWN_HOUSE

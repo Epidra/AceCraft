@@ -8,7 +8,6 @@ import mod.lucky77.crafting.RecipeBase;
 import mod.lucky77.util.Dummy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -54,7 +53,7 @@ public class BlockEntityDistillery extends BlockEntityBase<Dummy> {
     };
 
     private final Object2IntOpenHashMap<ResourceLocation> recipesUsed = new Object2IntOpenHashMap<>();
-    protected final RecipeType<? extends RecipeBase> recipeType = ShopKeeper.RECIPE_DISTILLERY;
+    protected final RecipeType<? extends RecipeBase> recipeType = null;//ShopKeeper.RECIPE_DISTILLERY;
 
 
 
@@ -77,57 +76,57 @@ public class BlockEntityDistillery extends BlockEntityBase<Dummy> {
     //----------------------------------------SERVER_TICK----------------------------------------//
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, BlockEntityDistillery BE) {
-        boolean flag = BE.isLit();
-        boolean flag1 = false;
-        if (BE.isLit()) {
-            --BE.litTime;
-        }
-        if (!BE.level.isClientSide) {
-            ItemStack itemstack = BE.inventory.get(2);
-            if (BE.isLit() || !itemstack.isEmpty() && !BE.inventory.get(0).isEmpty() && !BE.inventory.get(1).isEmpty()) {
-                Recipe<?> irecipe = BE.level.getRecipeManager().getRecipeFor((RecipeType<RecipeDistillery>)BE.recipeType, BE, BE.level).orElse(null);
-                if (!BE.isLit() && BE.canBurn(irecipe)) {
-                    BE.litTime = BE.getBurnDuration(itemstack);
-                    BE.litDuration = BE.litTime;
-                    if (BE.isLit()) {
-                        flag1 = true;
-                        if (itemstack.hasContainerItem())
-                            BE.inventory.set(1, itemstack.getContainerItem());
-                        else
-                        if (!itemstack.isEmpty()) {
-                            Item item = itemstack.getItem();
-                            itemstack.shrink(1);
-                            if (itemstack.isEmpty()) {
-                                BE.inventory.set(1, itemstack.getContainerItem());
-                            }
-                        }
-                    }
-                }
-
-                if (BE.isLit() && BE.canBurn(irecipe)) {
-                    ++BE.cookingProgress;
-                    if (BE.cookingProgress == BE.cookingTotalTime) {
-                        BE.cookingProgress = 0;
-                        BE.cookingTotalTime = BE.getTotalCookTime();
-                        BE.burn(irecipe);
-                        flag1 = true;
-                    }
-                } else {
-                    BE.cookingProgress = 0;
-                }
-            } else if (!BE.isLit() && BE.cookingProgress > 0) {
-                BE.cookingProgress = Mth.clamp(BE.cookingProgress - 2, 0, BE.cookingTotalTime);
-            }
-
-            if (flag != BE.isLit()) {
-                flag1 = true;
-                BE.level.setBlock(BE.worldPosition, BE.level.getBlockState(BE.worldPosition).setValue(AbstractFurnaceBlock.LIT, BE.isLit()), 3);
-            }
-        }
-
-        if (flag1) {
-            BE.setChanged();
-        }
+        //boolean flag = BE.isLit();
+        //boolean flag1 = false;
+        //if (BE.isLit()) {
+        //    --BE.litTime;
+        //}
+        //if (!BE.level.isClientSide) {
+        //    ItemStack itemstack = BE.inventory.get(2);
+        //    if (BE.isLit() || !itemstack.isEmpty() && !BE.inventory.get(0).isEmpty() && !BE.inventory.get(1).isEmpty()) {
+        //        Recipe<?> irecipe = BE.level.getRecipeManager().getRecipeFor((RecipeType<RecipeDistillery>)BE.recipeType, BE, BE.level).orElse(null);
+        //        if (!BE.isLit() && BE.canBurn(irecipe)) {
+        //            BE.litTime = BE.getBurnDuration(itemstack);
+        //            BE.litDuration = BE.litTime;
+        //            if (BE.isLit()) {
+        //                flag1 = true;
+        //                if (itemstack.hasCraftingRemainingItem())
+        //                    BE.inventory.set(1, itemstack.getCraftingRemainingItem());
+        //                else
+        //                if (!itemstack.isEmpty()) {
+        //                    Item item = itemstack.getItem();
+        //                    itemstack.shrink(1);
+        //                    if (itemstack.isEmpty()) {
+        //                        BE.inventory.set(1, itemstack.getCraftingRemainingItem());
+        //                    }
+        //                }
+        //            }
+        //        }
+//
+        //        if (BE.isLit() && BE.canBurn(irecipe)) {
+        //            ++BE.cookingProgress;
+        //            if (BE.cookingProgress == BE.cookingTotalTime) {
+        //                BE.cookingProgress = 0;
+        //                BE.cookingTotalTime = BE.getTotalCookTime();
+        //                BE.burn(irecipe);
+        //                flag1 = true;
+        //            }
+        //        } else {
+        //            BE.cookingProgress = 0;
+        //        }
+        //    } else if (!BE.isLit() && BE.cookingProgress > 0) {
+        //        BE.cookingProgress = Mth.clamp(BE.cookingProgress - 2, 0, BE.cookingTotalTime);
+        //    }
+//
+        //    if (flag != BE.isLit()) {
+        //        flag1 = true;
+        //        BE.level.setBlock(BE.worldPosition, BE.level.getBlockState(BE.worldPosition).setValue(AbstractFurnaceBlock.LIT, BE.isLit()), 3);
+        //    }
+        //}
+//
+        //if (flag1) {
+        //    BE.setChanged();
+        //}
 
     }
 
@@ -248,7 +247,8 @@ public class BlockEntityDistillery extends BlockEntityBase<Dummy> {
     }
 
     protected int getTotalCookTime() {
-        return this.level.getRecipeManager().getRecipeFor((RecipeType<RecipeDistillery>)this.recipeType, this, this.level).map(RecipeDistillery::getCookingTime).orElse(200);
+        return 200;
+        //return this.level.getRecipeManager().getRecipeFor((RecipeType<RecipeDistillery>)this.recipeType, this, this.level).map(RecipeDistillery::getCookingTime).orElse(200);
     }
 
     public void setItem(int p_70299_1_, ItemStack p_70299_2_) {
@@ -276,10 +276,10 @@ public class BlockEntityDistillery extends BlockEntityBase<Dummy> {
         return dataAccess;
     }
 
-    @Override
-    public TextComponent getName() {
-        return new TextComponent("tile.distillery.name");
-    }
+    // @Override
+    // public TextComponent getName() {
+    //     return new TextComponent("tile.distillery.name");
+    // }
 
     public void setRecipeUsed(@Nullable Recipe<?> p_193056_1_) {
         if (p_193056_1_ != null) {

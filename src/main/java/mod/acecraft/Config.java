@@ -3,11 +3,10 @@ package mod.acecraft;
 import mod.lucky77.system.SystemBiomes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import static net.minecraftforge.common.BiomeDictionary.Type.*;
+import static net.minecraft.world.level.biome.Biomes.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -80,9 +79,9 @@ public class Config {
             weight = builder.defineInRange("weight", _weight, 0, 100);
             builder.pop();
             builder.push("spawnable biomes " + id);
-            spawnBlocks = builder.defineList("spawn blocks", Collections.singletonList(Blocks.GRASS_BLOCK.getRegistryName().toString()), o -> o instanceof String && ForgeRegistries.BLOCKS.getKeys().contains(new ResourceLocation(o.toString())));
-            include = builder.defineList("include", Arrays.asList(SAVANNA.toString(), HILLS.toString(), MESA.toString()), o -> o instanceof String && (o.equals("") || BiomeDictionary.Type.getAll().contains(SystemBiomes.getType(o.toString()))));
-            exclude = builder.defineList("exclude", Arrays.asList(FOREST.toString(), SNOWY.toString(), OCEAN.toString(), NETHER.toString()), o -> o instanceof String && (o.equals("") || BiomeDictionary.Type.getAll().contains(SystemBiomes.getType(o.toString()))));
+            spawnBlocks = builder.defineList("spawn blocks", Collections.singletonList(Blocks.GRASS_BLOCK.getDescriptionId().toString()), o -> o instanceof String && ForgeRegistries.BLOCKS.getKeys().contains(new ResourceLocation(o.toString())));
+            include = builder.defineList("include", Arrays.asList(SAVANNA.toString(), BADLANDS.toString()), o -> o instanceof String && (o.equals("")));
+            exclude = builder.defineList("exclude", Arrays.asList(FOREST.toString(), SNOWY_PLAINS.toString(), OCEAN.toString()), o -> o instanceof String && (o.equals("")));
             builder.pop();
         }
     }

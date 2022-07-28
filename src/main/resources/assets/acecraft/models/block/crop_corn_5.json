@@ -1,5 +1,6 @@
 {
     "parent": "acecraft:template/crop",
+    "render_type": "cutout",
     "textures": {
         "crop": "acecraft:block/crop_corn_5"
     }

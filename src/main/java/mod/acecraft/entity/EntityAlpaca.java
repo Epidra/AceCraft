@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -283,7 +284,7 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         }
     }
 
-    public static DyeColor getRandomSheepColor(Random p_29843_) {
+    public static DyeColor getRandomSheepColor(RandomSource p_29843_) {
         int i = p_29843_.nextInt(100);
         if (i < 5) {
             return DyeColor.BLACK;
@@ -332,6 +333,11 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
 
     private static CraftingContainer makeContainer(DyeColor p_29832_, DyeColor p_29833_) {
         CraftingContainer craftingcontainer = new CraftingContainer(new AbstractContainerMenu((MenuType)null, -1) {
+            @Override
+            public ItemStack quickMoveStack(Player p_38941_, int p_38942_) {
+                return null;
+            }
+
             public boolean stillValid(Player p_29888_) {
                 return false;
             }
