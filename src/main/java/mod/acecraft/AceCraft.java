@@ -18,16 +18,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod("acecraft")
 public class AceCraft {
 
-    // TODO: Add Topaz Geode
-    // TODO Add Stone and Deepslate variants for Ores
-    // TODO: Fix Dynamite
-    // TODO: Fix Ore Throwing
-    // TODO: Fix Block GUIs
-    // TODO: Make Alpaca smaller
-    // TODO: Add Book concerning infos about Alpacas/Llamas
-    // TODO: Add Book concerning infos about geodes
-    // TODO: Add Book concerning infos about Ores and Alloy smelting
-
     // The Mod ID
     public static final String MODID = "acecraft";
     // Client/Server Proxy
