@@ -23,7 +23,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.data.worldgen.PlainVillagePools;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
@@ -87,39 +86,39 @@ public class ShopKeeper {
 
 
     // Blocks
-    public static final RegistryObject<Block> BLOCK_MYTHRIL    = registerB("block_mythril",    () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_MYTHRIL    = fromBlock(BLOCK_MYTHRIL   , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_GILIUM     = registerB("block_gilium",     () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_GILIUM     = fromBlock(BLOCK_GILIUM    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_TIN        = registerB("block_tin",        () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_TIN        = fromBlock(BLOCK_TIN       , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_ZINC       = registerB("block_zinc",       () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_ZINC       = fromBlock(BLOCK_ZINC      , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_BRONZE     = registerB("block_bronze",     () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_BRONZE     = fromBlock(BLOCK_BRONZE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_BRASS      = registerB("block_brass",      () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_BRASS      = fromBlock(BLOCK_BRASS     , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_STEEL      = registerB("block_steel",      () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_STEEL      = fromBlock(BLOCK_STEEL     , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_ORICHALCUM = registerB("block_orichalcum", () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_ORICHALCUM = fromBlock(BLOCK_ORICHALCUM, CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_ADAMANTIUM = registerB("block_adamantium", () -> new BlockBlock(Blocks.IRON_BLOCK),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_ADAMANTIUM = fromBlock(BLOCK_ADAMANTIUM, CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_SALT       = registerB("block_salt",       () -> new BlockBlock(Blocks.SAND),          CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_SALT       = fromBlock(BLOCK_SALT      , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_SULFUR     = registerB("block_sulfur",     () -> new BlockBlock(Blocks.SAND),          CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_SULFUR     = fromBlock(BLOCK_SULFUR    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_RUBY       = registerB("block_ruby",       () -> new BlockBlock(Blocks.DIAMOND_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_RUBY       = fromBlock(BLOCK_RUBY      , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_SAPPHIRE   = registerB("block_sapphire",   () -> new BlockBlock(Blocks.DIAMOND_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_SAPPHIRE   = fromBlock(BLOCK_SAPPHIRE  , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> BLOCK_AURORITE   = registerB("block_aurorite",   () -> new BlockBlock(Blocks.DIAMOND_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_BLOCK_AURORITE   = fromBlock(BLOCK_AURORITE  , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_MYTHRIL    = registerB("block_mythril",    () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_MYTHRIL    = fromBlock(BLOCK_MYTHRIL   , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_GILIUM     = registerB("block_gilium",     () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_GILIUM     = fromBlock(BLOCK_GILIUM    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_TIN        = registerB("block_tin",        () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_TIN        = fromBlock(BLOCK_TIN       , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_ZINC       = registerB("block_zinc",       () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_ZINC       = fromBlock(BLOCK_ZINC      , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_BRONZE     = registerB("block_bronze",     () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_BRONZE     = fromBlock(BLOCK_BRONZE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_BRASS      = registerB("block_brass",      () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_BRASS      = fromBlock(BLOCK_BRASS     , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_STEEL      = registerB("block_steel",      () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_STEEL      = fromBlock(BLOCK_STEEL     , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_ORICHALCUM = registerB("block_orichalcum", () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_ORICHALCUM = fromBlock(BLOCK_ORICHALCUM, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_ADAMANTIUM = registerB("block_adamantium", () -> new BlockBlock(Blocks.IRON_BLOCK),    true);     //static final RegistryObject<Item> I_BLOCK_ADAMANTIUM = fromBlock(BLOCK_ADAMANTIUM, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_SALT       = registerB("block_salt",       () -> new BlockBlock(Blocks.SAND),          true);     //static final RegistryObject<Item> I_BLOCK_SALT       = fromBlock(BLOCK_SALT      , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_SULFUR     = registerB("block_sulfur",     () -> new BlockBlock(Blocks.SAND),          true);     //static final RegistryObject<Item> I_BLOCK_SULFUR     = fromBlock(BLOCK_SULFUR    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_RUBY       = registerB("block_ruby",       () -> new BlockBlock(Blocks.DIAMOND_BLOCK), true);     //static final RegistryObject<Item> I_BLOCK_RUBY       = fromBlock(BLOCK_RUBY      , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_SAPPHIRE   = registerB("block_sapphire",   () -> new BlockBlock(Blocks.DIAMOND_BLOCK), true);     //static final RegistryObject<Item> I_BLOCK_SAPPHIRE   = fromBlock(BLOCK_SAPPHIRE  , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> BLOCK_AURORITE   = registerB("block_aurorite",   () -> new BlockBlock(Blocks.DIAMOND_BLOCK), true);     //static final RegistryObject<Item> I_BLOCK_AURORITE   = fromBlock(BLOCK_AURORITE  , CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     // Ore
-    public static final RegistryObject<Block> ORE_MYTHRIL_BASE  = registerB("ore_mythril_base",  () -> new BlockOre(Blocks.IRON_ORE),              CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_MYTHRIL_BASE  = fromBlock(ORE_MYTHRIL_BASE , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_MYTHRIL_DEEP  = registerB("ore_mythril_deep",  () -> new BlockOre(Blocks.DEEPSLATE_IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_MYTHRIL_DEEP  = fromBlock(ORE_MYTHRIL_DEEP , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_GILIUM        = registerB("ore_gilium",        () -> new BlockOre(Blocks.IRON_ORE),              CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_GILIUM        = fromBlock(ORE_GILIUM       , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_TIN_BASE      = registerB("ore_tin_base",      () -> new BlockOre(Blocks.IRON_ORE),              CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_TIN_BASE      = fromBlock(ORE_TIN_BASE     , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_TIN_DEEP      = registerB("ore_tin_deep",      () -> new BlockOre(Blocks.DEEPSLATE_IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_TIN_DEEP      = fromBlock(ORE_TIN_DEEP     , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_ZINC_BASE     = registerB("ore_zinc_base",     () -> new BlockOre(Blocks.IRON_ORE),              CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_ZINC_BASE     = fromBlock(ORE_ZINC_BASE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_ZINC_DEEP     = registerB("ore_zinc_deep",     () -> new BlockOre(Blocks.DEEPSLATE_IRON_ORE),    CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_ZINC_DEEP     = fromBlock(ORE_ZINC_DEEP    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SALT_BASE     = registerB("ore_salt_base",     () -> new BlockOre(Blocks.LAPIS_ORE),             CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_SALT_BASE     = fromBlock(ORE_SALT_BASE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SALT_DEEP     = registerB("ore_salt_deep",     () -> new BlockOre(Blocks.DEEPSLATE_LAPIS_ORE),   CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_SALT_DEEP     = fromBlock(ORE_SALT_DEEP    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SULFUR_BASE   = registerB("ore_sulfur_base",   () -> new BlockOre(Blocks.LAPIS_ORE),             CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_SULFUR_BASE   = fromBlock(ORE_SULFUR_BASE  , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SULFUR_DEEP   = registerB("ore_sulfur_deep",   () -> new BlockOre(Blocks.DEEPSLATE_LAPIS_ORE),   CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_SULFUR_DEEP   = fromBlock(ORE_SULFUR_DEEP  , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_RUBY_BASE     = registerB("ore_ruby_base",     () -> new BlockOre(Blocks.DIAMOND_ORE),           CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_RUBY_BASE     = fromBlock(ORE_RUBY_BASE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_RUBY_DEEP     = registerB("ore_ruby_deep",     () -> new BlockOre(Blocks.DEEPSLATE_DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_RUBY_DEEP     = fromBlock(ORE_RUBY_DEEP    , CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SAPPHIRE_BASE = registerB("ore_sapphire_base", () -> new BlockOre(Blocks.DIAMOND_ORE),           CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_SAPPHIRE_BASE = fromBlock(ORE_SAPPHIRE_BASE, CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_SAPPHIRE_DEEP = registerB("ore_sapphire_deep", () -> new BlockOre(Blocks.DEEPSLATE_DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_SAPPHIRE_DEEP = fromBlock(ORE_SAPPHIRE_DEEP, CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_AURORITE_BASE = registerB("ore_aurorite_base", () -> new BlockOre(Blocks.DIAMOND_ORE),           CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_AURORITE_BASE = fromBlock(ORE_AURORITE_BASE, CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> ORE_AURORITE_DEEP = registerB("ore_aurorite_deep", () -> new BlockOre(Blocks.DEEPSLATE_DIAMOND_ORE), CreativeModeTab.TAB_BUILDING_BLOCKS);     //static final RegistryObject<Item> I_ORE_AURORITE_DEEP = fromBlock(ORE_AURORITE_DEEP, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_MYTHRIL_BASE  = registerB("ore_mythril_base",  () -> new BlockOre(Blocks.IRON_ORE),              true);     //static final RegistryObject<Item> I_ORE_MYTHRIL_BASE  = fromBlock(ORE_MYTHRIL_BASE , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_MYTHRIL_DEEP  = registerB("ore_mythril_deep",  () -> new BlockOre(Blocks.DEEPSLATE_IRON_ORE),    true);     //static final RegistryObject<Item> I_ORE_MYTHRIL_DEEP  = fromBlock(ORE_MYTHRIL_DEEP , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_GILIUM        = registerB("ore_gilium",        () -> new BlockOre(Blocks.IRON_ORE),              true);     //static final RegistryObject<Item> I_ORE_GILIUM        = fromBlock(ORE_GILIUM       , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_TIN_BASE      = registerB("ore_tin_base",      () -> new BlockOre(Blocks.IRON_ORE),              true);     //static final RegistryObject<Item> I_ORE_TIN_BASE      = fromBlock(ORE_TIN_BASE     , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_TIN_DEEP      = registerB("ore_tin_deep",      () -> new BlockOre(Blocks.DEEPSLATE_IRON_ORE),    true);     //static final RegistryObject<Item> I_ORE_TIN_DEEP      = fromBlock(ORE_TIN_DEEP     , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_ZINC_BASE     = registerB("ore_zinc_base",     () -> new BlockOre(Blocks.IRON_ORE),              true);     //static final RegistryObject<Item> I_ORE_ZINC_BASE     = fromBlock(ORE_ZINC_BASE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_ZINC_DEEP     = registerB("ore_zinc_deep",     () -> new BlockOre(Blocks.DEEPSLATE_IRON_ORE),    true);     //static final RegistryObject<Item> I_ORE_ZINC_DEEP     = fromBlock(ORE_ZINC_DEEP    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SALT_BASE     = registerB("ore_salt_base",     () -> new BlockOre(Blocks.LAPIS_ORE),             true);     //static final RegistryObject<Item> I_ORE_SALT_BASE     = fromBlock(ORE_SALT_BASE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SALT_DEEP     = registerB("ore_salt_deep",     () -> new BlockOre(Blocks.DEEPSLATE_LAPIS_ORE),   true);     //static final RegistryObject<Item> I_ORE_SALT_DEEP     = fromBlock(ORE_SALT_DEEP    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SULFUR_BASE   = registerB("ore_sulfur_base",   () -> new BlockOre(Blocks.LAPIS_ORE),             true);     //static final RegistryObject<Item> I_ORE_SULFUR_BASE   = fromBlock(ORE_SULFUR_BASE  , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SULFUR_DEEP   = registerB("ore_sulfur_deep",   () -> new BlockOre(Blocks.DEEPSLATE_LAPIS_ORE),   true);     //static final RegistryObject<Item> I_ORE_SULFUR_DEEP   = fromBlock(ORE_SULFUR_DEEP  , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_RUBY_BASE     = registerB("ore_ruby_base",     () -> new BlockOre(Blocks.DIAMOND_ORE),           true);     //static final RegistryObject<Item> I_ORE_RUBY_BASE     = fromBlock(ORE_RUBY_BASE    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_RUBY_DEEP     = registerB("ore_ruby_deep",     () -> new BlockOre(Blocks.DEEPSLATE_DIAMOND_ORE), true);     //static final RegistryObject<Item> I_ORE_RUBY_DEEP     = fromBlock(ORE_RUBY_DEEP    , CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SAPPHIRE_BASE = registerB("ore_sapphire_base", () -> new BlockOre(Blocks.DIAMOND_ORE),           true);     //static final RegistryObject<Item> I_ORE_SAPPHIRE_BASE = fromBlock(ORE_SAPPHIRE_BASE, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_SAPPHIRE_DEEP = registerB("ore_sapphire_deep", () -> new BlockOre(Blocks.DEEPSLATE_DIAMOND_ORE), true);     //static final RegistryObject<Item> I_ORE_SAPPHIRE_DEEP = fromBlock(ORE_SAPPHIRE_DEEP, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_AURORITE_BASE = registerB("ore_aurorite_base", () -> new BlockOre(Blocks.DIAMOND_ORE),           true);     //static final RegistryObject<Item> I_ORE_AURORITE_BASE = fromBlock(ORE_AURORITE_BASE, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> ORE_AURORITE_DEEP = registerB("ore_aurorite_deep", () -> new BlockOre(Blocks.DEEPSLATE_DIAMOND_ORE), true);     //static final RegistryObject<Item> I_ORE_AURORITE_DEEP = fromBlock(ORE_AURORITE_DEEP, CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     // Nuggets
     public static final RegistryObject<Item> NUGGET_MYTHRIL = registerI("nugget_mythril", () -> new ItemNugget());
@@ -128,27 +127,27 @@ public class ShopKeeper {
     public static final RegistryObject<Item> NUGGET_ZINC    = registerI("nugget_zinc",    () -> new ItemNugget());
 
     // Ingot
-    public static final RegistryObject<Item> INGOT_MYTHRIL    = registerI("ingot_mythril",    () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_GILIUM     = registerI("ingot_gilium",     () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_TIN        = registerI("ingot_tin",        () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_ZINC       = registerI("ingot_zinc",       () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_BRONZE     = registerI("ingot_bronze",     () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_BRASS      = registerI("ingot_brass",      () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_STEEL      = registerI("ingot_steel",      () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_ORICHALCUM = registerI("ingot_orichalcum", () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
-    public static final RegistryObject<Item> INGOT_ADAMANTIUM = registerI("ingot_adamantium", () -> new ItemItem(CreativeModeTab.TAB_MATERIALS));
+    public static final RegistryObject<Item> INGOT_MYTHRIL    = registerI("ingot_mythril",    () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_GILIUM     = registerI("ingot_gilium",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_TIN        = registerI("ingot_tin",        () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_ZINC       = registerI("ingot_zinc",       () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_BRONZE     = registerI("ingot_bronze",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_BRASS      = registerI("ingot_brass",      () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_STEEL      = registerI("ingot_steel",      () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_ORICHALCUM = registerI("ingot_orichalcum", () -> new ItemItem(null));
+    public static final RegistryObject<Item> INGOT_ADAMANTIUM = registerI("ingot_adamantium", () -> new ItemItem(null));
 
     // Stuff
-    public static final RegistryObject<Item> STUFF_SALT     = registerI("stuff_salt",     () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_SULFUR   = registerI("stuff_sulfur",   () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_RICE     = registerI("stuff_rice",     () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_COFFEE   = registerI("stuff_coffee",   () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_HEMP     = registerI("stuff_hemp",     () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_ROPE     = registerI("stuff_rope",     () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_SLAG     = registerI("stuff_slag",     () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_RUBY     = registerI("stuff_ruby",     () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_SAPPHIRE = registerI("stuff_sapphire", () -> new ItemItem(CreativeModeTab.TAB_MISC));
-    public static final RegistryObject<Item> STUFF_AURORITE = registerI("stuff_aurorite", () -> new ItemItem(CreativeModeTab.TAB_MISC));
+    public static final RegistryObject<Item> STUFF_SALT     = registerI("stuff_salt",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_SULFUR   = registerI("stuff_sulfur",   () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_RICE     = registerI("stuff_rice",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_COFFEE   = registerI("stuff_coffee",   () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_HEMP     = registerI("stuff_hemp",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_ROPE     = registerI("stuff_rope",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_SLAG     = registerI("stuff_slag",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_RUBY     = registerI("stuff_ruby",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_SAPPHIRE = registerI("stuff_sapphire", () -> new ItemItem(null));
+    public static final RegistryObject<Item> STUFF_AURORITE = registerI("stuff_aurorite", () -> new ItemItem(null));
 
     // Food
     public static final RegistryObject<Item> FOOD_CABBAGE        = registerI("food_cabbage",        () -> new ItemFood(1, 1, false));
@@ -206,53 +205,53 @@ public class ShopKeeper {
     public static final RegistryObject<Item> SEED_HEMP       = registerI("seeds_hemp",       () -> new ItemSeed("hemp"      ));
 
     // Machina
-    public static final RegistryObject<Block> MACHINA_GLOBE        = registerB("machina_globe",        () -> new BlockGlobe(),        CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_GLOBE        = fromBlock(MACHINA_GLOBE       , CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> MACHINA_FOUNDRY      = registerB("machina_foundry",      () -> new BlockFoundry(),      CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_FOUNDRY      = fromBlock(MACHINA_FOUNDRY     , CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> MACHINA_DISTILLERY   = registerB("machina_distillery",   () -> new BlockDistillery(),   CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_DISTILLERY   = fromBlock(MACHINA_DISTILLERY  , CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> MACHINA_COOKINGBOARD = registerB("machina_cookingboard", () -> new BlockCookingBoard(), CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_COOKINGBOARD = fromBlock(MACHINA_COOKINGBOARD, CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> MACHINA_KEG          = registerB("machina_keg",          () -> new BlockKeg(),          CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_KEG          = fromBlock(MACHINA_KEG         , CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> MACHINA_ANCHOR       = registerB("machina_anchor",       () -> new BlockAnchor(),       CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_ANCHOR       = fromBlock(MACHINA_ANCHOR      , CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> MACHINA_ROPE         = registerB("machina_rope",         () -> new BlockRope(),         CreativeModeTab.TAB_DECORATIONS);     //static final RegistryObject<Item> I_MACHINA_ROPE         = fromBlock(MACHINA_ROPE        , CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_GLOBE        = registerB("machina_globe",        () -> new BlockGlobe(),        true);     //static final RegistryObject<Item> I_MACHINA_GLOBE        = fromBlock(MACHINA_GLOBE       , CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_FOUNDRY      = registerB("machina_foundry",      () -> new BlockFoundry(),      true);     //static final RegistryObject<Item> I_MACHINA_FOUNDRY      = fromBlock(MACHINA_FOUNDRY     , CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_DISTILLERY   = registerB("machina_distillery",   () -> new BlockDistillery(),   true);     //static final RegistryObject<Item> I_MACHINA_DISTILLERY   = fromBlock(MACHINA_DISTILLERY  , CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_COOKINGBOARD = registerB("machina_cookingboard", () -> new BlockCookingBoard(), true);     //static final RegistryObject<Item> I_MACHINA_COOKINGBOARD = fromBlock(MACHINA_COOKINGBOARD, CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_KEG          = registerB("machina_keg",          () -> new BlockKeg(),          true);     //static final RegistryObject<Item> I_MACHINA_KEG          = fromBlock(MACHINA_KEG         , CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_ANCHOR       = registerB("machina_anchor",       () -> new BlockAnchor(),       true);     //static final RegistryObject<Item> I_MACHINA_ANCHOR       = fromBlock(MACHINA_ANCHOR      , CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> MACHINA_ROPE         = registerB("machina_rope",         () -> new BlockRope(),         true);     //static final RegistryObject<Item> I_MACHINA_ROPE         = fromBlock(MACHINA_ROPE        , CreativeModeTab.TAB_DECORATIONS);
 
     // Armor Boots
-    public static final RegistryObject<Item> ARMOR_BOOTS_GILIUM     = registerI("armor_boots_gilium",     () -> new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_ADAMANTIUM = registerI("armor_boots_adamantium", () -> new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_MYTHRIL    = registerI("armor_boots_mythril",    () -> new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_ORICHALCUM = registerI("armor_boots_orichalcum", () -> new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_COPPER     = registerI("armor_boots_copper",     () -> new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_BRONZE     = registerI("armor_boots_bronze",     () -> new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_STEEL      = registerI("armor_boots_steel",      () -> new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlot.FEET));
-    public static final RegistryObject<Item> ARMOR_BOOTS_AURORITE   = registerI("armor_boots_aurorite",   () -> new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlot.FEET));
+    public static final RegistryObject<Item> ARMOR_BOOTS_GILIUM     = registerI("armor_boots_gilium",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_ADAMANTIUM = registerI("armor_boots_adamantium", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_MYTHRIL    = registerI("armor_boots_mythril",    () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_ORICHALCUM = registerI("armor_boots_orichalcum", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_COPPER     = registerI("armor_boots_copper",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_BRONZE     = registerI("armor_boots_bronze",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_STEEL      = registerI("armor_boots_steel",      () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_BOOTS_AURORITE   = registerI("armor_boots_aurorite",   () -> new ItemItem(null));
 
     // Armor Chestplate
-    public static final RegistryObject<Item> ARMOR_PLATE_GILIUM     = registerI("armor_plate_gilium",     () -> new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_ADAMANTIUM = registerI("armor_plate_adamantium", () -> new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_MYTHRIL    = registerI("armor_plate_mythril",    () -> new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_ORICHALCUM = registerI("armor_plate_orichalcum", () -> new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_COPPER     = registerI("armor_plate_copper",     () -> new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_BRONZE     = registerI("armor_plate_bronze",     () -> new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_STEEL      = registerI("armor_plate_steel",      () -> new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlot.CHEST));
-    public static final RegistryObject<Item> ARMOR_PLATE_AURORITE   = registerI("armor_plate_aurorite",   () -> new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlot.CHEST));
+    public static final RegistryObject<Item> ARMOR_PLATE_GILIUM     = registerI("armor_plate_gilium",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_ADAMANTIUM = registerI("armor_plate_adamantium", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_MYTHRIL    = registerI("armor_plate_mythril",    () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_ORICHALCUM = registerI("armor_plate_orichalcum", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_COPPER     = registerI("armor_plate_copper",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_BRONZE     = registerI("armor_plate_bronze",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_STEEL      = registerI("armor_plate_steel",      () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_PLATE_AURORITE   = registerI("armor_plate_aurorite",   () -> new ItemItem(null));
 
     // Armor Leggings
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_GILIUM     = registerI("armor_leggings_gilium",     () -> new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_ADAMANTIUM = registerI("armor_leggings_adamantium", () -> new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_MYTHRIL    = registerI("armor_leggings_mythril",    () -> new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_ORICHALCUM = registerI("armor_leggings_orichalcum", () -> new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_COPPER     = registerI("armor_leggings_copper",     () -> new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_BRONZE     = registerI("armor_leggings_bronze",     () -> new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_STEEL      = registerI("armor_leggings_steel",      () -> new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlot.LEGS));
-    public static final RegistryObject<Item> ARMOR_LEGGINGS_AURORITE   = registerI("armor_leggings_aurorite",   () -> new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlot.LEGS));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_GILIUM     = registerI("armor_leggings_gilium",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_ADAMANTIUM = registerI("armor_leggings_adamantium", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_MYTHRIL    = registerI("armor_leggings_mythril",    () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_ORICHALCUM = registerI("armor_leggings_orichalcum", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_COPPER     = registerI("armor_leggings_copper",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_BRONZE     = registerI("armor_leggings_bronze",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_STEEL      = registerI("armor_leggings_steel",      () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_LEGGINGS_AURORITE   = registerI("armor_leggings_aurorite",   () -> new ItemItem(null));
 
     // Armor Helmet
-    public static final RegistryObject<Item> ARMOR_HELMET_GILIUM     = registerI("armor_helmet_gilium",     () -> new ItemArmor(     MaterialArmor.GILIUM,     EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_ADAMANTIUM = registerI("armor_helmet_adamantium", () -> new ItemArmor(     MaterialArmor.ADAMANTIUM, EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_MYTHRIL    = registerI("armor_helmet_mythril",    () -> new ItemArmor(     MaterialArmor.MYTHRIL,    EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_ORICHALCUM = registerI("armor_helmet_orichalcum", () -> new ItemArmor(     MaterialArmor.ORICHALCUM, EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_COPPER     = registerI("armor_helmet_copper",     () -> new ItemArmor(     MaterialArmor.COPPER,     EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_BRONZE     = registerI("armor_helmet_bronze",     () -> new ItemArmor(     MaterialArmor.BRONZE,     EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_STEEL      = registerI("armor_helmet_steel",      () -> new ItemArmor(     MaterialArmor.STEEL,      EquipmentSlot.HEAD));
-    public static final RegistryObject<Item> ARMOR_HELMET_AURORITE   = registerI("armor_helmet_aurorite",   () -> new ItemArmorColor(MaterialArmor.AURORITE,   EquipmentSlot.HEAD));
+    public static final RegistryObject<Item> ARMOR_HELMET_GILIUM     = registerI("armor_helmet_gilium",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_ADAMANTIUM = registerI("armor_helmet_adamantium", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_MYTHRIL    = registerI("armor_helmet_mythril",    () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_ORICHALCUM = registerI("armor_helmet_orichalcum", () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_COPPER     = registerI("armor_helmet_copper",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_BRONZE     = registerI("armor_helmet_bronze",     () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_STEEL      = registerI("armor_helmet_steel",      () -> new ItemItem(null));
+    public static final RegistryObject<Item> ARMOR_HELMET_AURORITE   = registerI("armor_helmet_aurorite",   () -> new ItemItem(null));
 
     // Tool Sword
     public static final RegistryObject<Item> TOOL_SWORD_GILIUM     = registerI("tool_sword_gilium",     () -> new ToolSword(MaterialTool.GILIUM,     2, -1.0f));
@@ -315,9 +314,9 @@ public class ShopKeeper {
     public static final RegistryObject<Item> TOOL_HOE_AURORITE   = registerI("tool_hoe_aurorite",   () -> new ToolHoe(MaterialTool.AURORITE,   3, -1.0f));
 
     // Sounds
-    public static final RegistryObject<SoundEvent> SOUND_ALPACA_AMBIENT = registerS("acecraft.alpaca.ambient", () -> new SoundEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.ambient")));
-    public static final RegistryObject<SoundEvent> SOUND_ALPACA_HURT    = registerS("acecraft.alpaca.hurt",    () -> new SoundEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.hurt")));
-    public static final RegistryObject<SoundEvent> SOUND_ALPACA_DEATH   = registerS("acecraft.alpaca.death",   () -> new SoundEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.death")));
+    public static final RegistryObject<SoundEvent> SOUND_ALPACA_AMBIENT = registerS("acecraft.alpaca.ambient", () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.ambient")));
+    public static final RegistryObject<SoundEvent> SOUND_ALPACA_HURT    = registerS("acecraft.alpaca.hurt",    () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.hurt")));
+    public static final RegistryObject<SoundEvent> SOUND_ALPACA_DEATH   = registerS("acecraft.alpaca.death",   () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(AceCraft.MODID, "acecraft.alpaca.death")));
 
     // Tile Entity
     public static final RegistryObject<BlockEntityType<BlockEntityFoundry>>    TILE_FOUNDRY    = TILES.register("foundry",    () -> BlockEntityType.Builder.of(BlockEntityFoundry::new,    MACHINA_FOUNDRY.get()).build(null));
@@ -378,7 +377,7 @@ public class ShopKeeper {
     public static final RegistryObject<EntityType<EntityNugget>>   ENTITY_NUGGET   = null;
 
     // Spawn Eggs
-    public static final RegistryObject<Item> SPAWNEGG_ALPACA = ITEMS.register("spawnegg_alpaca", () -> new ForgeSpawnEggItem(ENTITY_ALPACA, 12345, 67890, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static final RegistryObject<Item> SPAWNEGG_ALPACA = ITEMS.register("spawnegg_alpaca", () -> new ForgeSpawnEggItem(ENTITY_ALPACA, 12345, 67890, new Item.Properties()));
 
     // Structure Configurations
     /**
@@ -418,19 +417,19 @@ public class ShopKeeper {
 
     // Conveniance function: Take a RegistryObject<Block> and make a corresponding RegistryObject<Item> from it
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block, CreativeModeTab CreativeModeTab) {
-        return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), (new Item.Properties()).tab(CreativeModeTab) ));
+        return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), (new Item.Properties()) ));
     }
 
-    static <T extends Recipe<?>> RecipeType<T> register(final String key) {
-        return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(key), new RecipeType<T>()
-        {
-            @Override
-            public String toString()
-            {
-                return key;
-            }
-        });
-    }
+    // static <T extends Recipe<?>> RecipeType<T> register(final String key) {
+    //     return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(key), new RecipeType<T>()
+    //     {
+    //         @Override
+    //         public String toString()
+    //         {
+    //             return key;
+    //         }
+    //     });
+    // }
 
     // public static void registerEntity(BiomeLoadingEvent event, Set<BiomeDictionary.Type> types) {
     //     event.getSpawns().getSpawner(CREATURE).add(new MobSpawnSettings.SpawnerData(ENTITY_ALPACA.get(), Config.ALPACA.weight.get(), Config.ALPACA.min.get(), Config.ALPACA.max.get()));
@@ -441,12 +440,12 @@ public class ShopKeeper {
     // }
 
     private static RegistryObject<Block> registerB(String name,  java.util.function.Supplier<? extends Block> block){
-        return registerB(name, block, null);
+        return registerB(name, block, false);
     }
 
-    private static RegistryObject<Block> registerB(String name,  java.util.function.Supplier<? extends Block> block, CreativeModeTab CreativeModeTab){
+    private static RegistryObject<Block> registerB(String name,  java.util.function.Supplier<? extends Block> block, boolean useItemBlock){
         RegistryObject<Block> rob = BLOCKS.register(name, block);
-        if(CreativeModeTab != null){ ITEMS.register(name, () -> new BlockItem(rob.get(), (new Item.Properties()).tab(CreativeModeTab))); }
+        if(useItemBlock){ ITEMS.register(name, () -> new BlockItem(rob.get(), (new Item.Properties()))); }
         return rob;
     }
 
@@ -475,23 +474,23 @@ public class ShopKeeper {
     }
 
     public static void registerOreSpawn(){
-        SPAWN_GILIUM        = SystemRegister.buildOreSpawn("ore_gilium",        ShopKeeper.ORE_GILIUM.get().defaultBlockState(),        Config.GILIUM.veinSize.get(),        0, Config.GILIUM.maxHeight.get(),        Config.GILIUM.spawnRate.get(),        OreFeatures.NETHER_ORE_REPLACEABLES,    true);
-        SPAWN_ZINC_BASE     = SystemRegister.buildOreSpawn("ore_zinc_base",     ShopKeeper.ORE_ZINC_BASE.get().defaultBlockState(),     Config.ZINC_BASE.veinSize.get(),     0, Config.ZINC_BASE.maxHeight.get(),     Config.ZINC_BASE.spawnRate.get(),     OreFeatures.STONE_ORE_REPLACEABLES,     true);
-        SPAWN_ZINC_DEEP     = SystemRegister.buildOreSpawn("ore_zinc_deep",     ShopKeeper.ORE_ZINC_DEEP.get().defaultBlockState(),     Config.ZINC_DEEP.veinSize.get(),     0, Config.ZINC_DEEP.maxHeight.get(),     Config.ZINC_DEEP.spawnRate.get(),     OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
-        SPAWN_MYTHRIL_BASE  = SystemRegister.buildOreSpawn("ore_mythril_base",  ShopKeeper.ORE_MYTHRIL_BASE.get().defaultBlockState(),  Config.MYTHRIL_BASE.veinSize.get(),  0, Config.MYTHRIL_BASE.maxHeight.get(),  Config.MYTHRIL_BASE.spawnRate.get(),  OreFeatures.STONE_ORE_REPLACEABLES,     true);
-        SPAWN_MYTHRIL_DEEP  = SystemRegister.buildOreSpawn("ore_mythril_deep",  ShopKeeper.ORE_MYTHRIL_DEEP.get().defaultBlockState(),  Config.MYTHRIL_DEEP.veinSize.get(),  0, Config.MYTHRIL_DEEP.maxHeight.get(),  Config.MYTHRIL_DEEP.spawnRate.get(),  OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
-        SPAWN_TIN_BASE      = SystemRegister.buildOreSpawn("ore_tin_base",      ShopKeeper.ORE_TIN_BASE.get().defaultBlockState(),      Config.TIN_BASE.veinSize.get(),      0, Config.TIN_BASE.maxHeight.get(),      Config.TIN_BASE.spawnRate.get(),      OreFeatures.STONE_ORE_REPLACEABLES,     true);
-        SPAWN_TIN_DEEP      = SystemRegister.buildOreSpawn("ore_tin_deep",      ShopKeeper.ORE_TIN_DEEP.get().defaultBlockState(),      Config.TIN_DEEP.veinSize.get(),      0, Config.TIN_DEEP.maxHeight.get(),      Config.TIN_DEEP.spawnRate.get(),      OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
-        SPAWN_AURORITE_BASE = SystemRegister.buildOreSpawn("ore_aurorite_base", ShopKeeper.ORE_AURORITE_BASE.get().defaultBlockState(), Config.AURORITE_BASE.veinSize.get(), 0, Config.AURORITE_BASE.maxHeight.get(), Config.AURORITE_BASE.spawnRate.get(), OreFeatures.STONE_ORE_REPLACEABLES,     true);
-        SPAWN_AURORITE_DEEP = SystemRegister.buildOreSpawn("ore_aurorite_deep", ShopKeeper.ORE_AURORITE_DEEP.get().defaultBlockState(), Config.AURORITE_DEEP.veinSize.get(), 0, Config.AURORITE_DEEP.maxHeight.get(), Config.AURORITE_DEEP.spawnRate.get(), OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
-        SPAWN_RUBY_BASE     = SystemRegister.buildOreSpawn("ore_ruby_base",     ShopKeeper.ORE_RUBY_BASE.get().defaultBlockState(),     Config.RUBY_BASE.veinSize.get(),     0, Config.RUBY_BASE.maxHeight.get(),     Config.RUBY_BASE.spawnRate.get(),     OreFeatures.STONE_ORE_REPLACEABLES,     true);
-        SPAWN_RUBY_DEEP     = SystemRegister.buildOreSpawn("ore_ruby_deep",     ShopKeeper.ORE_RUBY_DEEP.get().defaultBlockState(),     Config.RUBY_DEEP.veinSize.get(),     0, Config.RUBY_DEEP.maxHeight.get(),     Config.RUBY_DEEP.spawnRate.get(),     OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
-        SPAWN_SAPPHIRE_BASE = SystemRegister.buildOreSpawn("ore_sapphire_base", ShopKeeper.ORE_SAPPHIRE_BASE.get().defaultBlockState(), Config.SAPPHIRE_BASE.veinSize.get(), 0, Config.SAPPHIRE_BASE.maxHeight.get(), Config.SAPPHIRE_BASE.spawnRate.get(), OreFeatures.STONE_ORE_REPLACEABLES,     true);
-        SPAWN_SAPPHIRE_DEEP = SystemRegister.buildOreSpawn("ore_sapphire_deep", ShopKeeper.ORE_SAPPHIRE_DEEP.get().defaultBlockState(), Config.SAPPHIRE_DEEP.veinSize.get(), 0, Config.SAPPHIRE_DEEP.maxHeight.get(), Config.SAPPHIRE_DEEP.spawnRate.get(), OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
-        SPAWN_SALT_BASE     = SystemRegister.buildOreSpawn("ore_salt_base",     ShopKeeper.ORE_SALT_BASE.get().defaultBlockState(),     Config.SALT_BASE.veinSize.get(),     0, Config.SALT_BASE.maxHeight.get(),     Config.SALT_BASE.spawnRate.get(),     OreFeatures.STONE_ORE_REPLACEABLES,     false);
-        SPAWN_SALT_DEEP     = SystemRegister.buildOreSpawn("ore_salt_deep",     ShopKeeper.ORE_SALT_DEEP.get().defaultBlockState(),     Config.SALT_DEEP.veinSize.get(),     0, Config.SALT_DEEP.maxHeight.get(),     Config.SALT_DEEP.spawnRate.get(),     OreFeatures.DEEPSLATE_ORE_REPLACEABLES, false);
-        SPAWN_SULFUR_BASE   = SystemRegister.buildOreSpawn("ore_sulfur_base",   ShopKeeper.ORE_SULFUR_BASE.get().defaultBlockState(),   Config.SULFUR_BASE.veinSize.get(),   0, Config.SULFUR_BASE.maxHeight.get(),   Config.SULFUR_BASE.spawnRate.get(),   OreFeatures.STONE_ORE_REPLACEABLES,     false);
-        SPAWN_SULFUR_DEEP   = SystemRegister.buildOreSpawn("ore_sulfur_deep",   ShopKeeper.ORE_SULFUR_DEEP.get().defaultBlockState(),   Config.SULFUR_DEEP.veinSize.get(),   0, Config.SULFUR_DEEP.maxHeight.get(),   Config.SULFUR_DEEP.spawnRate.get(),   OreFeatures.DEEPSLATE_ORE_REPLACEABLES, false);
+        // SPAWN_GILIUM        = SystemRegister.buildOreSpawn("ore_gilium",        ShopKeeper.ORE_GILIUM.get().defaultBlockState(),        Config.GILIUM.veinSize.get(),        0, Config.GILIUM.maxHeight.get(),        Config.GILIUM.spawnRate.get(),        OreFeatures.NETHER_ORE_REPLACEABLES,    true);
+        // SPAWN_ZINC_BASE     = SystemRegister.buildOreSpawn("ore_zinc_base",     ShopKeeper.ORE_ZINC_BASE.get().defaultBlockState(),     Config.ZINC_BASE.veinSize.get(),     0, Config.ZINC_BASE.maxHeight.get(),     Config.ZINC_BASE.spawnRate.get(),     OreFeatures.STONE_ORE_REPLACEABLES,     true);
+        // SPAWN_ZINC_DEEP     = SystemRegister.buildOreSpawn("ore_zinc_deep",     ShopKeeper.ORE_ZINC_DEEP.get().defaultBlockState(),     Config.ZINC_DEEP.veinSize.get(),     0, Config.ZINC_DEEP.maxHeight.get(),     Config.ZINC_DEEP.spawnRate.get(),     OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
+        // SPAWN_MYTHRIL_BASE  = SystemRegister.buildOreSpawn("ore_mythril_base",  ShopKeeper.ORE_MYTHRIL_BASE.get().defaultBlockState(),  Config.MYTHRIL_BASE.veinSize.get(),  0, Config.MYTHRIL_BASE.maxHeight.get(),  Config.MYTHRIL_BASE.spawnRate.get(),  OreFeatures.STONE_ORE_REPLACEABLES,     true);
+        // SPAWN_MYTHRIL_DEEP  = SystemRegister.buildOreSpawn("ore_mythril_deep",  ShopKeeper.ORE_MYTHRIL_DEEP.get().defaultBlockState(),  Config.MYTHRIL_DEEP.veinSize.get(),  0, Config.MYTHRIL_DEEP.maxHeight.get(),  Config.MYTHRIL_DEEP.spawnRate.get(),  OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
+        // SPAWN_TIN_BASE      = SystemRegister.buildOreSpawn("ore_tin_base",      ShopKeeper.ORE_TIN_BASE.get().defaultBlockState(),      Config.TIN_BASE.veinSize.get(),      0, Config.TIN_BASE.maxHeight.get(),      Config.TIN_BASE.spawnRate.get(),      OreFeatures.STONE_ORE_REPLACEABLES,     true);
+        // SPAWN_TIN_DEEP      = SystemRegister.buildOreSpawn("ore_tin_deep",      ShopKeeper.ORE_TIN_DEEP.get().defaultBlockState(),      Config.TIN_DEEP.veinSize.get(),      0, Config.TIN_DEEP.maxHeight.get(),      Config.TIN_DEEP.spawnRate.get(),      OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
+        // SPAWN_AURORITE_BASE = SystemRegister.buildOreSpawn("ore_aurorite_base", ShopKeeper.ORE_AURORITE_BASE.get().defaultBlockState(), Config.AURORITE_BASE.veinSize.get(), 0, Config.AURORITE_BASE.maxHeight.get(), Config.AURORITE_BASE.spawnRate.get(), OreFeatures.STONE_ORE_REPLACEABLES,     true);
+        // SPAWN_AURORITE_DEEP = SystemRegister.buildOreSpawn("ore_aurorite_deep", ShopKeeper.ORE_AURORITE_DEEP.get().defaultBlockState(), Config.AURORITE_DEEP.veinSize.get(), 0, Config.AURORITE_DEEP.maxHeight.get(), Config.AURORITE_DEEP.spawnRate.get(), OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
+        // SPAWN_RUBY_BASE     = SystemRegister.buildOreSpawn("ore_ruby_base",     ShopKeeper.ORE_RUBY_BASE.get().defaultBlockState(),     Config.RUBY_BASE.veinSize.get(),     0, Config.RUBY_BASE.maxHeight.get(),     Config.RUBY_BASE.spawnRate.get(),     OreFeatures.STONE_ORE_REPLACEABLES,     true);
+        // SPAWN_RUBY_DEEP     = SystemRegister.buildOreSpawn("ore_ruby_deep",     ShopKeeper.ORE_RUBY_DEEP.get().defaultBlockState(),     Config.RUBY_DEEP.veinSize.get(),     0, Config.RUBY_DEEP.maxHeight.get(),     Config.RUBY_DEEP.spawnRate.get(),     OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
+        // SPAWN_SAPPHIRE_BASE = SystemRegister.buildOreSpawn("ore_sapphire_base", ShopKeeper.ORE_SAPPHIRE_BASE.get().defaultBlockState(), Config.SAPPHIRE_BASE.veinSize.get(), 0, Config.SAPPHIRE_BASE.maxHeight.get(), Config.SAPPHIRE_BASE.spawnRate.get(), OreFeatures.STONE_ORE_REPLACEABLES,     true);
+        // SPAWN_SAPPHIRE_DEEP = SystemRegister.buildOreSpawn("ore_sapphire_deep", ShopKeeper.ORE_SAPPHIRE_DEEP.get().defaultBlockState(), Config.SAPPHIRE_DEEP.veinSize.get(), 0, Config.SAPPHIRE_DEEP.maxHeight.get(), Config.SAPPHIRE_DEEP.spawnRate.get(), OreFeatures.DEEPSLATE_ORE_REPLACEABLES, true);
+        // SPAWN_SALT_BASE     = SystemRegister.buildOreSpawn("ore_salt_base",     ShopKeeper.ORE_SALT_BASE.get().defaultBlockState(),     Config.SALT_BASE.veinSize.get(),     0, Config.SALT_BASE.maxHeight.get(),     Config.SALT_BASE.spawnRate.get(),     OreFeatures.STONE_ORE_REPLACEABLES,     false);
+        // SPAWN_SALT_DEEP     = SystemRegister.buildOreSpawn("ore_salt_deep",     ShopKeeper.ORE_SALT_DEEP.get().defaultBlockState(),     Config.SALT_DEEP.veinSize.get(),     0, Config.SALT_DEEP.maxHeight.get(),     Config.SALT_DEEP.spawnRate.get(),     OreFeatures.DEEPSLATE_ORE_REPLACEABLES, false);
+        // SPAWN_SULFUR_BASE   = SystemRegister.buildOreSpawn("ore_sulfur_base",   ShopKeeper.ORE_SULFUR_BASE.get().defaultBlockState(),   Config.SULFUR_BASE.veinSize.get(),   0, Config.SULFUR_BASE.maxHeight.get(),   Config.SULFUR_BASE.spawnRate.get(),   OreFeatures.STONE_ORE_REPLACEABLES,     false);
+        // SPAWN_SULFUR_DEEP   = SystemRegister.buildOreSpawn("ore_sulfur_deep",   ShopKeeper.ORE_SULFUR_DEEP.get().defaultBlockState(),   Config.SULFUR_DEEP.veinSize.get(),   0, Config.SULFUR_DEEP.maxHeight.get(),   Config.SULFUR_DEEP.spawnRate.get(),   OreFeatures.DEEPSLATE_ORE_REPLACEABLES, false);
 
 
     }

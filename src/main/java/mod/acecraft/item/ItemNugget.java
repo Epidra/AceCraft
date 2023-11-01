@@ -15,7 +15,7 @@ public class ItemNugget extends Item {
 
     /** Default Constructor */
     public ItemNugget() {
-        super(new Properties().tab(CreativeModeTab.TAB_MATERIALS));
+        super(new Properties());
     }
 
 

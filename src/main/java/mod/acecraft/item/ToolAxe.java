@@ -16,7 +16,7 @@ public class ToolAxe extends AxeItem {
 
     /** Default Constructor */
     public ToolAxe(Tier tier, float attackDamageIn, float attackSpeedIn) {
-        super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_TOOLS));
+        super(tier, attackDamageIn, attackSpeedIn, new Properties());
     }
 
 

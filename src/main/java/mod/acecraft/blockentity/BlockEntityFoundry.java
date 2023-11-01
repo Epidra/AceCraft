@@ -155,40 +155,41 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
     //----------------------------------------SUPPORT----------------------------------------//
 
     private boolean searchForMaterial(){
-        if(logic().content.isEmpty()){
-            createMaterialMap();
-        }
-        if(inventory.get(0).getItem() == Items.COAL || inventory.get(0).getItem() == Items.CHARCOAL){
-            coalAmount++;
-            if(inventory.get(0).getCount() == 1){
-                inventory.set(0, ItemStack.EMPTY);
-            } else {
-                inventory.get(0).shrink(1);
-            }
-            return true;
-        }
-        Collection<Recipe<?>> stuff = level.getRecipeManager().getRecipes();
-        for(Recipe r : stuff){
-            if(r.getResultItem().getItem() == inventory.get(0).getItem()){
-                if(addItemsToFoundry(r.getIngredients())){
-                    if(inventory.get(0).getCount() == 1){
-                        inventory.set(0, ItemStack.EMPTY);
-                    } else {
-                        inventory.get(0).shrink(1);
-                    }
-                    return true;
-                }
-            }
-        }
-        if(addItemToFoundry(inventory.get(0).getItem())){
-            if(inventory.get(0).getCount() == 1){
-                inventory.set(0, ItemStack.EMPTY);
-            } else {
-                inventory.get(0).shrink(1);
-            }
-            return true;
-        }
         return false;
+        // if(logic().content.isEmpty()){
+        //     createMaterialMap();
+        // }
+        // if(inventory.get(0).getItem() == Items.COAL || inventory.get(0).getItem() == Items.CHARCOAL){
+        //     coalAmount++;
+        //     if(inventory.get(0).getCount() == 1){
+        //         inventory.set(0, ItemStack.EMPTY);
+        //     } else {
+        //         inventory.get(0).shrink(1);
+        //     }
+        //     return true;
+        // }
+        // Collection<Recipe<?>> stuff = level.getRecipeManager().getRecipes();
+        // for(Recipe r : stuff){
+        //     if(r.getResultItem().getItem() == inventory.get(0).getItem()){
+        //         if(addItemsToFoundry(r.getIngredients())){
+        //             if(inventory.get(0).getCount() == 1){
+        //                 inventory.set(0, ItemStack.EMPTY);
+        //             } else {
+        //                 inventory.get(0).shrink(1);
+        //             }
+        //             return true;
+        //         }
+        //     }
+        // }
+        // if(addItemToFoundry(inventory.get(0).getItem())){
+        //     if(inventory.get(0).getCount() == 1){
+        //         inventory.set(0, ItemStack.EMPTY);
+        //     } else {
+        //         inventory.get(0).shrink(1);
+        //     }
+        //     return true;
+        // }
+        // return false;
     }
 
     // Searches through internal list if the given item is recognized by the foundry
@@ -220,25 +221,25 @@ public class BlockEntityFoundry extends BlockEntityBase<LogicFoundry> {
     }
 
     private void createMaterialMap(){
-        ArrayList<Item> subSlag = new ArrayList<>();
-        subSlag.add(ShopKeeper.STUFF_SLAG.get());
-        logic().content.add(new FoundryContent("slag", ShopKeeper.STUFF_SLAG.get(), subSlag, null));
-        for(String s : Config.FOUNDRY.entry.get()){
-            String[] split = s.split(",");
-            String value = split[0];
-            if(split.length > 1){
-                Item item = Registry.ITEM.get(new ResourceLocation(split[1]));
-                ArrayList<Item> subs = new ArrayList<>();
-                for(int i = 1; i < split.length; i++){
-                    Item tmp = Registry.ITEM.get(new ResourceLocation(split[i]));
-                    if(tmp != Blocks.AIR.asItem()){
-                        subs.add(tmp);
-                    }
-                }
-                FoundryContent.Alloy alloy = findMatchingAlloy(value);
-                logic().content.add(new FoundryContent(value, item, subs, alloy));
-            }
-        }
+        // ArrayList<Item> subSlag = new ArrayList<>();
+        // subSlag.add(ShopKeeper.STUFF_SLAG.get());
+        // logic().content.add(new FoundryContent("slag", ShopKeeper.STUFF_SLAG.get(), subSlag, null));
+        // for(String s : Config.FOUNDRY.entry.get()){
+        //     String[] split = s.split(",");
+        //     String value = split[0];
+        //     if(split.length > 1){
+        //         Item item = Registry.ITEM.get(new ResourceLocation(split[1]));
+        //         ArrayList<Item> subs = new ArrayList<>();
+        //         for(int i = 1; i < split.length; i++){
+        //             Item tmp = Registry.ITEM.get(new ResourceLocation(split[i]));
+        //             if(tmp != Blocks.AIR.asItem()){
+        //                 subs.add(tmp);
+        //             }
+        //         }
+        //         FoundryContent.Alloy alloy = findMatchingAlloy(value);
+        //         logic().content.add(new FoundryContent(value, item, subs, alloy));
+        //     }
+        // }
     }
 
     private FoundryContent.Alloy findMatchingAlloy(String value){

@@ -16,7 +16,7 @@ public class ToolHoe extends HoeItem {
 
     /** Default Constructor */
     public ToolHoe(Tier tier, int attackDamageIn, float attackSpeedIn) {
-        super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_TOOLS));
+        super(tier, attackDamageIn, attackSpeedIn, new Properties());
     }
 
 

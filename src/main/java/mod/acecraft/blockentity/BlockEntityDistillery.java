@@ -195,46 +195,47 @@ public class BlockEntityDistillery extends BlockEntityBase<Dummy> {
     }
 
     protected boolean canBurn(@Nullable Recipe<?> recipe) {
-        if (!this.inventory.get(0).isEmpty() && !this.inventory.get(1).isEmpty() && recipe != null) {
-            ItemStack itemstack = recipe.getResultItem();
-            if (itemstack.isEmpty()) {
-                return false;
-            } else {
-                ItemStack itemstack1 = this.inventory.get(3);
-                if (itemstack1.isEmpty()) {
-                    return true;
-                } else if (!itemstack1.sameItem(itemstack)) {
-                    return false;
-                } else if (itemstack1.getCount() + itemstack.getCount() <= this.getMaxStackSize() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) { // Forge fix: make furnace respect stack sizes in furnace recipes
-                    return true;
-                } else {
-                    return itemstack1.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
-                }
-            }
-        } else {
-            return false;
-        }
+        return false;
+        // if (!this.inventory.get(0).isEmpty() && !this.inventory.get(1).isEmpty() && recipe != null) {
+        //     ItemStack itemstack = recipe.getResultItem();
+        //     if (itemstack.isEmpty()) {
+        //         return false;
+        //     } else {
+        //         ItemStack itemstack1 = this.inventory.get(3);
+        //         if (itemstack1.isEmpty()) {
+        //             return true;
+        //         } else if (!itemstack1.sameItem(itemstack)) {
+        //             return false;
+        //         } else if (itemstack1.getCount() + itemstack.getCount() <= this.getMaxStackSize() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize()) { // Forge fix: make furnace respect stack sizes in furnace recipes
+        //             return true;
+        //         } else {
+        //             return itemstack1.getCount() + itemstack.getCount() <= itemstack.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
+        //         }
+        //     }
+        // } else {
+        //     return false;
+        // }
     }
 
     private void burn(@Nullable Recipe<?> recipe) {
-        if (recipe != null && this.canBurn(recipe)) {
-            ItemStack itemstack0 = this.inventory.get(0);
-            ItemStack itemstack1 = this.inventory.get(1);
-            ItemStack itemstack3 = this.inventory.get(3);
-            ItemStack resultstack = recipe.getResultItem();
-            if (itemstack3.isEmpty()) {
-                this.inventory.set(3, resultstack.copy());
-            } else if (itemstack3.getItem() == resultstack.getItem()) {
-                itemstack3.grow(resultstack.getCount());
-            }
-
-            if (!this.level.isClientSide) {
-                this.setRecipeUsed(recipe);
-            }
-
-            itemstack0.shrink(1);
-            itemstack1.shrink(1);
-        }
+        // if (recipe != null && this.canBurn(recipe)) {
+        //     ItemStack itemstack0 = this.inventory.get(0);
+        //     ItemStack itemstack1 = this.inventory.get(1);
+        //     ItemStack itemstack3 = this.inventory.get(3);
+        //     ItemStack resultstack = recipe.getResultItem();
+        //     if (itemstack3.isEmpty()) {
+        //         this.inventory.set(3, resultstack.copy());
+        //     } else if (itemstack3.getItem() == resultstack.getItem()) {
+        //         itemstack3.grow(resultstack.getCount());
+        //     }
+//
+        //     if (!this.level.isClientSide) {
+        //         this.setRecipeUsed(recipe);
+        //     }
+//
+        //     itemstack0.shrink(1);
+        //     itemstack1.shrink(1);
+        // }
     }
 
     protected int getBurnDuration(ItemStack p_213997_1_) {

@@ -69,10 +69,10 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
 
     }
 
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
+    // @Override
+    // public Packet<?> getAddEntityPacket() {
+    //     return NetworkHooks.getEntitySpawningPacket(this);
+    // }
 
 
 
@@ -93,7 +93,7 @@ public class EntityNugget extends ThrowableItemProjectile implements IEntityAddi
         super.onHitEntity(p_37404_);
         Entity entity = p_37404_.getEntity();
         int i = entity instanceof Blaze ? 3 : 0;
-        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)i);
+        // entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)i);
     }
 
     protected void onHit(HitResult p_37406_) {

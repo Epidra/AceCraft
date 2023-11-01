@@ -4,6 +4,7 @@ import mod.acecraft.ShopKeeper;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -56,14 +57,24 @@ public enum MaterialArmor implements ArmorMaterial {
         return this.soundEvent;
     }
 
+    // @Override
+    // public int getDurabilityForSlot(EquipmentSlot slot) {
+    //     return MAX_DAMAGE_ARRAY[slot.getIndex()] * this.maxDamageFactor;
+    // }
+
+    // @Override
+    // public int getDefenseForSlot(EquipmentSlot slot) {
+    //     return this.damageReductionAmountArray[slot.getIndex()];
+    // }
+
     @Override
-    public int getDurabilityForSlot(EquipmentSlot slot) {
-        return MAX_DAMAGE_ARRAY[slot.getIndex()] * this.maxDamageFactor;
+    public int getDurabilityForType(ArmorItem.Type p_266807_) {
+        return 10;
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlot slot) {
-        return this.damageReductionAmountArray[slot.getIndex()];
+    public int getDefenseForType(ArmorItem.Type p_267168_) {
+        return 10;
     }
 
     @Override

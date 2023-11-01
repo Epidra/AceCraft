@@ -16,7 +16,7 @@ public class ToolSword extends SwordItem {
 
     /** Default Constructor */
     public ToolSword(Tier tier, int attackDamageIn, float attackSpeedIn) {
-        super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_COMBAT));
+        super(tier, attackDamageIn, attackSpeedIn, new Properties());
     }
 
 

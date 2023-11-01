@@ -323,12 +323,13 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
     private DyeColor getOffspringColor(Animal p_29824_, Animal p_29825_) {
         DyeColor dyecolor =  ((EntityAlpaca)p_29824_).getColor();
         DyeColor dyecolor1 = ((EntityAlpaca)p_29825_).getColor();
-        CraftingContainer craftingcontainer = makeContainer(dyecolor, dyecolor1);
-        return this.level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, craftingcontainer, this.level).map((p_29828_) -> {
-            return p_29828_.assemble(craftingcontainer);
-        }).map(ItemStack::getItem).filter(DyeItem.class::isInstance).map(DyeItem.class::cast).map(DyeItem::getDyeColor).orElseGet(() -> {
-            return this.level.random.nextBoolean() ? dyecolor : dyecolor1;
-        });
+        return dyecolor;
+        // CraftingContainer craftingcontainer = makeContainer(dyecolor, dyecolor1);
+        // return this.level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, craftingcontainer, this.level).map((p_29828_) -> {
+        //     return p_29828_.assemble(craftingcontainer);
+        // }).map(ItemStack::getItem).filter(DyeItem.class::isInstance).map(DyeItem.class::cast).map(DyeItem::getDyeColor).orElseGet(() -> {
+        //     return this.level.random.nextBoolean() ? dyecolor : dyecolor1;
+        // });
     }
 
     private static CraftingContainer makeContainer(DyeColor p_29832_, DyeColor p_29833_) {

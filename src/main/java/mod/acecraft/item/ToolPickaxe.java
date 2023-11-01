@@ -16,7 +16,7 @@ public class ToolPickaxe extends PickaxeItem {
 
     /** Default Constructor */
     public ToolPickaxe(Tier tier, int attackDamageIn, float attackSpeedIn) {
-        super(tier, attackDamageIn, attackSpeedIn, new Properties().tab(CreativeModeTab.TAB_TOOLS));
+        super(tier, attackDamageIn, attackSpeedIn, new Properties());
     }
 
 

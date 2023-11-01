@@ -15,7 +15,7 @@ public class ToolDynamite extends Item {
 
     /** Default Constructor */
     public ToolDynamite(){
-        super(new Properties().tab(CreativeModeTab.TAB_TOOLS));
+        super(new Properties());
     }
 
 
