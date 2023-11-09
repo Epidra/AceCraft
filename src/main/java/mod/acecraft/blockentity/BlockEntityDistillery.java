@@ -254,7 +254,7 @@ public class BlockEntityDistillery extends BlockEntityBase<Dummy> {
 
     public void setItem(int p_70299_1_, ItemStack p_70299_2_) {
         ItemStack itemstack = this.inventory.get(p_70299_1_);
-        boolean flag = !p_70299_2_.isEmpty() && p_70299_2_.sameItem(itemstack) && ItemStack.tagMatches(p_70299_2_, itemstack);
+        boolean flag = !p_70299_2_.isEmpty() && ItemStack.isSameItemSameTags(p_70299_2_, itemstack);
         this.inventory.set(p_70299_1_, p_70299_2_);
         if (p_70299_2_.getCount() > this.getMaxStackSize()) {
             p_70299_2_.setCount(this.getMaxStackSize());

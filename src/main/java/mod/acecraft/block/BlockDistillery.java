@@ -110,12 +110,12 @@ public class BlockDistillery extends MachinaBase implements EntityBlock {
         }
     }
 
-    @Override
-    public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-        List<ItemStack> drops = new ArrayList<>();
-        drops.add(new ItemStack(this));
-        return drops;
-    }
+    // @Override
+    // public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+    //     List<ItemStack> drops = new ArrayList<>();
+    //     drops.add(new ItemStack(this));
+    //     return drops;
+    // }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

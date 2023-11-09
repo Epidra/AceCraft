@@ -54,11 +54,11 @@ public class MessageEjectServer {
     public static class Handler {
         public static void handle (final MessageEjectServer message, Supplier<NetworkEvent.Context> context) {
             BlockPos pos = new BlockPos(message.x, message.y, message.z);
-            BlockEntityFoundry te = (BlockEntityFoundry) context.get().getSender().level.getBlockEntity(pos);
+            BlockEntityFoundry te = (BlockEntityFoundry) context.get().getSender().level().getBlockEntity(pos);
             context.get().enqueueWork(() ->{
                 te.eject();
             });
-            AceCraftPacketHandler.sendToChunk(new MessageEjectClient(new BlockPos(message.x, message.y, message.z)), context.get().getSender().level.getChunkAt(pos));
+            AceCraftPacketHandler.sendToChunk(new MessageEjectClient(new BlockPos(message.x, message.y, message.z)), context.get().getSender().level().getChunkAt(pos));
             context.get().setPacketHandled(true);
         }
     }

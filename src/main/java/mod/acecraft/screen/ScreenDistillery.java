@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mod.acecraft.menu.MenuDistillery;
 import mod.lucky77.screen.ScreenBase;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +29,6 @@ public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
 
 
-
     //----------------------------------------INPUT----------------------------------------//
 
     // ...
@@ -43,17 +43,22 @@ public class ScreenDistillery extends ScreenBase<MenuDistillery> {
 
     }
 
+    @Override
+    protected void renderBg(GuiGraphics p_283065_, float p_97788_, int p_97789_, int p_97790_) {
+
+    }
+
     protected void renderBg(PoseStack matrixStack, float partialTick, int mousePosX, int mousePosY) {
         RenderSystem.setShaderTexture(0, this.TEXTURE);
         int i = this.leftPos;
         int j = this.topPos;
-        this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        //this.blit(matrixStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
         if (this.menu.isLit()) {
             int k = this.menu.getLitProgress();
-            this.blit(matrixStack, i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
+            //this.blit(matrixStack, i + 56, j + 36 + 12 - k, 176, 12 - k, 14, k + 1);
         }
         int l = this.menu.getBurnProgress();
-        this.blit(matrixStack, i + 79, j + 34, 176, 14, l + 1, 16);
+        //this.blit(matrixStack, i + 79, j + 34, 176, 14, l + 1, 16);
     }
 
 

@@ -8,6 +8,7 @@ import mod.acecraft.network.MessageIgniteServer;
 import mod.acecraft.system.AceCraftPacketHandler;
 import mod.acecraft.util.FoundryContent;
 import mod.lucky77.screen.ScreenBase;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -28,7 +29,6 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
     public ScreenFoundry(MenuFoundry container, Inventory player, Component name) {
         super(container, player, name, 176, 204);
     }
-
 
 
 
@@ -55,10 +55,15 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
         int pos = 0;
         for(FoundryContent fc : menu.logic().content){
             if(fc.amount > 0){
-                font.draw(matrixstack, fc.id + " : " + fc.amount, this.imageWidth + 8+6, 8+6 + 24*pos, 9876543);
+                //font.draw(matrixstack, fc.id + " : " + fc.amount, this.imageWidth + 8+6, 8+6 + 24*pos, 9876543);
                 pos++;
             }
         }
+    }
+
+    @Override
+    protected void renderBg(GuiGraphics p_283065_, float p_97788_, int p_97789_, int p_97790_) {
+
     }
 
     /** Draws the background layer of this container (behind the items). */
@@ -66,30 +71,30 @@ public class ScreenFoundry extends ScreenBase<MenuFoundry> {
         RenderSystem.setShaderTexture(0, TEXTURE);
         int i = (this.width  - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
-        this.blit(matrixstack, i, j, 0, 0, this.imageWidth, this.imageHeight);
+        //this.blit(matrixstack, i, j, 0, 0, this.imageWidth, this.imageHeight);
         int pos = 0;
         int amount = 0;
         int coal = menu.getCoal();
         for(FoundryContent fc : menu.logic().content){
             if(fc.amount > 0){
                 amount += fc.amount;
-                this.blit(matrixstack, i + this.imageWidth + 8, j + 8 + 24*pos, 176, 64, 70, 22);
+                //this.blit(matrixstack, i + this.imageWidth + 8, j + 8 + 24*pos, 176, 64, 70, 22);
                 pos++;
             }
         }
-        this.blit(matrixstack, i + 17, j + 11 + 64-amount, 176, 64 - amount, 25, amount);
+        //this.blit(matrixstack, i + 17, j + 11 + 64-amount, 176, 64 - amount, 25, amount);
         if(coal > 0){
-            this.blit(matrixstack, i + 8, j + 11 + 64-coal, 226, 64 - coal, 7, coal);
+            //this.blit(matrixstack, i + 8, j + 11 + 64-coal, 226, 64 - coal, 7, coal);
         }
         if(menu.getCookTime() == 0 && amount > 0){
-            this.blit(matrixstack, i + 91, j + 29, 176, 130, 70, 22);
+            //this.blit(matrixstack, i + 91, j + 29, 176, 130, 70, 22);
         }
         if(menu.getCookTime() == 0 && amount > 0 && coal > 0 && amount / 8 < coal){
-            this.blit(matrixstack, i + 91, j + 5, 176, 86, 70, 22);
+            //this.blit(matrixstack, i + 91, j + 5, 176, 86, 70, 22);
         }
         if(menu.getCookTime() > 0){
             int cook = (int)((float) menu.getCookTime() / menu.getCookTimeMax() * 100.0f);
-            this.blit(matrixstack, i + 17, j + 11 + 64-cook, 176+25, 64 - cook, 25, cook);
+            //this.blit(matrixstack, i + 17, j + 11 + 64-cook, 176+25, 64 - cook, 25, cook);
         }
     }
 

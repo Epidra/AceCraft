@@ -129,7 +129,7 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
     }
 
     public void aiStep() {
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             this.eatAnimationTick = Math.max(0, this.eatAnimationTick - 1);
         }
         super.aiStep();
@@ -249,7 +249,7 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
     }
 
     public void shear(SoundSource p_29819_) {
-        this.level.playSound((Player)null, this, SoundEvents.SHEEP_SHEAR, p_29819_, 1.0F, 1.0F);
+        this.level().playSound((Player)null, this, SoundEvents.SHEEP_SHEAR, p_29819_, 1.0F, 1.0F);
         this.setSheared(true);
         int i = 1 + this.random.nextInt(3);
 
@@ -332,21 +332,20 @@ public class EntityAlpaca extends Animal implements Shearable, net.minecraftforg
         // });
     }
 
-    private static CraftingContainer makeContainer(DyeColor p_29832_, DyeColor p_29833_) {
-        CraftingContainer craftingcontainer = new CraftingContainer(new AbstractContainerMenu((MenuType)null, -1) {
-            @Override
-            public ItemStack quickMoveStack(Player p_38941_, int p_38942_) {
-                return null;
-            }
-
-            public boolean stillValid(Player p_29888_) {
-                return false;
-            }
-        }, 2, 1);
-        craftingcontainer.setItem(0, new ItemStack(DyeItem.byColor(p_29832_)));
-        craftingcontainer.setItem(1, new ItemStack(DyeItem.byColor(p_29833_)));
-        return craftingcontainer;
-    }
+    // private static CraftingContainer makeContainer(DyeColor p_29832_, DyeColor p_29833_) {
+    //     CraftingContainer craftingcontainer = new CraftingContainer(new AbstractContainerMenu((MenuType)null, -1) {
+    //         @Override
+    //         public ItemStack quickMoveStack(Player p_38941_, int p_38942_) {
+    //             return null;
+    //         }
+    //         public boolean stillValid(Player p_29888_) {
+    //             return false;
+    //         }
+    //     }, 2, 1);
+    //     craftingcontainer.setItem(0, new ItemStack(DyeItem.byColor(p_29832_)));
+    //     craftingcontainer.setItem(1, new ItemStack(DyeItem.byColor(p_29833_)));
+    //     return craftingcontainer;
+    // }
 
     protected float getStandingEyeHeight(Pose p_29850_, EntityDimensions p_29851_) {
         return 0.95F * p_29851_.height;
