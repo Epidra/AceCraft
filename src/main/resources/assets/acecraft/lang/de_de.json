@@ -1,4 +1,6 @@
 {
+  "gui.uncharted.entering": "Betrete...",
+
   "block.acecraft.block_mythril": "Mythrilblock",
   "block.acecraft.block_gilium": "Giliumblock",
   "block.acecraft.block_tin": "Zinnblock",
@@ -32,10 +34,10 @@
   "block.acecraft.ore_aurorite_base": "Auroriterz",
   "block.acecraft.ore_aurorite_deep": "Tiefenschiefer-Auroriterz",
 
-  "item.acecraft.nugget_mythril": "Rohmythril",
-  "item.acecraft.nugget_gilium": "Rohgilium",
-  "item.acecraft.nugget_tin": "Rohzinn",
-  "item.acecraft.nugget_zinc": "Rohzink",
+  "item.acecraft.stuff_mythril": "Rohmythril",
+  "item.acecraft.stuff_gilium": "Rohgilium",
+  "item.acecraft.stuff_tin": "Rohzinn",
+  "item.acecraft.stuff_zinc": "Rohzink",
 
   "item.acecraft.ingot_mythril": "Mythrilbarren",
   "item.acecraft.ingot_gilium": "Giliumbarren",
@@ -96,19 +98,19 @@
   "block.acecraft.crop_coffee": "Kaffeepflanze",
   "block.acecraft.crop_hemp": "Hanfpflanze",
 
-  "item.acecraft.seeds_cabbage": "Kohlsamen",
-  "item.acecraft.seeds_corn": "Maissamen",
-  "item.acecraft.seeds_cucumber": "Gurkensamen",
-  "item.acecraft.seeds_eggplant": "Auberginensamen",
-  "item.acecraft.seeds_grapes": "Traubensamen",
-  "item.acecraft.seeds_onion": "Zwiebelsamen",
-  "item.acecraft.seeds_pineapple": "Ananassamen",
-  "item.acecraft.seeds_strawberry": "Erdbeerensamen",
-  "item.acecraft.seeds_tomato": "Tomatensamen",
-  "item.acecraft.seeds_turnip": "Rübensamen",
-  "item.acecraft.seeds_rice": "Reissamen",
-  "item.acecraft.seeds_coffee": "Kaffeesamen",
-  "item.acecraft.seeds_hemp": "Hanfsamen",
+  "item.acecraft.seed_cabbage": "Kohlsamen",
+  "item.acecraft.seed_corn": "Maissamen",
+  "item.acecraft.seed_cucumber": "Gurkensamen",
+  "item.acecraft.seed_eggplant": "Auberginensamen",
+  "item.acecraft.seed_grapes": "Traubensamen",
+  "item.acecraft.seed_onion": "Zwiebelsamen",
+  "item.acecraft.seed_pineapple": "Ananassamen",
+  "item.acecraft.seed_strawberry": "Erdbeerensamen",
+  "item.acecraft.seed_tomato": "Tomatensamen",
+  "item.acecraft.seed_turnip": "Rübensamen",
+  "item.acecraft.seed_rice": "Reissamen",
+  "item.acecraft.seed_coffee": "Kaffeesamen",
+  "item.acecraft.seed_hemp": "Hanfsamen",
 
   "block.acecraft.machina_globe": "Globus",
   "block.acecraft.machina_foundry": "Erzschmelze",
@@ -211,4 +213,5 @@
   "item.acecraft.tool_dynamite": "Dynamit",
 
   "item.acecraft.spawnegg_alpaca": "Alpaka Spawn Egg"
+
 }

@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "acecraft:ore_sapphire_deep"
-  },
-  "result": "acecraft:stuff_sapphire",
-  "experience": 1.0,
-  "cookingtime": 200
-}

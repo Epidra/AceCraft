@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-        "acecraft:stuff_aurorite_"
+        "acecraft:stuff_aurorite_deep"
     ]
   },
   "criteria": {

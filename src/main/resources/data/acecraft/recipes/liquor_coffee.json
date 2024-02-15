@@ -9,8 +9,7 @@
     }
   ],
   "result": {
-    "item": "acecraft:liquor_coffee",
-    "experience": 0.35,
-    "cookingtime": 200
+    "count": 1,
+    "item": "acecraft:liquor_coffee"
   }
 }

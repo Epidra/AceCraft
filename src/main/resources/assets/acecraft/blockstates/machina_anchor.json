@@ -1,10 +1,16 @@
 {
     "variants": {
-        "facing=up":    { "model": "acecraft:block/machina_anchor_top" },
-        "facing=down":  { "model": "acecraft:block/machina_anchor_bottom" },
-        "facing=north": { "model": "acecraft:block/machina_anchor_side" },
-        "facing=east":  { "model": "acecraft:block/machina_anchor_side", "y": 90 },
-        "facing=south": { "model": "acecraft:block/machina_anchor_side", "y": 180 },
-        "facing=west":  { "model": "acecraft:block/machina_anchor_side", "y": 270 }
+        "facing=up,attached=false":    { "model": "acecraft:block/machina_anchor_top1" },
+        "facing=down,attached=false":  { "model": "acecraft:block/machina_anchor_bottom" },
+        "facing=north,attached=false": { "model": "acecraft:block/machina_anchor_side1" },
+        "facing=east,attached=false":  { "model": "acecraft:block/machina_anchor_side1", "y": 90 },
+        "facing=south,attached=false": { "model": "acecraft:block/machina_anchor_side1", "y": 180 },
+        "facing=west,attached=false":  { "model": "acecraft:block/machina_anchor_side1", "y": 270 },
+        "facing=up,attached=true":    { "model": "acecraft:block/machina_anchor_top2" },
+        "facing=down,attached=true":  { "model": "acecraft:block/machina_anchor_bottom" },
+        "facing=north,attached=true": { "model": "acecraft:block/machina_anchor_side2" },
+        "facing=east,attached=true":  { "model": "acecraft:block/machina_anchor_side2", "y": 90 },
+        "facing=south,attached=true": { "model": "acecraft:block/machina_anchor_side2", "y": 180 },
+        "facing=west,attached=true":  { "model": "acecraft:block/machina_anchor_side2", "y": 270 }
     }
 }

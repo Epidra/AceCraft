@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "acecraft:block/block_topaz_bud_2",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "acecraft:block/block_topaz_bud_2",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "acecraft:block/block_topaz_bud_2",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "acecraft:block/block_topaz_bud_2",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "acecraft:block/block_topaz_bud_2"
+    },
+    "facing=west": {
+      "model": "acecraft:block/block_topaz_bud_2",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

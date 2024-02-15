@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "group": "armor_boots",
   "pattern": [
     "X X",
@@ -7,10 +8,10 @@
   ],
   "key": {
     "X": {
-      "item": "acecraft:ingot_adamantium"
+      "item": "acecraft:ingot_bronze"
     }
   },
   "result": {
-    "item": "acecraft:armor_boots_adamantium"
+    "item": "acecraft:armor_boots_bronze"
   }
 }

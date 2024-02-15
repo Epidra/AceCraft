@@ -1,4 +1,6 @@
 {
+  "gui.uncharted.entering": "Entering...",
+
   "block.acecraft.block_mythril": "Mythril Block",
   "block.acecraft.block_gilium": "Gilium Block",
   "block.acecraft.block_tin": "Tin Block",
@@ -32,10 +34,10 @@
   "block.acecraft.ore_aurorite_base": "Aurorite Ore",
   "block.acecraft.ore_aurorite_deep": "Deepslate Aurorite Ore",
 
-  "item.acecraft.nugget_mythril": "Raw Mythril",
-  "item.acecraft.nugget_gilium": "Raw Gilium",
-  "item.acecraft.nugget_tin": "Raw Tin",
-  "item.acecraft.nugget_zinc": "Raw Zinc",
+  "item.acecraft.stuff_mythril": "Raw Mythril",
+  "item.acecraft.stuff_gilium": "Raw Gilium",
+  "item.acecraft.stuff_tin": "Raw Tin",
+  "item.acecraft.stuff_zinc": "Raw Zinc",
 
   "item.acecraft.ingot_copper": "Copper Ingot",
   "item.acecraft.ingot_mythril": "Mythril Ingot",
@@ -97,19 +99,19 @@
   "block.acecraft.crop_coffee": "Coffee Plant",
   "block.acecraft.crop_hemp": "Hemp Plant",
 
-  "item.acecraft.seeds_cabbage": "Cabbage Seeds",
-  "item.acecraft.seeds_corn": "Corn Seeds",
-  "item.acecraft.seeds_cucumber": "Cucumber Seeds",
-  "item.acecraft.seeds_eggplant": "Eggplant Seeds",
-  "item.acecraft.seeds_grapes": "Grapes Seeds",
-  "item.acecraft.seeds_onion": "Onion Seeds",
-  "item.acecraft.seeds_pineapple": "Pineapple Seeds",
-  "item.acecraft.seeds_strawberry": "Strawberry Seeds",
-  "item.acecraft.seeds_tomato": "Tomato Seeds",
-  "item.acecraft.seeds_turnip": "Turnip Seeds",
-  "item.acecraft.seeds_rice": "Rice Seeds",
-  "item.acecraft.seeds_coffee": "Coffee Seeds",
-  "item.acecraft.seeds_hemp": "Hemp Seeds",
+  "item.acecraft.seed_cabbage": "Cabbage Seeds",
+  "item.acecraft.seed_corn": "Corn Seeds",
+  "item.acecraft.seed_cucumber": "Cucumber Seeds",
+  "item.acecraft.seed_eggplant": "Eggplant Seeds",
+  "item.acecraft.seed_grapes": "Grapes Seeds",
+  "item.acecraft.seed_onion": "Onion Seeds",
+  "item.acecraft.seed_pineapple": "Pineapple Seeds",
+  "item.acecraft.seed_strawberry": "Strawberry Seeds",
+  "item.acecraft.seed_tomato": "Tomato Seeds",
+  "item.acecraft.seed_turnip": "Turnip Seeds",
+  "item.acecraft.seed_rice": "Rice Seeds",
+  "item.acecraft.seed_coffee": "Coffee Seeds",
+  "item.acecraft.seed_hemp": "Hemp Seeds",
 
   "block.acecraft.machina_globe": "Globe",
   "block.acecraft.machina_foundry": "Foundry",
@@ -217,5 +219,17 @@
 
   "acecraft:subtitles.alpaca.ambient": "Alpaca bleats",
   "acecraft:subtitles.alpaca.hurt":    "Alpaca hurts",
-  "acecraft:subtitles.alpaca.death":   "Alpaca dies"
+  "acecraft:subtitles.alpaca.death":   "Alpaca dies",
+
+  "block.acecraft.block_topaz": "Block of Topaz",
+  "block.acecraft.block_topaz_budding": "Budding Topaz",
+  "block.acecraft.block_topaz_cluster": "Topaz Cluster",
+  "block.acecraft.block_topaz_bud_3": "Large Topaz Bud",
+  "block.acecraft.block_topaz_bud_2": "Medium Topaz Bud",
+  "block.acecraft.block_topaz_bud_1": "Small Topaz Bud",
+  "item.acecraft.stuff_topaz": "Topaz Shard",
+  "item.acecraft.book_alloy": "Book about Alloys",
+  "item.acecraft.book_plant": "Book about Plants",
+  "item.acecraft.book_drink": "Book about Drinks"
+
 }

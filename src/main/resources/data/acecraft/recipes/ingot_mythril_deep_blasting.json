@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "acecraft:ore_mythril_deep"
+  },
+  "result": "acecraft:ingot_mythril",
+  "experience": 0.7,
+  "cookingtime": 200
+}

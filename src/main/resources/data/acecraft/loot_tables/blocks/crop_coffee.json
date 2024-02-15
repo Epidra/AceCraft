@@ -22,7 +22,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "acecraft:seeds_coffee"
+              "name": "acecraft:seed_coffee"
             }
           ]
         }
@@ -44,7 +44,7 @@
               }
             }
           ],
-          "name": "acecraft:seeds_coffee"
+          "name": "acecraft:seed_coffee"
         }
       ],
       "conditions": [

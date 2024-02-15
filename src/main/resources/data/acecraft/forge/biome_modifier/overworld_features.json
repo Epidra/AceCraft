@@ -1,0 +1,19 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "acecraft:ore_aurorite_large",
+    "acecraft:ore_aurorite_small",
+
+    "acecraft:ore_mythril_large",
+    "acecraft:ore_mythril_small",
+
+    "acecraft:ore_tin_buried",
+    "acecraft:ore_tin_normal",
+
+    "acecraft:ore_ruby",
+
+    "acecraft:geode_topaz"
+  ],
+  "step": "underground_ores"
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "acecraft:ore_aurorite_base"
+  },
+  "result": "acecraft:stuff_aurorite",
+  "experience": 1.0,
+  "cookingtime": 200
+}

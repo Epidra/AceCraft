@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_topaz_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "acecraft:stuff_topaz"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "acecraft:block_topaz"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_topaz_shard",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "acecraft:block_topaz"
+    ]
+  },
+  "sends_telemetry_event": false
+}

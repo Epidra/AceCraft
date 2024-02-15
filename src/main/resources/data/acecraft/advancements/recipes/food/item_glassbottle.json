@@ -3,15 +3,11 @@
   "rewards": {
     "recipes": [
       "acecraft:liquor_coffee",
-      "acecraft:liquor_moonshine",
       "acecraft:liquor_rum",
       "acecraft:liquor_sake",
       "acecraft:liquor_salgam",
       "acecraft:liquor_vodka",
-      "acecraft:liquor_whisky",
-      "acecraft:liquor_brandy",
-      "acecraft:liquor_oil_sunflower",
-      "acecraft:liquor_oil_hemp"
+      "acecraft:liquor_whisky"
     ]
   },
   "criteria": {
