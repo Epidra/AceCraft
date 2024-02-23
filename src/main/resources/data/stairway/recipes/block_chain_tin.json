@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+    "group": "block_chain",
+  "pattern": [
+    "#",
+    "#",
+	"#"
+  ],
+  "key": {
+    "#": {
+      "item": "acecraft:ingot_tin"
+    }
+  },
+  "result": {
+    "item": "stairway:block_chain_tin",
+    "count": 2
+  }
+}

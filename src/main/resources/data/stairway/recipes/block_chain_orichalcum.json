@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+    "group": "block_chain",
+  "pattern": [
+    "#",
+    "#",
+	"#"
+  ],
+  "key": {
+    "#": {
+      "item": "acecraft:ingot_orichalcum"
+    }
+  },
+  "result": {
+    "item": "stairway:block_chain_orichalcum",
+    "count": 2
+  }
+}

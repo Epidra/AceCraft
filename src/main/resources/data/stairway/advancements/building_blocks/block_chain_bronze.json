@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "stairway:block_chain_bronze"
+    ]
+  },
+  "criteria": {
+    "has_bronze": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["acecraft:ingot_bronze"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bronze"
+    ]
+  ]
+}

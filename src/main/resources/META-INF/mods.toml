@@ -4,7 +4,7 @@ license="All rights reserved"
 issueTrackerURL="https://github.com/Epidra/AceCraft/issues"
 [[mods]]
 modId="acecraft"
-version="5.0"
+version="6.0"
 displayName="AceCraft"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/acecraft"
 logoFile="logo.png"
@@ -24,6 +24,6 @@ aliquyam erat, sed diam voluptua.
 [[dependencies.acecraft]]
     modId="lucky77"
     mandatory=true
-    versionRange="[2.0,)"
+    versionRange="[3.0,)"
     ordering="NONE"
     side="BOTH"

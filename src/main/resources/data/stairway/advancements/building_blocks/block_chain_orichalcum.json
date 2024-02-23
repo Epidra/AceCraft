@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "stairway:block_chain_orichalcum"
+    ]
+  },
+  "criteria": {
+    "has_orichalcum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": ["acecraft:ingot_orichalcum"]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_orichalcum"
+    ]
+  ]
+}

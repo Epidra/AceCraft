@@ -28,14 +28,15 @@ public class ItemBookAlloy extends ItemBook {
 	
 	private void createPages(int id){
 		if(id == 1){ // Alloys
-			this.addPage("Minerals", "", "", -1, MODID);
+			this.addPage("Minerals", "This book will be filled with valuable information in the future.", "", -1, MODID);
 		}
 		if(id == 2){ // Crops
-			this.addPage("Crops", "", "", -1, MODID);
+			this.addPage("Crops", "This book will be filled with valuable information in the future.", "", -1, MODID);
 		}
 		if(id == 3){ // Drink
-			this.addPage("Drinks", "", "", -1, MODID);
+			this.addPage("Drinks", "This book will be filled with valuable information in the future.", "", -1, MODID);
 		}
+		this.addPage("", "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.", "", -1, MODID);
 	}
 	
 	

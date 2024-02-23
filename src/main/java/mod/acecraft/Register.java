@@ -233,9 +233,9 @@ public class Register {
 	public static final RegistryObject<Item> TOOL_DYNAMITE   = registerItem("tool_dynamite",   ToolDynamite::new);
 	
 	// ----- Books ----- //
-	public static final RegistryObject<Item> BOOK_ALLOY     = registerItem("book_alloy", () -> new ItemBookAlloy(4, 1));
-	public static final RegistryObject<Item> BOOK_PLANT     = registerItem("book_plant", () -> new ItemBookAlloy(4, 2));
-	public static final RegistryObject<Item> BOOK_DRINK     = registerItem("book_drink", () -> new ItemBookAlloy(4, 3));
+	public static final RegistryObject<Item> BOOK_ALLOY     = registerItem("book_alloy", () -> new ItemBookAlloy(0, 1));
+	public static final RegistryObject<Item> BOOK_PLANT     = registerItem("book_plant", () -> new ItemBookAlloy(0, 2));
+	public static final RegistryObject<Item> BOOK_DRINK     = registerItem("book_drink", () -> new ItemBookAlloy(0, 3));
 	
 	
 	
@@ -243,9 +243,9 @@ public class Register {
 	
 	// ---------- ---------- ---------- ----------  SOUNDS  ---------- ---------- ---------- ---------- //
 	
-	public static final RegistryObject<SoundEvent> SOUND_ALPACA_AMBIENT      = SOUNDS.register("acecraft.alpaca.ambient",    () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "acecraft.alpaca.ambient"   )));
-	public static final RegistryObject<SoundEvent> SOUND_ALPACA_HURT         = SOUNDS.register("acecraft.alpaca.hurt",       () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "acecraft.alpaca.hurt"      )));
-	public static final RegistryObject<SoundEvent> SOUND_ALPACA_DEATH        = SOUNDS.register("acecraft.alpaca.death",      () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "acecraft.alpaca.death"     )));
+	// public static final RegistryObject<SoundEvent> SOUND_ALPACA_AMBIENT      = SOUNDS.register("acecraft.alpaca.ambient",    () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "acecraft.alpaca.ambient"   )));
+	// public static final RegistryObject<SoundEvent> SOUND_ALPACA_HURT         = SOUNDS.register("acecraft.alpaca.hurt",       () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "acecraft.alpaca.hurt"      )));
+	// public static final RegistryObject<SoundEvent> SOUND_ALPACA_DEATH        = SOUNDS.register("acecraft.alpaca.death",      () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(MODID, "acecraft.alpaca.death"     )));
 	
 	
 	
