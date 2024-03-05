@@ -4,7 +4,7 @@ license="All rights reserved"
 issueTrackerURL="https://github.com/Epidra/AceCraft/issues"
 [[mods]]
 modId="acecraft"
-version="6.0"
+version="7.0"
 displayName="AceCraft"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/acecraft"
 logoFile="logo.png"

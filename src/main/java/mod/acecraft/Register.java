@@ -130,6 +130,9 @@ public class Register {
 	public static final RegistryObject<Item> INGOT_ADAMANTIUM = registerItem("ingot_adamantium", ItemItem::new);
 	
 	// ----- Food ----- //
+	public static final RegistryObject<Item> FOOD_ONIGIRI        = registerItem("food_onigiri",        () -> new ItemFood(2, 2f, false));
+	public static final RegistryObject<Item> FOOD_NIGIRI         = registerItem("food_nigiri",         () -> new ItemFood(3, 3f, false));
+	public static final RegistryObject<Item> FOOD_SUSHI          = registerItem("food_sushi",          () -> new ItemFood(4, 4f, false));
 	public static final RegistryObject<Item> FOOD_VICUGNA_RAW    = registerItem("food_vicugna_raw",    () -> new ItemFood(1, 1f,  true));
 	public static final RegistryObject<Item> FOOD_VICUGNA_COOKED = registerItem("food_vicugna_cooked", () -> new ItemFood(1, 1f,  true));
 	
@@ -464,6 +467,9 @@ public class Register {
 			event.accept(Register.TOOL_DYNAMITE);
 		}
 		if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS){
+			event.accept(Register.FOOD_ONIGIRI);
+			event.accept(Register.FOOD_NIGIRI);
+			event.accept(Register.FOOD_SUSHI);
 			event.accept(Register.FOOD_VICUGNA_RAW);
 			event.accept(Register.FOOD_VICUGNA_COOKED);
 			event.accept(Register.LIQUOR_COFFEE);

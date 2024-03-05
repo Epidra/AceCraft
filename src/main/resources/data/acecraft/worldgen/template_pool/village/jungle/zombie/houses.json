@@ -1,0 +1,263 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_2",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_3",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_4",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_5",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_6",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_7",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_small_house_8",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_medium_house_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/zombie/houses/jungle_medium_house_2",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_butcher_shop_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_tool_smith_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_fletcher_house_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_shepherd_house_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_armorer_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_fisher_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_tannery_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_cartographer_house_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_library_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_mason_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_weaponsmith_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_temple_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_temple_2",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_large_farm_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 7
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_farm_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_farm_2",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_animal_pen_1",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "acecraft:village/jungle/houses/jungle_animal_pen_2",
+        "processors": "minecraft:zombie_desert",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:empty_pool_element"
+      },
+      "weight": 5
+    }
+  ],
+  "fallback": "acecraft:village/jungle/zombie/terminators"
+}

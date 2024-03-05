@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "item": "acecraft:stuff_rice"
+    }
+  ],
+  "result": {
+    "item": "acecraft:food_onigiri"
+  }
+}

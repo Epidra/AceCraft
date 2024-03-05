@@ -1,0 +1,18 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 10387312,
+    "separation": 8,
+    "spacing": 34
+  },
+  "structures": [
+    {
+      "structure": "acecraft:village_swamp",
+      "weight": 1
+    },
+    {
+      "structure": "acecraft:village_jungle",
+      "weight": 1
+    }
+  ]
+}

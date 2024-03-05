@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "food",
+  "ingredients": [
+    {
+      "item": "acecraft:stuff_rice"
+    },
+    {
+      "item": "minecraft:cod"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    }
+  ],
+  "result": {
+    "item": "acecraft:food_sushi"
+  }
+}
