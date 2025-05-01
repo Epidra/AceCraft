@@ -1,8 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#minecraft:is_nether",
-  "features": [
-    "acecraft:ore_gilium"
-  ],
-  "step": "underground_ores"
-}

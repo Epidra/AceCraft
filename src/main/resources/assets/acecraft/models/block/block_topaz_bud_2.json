@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "acecraft:block/block_topaz_bud_2"
-  }
-}
