@@ -1,0 +1,10 @@
+{
+	"type": "neoforge:add_features",
+	"biomes": "#minecraft:is_nether",
+	"features": [
+		"acecraft:ore_gilium_large",
+		"acecraft:ore_gilium_medium",
+		"acecraft:ore_gilium_small"
+	],
+	"step": "underground_ores"
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "acecraft:template/foundry_lower",
+  "textures": {
+		"particle": "minecraft:block/stone",
+		"molten": "minecraft:block/lava_still",
+		"metal": "minecraft:block/iron_block",
+		"stone": "minecraft:block/stone"
+	}
+}

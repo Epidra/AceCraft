@@ -1,0 +1,7 @@
+{
+  "parent": "acecraft:template/rope",
+  "textures": {
+		"particle": "acecraft:block/block_rope",
+		"rope": "acecraft:block/block_rope"
+	}
+}

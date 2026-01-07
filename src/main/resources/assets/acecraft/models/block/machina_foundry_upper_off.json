@@ -1,0 +1,9 @@
+{
+  "parent": "acecraft:template/foundry_upper",
+  "textures": {
+		"particle": "minecraft:block/stone",
+		"molten": "minecraft:block/coal_block",
+		"metal": "minecraft:block/iron_block",
+		"stone": "minecraft:block/stone"
+	}
+}

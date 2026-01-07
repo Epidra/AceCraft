@@ -1,0 +1,35 @@
+{
+	
+	"alpaca_idle": {
+		"sounds": [
+			{
+				"type": "event",
+				"name": "acecraft:entity.alpaca.idle"
+			}
+		],
+		"subtitle": "subtitle.alpaca.idle"
+	},
+	
+	"alpaca_hurt": {
+		"sounds": [
+			{
+				"type": "event",
+				"name": "acecraft:entity.alpaca.hurt"
+			}
+		],
+		"subtitle": "subtitle.alpaca.hurt"
+	},
+	
+	"alpaca_dead": {
+		"sounds": [
+			{
+				"type": "event",
+				"name": "acecraft:entity.alpaca.dead"
+			}
+		],
+		"subtitle": "subtitle.alpaca.dead"
+	}
+	
+	
+	
+}

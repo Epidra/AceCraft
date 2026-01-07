@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "acecraft:ore_gilium_raw"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "acecraft:blocks/ore_gilium_raw"
+}

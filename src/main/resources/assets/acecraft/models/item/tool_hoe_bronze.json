@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "acecraft:item/tool_hoe_bronze"
+  }
+}

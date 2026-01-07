@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "acecraft:food_vicugna_raw"
+  },
+  "result": {
+    "id": "acecraft:food_vicugna_cooked"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:gun_powder"
+    },
+	{
+      "item": "minecraft:sand"
+    },
+	{
+      "item": "minecraft:string"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "acecraft:tool_dynamite"
+  }
+}

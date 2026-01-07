@@ -1,0 +1,18 @@
+{
+	"type": "neoforge:add_features",
+	"biomes": "#minecraft:is_overworld",
+	"features": [
+		"acecraft:ore_aurorite_large",
+		"acecraft:ore_aurorite_medium",
+		"acecraft:ore_aurorite_small",
+
+		"acecraft:ore_mythril_large",
+		"acecraft:ore_mythril_medium",
+		"acecraft:ore_mythril_small",
+
+		"acecraft:ore_tin_large",
+		"acecraft:ore_tin_medium",
+		"acecraft:ore_tin_small"
+	],
+	"step": "underground_ores"
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "acecraft:tool_hoe_mythril"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_the_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "acecraft:stuff_mythril_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_the_item"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "acecraft:tool_hoe_mythril"
+    ]
+  }
+}

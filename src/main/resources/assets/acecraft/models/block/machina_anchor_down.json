@@ -1,0 +1,8 @@
+{
+  "parent": "acecraft:template/anchor_down",
+  "textures": {
+		"particle": "minecraft:block/iron_block",
+		"metal": "minecraft:block/iron_block",
+		"rope": "acecraft:block/block_rope"
+	}
+}

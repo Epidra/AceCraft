@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "food",
+  "cookingtime": 200,
+  "experience": 0.3,
+  "ingredient": {
+    "item": "acecraft:food_salgam"
+  },
+  "result": {
+    "id": "acecraft:liquor_salgam"
+  }
+}

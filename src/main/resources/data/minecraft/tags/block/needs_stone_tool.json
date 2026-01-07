@@ -1,0 +1,25 @@
+{
+	"replace": false,
+	"values": [
+		"acecraft:block_tin",
+		"acecraft:block_mythril",
+		"acecraft:block_gilium",
+		"acecraft:block_bronze",
+		"acecraft:block_orichalcum",
+		"acecraft:block_adamantium",
+		"acecraft:block_aurorite",
+		"acecraft:ore_tin_base",
+		"acecraft:ore_tin_deep",
+		"acecraft:ore_tin_raw",
+		"acecraft:ore_mythril_base",
+		"acecraft:ore_mythril_deep",
+		"acecraft:ore_mythril_raw",
+		"acecraft:ore_gilium_hell",
+		"acecraft:ore_gilium_raw",
+		"acecraft:ore_aurorite_base",
+		"acecraft:ore_aurorite_deep",
+		"acecraft:machina_foundry",
+		"acecraft:machina_distillery",
+		"acecraft:machina_anchor"
+	]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+	"#": {
+      "item": "acecraft:stuff_rope"
+    }
+  },
+  "pattern": [
+    " I ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "acecraft:machina_anchor"
+  }
+}

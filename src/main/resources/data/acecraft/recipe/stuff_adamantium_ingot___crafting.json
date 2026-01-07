@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "acecraft:block_adamantium"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "acecraft:stuff_adamantium_ingot"
+  }
+}

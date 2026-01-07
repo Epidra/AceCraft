@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "gilium",
+  "ingredient": {
+    "item": "acecraft:stuff_gilium_nugget"
+  },
+  "result": {
+    "id": "acecraft:ore_gilium_ingot"
+  }
+}

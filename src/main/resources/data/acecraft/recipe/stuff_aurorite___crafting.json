@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "acecraft:block_aurorite"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "acecraft:stuff_aurorite"
+  }
+}

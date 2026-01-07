@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "gilium",
+  "ingredient": {
+    "item": "acecraft:ore_gilium_hell"
+  },
+  "result": {
+    "id": "acecraft:ore_gilium_ingot"
+  }
+}

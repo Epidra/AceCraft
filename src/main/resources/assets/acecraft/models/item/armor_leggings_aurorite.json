@@ -1,0 +1,68 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___quartz",
+      "predicate": {
+        "trim_type": 0.1
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___iron",
+      "predicate": {
+        "trim_type": 0.2
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___netherite",
+      "predicate": {
+        "trim_type": 0.3
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___redstone",
+      "predicate": {
+        "trim_type": 0.4
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___copper",
+      "predicate": {
+        "trim_type": 0.5
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___gold",
+      "predicate": {
+        "trim_type": 0.6
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___emerald",
+      "predicate": {
+        "trim_type": 0.7
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___diamond",
+      "predicate": {
+        "trim_type": 0.8
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___lapis",
+      "predicate": {
+        "trim_type": 0.9
+      }
+    },
+    {
+      "model": "acecraft:item/trim/armor_leggings_aurorite___amethyst",
+      "predicate": {
+        "trim_type": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "acecraft:item/armor_leggings_aurorite"
+  }
+}

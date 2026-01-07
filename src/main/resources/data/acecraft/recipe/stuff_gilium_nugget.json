@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "acecraft:ore_gilium_raw"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "acecraft:stuff_gilium_nugget"
+  }
+}
