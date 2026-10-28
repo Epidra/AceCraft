@@ -56,6 +56,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 import static mod.acecraft.AceCraft.MODID;
+import static mod.acecraft.custom.material.MaterialArmor.ARMOR_MATERIAL_DEFERRED;
 
 public class Register {
 	
@@ -127,7 +128,7 @@ public class Register {
 	public static final DeferredItem<Item> LIQUOR_WHISKY = registerItem("liquor_whisky", () -> new ItemLiquor(MobEffects.ABSORPTION, 1, MobEffects.ABSORPTION, 1));
 	public static final DeferredItem<Item> LIQUOR_VODKA = registerItem("liquor_vodka", () -> new ItemLiquor(MobEffects.ABSORPTION, 1, MobEffects.ABSORPTION, 1));
 	public static final DeferredItem<Item> LIQUOR_RUM = registerItem("liquor_rum", () -> new ItemLiquor(MobEffects.ABSORPTION, 1, MobEffects.ABSORPTION, 1));
-	
+
 	// Crop Blocks
 	public static final DeferredBlock<Block> CROP_COFFEE = registerBlockNoItem("crop_coffee", () -> new BlockCrop(Blocks.WHEAT, "coffee"));
 	public static final DeferredBlock<Block> CROP_HEMP = registerBlockNoItem("crop_hemp", () -> new BlockCrop(Blocks.WHEAT, "hemp", 2, 2));
@@ -198,7 +199,7 @@ public class Register {
 	public static final DeferredItem<Item> TOOL_PICKAXE_ORICHALCUM = registerItem("tool_pickaxe_orichalcum", () -> new ToolPickaxe(MaterialTool.ORICHALCUM, 1, 1));
 	public static final DeferredItem<Item> TOOL_PICKAXE_ADAMANTIUM = registerItem("tool_pickaxe_adamantium", () -> new ToolPickaxe(MaterialTool.ADAMANTIUM, 1, 1));
 	public static final DeferredItem<Item> TOOL_PICKAXE_AURORITE = registerItem("tool_pickaxe_aurorite", () -> new ToolPickaxe(MaterialTool.AURORITE, 1, 1));
-	
+
 	// Tools - Shovels
 	public static final DeferredItem<Item> TOOL_SHOVEL_MYTHRIL = registerItem("tool_shovel_mythril", () -> new ToolShovel(MaterialTool.MYTHRIL, 1, 1));
 	public static final DeferredItem<Item> TOOL_SHOVEL_GILIUM = registerItem("tool_shovel_gilium", () -> new ToolShovel(MaterialTool.GILIUM, 1, 1));
@@ -284,6 +285,8 @@ public class Register {
 		Register.ENTITIES.register(modEventBus);
 		Register.RECIPES.register(modEventBus);
 		Register.SOUNDS.register(modEventBus);
+
+		ARMOR_MATERIAL_DEFERRED.register(modEventBus);
 	}
 	
 	public static void registerCreativeTabs(BuildCreativeModeTabContentsEvent event){

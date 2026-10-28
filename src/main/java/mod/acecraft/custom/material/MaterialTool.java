@@ -14,12 +14,12 @@ import java.util.function.Supplier;
 
 public enum MaterialTool implements Tier {
 	
-	MYTHRIL(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Register.STUFF_MYTHRIL_INGOT)),
-	GILIUM(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Register.STUFF_GILIUM_INGOT)),
-	BRONZE(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Register.STUFF_BRONZE_INGOT)),
-	ORICHALCUM(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Register.STUFF_ORICHALCUM_INGOT)),
-	ADAMANTIUM(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Register.STUFF_ADAMANTIUM_INGOT)),
-	AURORITE(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Register.STUFF_AURORITE));
+	MYTHRIL(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 1.0F, 22, () -> Ingredient.of(Register.STUFF_MYTHRIL_INGOT)),
+	GILIUM(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 1.0F, 22, () -> Ingredient.of(Register.STUFF_GILIUM_INGOT)),
+	BRONZE(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 1.0F, 22, () -> Ingredient.of(Register.STUFF_BRONZE_INGOT)),
+	ORICHALCUM(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 1.0F, 22, () -> Ingredient.of(Register.STUFF_ORICHALCUM_INGOT)),
+	ADAMANTIUM(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 1.0F, 22, () -> Ingredient.of(Register.STUFF_ADAMANTIUM_INGOT)),
+	AURORITE(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 1.0F, 22, () -> Ingredient.of(Register.STUFF_AURORITE));
 	
 	// WOOD(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 59, 2.0F, 0.0F, 15, () -> Ingredient.of(ItemTags.PLANKS)),
 	// STONE(BlockTags.INCORRECT_FOR_STONE_TOOL, 131, 4.0F, 1.0F, 5, () -> Ingredient.of(ItemTags.STONE_TOOL_MATERIALS)),

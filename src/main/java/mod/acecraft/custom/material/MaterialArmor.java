@@ -32,13 +32,15 @@ public class MaterialArmor {
 		map.put(ArmorItem.Type.LEGGINGS, 6);
 		map.put(ArmorItem.Type.CHESTPLATE, 8);
 		map.put(ArmorItem.Type.HELMET, 3);
-	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Register.STUFF_BRONZE_INGOT.get()));
+		map.put(ArmorItem.Type.BODY, 8);
+	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 1.0F, () -> Ingredient.of(Register.STUFF_BRONZE_INGOT.get()));
 	
 	public static Holder<ArmorMaterial> GILIUM = register("gilium", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
 		map.put(ArmorItem.Type.BOOTS, 3);
 		map.put(ArmorItem.Type.LEGGINGS, 6);
 		map.put(ArmorItem.Type.CHESTPLATE, 8);
 		map.put(ArmorItem.Type.HELMET, 3);
+		map.put(ArmorItem.Type.BODY, 8);
 	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Register.STUFF_GILIUM_INGOT.get()));
 	
 	public static Holder<ArmorMaterial> MYTHRIL = register("mythril", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
@@ -46,6 +48,7 @@ public class MaterialArmor {
 		map.put(ArmorItem.Type.LEGGINGS, 6);
 		map.put(ArmorItem.Type.CHESTPLATE, 8);
 		map.put(ArmorItem.Type.HELMET, 3);
+		map.put(ArmorItem.Type.BODY, 8);
 	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Register.STUFF_MYTHRIL_INGOT.get()));
 	
 	public static Holder<ArmorMaterial> ADAMANTIUM = register("adamantium", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
@@ -53,6 +56,7 @@ public class MaterialArmor {
 		map.put(ArmorItem.Type.LEGGINGS, 6);
 		map.put(ArmorItem.Type.CHESTPLATE, 8);
 		map.put(ArmorItem.Type.HELMET, 3);
+		map.put(ArmorItem.Type.BODY, 8);
 	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Register.STUFF_ADAMANTIUM_INGOT.get()));
 	
 	public static Holder<ArmorMaterial> ORICHALCUM = register("orichalcum", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
@@ -60,6 +64,7 @@ public class MaterialArmor {
 		map.put(ArmorItem.Type.LEGGINGS, 6);
 		map.put(ArmorItem.Type.CHESTPLATE, 8);
 		map.put(ArmorItem.Type.HELMET, 3);
+		map.put(ArmorItem.Type.BODY, 8);
 	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Register.STUFF_ORICHALCUM_INGOT.get()));
 	
 	public static Holder<ArmorMaterial> AURORITE = register("aurorite", Util.make(new EnumMap<>(ArmorItem.Type.class), (map) -> {
@@ -67,6 +72,7 @@ public class MaterialArmor {
 		map.put(ArmorItem.Type.LEGGINGS, 6);
 		map.put(ArmorItem.Type.CHESTPLATE, 8);
 		map.put(ArmorItem.Type.HELMET, 3);
+		map.put(ArmorItem.Type.BODY, 8);
 	}), 14, SoundEvents.ARMOR_EQUIP_DIAMOND, 2.0F, 0.0F, () -> Ingredient.of(Register.STUFF_AURORITE.get()));
 	
 	private static Holder<ArmorMaterial> register(String name, EnumMap<ArmorItem.Type, Integer> defense, int enchantmentValue, Holder<SoundEvent> equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient){
